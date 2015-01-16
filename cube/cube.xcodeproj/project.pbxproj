@@ -7,14 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A2FE8E31A6904E20008C4D6 /* PeriperalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2FE8E21A6904E20008C4D6 /* PeriperalInfo.m */; };
+		9A2FE8E51A690F980008C4D6 /* BTServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2FE8E41A690F980008C4D6 /* BTServer.m */; };
+		9A2FE8E91A691A100008C4D6 /* myTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2FE8E81A691A100008C4D6 /* myTableViewCell.m */; };
 		9AAA314E1A67E845001D5B52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA314D1A67E845001D5B52 /* main.m */; };
 		9AAA31511A67E845001D5B52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA31501A67E845001D5B52 /* AppDelegate.m */; };
-		9AAA31541A67E845001D5B52 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA31531A67E845001D5B52 /* FirstViewController.m */; };
-		9AAA31571A67E845001D5B52 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA31561A67E845001D5B52 /* SecondViewController.m */; };
+		9AAA31541A67E845001D5B52 /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA31531A67E845001D5B52 /* RecordViewController.m */; };
+		9AAA31571A67E845001D5B52 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA31561A67E845001D5B52 /* ScanViewController.m */; };
 		9AAA315A1A67E845001D5B52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AAA31581A67E845001D5B52 /* Main.storyboard */; };
 		9AAA315C1A67E845001D5B52 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AAA315B1A67E845001D5B52 /* Images.xcassets */; };
 		9AAA315F1A67E845001D5B52 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AAA315D1A67E845001D5B52 /* LaunchScreen.xib */; };
 		9AAA316B1A67E845001D5B52 /* cubeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA316A1A67E845001D5B52 /* cubeTests.m */; };
+		9AAA320C1A67EDA0001D5B52 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA320B1A67EDA0001D5B52 /* MBProgressHUD.m */; };
+		9AAA320E1A67EDFC001D5B52 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAA320D1A67EDFC001D5B52 /* UIKit.framework */; };
+		9AAA32101A67EE11001D5B52 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAA320F1A67EE11001D5B52 /* CoreGraphics.framework */; };
+		9AAA32121A67EE37001D5B52 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAA32111A67EE37001D5B52 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,21 +35,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9A2FE8E11A6904E20008C4D6 /* PeriperalInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeriperalInfo.h; sourceTree = "<group>"; };
+		9A2FE8E21A6904E20008C4D6 /* PeriperalInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeriperalInfo.m; sourceTree = "<group>"; };
+		9A2FE8E41A690F980008C4D6 /* BTServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTServer.m; sourceTree = "<group>"; };
+		9A2FE8E61A690FA30008C4D6 /* BTServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTServer.h; sourceTree = "<group>"; };
+		9A2FE8E71A691A0A0008C4D6 /* myTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myTableViewCell.h; sourceTree = "<group>"; };
+		9A2FE8E81A691A100008C4D6 /* myTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myTableViewCell.m; sourceTree = "<group>"; };
 		9AAA31481A67E845001D5B52 /* cube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AAA314C1A67E845001D5B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AAA314D1A67E845001D5B52 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9AAA314F1A67E845001D5B52 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9AAA31501A67E845001D5B52 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9AAA31521A67E845001D5B52 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		9AAA31531A67E845001D5B52 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		9AAA31551A67E845001D5B52 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		9AAA31561A67E845001D5B52 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		9AAA31521A67E845001D5B52 /* RecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
+		9AAA31531A67E845001D5B52 /* RecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
+		9AAA31551A67E845001D5B52 /* ScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
+		9AAA31561A67E845001D5B52 /* ScanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
 		9AAA31591A67E845001D5B52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9AAA315B1A67E845001D5B52 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9AAA315E1A67E845001D5B52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		9AAA31641A67E845001D5B52 /* cubeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cubeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AAA31691A67E845001D5B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AAA316A1A67E845001D5B52 /* cubeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cubeTests.m; sourceTree = "<group>"; };
+		9AAA320A1A67ED8D001D5B52 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = cube/MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
+		9AAA320B1A67EDA0001D5B52 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = cube/MBProgressHUD/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
+		9AAA320D1A67EDFC001D5B52 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9AAA320F1A67EE11001D5B52 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9AAA32111A67EE37001D5B52 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +68,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AAA32121A67EE37001D5B52 /* Foundation.framework in Frameworks */,
+				9AAA32101A67EE11001D5B52 /* CoreGraphics.framework in Frameworks */,
+				9AAA320E1A67EDFC001D5B52 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,11 +84,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A2FE8E01A6904E20008C4D6 /* BluetoothLE */ = {
+			isa = PBXGroup;
+			children = (
+				9A2FE8E61A690FA30008C4D6 /* BTServer.h */,
+				9A2FE8E41A690F980008C4D6 /* BTServer.m */,
+				9A2FE8E71A691A0A0008C4D6 /* myTableViewCell.h */,
+				9A2FE8E81A691A100008C4D6 /* myTableViewCell.m */,
+				9A2FE8E11A6904E20008C4D6 /* PeriperalInfo.h */,
+				9A2FE8E21A6904E20008C4D6 /* PeriperalInfo.m */,
+			);
+			path = BluetoothLE;
+			sourceTree = "<group>";
+		};
 		9AAA313F1A67E845001D5B52 = {
 			isa = PBXGroup;
 			children = (
 				9AAA314A1A67E845001D5B52 /* cube */,
 				9AAA31671A67E845001D5B52 /* cubeTests */,
+				9AAA32131A67EE49001D5B52 /* Frameworks */,
 				9AAA31491A67E845001D5B52 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,12 +119,14 @@
 		9AAA314A1A67E845001D5B52 /* cube */ = {
 			isa = PBXGroup;
 			children = (
+				9A2FE8E01A6904E20008C4D6 /* BluetoothLE */,
+				9AAA31C11A67EC4C001D5B52 /* MBProgressHUD */,
 				9AAA314F1A67E845001D5B52 /* AppDelegate.h */,
 				9AAA31501A67E845001D5B52 /* AppDelegate.m */,
-				9AAA31521A67E845001D5B52 /* FirstViewController.h */,
-				9AAA31531A67E845001D5B52 /* FirstViewController.m */,
-				9AAA31551A67E845001D5B52 /* SecondViewController.h */,
-				9AAA31561A67E845001D5B52 /* SecondViewController.m */,
+				9AAA31521A67E845001D5B52 /* RecordViewController.h */,
+				9AAA31531A67E845001D5B52 /* RecordViewController.m */,
+				9AAA31551A67E845001D5B52 /* ScanViewController.h */,
+				9AAA31561A67E845001D5B52 /* ScanViewController.m */,
 				9AAA31581A67E845001D5B52 /* Main.storyboard */,
 				9AAA315B1A67E845001D5B52 /* Images.xcassets */,
 				9AAA315D1A67E845001D5B52 /* LaunchScreen.xib */,
@@ -122,6 +159,27 @@
 				9AAA31691A67E845001D5B52 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9AAA31C11A67EC4C001D5B52 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				9AAA320B1A67EDA0001D5B52 /* MBProgressHUD.m */,
+				9AAA320A1A67ED8D001D5B52 /* MBProgressHUD.h */,
+			);
+			name = MBProgressHUD;
+			path = ../MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		9AAA32131A67EE49001D5B52 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9AAA320D1A67EDFC001D5B52 /* UIKit.framework */,
+				9AAA320F1A67EE11001D5B52 /* CoreGraphics.framework */,
+				9AAA32111A67EE37001D5B52 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			path = cube;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,9 +282,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AAA31571A67E845001D5B52 /* SecondViewController.m in Sources */,
+				9A2FE8E31A6904E20008C4D6 /* PeriperalInfo.m in Sources */,
+				9A2FE8E51A690F980008C4D6 /* BTServer.m in Sources */,
+				9AAA31571A67E845001D5B52 /* ScanViewController.m in Sources */,
 				9AAA31511A67E845001D5B52 /* AppDelegate.m in Sources */,
-				9AAA31541A67E845001D5B52 /* FirstViewController.m in Sources */,
+				9AAA320C1A67EDA0001D5B52 /* MBProgressHUD.m in Sources */,
+				9A2FE8E91A691A100008C4D6 /* myTableViewCell.m in Sources */,
+				9AAA31541A67E845001D5B52 /* RecordViewController.m in Sources */,
 				9AAA314E1A67E845001D5B52 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,6 +482,7 @@
 				9AAA31701A67E845001D5B52 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9AAA31711A67E845001D5B52 /* Build configuration list for PBXNativeTarget "cubeTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +491,7 @@
 				9AAA31731A67E845001D5B52 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
