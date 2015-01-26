@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9A2FE8E31A6904E20008C4D6 /* PeriperalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2FE8E21A6904E20008C4D6 /* PeriperalInfo.m */; };
 		9A2FE8E51A690F980008C4D6 /* BTServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2FE8E41A690F980008C4D6 /* BTServer.m */; };
 		9A2FE8E91A691A100008C4D6 /* myTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2FE8E81A691A100008C4D6 /* myTableViewCell.m */; };
+		9A3D3FAC1A6E549900852006 /* BLEDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FAB1A6E549900852006 /* BLEDevice.m */; };
+		9A3D3FAF1A6E750D00852006 /* BLEUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FAE1A6E750D00852006 /* BLEUtility.m */; };
+		9A3D3FB21A6E79C600852006 /* PeriperalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FB11A6E79C600852006 /* PeriperalInfo.m */; };
+		9A40B1E01A6F71FD003C96D5 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A40B1DF1A6F71FD003C96D5 /* CoreBluetooth.framework */; };
 		9AAA314E1A67E845001D5B52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA314D1A67E845001D5B52 /* main.m */; };
 		9AAA31511A67E845001D5B52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA31501A67E845001D5B52 /* AppDelegate.m */; };
 		9AAA31541A67E845001D5B52 /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA31531A67E845001D5B52 /* RecordViewController.m */; };
@@ -35,12 +38,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9A2FE8E11A6904E20008C4D6 /* PeriperalInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeriperalInfo.h; sourceTree = "<group>"; };
-		9A2FE8E21A6904E20008C4D6 /* PeriperalInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeriperalInfo.m; sourceTree = "<group>"; };
 		9A2FE8E41A690F980008C4D6 /* BTServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTServer.m; sourceTree = "<group>"; };
 		9A2FE8E61A690FA30008C4D6 /* BTServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTServer.h; sourceTree = "<group>"; };
 		9A2FE8E71A691A0A0008C4D6 /* myTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myTableViewCell.h; sourceTree = "<group>"; };
 		9A2FE8E81A691A100008C4D6 /* myTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myTableViewCell.m; sourceTree = "<group>"; };
+		9A3808D91A710810009F3B10 /* DbgMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbgMsg.h; sourceTree = "<group>"; };
+		9A3D3FAB1A6E549900852006 /* BLEDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEDevice.m; sourceTree = "<group>"; };
+		9A3D3FAD1A6E54BD00852006 /* BLEDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLEDevice.h; sourceTree = "<group>"; };
+		9A3D3FAE1A6E750D00852006 /* BLEUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEUtility.m; sourceTree = "<group>"; };
+		9A3D3FB01A6E751700852006 /* BLEUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEUtility.h; sourceTree = "<group>"; };
+		9A3D3FB11A6E79C600852006 /* PeriperalInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeriperalInfo.m; sourceTree = "<group>"; };
+		9A3D3FB31A6E79CD00852006 /* PeriperalInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeriperalInfo.h; sourceTree = "<group>"; };
+		9A40B1DF1A6F71FD003C96D5 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		9AAA31481A67E845001D5B52 /* cube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AAA314C1A67E845001D5B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AAA314D1A67E845001D5B52 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -68,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A40B1E01A6F71FD003C96D5 /* CoreBluetooth.framework in Frameworks */,
 				9AAA32121A67EE37001D5B52 /* Foundation.framework in Frameworks */,
 				9AAA32101A67EE11001D5B52 /* CoreGraphics.framework in Frameworks */,
 				9AAA320E1A67EDFC001D5B52 /* UIKit.framework in Frameworks */,
@@ -87,12 +97,16 @@
 		9A2FE8E01A6904E20008C4D6 /* BluetoothLE */ = {
 			isa = PBXGroup;
 			children = (
+				9A3D3FB31A6E79CD00852006 /* PeriperalInfo.h */,
+				9A3D3FB11A6E79C600852006 /* PeriperalInfo.m */,
 				9A2FE8E61A690FA30008C4D6 /* BTServer.h */,
 				9A2FE8E41A690F980008C4D6 /* BTServer.m */,
 				9A2FE8E71A691A0A0008C4D6 /* myTableViewCell.h */,
 				9A2FE8E81A691A100008C4D6 /* myTableViewCell.m */,
-				9A2FE8E11A6904E20008C4D6 /* PeriperalInfo.h */,
-				9A2FE8E21A6904E20008C4D6 /* PeriperalInfo.m */,
+				9A3D3FB01A6E751700852006 /* BLEUtility.h */,
+				9A3D3FAE1A6E750D00852006 /* BLEUtility.m */,
+				9A3D3FAD1A6E54BD00852006 /* BLEDevice.h */,
+				9A3D3FAB1A6E549900852006 /* BLEDevice.m */,
 			);
 			path = BluetoothLE;
 			sourceTree = "<group>";
@@ -127,6 +141,7 @@
 				9AAA31531A67E845001D5B52 /* RecordViewController.m */,
 				9AAA31551A67E845001D5B52 /* ScanViewController.h */,
 				9AAA31561A67E845001D5B52 /* ScanViewController.m */,
+				9A3808D91A710810009F3B10 /* DbgMsg.h */,
 				9AAA31581A67E845001D5B52 /* Main.storyboard */,
 				9AAA315B1A67E845001D5B52 /* Images.xcassets */,
 				9AAA315D1A67E845001D5B52 /* LaunchScreen.xib */,
@@ -174,6 +189,7 @@
 		9AAA32131A67EE49001D5B52 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9A40B1DF1A6F71FD003C96D5 /* CoreBluetooth.framework */,
 				9AAA320D1A67EDFC001D5B52 /* UIKit.framework */,
 				9AAA320F1A67EE11001D5B52 /* CoreGraphics.framework */,
 				9AAA32111A67EE37001D5B52 /* Foundation.framework */,
@@ -282,12 +298,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A2FE8E31A6904E20008C4D6 /* PeriperalInfo.m in Sources */,
+				9A3D3FAC1A6E549900852006 /* BLEDevice.m in Sources */,
 				9A2FE8E51A690F980008C4D6 /* BTServer.m in Sources */,
 				9AAA31571A67E845001D5B52 /* ScanViewController.m in Sources */,
 				9AAA31511A67E845001D5B52 /* AppDelegate.m in Sources */,
 				9AAA320C1A67EDA0001D5B52 /* MBProgressHUD.m in Sources */,
 				9A2FE8E91A691A100008C4D6 /* myTableViewCell.m in Sources */,
+				9A3D3FB21A6E79C600852006 /* PeriperalInfo.m in Sources */,
+				9A3D3FAF1A6E750D00852006 /* BLEUtility.m in Sources */,
 				9AAA31541A67E845001D5B52 /* RecordViewController.m in Sources */,
 				9AAA314E1A67E845001D5B52 /* main.m in Sources */,
 			);

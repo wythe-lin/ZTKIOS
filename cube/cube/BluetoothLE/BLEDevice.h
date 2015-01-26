@@ -1,6 +1,6 @@
 /*
  ******************************************************************************
- * ScanViewController.h -
+ * BLEDevice.h -
  *
  * Copyright (c) 2015-2016 by ZealTek Electronic Co., Ltd.
  *
@@ -22,24 +22,19 @@
  ******************************************************************************
  */
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
-@interface ScanViewController : UITableViewController <CBCentralManagerDelegate, CBPeripheralDelegate>
-{
-    NSMutableArray      *mainlst, *sublst, *devlst;
+// Class which describes a Bluetooth Smart Device
+@interface BLEDevice : NSObject
 
-    CBCentralManager    *cbm;
-    CBPeripheral        *cbp;
-    CBCharacteristic    *writeCharacteristic;
+// Pointer to CoreBluetooth peripheral
+@property (strong,nonatomic) CBPeripheral *cbp;
 
-    NSTimer             *timer;
-}
+// Pointer to CoreBluetooth manager that found this peripheral
+@property (strong,nonatomic) CBCentralManager *cbm;
 
-- (void)ticker;
-- (void)startScan;
-- (void)stopScan;
-
+// Pointer to dictionary with device setup data
+@property NSMutableDictionary *setupData;
 
 @end
-
