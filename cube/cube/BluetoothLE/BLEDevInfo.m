@@ -1,6 +1,6 @@
 /*
  ******************************************************************************
- * RecordViewController.h -
+ * BLEDevInfo.m -
  *
  * Copyright (c) 2015-2016 by ZealTek Electronic Co., Ltd.
  *
@@ -17,22 +17,25 @@
  * software without notice.
  *
  * History:
- *	2015.01.16	T.C. Chiu	frist edition
+ *	2015.01.28	T.C. Chiu	frist edition
  *
  ******************************************************************************
  */
 
-#import <UIKit/UIKit.h>
-#import "BluetoothLE/BLEServer.h"
+#import "BLEDevInfo.h"
 
-@interface RecordViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, BLEServerDelegate>
-{
-    NSMutableArray      *lstResolution, *lstSpeed, *lstPower;
-    UIButton            *record;
 
-    BLEServer           *BLEServ;
-    NSMutableArray      *connectList;
-}
+@interface BLEDevInfo ()
 
 @end
 
+@implementation BLEDevInfo
+
+@synthesize cbp;
+@synthesize advertisementData;
+@synthesize RSSI;
+@synthesize gattProfile;
+@synthesize times;
+
+
+@end

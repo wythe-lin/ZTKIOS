@@ -1,6 +1,6 @@
 /*
  ******************************************************************************
- * RecordViewController.h -
+ * BLEDevInfo.h -
  *
  * Copyright (c) 2015-2016 by ZealTek Electronic Co., Ltd.
  *
@@ -23,16 +23,15 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "BluetoothLE/BLEServer.h"
+#import <CoreBluetooth/CoreBluetooth.h>
 
-@interface RecordViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, BLEServerDelegate>
-{
-    NSMutableArray      *lstResolution, *lstSpeed, *lstPower;
-    UIButton            *record;
+// Class which describes a Bluetooth Smart Device
+@interface BLEDevInfo : NSObject
 
-    BLEServer           *BLEServ;
-    NSMutableArray      *connectList;
-}
+@property (strong, nonatomic) CBPeripheral          *cbp;
+@property (strong, nonatomic) NSMutableDictionary   *advertisementData;
+@property (strong, nonatomic) NSNumber              *RSSI;
+@property (strong, nonatomic) NSMutableDictionary   *gattProfile;
+@property (nonatomic)         NSInteger             times;
 
 @end
-

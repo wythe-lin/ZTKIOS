@@ -23,6 +23,10 @@
  */
 
 #import "RecordViewController.h"
+#import "DbgMsg.h"
+
+#import "BatteryService.h"
+
 
 @interface RecordViewController ()
 
@@ -30,8 +34,10 @@
 
 @implementation RecordViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    LogRV(@"viewDidLoad");
 
     // Do any additional setup after loading the view, typically from a nib.
     lstResolution = [[NSMutableArray alloc] init];
@@ -51,18 +57,34 @@
     lstPower = [[NSMutableArray alloc] init];
     [lstPower addObject:@"50Hz"];
     [lstPower addObject:@"60Hz"];
+
+
+    record = (UIButton *)[self.view viewWithTag:100];
+    [record setBackgroundColor:[UIColor lightGrayColor]];
+    [record setTitle:@"Record" forState:UIControlStateNormal];
+
+
+    // init BLEServer
+    BLEServ          = [BLEServer initBLEServer];
+    BLEServ.delegate = self;
+//    BLEServ          = [BLEServer initWithDelegate:self];
+
+    connectList      = [BLEServ getConnectList];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
     return 3;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
     switch (component) {
         case 0:     return [lstResolution count];
         case 1:     return [lstSpeed count];
@@ -71,7 +93,8 @@
     }
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
     switch (component) {
         case 0:     return [lstResolution objectAtIndex:row];
         case 1:     return [lstSpeed objectAtIndex:row];
@@ -80,13 +103,40 @@
     }
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
     switch (component) {
-        case 0:     NSLog(@"resolution -> %@", [lstResolution objectAtIndex:row]); break;
-        case 1:     NSLog(@"speed      -> %@", [lstSpeed objectAtIndex:row]);      break;
-        case 2:     NSLog(@"power      -> %@", [lstPower objectAtIndex:row]);      break;
+        case 0:     LogRV(@"resolution -> %@", [lstResolution objectAtIndex:row]); break;
+        case 1:     LogRV(@"speed      -> %@", [lstSpeed objectAtIndex:row]);      break;
+        case 2:     LogRV(@"power      -> %@", [lstPower objectAtIndex:row]);      break;
         default:    break;
     }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// TableView Data Source
+//
+- (IBAction)recordButtonPress:(UIButton *)sender
+{
+    LogRV(@"recordButtonPress: - begin (isMainThread=%@)", [[NSThread currentThread] isMainThread] ? @"YES" : @"NO");
+
+    [BLEServ sendCommand:0];
+
+    LogRV(@"recordButtonPress: - end (isMainThread=%@)", [[NSThread currentThread] isMainThread] ? @"YES" : @"NO");
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// BLEServer Callbacks
+//
+#pragma mark - BLEServer Callbacks
+- (void)didDisconnect
+{
+    LogRV(@"did disconnect");
+    
 }
 
 

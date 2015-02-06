@@ -57,10 +57,12 @@
 #ifndef LOGGING_LEVEL_DEBUG
     #define LOGGING_LEVEL_DEBUG             1
 #endif
-#ifndef LOGGING_LEVEL_BLE
-    #define LOGGING_LEVEL_BLE               1
+#ifndef LOGGING_LEVEL_SCANVIEW
+    #define LOGGING_LEVEL_SCANVIEW          1
 #endif
-
+#ifndef LOGGING_LEVEL_RECORDVIEW
+    #define LOGGING_LEVEL_RECORDVIEW        1
+#endif
 
 
 // *********** END OF USER SETTINGS  - Do not change anything below this line ***********
@@ -84,11 +86,19 @@
 
 
 // BLE logging -
-#if defined(LOGGING_LEVEL_BLE) && LOGGING_LEVEL_BLE
-    #define LogBLE(fmt, ...)            LOG_FORMAT(fmt, @"BLE", ##__VA_ARGS__)
+#if defined(LOGGING_LEVEL_SCANVIEW) && LOGGING_LEVEL_SCANVIEW
+    #define LogSV(fmt, ...)             LOG_FORMAT(fmt, @"SV", ##__VA_ARGS__)
 #else
-    #define LogBLE(...)
+    #define LogSV(...)
 #endif
+
+#if defined(LOGGING_LEVEL_RECORDVIEW) && LOGGING_LEVEL_RECORDVIEW
+    #define LogRV(fmt, ...)             LOG_FORMAT(fmt, @"RV", ##__VA_ARGS__)
+#else
+    #define LogRV(...)
+#endif
+
+
 
 // Trace logging - for detailed tracing
 #if defined(LOGGING_LEVEL_TRACE) && LOGGING_LEVEL_TRACE

@@ -1,6 +1,6 @@
 /*
  ******************************************************************************
- * RecordViewController.h -
+ * BatteryService.m -
  *
  * Copyright (c) 2015-2016 by ZealTek Electronic Co., Ltd.
  *
@@ -17,22 +17,31 @@
  * software without notice.
  *
  * History:
- *	2015.01.16	T.C. Chiu	frist edition
+ *	2015.02.04	T.C. Chiu	frist edition
  *
  ******************************************************************************
  */
 
-#import <UIKit/UIKit.h>
-#import "BluetoothLE/BLEServer.h"
+#import "BatteryService.h"
 
-@interface RecordViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, BLEServerDelegate>
+
+@implementation BattertService
+
++ (void)readBatteryLevel:(CBPeripheral *)peripheral
 {
-    NSMutableArray      *lstResolution, *lstSpeed, *lstPower;
-    UIButton            *record;
 
-    BLEServer           *BLEServ;
-    NSMutableArray      *connectList;
+    CBUUID      *sUUID = [CBUUID UUIDWithString:@"180F"];
+    CBUUID      *cUUID = [CBUUID UUIDWithString:@"2A19"];
+
+    [BLEUtility readCharacteristic:peripheral sCBUUID:sUUID cCBUUID:cUUID];
+
+}
+
++ (void)readBatteryLevel:(CBPeripheral *)peripheral sCBUUID:(CBUUID *)sCBUUID cCBUUID:(CBUUID *)cCBUUID;
+{
+
+
+
 }
 
 @end
-

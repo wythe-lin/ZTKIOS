@@ -27,6 +27,11 @@
 
 @implementation BLEUtility
 
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// 
+//
 + (void)writeNoResponseCharacteristic:(CBPeripheral *)peripheral sUUID:(NSString *)sUUID cUUID:(NSString *)cUUID data:(NSData *)data {
     // Sends data to BLE peripheral to process HID and send EHIF command to PC
     for (CBService *service in peripheral.services) {
@@ -57,6 +62,11 @@
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//
+//
 + (void)writeCharacteristic:(CBPeripheral *)peripheral sUUID:(NSString *)sUUID cUUID:(NSString *)cUUID data:(NSData *)data {
     // Sends data to BLE peripheral to process HID and send EHIF command to PC
     for (CBService *service in peripheral.services) {
@@ -87,6 +97,11 @@
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//
+//
 + (void)readCharacteristic:(CBPeripheral *)peripheral sUUID:(NSString *)sUUID cUUID:(NSString *)cUUID {
     for (CBService *service in peripheral.services) {
         if([service.UUID isEqual:[CBUUID UUIDWithString:sUUID]]) {
@@ -113,6 +128,11 @@
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//
+//
 + (void)setNotificationForCharacteristic:(CBPeripheral *)peripheral sUUID:(NSString *)sUUID cUUID:(NSString *)cUUID enable:(BOOL)enable {
     for (CBService *service in peripheral.services) {
         if ([service.UUID isEqual:[CBUUID UUIDWithString:sUUID]]) {
@@ -139,6 +159,11 @@
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//
+//
 + (BOOL)isCharacteristicNotifiable:(CBPeripheral *)peripheral sCBUUID:(CBUUID *)sCBUUID cCBUUID:(CBUUID *) cCBUUID {
     for (CBService *service in peripheral.services) {
         if ([service.UUID isEqual:sCBUUID]) {
@@ -156,13 +181,4 @@
     return NO;
 }
 
-
-+ (BOOL)runningiOSSeven {
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
-  
 @end

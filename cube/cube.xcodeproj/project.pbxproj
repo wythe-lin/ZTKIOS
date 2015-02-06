@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9A2FE8E51A690F980008C4D6 /* BTServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2FE8E41A690F980008C4D6 /* BTServer.m */; };
-		9A2FE8E91A691A100008C4D6 /* myTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2FE8E81A691A100008C4D6 /* myTableViewCell.m */; };
-		9A3D3FAC1A6E549900852006 /* BLEDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FAB1A6E549900852006 /* BLEDevice.m */; };
+		9A3D3FAC1A6E549900852006 /* BLEDevInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FAB1A6E549900852006 /* BLEDevInfo.m */; };
 		9A3D3FAF1A6E750D00852006 /* BLEUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FAE1A6E750D00852006 /* BLEUtility.m */; };
 		9A3D3FB21A6E79C600852006 /* PeriperalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FB11A6E79C600852006 /* PeriperalInfo.m */; };
 		9A40B1E01A6F71FD003C96D5 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A40B1DF1A6F71FD003C96D5 /* CoreBluetooth.framework */; };
@@ -25,6 +24,8 @@
 		9AAA320E1A67EDFC001D5B52 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAA320D1A67EDFC001D5B52 /* UIKit.framework */; };
 		9AAA32101A67EE11001D5B52 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAA320F1A67EE11001D5B52 /* CoreGraphics.framework */; };
 		9AAA32121A67EE37001D5B52 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAA32111A67EE37001D5B52 /* Foundation.framework */; };
+		9AC4C08D1A7A0959008E72BE /* BLEServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4C08C1A7A0959008E72BE /* BLEServer.m */; };
+		9AC7C6C51A821D1700EFAE59 /* BatteryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC7C6C41A821D1700EFAE59 /* BatteryService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,11 +41,9 @@
 /* Begin PBXFileReference section */
 		9A2FE8E41A690F980008C4D6 /* BTServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTServer.m; sourceTree = "<group>"; };
 		9A2FE8E61A690FA30008C4D6 /* BTServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTServer.h; sourceTree = "<group>"; };
-		9A2FE8E71A691A0A0008C4D6 /* myTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myTableViewCell.h; sourceTree = "<group>"; };
-		9A2FE8E81A691A100008C4D6 /* myTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myTableViewCell.m; sourceTree = "<group>"; };
 		9A3808D91A710810009F3B10 /* DbgMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbgMsg.h; sourceTree = "<group>"; };
-		9A3D3FAB1A6E549900852006 /* BLEDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEDevice.m; sourceTree = "<group>"; };
-		9A3D3FAD1A6E54BD00852006 /* BLEDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLEDevice.h; sourceTree = "<group>"; };
+		9A3D3FAB1A6E549900852006 /* BLEDevInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEDevInfo.m; sourceTree = "<group>"; };
+		9A3D3FAD1A6E54BD00852006 /* BLEDevInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLEDevInfo.h; sourceTree = "<group>"; };
 		9A3D3FAE1A6E750D00852006 /* BLEUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEUtility.m; sourceTree = "<group>"; };
 		9A3D3FB01A6E751700852006 /* BLEUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEUtility.h; sourceTree = "<group>"; };
 		9A3D3FB11A6E79C600852006 /* PeriperalInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeriperalInfo.m; sourceTree = "<group>"; };
@@ -70,6 +69,10 @@
 		9AAA320D1A67EDFC001D5B52 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9AAA320F1A67EE11001D5B52 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		9AAA32111A67EE37001D5B52 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9AC4C08C1A7A0959008E72BE /* BLEServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEServer.m; sourceTree = "<group>"; };
+		9AC4C08E1A7A097D008E72BE /* BLEServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLEServer.h; sourceTree = "<group>"; };
+		9AC7C6C41A821D1700EFAE59 /* BatteryService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatteryService.m; sourceTree = "<group>"; };
+		9AC7C6C61A821D3200EFAE59 /* BatteryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BatteryService.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,14 +102,16 @@
 			children = (
 				9A3D3FB31A6E79CD00852006 /* PeriperalInfo.h */,
 				9A3D3FB11A6E79C600852006 /* PeriperalInfo.m */,
+				9AC7C6C61A821D3200EFAE59 /* BatteryService.h */,
+				9AC7C6C41A821D1700EFAE59 /* BatteryService.m */,
 				9A2FE8E61A690FA30008C4D6 /* BTServer.h */,
 				9A2FE8E41A690F980008C4D6 /* BTServer.m */,
-				9A2FE8E71A691A0A0008C4D6 /* myTableViewCell.h */,
-				9A2FE8E81A691A100008C4D6 /* myTableViewCell.m */,
 				9A3D3FB01A6E751700852006 /* BLEUtility.h */,
 				9A3D3FAE1A6E750D00852006 /* BLEUtility.m */,
-				9A3D3FAD1A6E54BD00852006 /* BLEDevice.h */,
-				9A3D3FAB1A6E549900852006 /* BLEDevice.m */,
+				9A3D3FAD1A6E54BD00852006 /* BLEDevInfo.h */,
+				9A3D3FAB1A6E549900852006 /* BLEDevInfo.m */,
+				9AC4C08E1A7A097D008E72BE /* BLEServer.h */,
+				9AC4C08C1A7A0959008E72BE /* BLEServer.m */,
 			);
 			path = BluetoothLE;
 			sourceTree = "<group>";
@@ -247,6 +252,7 @@
 				TargetAttributes = {
 					9AAA31471A67E845001D5B52 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 4M8S7GUF3Y;
 					};
 					9AAA31631A67E845001D5B52 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -298,16 +304,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A3D3FAC1A6E549900852006 /* BLEDevice.m in Sources */,
+				9A3D3FAC1A6E549900852006 /* BLEDevInfo.m in Sources */,
 				9A2FE8E51A690F980008C4D6 /* BTServer.m in Sources */,
 				9AAA31571A67E845001D5B52 /* ScanViewController.m in Sources */,
 				9AAA31511A67E845001D5B52 /* AppDelegate.m in Sources */,
 				9AAA320C1A67EDA0001D5B52 /* MBProgressHUD.m in Sources */,
-				9A2FE8E91A691A100008C4D6 /* myTableViewCell.m in Sources */,
+				9AC4C08D1A7A0959008E72BE /* BLEServer.m in Sources */,
 				9A3D3FB21A6E79C600852006 /* PeriperalInfo.m in Sources */,
 				9A3D3FAF1A6E750D00852006 /* BLEUtility.m in Sources */,
 				9AAA31541A67E845001D5B52 /* RecordViewController.m in Sources */,
 				9AAA314E1A67E845001D5B52 /* main.m in Sources */,
+				9AC7C6C51A821D1700EFAE59 /* BatteryService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,7 +438,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = cube/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -441,7 +450,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = cube/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

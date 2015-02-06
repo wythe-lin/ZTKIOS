@@ -23,22 +23,13 @@
  */
 
 #import <UIKit/UIKit.h>
-#import <CoreBluetooth/CoreBluetooth.h>
+#import "BluetoothLE/BLEServer.h"
 
-@interface ScanViewController : UITableViewController <CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface ScanViewController : UITableViewController <BLEServerDelegate>
 {
-    NSMutableArray      *mainlst, *sublst, *devlst;
-
-    CBCentralManager    *cbm;
-    CBPeripheral        *cbp;
-    CBCharacteristic    *writeCharacteristic;
-
-    NSTimer             *timer;
+    BLEServer           *BLEServ;
+    NSMutableArray      *scanList, *connectList;
 }
-
-- (void)ticker;
-- (void)startScan;
-- (void)stopScan;
 
 
 @end

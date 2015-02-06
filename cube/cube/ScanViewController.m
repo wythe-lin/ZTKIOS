@@ -25,7 +25,6 @@
 #import "ScanViewController.h"
 #import "DbgMsg.h"
 
-static BOOL  isWork = NO;
 
 @interface ScanViewController ()
 
@@ -39,13 +38,14 @@ static BOOL  isWork = NO;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    LogTrace(@"viewDidLoad");
+    LogSV(@"viewDidLoad");
     // Do any additional setup after loading the view, typically from a nib.
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    self.navigationItem.title = @"Scan Device";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
     // for refresh control
@@ -54,62 +54,56 @@ static BOOL  isWork = NO;
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
     self.refreshControl = refreshControl;
 
-    //
-    mainlst = [[NSMutableArray alloc] init];
-    [mainlst addObject:@"PT-5200"];
+    // init BLEServer
+    BLEServ          = [BLEServer initBLEServer];
+    BLEServ.delegate = self;
+//    BLEServ          = [BLEServer initWithDelegate:self];
 
-    sublst = [[NSMutableArray alloc] init];
-    [sublst addObject:@"2 services"];
-
-    devlst = [[NSMutableArray alloc] init];
-
-    // 將觸發centralManagerDidUpdateState: method
-    cbm = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-
-    // 設定timer每2秒呼叫ticker方法一次
-    timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(ticker) userInfo:nil repeats:YES];
+    scanList         = [BLEServ getDiscoverList];
+    connectList      = [BLEServ getConnectList];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    LogTrace(@"viewWillAppear");
-
+    LogSV(@"viewWillAppear");
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    LogTrace(@"viewDidAppear");
+    LogSV(@"viewDidAppear");
 
+    [BLEServ startScan];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    LogTrace(@"viewWillDisappear");
+    LogSV(@"viewWillDisappear");
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [timer invalidate];
-    [self stopScan];
-
     [super viewDidDisappear:animated];
-    LogTrace(@"viewDidDisappear");
+    LogSV(@"viewDidDisappear");
+
+    [BLEServ stopScan];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    LogTrace(@"viewDidDisappear");
+    LogSV(@"viewDidDisappear");
     // Dispose of any resources that can be recreated.
 
 }
 
 - (void)handleRefresh
 {
-    [devlst removeAllObjects];
+    LogSV(@"handleRefresh");
+
+    [scanList removeAllObjects];
 
     // 進行資料更新程序 開始
     [NSThread sleepForTimeInterval:1.0];    // 模擬資料更新要1秒鐘
@@ -135,17 +129,22 @@ static BOOL  isWork = NO;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    LogSV(@"tableView:numberOfRowsInSection:");
+
     // Return the number of rows in the section.
     // 告訴tableView一個section裡要顯示多少行
-    NSInteger n = 0;
+    NSMutableArray  *lst;
+    NSInteger       n = 0;
 
     switch (section) {
         case 0:
-             n = [devlst count] ? [devlst count] : 1;
+            lst = [BLEServ getDiscoverList];
+            n   = [lst count] ? [lst count] : 1;
             break;
 
         case 1:
-            n = 1;
+            lst = [BLEServ getConnectList];
+            n   = [lst count];
             break;
     }
     return n;
@@ -171,19 +170,25 @@ static BOOL  isWork = NO;
 //
 #pragma mark - TableView Delegate
 
+// 傳回編輯狀態的style
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCellEditingStyle     style = UITableViewCellEditingStyleNone;
 
     switch (indexPath.section) {
         case 0: style = UITableViewCellEditingStyleNone;    break;
+#if 1
+        case 1: style = UITableViewCellEditingStyleNone;    break;
+#else
         case 1: style = UITableViewCellEditingStyleDelete;  break;
+#endif
     }
     return style;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    LogSV(@"tableView:commitEditingStyle:forRowAtIndexPath:");
 
 //    [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
 
@@ -194,51 +199,92 @@ static BOOL  isWork = NO;
     [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
 }
 
+// 選中cell的反應事件
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LogSV(@"tableView:didSelectRowAtIndexPath:");
+
+    // 選中後的反白顏色即刻消失
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    switch (indexPath.section) {
+        case 0:
+            LogSV(@"section(0): row=%@", [NSString stringWithFormat:@"%0ld", (long) indexPath.row, nil]);
+            if ([scanList count]) {
+                BLEDevInfo  *devInfo = [scanList objectAtIndex:indexPath.row];
+                if (![connectList containsObject:devInfo]) {
+                    [connectList addObject:devInfo];
+                    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[connectList count]-1 inSection:1]] withRowAnimation:UITableViewRowAnimationRight];
+                }
+            }
+            break;
+        case 1:
+            LogSV(@"section(1): row=%@", [NSString stringWithFormat:@"%0ld", (long) indexPath.row, nil]);
+            if ([connectList count]) {
+                [connectList removeObjectAtIndex:indexPath.row];
+                [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
+            }
+            break;
+    }
+
+//    [list removeObjectAtIndex:index];
+//    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *indicator = @"Cell";
+    LogSV(@"tableView:cellForRowAtIndexPath:");
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indicator forIndexPath:indexPath];
+    static NSString     *indicator = @"Cell";
+    UITableViewCell     *cell      = [tableView dequeueReusableCellWithIdentifier:indicator forIndexPath:indexPath];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:indicator];
     }
 
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
 
     // 區分顯示區段
     switch (indexPath.section) {
         case 0:
-            if ([devlst count] == 0) {
+            if (![scanList count]) {
                 cell.textLabel.font       = [UIFont fontWithName:@"HelveticaNeue-Thin" size:16.0];
                 cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:10.0];
 
                 cell.textLabel.text       = @"Searching for peripherals...";
-                cell.detailTextLabel.text = @"";
+                cell.detailTextLabel.text = @" ";
             } else {
                 // 設定儲存格指示器 - 揭露指示器
                 cell.accessoryType        = UITableViewCellAccessoryDisclosureIndicator;
                 cell.textLabel.font       = [UIFont fontWithName:@"HelveticaNeue-Thin" size:26.0];
                 cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:12.0];
 
-                CBPeripheral           *p = [devlst objectAtIndex:indexPath.row];
-                if (p.name == nil) {
+                BLEDevInfo      *devInfo  = [scanList objectAtIndex:indexPath.row];
+                CBPeripheral    *dev      = devInfo.cbp;
+                if (dev.name == nil) {
                     cell.textLabel.text   = @"Unnamed";
                 } else {
-                    cell.textLabel.text   = p.name;
+                    cell.textLabel.text   = dev.name;
                 }
-                cell.detailTextLabel.text = [p.identifier UUIDString];
+                cell.detailTextLabel.text = [dev.identifier UUIDString];
             }
             break;
 
         case 1:
-            // 設定儲存格指示器 - 揭露指示器
-            cell.accessoryType        = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textLabel.font       = [UIFont fontWithName:@"HelveticaNeue-Thin" size:26.0];
-            cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:12.0];
+            if ([connectList count]) {
+                // 設定儲存格指示器 - 揭露指示器
+                cell.accessoryType        = UITableViewCellAccessoryDisclosureIndicator;
+                cell.textLabel.font       = [UIFont fontWithName:@"HelveticaNeue-Thin" size:26.0];
+                cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:12.0];
 
-            cell.textLabel.text       = [mainlst objectAtIndex:indexPath.row];
-            cell.detailTextLabel.text = [sublst objectAtIndex:indexPath.row];
+                BLEDevInfo      *devInfo  = [connectList objectAtIndex:indexPath.row];
+                CBPeripheral    *dev      = devInfo.cbp;
+                if (dev.name == nil) {
+                    cell.textLabel.text   = @"Unnamed";
+                } else {
+                    cell.textLabel.text   = dev.name;
+                }
+                cell.detailTextLabel.text = [dev.identifier UUIDString];
+            }
             break;
     }
     return cell;
@@ -251,98 +297,30 @@ static BOOL  isWork = NO;
 }
 
 
-
 ///////////////////////////////////////////////////////////////////////////////
 //
-// CBCentralManager Delegate Callbacks
+// BLEServer Callbacks
 //
-#pragma mark - CBCentralManager Delegate Callbacks
-
-- (void)centralManagerDidUpdateState:(CBCentralManager *)central
+#pragma mark - BLEServer Callbacks
+- (void)didStopScan
 {
-    isWork = NO;
+    LogSV(@"did stop scan");
 
-    // 此 method 如果沒有實作, app 會 runtime crash
-    // 先判斷藍牙是否開啟, 如果不是藍牙4.x, 也會傳回電源未開啟
-    switch (central.state) {
-        case CBCentralManagerStateUnknown:
-            LogBLE(@"Unknown");
-            break;
-        case CBCentralManagerStateUnsupported:
-            LogBLE(@"Unsupported");
-            break;
-        case CBCentralManagerStateUnauthorized:
-            LogBLE(@"Unauthorized");
-            break;
-        case CBCentralManagerStateResetting:
-            LogBLE(@"Resetting");
-            break;
-        case CBCentralManagerStatePoweredOff:
-            LogBLE(@"Powered Off");
-            break;
-        case CBCentralManagerStatePoweredOn:
-            LogBLE(@"Powered On and Ready");
-            isWork = YES;
-            break;
-        default:
-            LogBLE(@"None");
-            break;
-    }
 }
 
-
-- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
+- (void)didFoundPeripheral
 {
-    LogBLE(@"found %@", peripheral.name);
+    LogSV(@"did found peripheral...");
 
-    if (![devlst containsObject:peripheral]) {
-        LogBLE(@"add dev - %@", peripheral.name);
-        [devlst addObject:peripheral];
-
-
-        NSIndexPath     *indexPath  = [NSIndexPath indexPathForRow:[devlst indexOfObject:peripheral] inSection:0];
-        NSMutableArray  *indexPaths = [[NSMutableArray alloc] init];
-
-        [indexPaths addObject: indexPath];
-
-        [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-//        [self.tableView reloadData];
-    }
+    [self.tableView reloadData];
 }
 
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// APIs
-//
-#pragma mark - APIs
-
-- (void)startScan
+- (void)didDisconnect
 {
-    if (isWork == NO) {
-        return;
-    }
+    LogSV(@"did disconnect");
 
-    LogBLE(@"ST");
-    // 將觸發 centralManager:didDiscoverPeripheral:advertisementData:RSSI: method
-    [cbm scanForPeripheralsWithServices:nil options:nil];
 }
 
-- (void)stopScan
-{
-    if (isWork == NO) {
-        return;
-    }
-
-    LogBLE(@"SP");
-    [cbm stopScan];
-}
-
-- (void)ticker
-{
-    [self startScan];
-}
 
 
 

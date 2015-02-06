@@ -1,6 +1,6 @@
 /*
  ******************************************************************************
- * BLEDevice.h -
+ * BatteryService.h -
  *
  * Copyright (c) 2015-2016 by ZealTek Electronic Co., Ltd.
  *
@@ -17,24 +17,20 @@
  * software without notice.
  *
  * History:
- *	2015.01.16	T.C. Chiu	frist edition
+ *	2015.02.04	T.C. Chiu	frist edition
  *
  ******************************************************************************
  */
 
-#import <Foundation/Foundation.h>
-#import <CoreBluetooth/CoreBluetooth.h>
+#import "BLEServer.h"
+#import "BLEUtility.h"
 
-// Class which describes a Bluetooth Smart Device
-@interface BLEDevice : NSObject
 
-// Pointer to CoreBluetooth peripheral
-@property (strong,nonatomic) CBPeripheral *cbp;
+@interface BattertService : NSObject
 
-// Pointer to CoreBluetooth manager that found this peripheral
-@property (strong,nonatomic) CBCentralManager *cbm;
-
-// Pointer to dictionary with device setup data
-@property NSMutableDictionary *setupData;
++ (void)readBatteryLevel:(CBPeripheral *)peripheral;
++ (void)readBatteryLevel:(CBPeripheral *)peripheral sCBUUID:(CBUUID *)sCBUUID cCBUUID:(CBUUID *)cCBUUID;
 
 @end
+
+
