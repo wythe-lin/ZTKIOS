@@ -1,6 +1,6 @@
 /*
  ******************************************************************************
- * RecordViewController.h -
+ * YmsCoreBluetooth.h -
  *
  * Copyright (c) 2015-2016 by ZealTek Electronic Co., Ltd.
  *
@@ -22,24 +22,13 @@
  ******************************************************************************
  */
 
-#import <UIKit/UIKit.h>
-#import "BluetoothLE/BLEServer.h"
-
-#import "ZTCentralManager.h"
-
-@interface RecordViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, BLEServerDelegate>
-{
-    NSMutableArray      *lstResolution, *lstSpeed, *lstPower;
-    UIButton            *record;
-
-    BLEServer           *BLEServ;
-    NSMutableArray      *connectList;
-
-
-}
-
-@property (atomic, strong) ZTCentralManager *manager;
-
-
-@end
+#import "NSMutableArray+fifoQueue.h"
+#import "YMS128.h"
+#import "YMSCBCentralManager.h"
+#import "YMSCBPeripheral.h"
+#import "YMSCBStoredPeripherals.h"
+#import "YMSCBService.h"
+#import "YMSCBCharacteristic.h"
+#import "YMSCBDescriptor.h"
+#import "YMSCBUtils.h"
 

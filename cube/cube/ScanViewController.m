@@ -23,18 +23,50 @@
  */
 
 #import "ScanViewController.h"
-#import "DbgMsg.h"
 
 
+
+/*
+ ******************************************************************************
+ *
+ * for debug
+ *
+ ******************************************************************************
+ */
+#define LOGGING_LEVEL_SCANVIEW      1
+#include "DbgMsg.h"
+
+#if defined(LOGGING_LEVEL_SCANVIEW) && LOGGING_LEVEL_SCANVIEW
+    #define LogSV(fmt, ...)     LOG_FORMAT(fmt, @"SV", ##__VA_ARGS__)
+#else
+    #define LogSV(...)
+#endif
+
+
+/*
+ ******************************************************************************
+ *
+ * @interface
+ *
+ ******************************************************************************
+ */
 @interface ScanViewController ()
 
 @end
 
 
+/*
+ ******************************************************************************
+ *
+ * @implementation
+ *
+ ******************************************************************************
+ */
 @implementation ScanViewController
 
-
-#pragma mark - View Lifecycle
+/*---------------------------------------------------------------------------*/
+#pragma mark - TableView Lifecycle
+/*---------------------------------------------------------------------------*/
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -54,10 +86,13 @@
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
     self.refreshControl = refreshControl;
 
+    // KVO
+    ZTCentralManager *centralManager = [ZTCentralManager initSharedServiceWithDelegate:self];
+    [centralManager addObserver:self forKeyPath:@"isScanning" options:NSKeyValueObservingOptionNew context:NULL];
+
     // init BLEServer
     BLEServ          = [BLEServer initBLEServer];
     BLEServ.delegate = self;
-//    BLEServ          = [BLEServer initWithDelegate:self];
 
     scanList         = [BLEServ getDiscoverList];
     connectList      = [BLEServ getConnectList];
@@ -66,15 +101,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    LogSV(@"viewWillAppear");
+    LogSV(@"viewWillAppear:");
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    LogSV(@"viewDidAppear");
+    LogSV(@"viewDidAppear:");
 
-    [BLEServ startScan];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -88,13 +123,18 @@
     [super viewDidDisappear:animated];
     LogSV(@"viewDidDisappear");
 
-    [BLEServ stopScan];
+    // stop scan
+    ZTCentralManager *centralManager = [ZTCentralManager sharedService];
+    if (centralManager.isScanning == YES) {
+        [centralManager stopScan];
+    }
+//    [BLEServ stopScan];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    LogSV(@"viewDidDisappear");
+    LogSV(@"didReceiveMemoryWarning");
     // Dispose of any resources that can be recreated.
 
 }
@@ -114,12 +154,9 @@
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// TableView Data Source
-//
+/*---------------------------------------------------------------------------*/
 #pragma mark - TableView Data Source
-
+/*---------------------------------------------------------------------------*/
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
@@ -129,8 +166,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    LogSV(@"tableView:numberOfRowsInSection:");
-
     // Return the number of rows in the section.
     // 告訴tableView一個section裡要顯示多少行
     NSMutableArray  *lst;
@@ -152,24 +187,26 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    // 設定每個區段的表頭資料，這個方法為非必要方法
+    // 設定每個區段的表頭資料
     NSString    *str;
 
     switch (section) {
-        case 0: str = @"Peripherals Nearby";    break;
-        case 1: str = @"Connected";             break;
+        case 0:
+            str = @"Peripherals Nearby";
+            break;
+
+        case 1:
+            str = @"Connected";
+            break;
     }
     return str;
 }
 
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// TableView Delegate
-//
+/*---------------------------------------------------------------------------*/
 #pragma mark - TableView Delegate
-
+/*---------------------------------------------------------------------------*/
 // 傳回編輯狀態的style
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -290,35 +327,198 @@
     return cell;
 }
 
-// 這個是非必要的，如果你想修改每一行Cell的高度，特別是有多行時會超出原有Cell的高度！
+// 修改每一行Cell的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 65.0;
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// BLEServer Callbacks
-//
-#pragma mark - BLEServer Callbacks
-- (void)didStopScan
+/*---------------------------------------------------------------------------*/
+#pragma mark - KVO
+/*---------------------------------------------------------------------------*/
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    LogSV(@"did stop scan");
+    LogSV(@"observeValueForKeyPath:ofObject:change:context:");
+
+    ZTCentralManager *centralManager = [ZTCentralManager sharedService];
+
+    if (object == centralManager) {
+        if ([keyPath isEqualToString:@"isScanning"]) {
+            if (centralManager.isScanning) {
+                LogSV(@"isScanning=YES");
+            } else {
+                LogSV(@"isScanning=NO");
+            }
+        }
+    }
+}
+
+
+/*---------------------------------------------------------------------------*/
+#pragma mark - CBCentralManagerDelegate Methods
+/*---------------------------------------------------------------------------*/
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central
+{
+    LogSV(@"centralManagerDidUpdateState:");
+
+    switch (central.state) {
+        case CBCentralManagerStateUnknown: {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:@"The current state of the central manager is unknown."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            break;
+        }
+
+        case CBCentralManagerStateResetting:
+            [self.tableView reloadData];
+            break;
+
+        case CBCentralManagerStateUnsupported: {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:@"The platform does not support Bluetooth low energy."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            break;
+        }
+
+        case CBCentralManagerStateUnauthorized: {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning"
+                                                            message:@"The app is not authorized to use Bluetooth low energy."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            break;
+        }
+
+        case CBCentralManagerStatePoweredOff: {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning"
+                                                            message:@"Bluetooth is currently powered off."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            break;
+        }
+
+        case CBCentralManagerStatePoweredOn: {
+            // start scan
+            ZTCentralManager *centralManager = [ZTCentralManager sharedService];
+            if (centralManager.isScanning == NO) {
+                [centralManager startScan];
+            }
+            break;
+        }
+
+        default:
+            break;
+    }
+}
+
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
+{
+    LogSV(@"centralManager:didDiscoverPeripheral:advertisementData:RSSI:");
+
+    ZTCentralManager    *centralManager = [ZTCentralManager sharedService];
+    YMSCBPeripheral     *yp             = [centralManager findPeripheral:peripheral];
+
+    if (yp.isRenderedInViewCell == NO) {
+        [self.tableView reloadData];
+        yp.isRenderedInViewCell = YES;
+    }
+}
+
+- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
+{
+    LogSV(@"centralManager:didConnectPeripheral:");
+
+    ZTCentralManager    *centralManager = [ZTCentralManager sharedService];
+    YMSCBPeripheral     *yp             = [centralManager findPeripheral:peripheral];
+
+//    yp.delegate = self;
+//    [yp readRSSI];
 
 }
 
-- (void)didFoundPeripheral
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    LogSV(@"did found peripheral...");
+    LogSV(@"centralManager:didDisconnectPeripheral:error:");
 
-    [self.tableView reloadData];
+
+
 }
 
-- (void)didDisconnect
+- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals
 {
-    LogSV(@"did disconnect");
+    LogSV(@"centralManager:didRetrievePeripherals:");
 
+    ZTCentralManager *centralManager = [ZTCentralManager sharedService];
+
+    for (CBPeripheral *peripheral in peripherals) {
+        YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+        if (yp) {
+//            yp.delegate = self;
+        }
+    }
+
+}
+
+
+- (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals
+{
+    LogSV(@"centralManager:didRetrieveConnectedPeripherals:");
+
+    ZTCentralManager *centralManager = [ZTCentralManager sharedService];
+
+    for (CBPeripheral *peripheral in peripherals) {
+        YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+        if (yp) {
+//            yp.delegate = self;
+        }
+    }
+
+}
+
+
+/*---------------------------------------------------------------------------*/
+#pragma mark - CBPeripheralDelegate Methods
+/*---------------------------------------------------------------------------*/
+- (void)performUpdateRSSI:(NSArray *)args
+{
+    LogSV(@"performUpdateRSSI:");
+
+    CBPeripheral *peripheral = args[0];
+
+    [peripheral readRSSI];
+}
+
+
+- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error
+{
+    LogSV(@"peripheralDidUpdateRSSI:error:");
+
+    if (error) {
+        NSLog(@"ERROR: readRSSI failed, retrying. %@", error.description);
+
+        if (peripheral.state == CBPeripheralStateConnected) {
+            NSArray *args = @[peripheral];
+            [self performSelector:@selector(performUpdateRSSI:) withObject:args afterDelay:2.0];
+        }
+
+        return;
+    }
+
+    ZTCentralManager *centralManager = [ZTCentralManager sharedService];
+    YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+
+    NSArray *args = @[peripheral];
+    [self performSelector:@selector(performUpdateRSSI:) withObject:args afterDelay:yp.rssiPingPeriod];
 }
 
 

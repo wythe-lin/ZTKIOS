@@ -8,6 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		9A2FE8E51A690F980008C4D6 /* BTServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2FE8E41A690F980008C4D6 /* BTServer.m */; };
+		9A379EE91A8B54540002FB5C /* NSMutableArray+fifoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379ED81A8B54540002FB5C /* NSMutableArray+fifoQueue.m */; };
+		9A379EEA1A8B54540002FB5C /* YMS128.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A379ED91A8B54540002FB5C /* YMS128.c */; };
+		9A379EEB1A8B54540002FB5C /* YMSCBCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EDC1A8B54540002FB5C /* YMSCBCentralManager.m */; };
+		9A379EEC1A8B54540002FB5C /* YMSCBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EDE1A8B54540002FB5C /* YMSCBCharacteristic.m */; };
+		9A379EED1A8B54540002FB5C /* YMSCBDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EE01A8B54540002FB5C /* YMSCBDescriptor.m */; };
+		9A379EEE1A8B54540002FB5C /* YMSCBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EE21A8B54540002FB5C /* YMSCBPeripheral.m */; };
+		9A379EEF1A8B54540002FB5C /* YMSCBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EE41A8B54540002FB5C /* YMSCBService.m */; };
+		9A379EF01A8B54540002FB5C /* YMSCBStoredPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EE61A8B54540002FB5C /* YMSCBStoredPeripherals.m */; };
+		9A379EF11A8B54540002FB5C /* YMSCBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EE81A8B54540002FB5C /* YMSCBUtils.m */; };
+		9A379EF51A8B55000002FB5C /* ZTCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EF41A8B55000002FB5C /* ZTCentralManager.m */; };
+		9A379EF91A8B56530002FB5C /* DEASensorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EF71A8B56530002FB5C /* DEASensorTag.m */; };
+		9A379F291A8B61130002FB5C /* DEAAccelerometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F181A8B61130002FB5C /* DEAAccelerometerService.m */; };
+		9A379F2A1A8B61130002FB5C /* DEABarometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F1A1A8B61130002FB5C /* DEABarometerService.m */; };
+		9A379F2B1A8B61130002FB5C /* DEABaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F1C1A8B61130002FB5C /* DEABaseService.m */; };
+		9A379F2C1A8B61130002FB5C /* DEADeviceInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F1E1A8B61130002FB5C /* DEADeviceInfoService.m */; };
+		9A379F2D1A8B61130002FB5C /* DEAGyroscopeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F201A8B61130002FB5C /* DEAGyroscopeService.m */; };
+		9A379F2E1A8B61130002FB5C /* DEAHumidityService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F221A8B61130002FB5C /* DEAHumidityService.m */; };
+		9A379F2F1A8B61130002FB5C /* DEAMagnetometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F241A8B61130002FB5C /* DEAMagnetometerService.m */; };
+		9A379F301A8B61130002FB5C /* DEASimpleKeysService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F261A8B61130002FB5C /* DEASimpleKeysService.m */; };
+		9A379F311A8B61130002FB5C /* DEATemperatureService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F281A8B61130002FB5C /* DEATemperatureService.m */; };
 		9A3D3FAC1A6E549900852006 /* BLEDevInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FAB1A6E549900852006 /* BLEDevInfo.m */; };
 		9A3D3FAF1A6E750D00852006 /* BLEUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FAE1A6E750D00852006 /* BLEUtility.m */; };
 		9A3D3FB21A6E79C600852006 /* PeriperalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FB11A6E79C600852006 /* PeriperalInfo.m */; };
@@ -41,6 +61,48 @@
 /* Begin PBXFileReference section */
 		9A2FE8E41A690F980008C4D6 /* BTServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTServer.m; sourceTree = "<group>"; };
 		9A2FE8E61A690FA30008C4D6 /* BTServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTServer.h; sourceTree = "<group>"; };
+		9A379ED71A8B54540002FB5C /* NSMutableArray+fifoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+fifoQueue.h"; path = "YmsCoreBluetooth/NSMutableArray+fifoQueue.h"; sourceTree = "<group>"; };
+		9A379ED81A8B54540002FB5C /* NSMutableArray+fifoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+fifoQueue.m"; path = "YmsCoreBluetooth/NSMutableArray+fifoQueue.m"; sourceTree = "<group>"; };
+		9A379ED91A8B54540002FB5C /* YMS128.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = YMS128.c; path = YmsCoreBluetooth/YMS128.c; sourceTree = "<group>"; };
+		9A379EDA1A8B54540002FB5C /* YMS128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMS128.h; path = YmsCoreBluetooth/YMS128.h; sourceTree = "<group>"; };
+		9A379EDB1A8B54540002FB5C /* YMSCBCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMSCBCentralManager.h; path = YmsCoreBluetooth/YMSCBCentralManager.h; sourceTree = "<group>"; };
+		9A379EDC1A8B54540002FB5C /* YMSCBCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBCentralManager.m; path = YmsCoreBluetooth/YMSCBCentralManager.m; sourceTree = "<group>"; };
+		9A379EDD1A8B54540002FB5C /* YMSCBCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMSCBCharacteristic.h; path = YmsCoreBluetooth/YMSCBCharacteristic.h; sourceTree = "<group>"; };
+		9A379EDE1A8B54540002FB5C /* YMSCBCharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBCharacteristic.m; path = YmsCoreBluetooth/YMSCBCharacteristic.m; sourceTree = "<group>"; };
+		9A379EDF1A8B54540002FB5C /* YMSCBDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMSCBDescriptor.h; path = YmsCoreBluetooth/YMSCBDescriptor.h; sourceTree = "<group>"; };
+		9A379EE01A8B54540002FB5C /* YMSCBDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBDescriptor.m; path = YmsCoreBluetooth/YMSCBDescriptor.m; sourceTree = "<group>"; };
+		9A379EE11A8B54540002FB5C /* YMSCBPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMSCBPeripheral.h; path = YmsCoreBluetooth/YMSCBPeripheral.h; sourceTree = "<group>"; };
+		9A379EE21A8B54540002FB5C /* YMSCBPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBPeripheral.m; path = YmsCoreBluetooth/YMSCBPeripheral.m; sourceTree = "<group>"; };
+		9A379EE31A8B54540002FB5C /* YMSCBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMSCBService.h; path = YmsCoreBluetooth/YMSCBService.h; sourceTree = "<group>"; };
+		9A379EE41A8B54540002FB5C /* YMSCBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBService.m; path = YmsCoreBluetooth/YMSCBService.m; sourceTree = "<group>"; };
+		9A379EE51A8B54540002FB5C /* YMSCBStoredPeripherals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMSCBStoredPeripherals.h; path = YmsCoreBluetooth/YMSCBStoredPeripherals.h; sourceTree = "<group>"; };
+		9A379EE61A8B54540002FB5C /* YMSCBStoredPeripherals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBStoredPeripherals.m; path = YmsCoreBluetooth/YMSCBStoredPeripherals.m; sourceTree = "<group>"; };
+		9A379EE71A8B54540002FB5C /* YMSCBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMSCBUtils.h; path = YmsCoreBluetooth/YMSCBUtils.h; sourceTree = "<group>"; };
+		9A379EE81A8B54540002FB5C /* YMSCBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBUtils.m; path = YmsCoreBluetooth/YMSCBUtils.m; sourceTree = "<group>"; };
+		9A379EF31A8B55000002FB5C /* ZTCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTCentralManager.h; path = ZTProfile/ZTCentralManager.h; sourceTree = "<group>"; };
+		9A379EF41A8B55000002FB5C /* ZTCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTCentralManager.m; path = ZTProfile/ZTCentralManager.m; sourceTree = "<group>"; };
+		9A379EF61A8B56530002FB5C /* DEASensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEASensorTag.h; path = ZTProfile/DEASensorTag.h; sourceTree = "<group>"; };
+		9A379EF71A8B56530002FB5C /* DEASensorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEASensorTag.m; path = ZTProfile/DEASensorTag.m; sourceTree = "<group>"; };
+		9A379EF81A8B56530002FB5C /* TISensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TISensorTag.h; path = ZTProfile/TISensorTag.h; sourceTree = "<group>"; };
+		9A379F171A8B61130002FB5C /* DEAAccelerometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEAAccelerometerService.h; path = ZTProfile/Services/DEAAccelerometerService.h; sourceTree = "<group>"; };
+		9A379F181A8B61130002FB5C /* DEAAccelerometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEAAccelerometerService.m; path = ZTProfile/Services/DEAAccelerometerService.m; sourceTree = "<group>"; };
+		9A379F191A8B61130002FB5C /* DEABarometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEABarometerService.h; path = ZTProfile/Services/DEABarometerService.h; sourceTree = "<group>"; };
+		9A379F1A1A8B61130002FB5C /* DEABarometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEABarometerService.m; path = ZTProfile/Services/DEABarometerService.m; sourceTree = "<group>"; };
+		9A379F1B1A8B61130002FB5C /* DEABaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEABaseService.h; path = ZTProfile/Services/DEABaseService.h; sourceTree = "<group>"; };
+		9A379F1C1A8B61130002FB5C /* DEABaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEABaseService.m; path = ZTProfile/Services/DEABaseService.m; sourceTree = "<group>"; };
+		9A379F1D1A8B61130002FB5C /* DEADeviceInfoService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEADeviceInfoService.h; path = ZTProfile/Services/DEADeviceInfoService.h; sourceTree = "<group>"; };
+		9A379F1E1A8B61130002FB5C /* DEADeviceInfoService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEADeviceInfoService.m; path = ZTProfile/Services/DEADeviceInfoService.m; sourceTree = "<group>"; };
+		9A379F1F1A8B61130002FB5C /* DEAGyroscopeService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEAGyroscopeService.h; path = ZTProfile/Services/DEAGyroscopeService.h; sourceTree = "<group>"; };
+		9A379F201A8B61130002FB5C /* DEAGyroscopeService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEAGyroscopeService.m; path = ZTProfile/Services/DEAGyroscopeService.m; sourceTree = "<group>"; };
+		9A379F211A8B61130002FB5C /* DEAHumidityService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEAHumidityService.h; path = ZTProfile/Services/DEAHumidityService.h; sourceTree = "<group>"; };
+		9A379F221A8B61130002FB5C /* DEAHumidityService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEAHumidityService.m; path = ZTProfile/Services/DEAHumidityService.m; sourceTree = "<group>"; };
+		9A379F231A8B61130002FB5C /* DEAMagnetometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEAMagnetometerService.h; path = ZTProfile/Services/DEAMagnetometerService.h; sourceTree = "<group>"; };
+		9A379F241A8B61130002FB5C /* DEAMagnetometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEAMagnetometerService.m; path = ZTProfile/Services/DEAMagnetometerService.m; sourceTree = "<group>"; };
+		9A379F251A8B61130002FB5C /* DEASimpleKeysService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEASimpleKeysService.h; path = ZTProfile/Services/DEASimpleKeysService.h; sourceTree = "<group>"; };
+		9A379F261A8B61130002FB5C /* DEASimpleKeysService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEASimpleKeysService.m; path = ZTProfile/Services/DEASimpleKeysService.m; sourceTree = "<group>"; };
+		9A379F271A8B61130002FB5C /* DEATemperatureService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEATemperatureService.h; path = ZTProfile/Services/DEATemperatureService.h; sourceTree = "<group>"; };
+		9A379F281A8B61130002FB5C /* DEATemperatureService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEATemperatureService.m; path = ZTProfile/Services/DEATemperatureService.m; sourceTree = "<group>"; };
+		9A379F321A8B61250002FB5C /* YmsCoreBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YmsCoreBluetooth.h; path = ZTProfile/YmsCoreBluetooth.h; sourceTree = "<group>"; };
 		9A3808D91A710810009F3B10 /* DbgMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbgMsg.h; sourceTree = "<group>"; };
 		9A3D3FAB1A6E549900852006 /* BLEDevInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEDevInfo.m; sourceTree = "<group>"; };
 		9A3D3FAD1A6E54BD00852006 /* BLEDevInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLEDevInfo.h; sourceTree = "<group>"; };
@@ -116,6 +178,70 @@
 			path = BluetoothLE;
 			sourceTree = "<group>";
 		};
+		9A379ED61A8B54130002FB5C /* YmsCoreBluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				9A379ED71A8B54540002FB5C /* NSMutableArray+fifoQueue.h */,
+				9A379ED81A8B54540002FB5C /* NSMutableArray+fifoQueue.m */,
+				9A379ED91A8B54540002FB5C /* YMS128.c */,
+				9A379EDA1A8B54540002FB5C /* YMS128.h */,
+				9A379EDB1A8B54540002FB5C /* YMSCBCentralManager.h */,
+				9A379EDC1A8B54540002FB5C /* YMSCBCentralManager.m */,
+				9A379EE11A8B54540002FB5C /* YMSCBPeripheral.h */,
+				9A379EE21A8B54540002FB5C /* YMSCBPeripheral.m */,
+				9A379EE51A8B54540002FB5C /* YMSCBStoredPeripherals.h */,
+				9A379EE61A8B54540002FB5C /* YMSCBStoredPeripherals.m */,
+				9A379EE31A8B54540002FB5C /* YMSCBService.h */,
+				9A379EE41A8B54540002FB5C /* YMSCBService.m */,
+				9A379EDD1A8B54540002FB5C /* YMSCBCharacteristic.h */,
+				9A379EDE1A8B54540002FB5C /* YMSCBCharacteristic.m */,
+				9A379EDF1A8B54540002FB5C /* YMSCBDescriptor.h */,
+				9A379EE01A8B54540002FB5C /* YMSCBDescriptor.m */,
+				9A379EE71A8B54540002FB5C /* YMSCBUtils.h */,
+				9A379EE81A8B54540002FB5C /* YMSCBUtils.m */,
+			);
+			name = YmsCoreBluetooth;
+			sourceTree = "<group>";
+		};
+		9A379EF21A8B547B0002FB5C /* ZTProfile */ = {
+			isa = PBXGroup;
+			children = (
+				9A379F151A8B59920002FB5C /* Services */,
+				9A379F321A8B61250002FB5C /* YmsCoreBluetooth.h */,
+				9A379EF31A8B55000002FB5C /* ZTCentralManager.h */,
+				9A379EF41A8B55000002FB5C /* ZTCentralManager.m */,
+				9A379EF61A8B56530002FB5C /* DEASensorTag.h */,
+				9A379EF71A8B56530002FB5C /* DEASensorTag.m */,
+				9A379EF81A8B56530002FB5C /* TISensorTag.h */,
+			);
+			name = ZTProfile;
+			sourceTree = "<group>";
+		};
+		9A379F151A8B59920002FB5C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9A379F171A8B61130002FB5C /* DEAAccelerometerService.h */,
+				9A379F181A8B61130002FB5C /* DEAAccelerometerService.m */,
+				9A379F191A8B61130002FB5C /* DEABarometerService.h */,
+				9A379F1A1A8B61130002FB5C /* DEABarometerService.m */,
+				9A379F1B1A8B61130002FB5C /* DEABaseService.h */,
+				9A379F1C1A8B61130002FB5C /* DEABaseService.m */,
+				9A379F1D1A8B61130002FB5C /* DEADeviceInfoService.h */,
+				9A379F1E1A8B61130002FB5C /* DEADeviceInfoService.m */,
+				9A379F1F1A8B61130002FB5C /* DEAGyroscopeService.h */,
+				9A379F201A8B61130002FB5C /* DEAGyroscopeService.m */,
+				9A379F211A8B61130002FB5C /* DEAHumidityService.h */,
+				9A379F221A8B61130002FB5C /* DEAHumidityService.m */,
+				9A379F231A8B61130002FB5C /* DEAMagnetometerService.h */,
+				9A379F241A8B61130002FB5C /* DEAMagnetometerService.m */,
+				9A379F251A8B61130002FB5C /* DEASimpleKeysService.h */,
+				9A379F261A8B61130002FB5C /* DEASimpleKeysService.m */,
+				9A379F271A8B61130002FB5C /* DEATemperatureService.h */,
+				9A379F281A8B61130002FB5C /* DEATemperatureService.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		9AAA313F1A67E845001D5B52 = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +264,8 @@
 		9AAA314A1A67E845001D5B52 /* cube */ = {
 			isa = PBXGroup;
 			children = (
+				9A379EF21A8B547B0002FB5C /* ZTProfile */,
+				9A379ED61A8B54130002FB5C /* YmsCoreBluetooth */,
 				9A2FE8E01A6904E20008C4D6 /* BluetoothLE */,
 				9AAA31C11A67EC4C001D5B52 /* MBProgressHUD */,
 				9AAA314F1A67E845001D5B52 /* AppDelegate.h */,
@@ -304,17 +432,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A379EEF1A8B54540002FB5C /* YMSCBService.m in Sources */,
+				9A379EEB1A8B54540002FB5C /* YMSCBCentralManager.m in Sources */,
+				9A379EF51A8B55000002FB5C /* ZTCentralManager.m in Sources */,
 				9A3D3FAC1A6E549900852006 /* BLEDevInfo.m in Sources */,
+				9A379F301A8B61130002FB5C /* DEASimpleKeysService.m in Sources */,
+				9A379F2D1A8B61130002FB5C /* DEAGyroscopeService.m in Sources */,
+				9A379EEE1A8B54540002FB5C /* YMSCBPeripheral.m in Sources */,
 				9A2FE8E51A690F980008C4D6 /* BTServer.m in Sources */,
 				9AAA31571A67E845001D5B52 /* ScanViewController.m in Sources */,
+				9A379EF91A8B56530002FB5C /* DEASensorTag.m in Sources */,
+				9A379F2C1A8B61130002FB5C /* DEADeviceInfoService.m in Sources */,
 				9AAA31511A67E845001D5B52 /* AppDelegate.m in Sources */,
 				9AAA320C1A67EDA0001D5B52 /* MBProgressHUD.m in Sources */,
 				9AC4C08D1A7A0959008E72BE /* BLEServer.m in Sources */,
+				9A379F311A8B61130002FB5C /* DEATemperatureService.m in Sources */,
 				9A3D3FB21A6E79C600852006 /* PeriperalInfo.m in Sources */,
+				9A379EF01A8B54540002FB5C /* YMSCBStoredPeripherals.m in Sources */,
+				9A379F291A8B61130002FB5C /* DEAAccelerometerService.m in Sources */,
 				9A3D3FAF1A6E750D00852006 /* BLEUtility.m in Sources */,
+				9A379F2B1A8B61130002FB5C /* DEABaseService.m in Sources */,
+				9A379EED1A8B54540002FB5C /* YMSCBDescriptor.m in Sources */,
+				9A379F2E1A8B61130002FB5C /* DEAHumidityService.m in Sources */,
 				9AAA31541A67E845001D5B52 /* RecordViewController.m in Sources */,
+				9A379EEC1A8B54540002FB5C /* YMSCBCharacteristic.m in Sources */,
 				9AAA314E1A67E845001D5B52 /* main.m in Sources */,
 				9AC7C6C51A821D1700EFAE59 /* BatteryService.m in Sources */,
+				9A379F2A1A8B61130002FB5C /* DEABarometerService.m in Sources */,
+				9A379EE91A8B54540002FB5C /* NSMutableArray+fifoQueue.m in Sources */,
+				9A379EF11A8B54540002FB5C /* YMSCBUtils.m in Sources */,
+				9A379EEA1A8B54540002FB5C /* YMS128.c in Sources */,
+				9A379F2F1A8B61130002FB5C /* DEAMagnetometerService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,9 +588,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = cube/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = cube;
 			};
 			name = Debug;
 		};
@@ -452,9 +600,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = cube/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = cube;
 			};
 			name = Release;
 		};
@@ -472,7 +620,7 @@
 				);
 				INFOPLIST_FILE = cubeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = cubeTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cube.app/cube";
 			};
 			name = Debug;
@@ -487,7 +635,7 @@
 				);
 				INFOPLIST_FILE = cubeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = cubeTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cube.app/cube";
 			};
 			name = Release;

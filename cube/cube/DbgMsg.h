@@ -40,6 +40,11 @@
     #define LOGGING_INCLUDE_CODE_LOCATION   0
 #endif
 
+#ifndef LOGGING_INCLUDE_MULTITHREAD
+    #define LOGGING_INCLUDE_MULTITHREAD     0
+#endif
+
+
 /**
  * Set any or all of these switches to enable or disable logging at specific levels.
  * These can be set either here or as a compiler build settings.
@@ -57,12 +62,6 @@
 #ifndef LOGGING_LEVEL_DEBUG
     #define LOGGING_LEVEL_DEBUG             1
 #endif
-#ifndef LOGGING_LEVEL_SCANVIEW
-    #define LOGGING_LEVEL_SCANVIEW          1
-#endif
-#ifndef LOGGING_LEVEL_RECORDVIEW
-    #define LOGGING_LEVEL_RECORDVIEW        1
-#endif
 
 
 // *********** END OF USER SETTINGS  - Do not change anything below this line ***********
@@ -74,30 +73,19 @@
 #endif
 
 // Logging format
-#define LOG_FORMAT_NO_LOCATION(fmt, lvl, ...)       NSLog((@"[%@] " fmt), lvl, ##__VA_ARGS__)
-#define LOG_FORMAT_WITH_LOCATION(fmt, lvl, ...)     NSLog((@"%s[Line %d] [%@] " fmt), __PRETTY_FUNCTION__, __LINE__, lvl, ##__VA_ARGS__)
-
+#if defined(LOGGING_INCLUDE_MULTITHREAD) && LOGGING_INCLUDE_MULTITHREAD
+    #define LOG_FORMAT_NO_LOCATION(fmt, lvl, ...)   NSLog((@"[%@][%@] " fmt), lvl, [[NSThread currentThread] isMainThread] ? @"Y" : @"N", ##__VA_ARGS__)
+    #define LOG_FORMAT_WITH_LOCATION(fmt, lvl, ...) NSLog((@"%s[Line %d] [%@][%@] " fmt), __PRETTY_FUNCTION__, __LINE__, lvl, [[NSThread currentThread] isMainThread] ? @"Y" : @"N", ##__VA_ARGS__)
+#else
+    #define LOG_FORMAT_NO_LOCATION(fmt, lvl, ...)   NSLog((@"[%@] " fmt), lvl, ##__VA_ARGS__)
+    #define LOG_FORMAT_WITH_LOCATION(fmt, lvl, ...) NSLog((@"%s[Line %d] [%@] " fmt), __PRETTY_FUNCTION__, __LINE__, lvl, ##__VA_ARGS__)
+#endif
 
 #if defined(LOGGING_INCLUDE_CODE_LOCATION) && LOGGING_INCLUDE_CODE_LOCATION
     #define LOG_FORMAT(fmt, lvl, ...)               LOG_FORMAT_WITH_LOCATION(fmt, lvl, ##__VA_ARGS__)
 #else
     #define LOG_FORMAT(fmt, lvl, ...)               LOG_FORMAT_NO_LOCATION(fmt, lvl, ##__VA_ARGS__)
 #endif
-
-
-// BLE logging -
-#if defined(LOGGING_LEVEL_SCANVIEW) && LOGGING_LEVEL_SCANVIEW
-    #define LogSV(fmt, ...)             LOG_FORMAT(fmt, @"SV", ##__VA_ARGS__)
-#else
-    #define LogSV(...)
-#endif
-
-#if defined(LOGGING_LEVEL_RECORDVIEW) && LOGGING_LEVEL_RECORDVIEW
-    #define LogRV(fmt, ...)             LOG_FORMAT(fmt, @"RV", ##__VA_ARGS__)
-#else
-    #define LogRV(...)
-#endif
-
 
 
 // Trace logging - for detailed tracing

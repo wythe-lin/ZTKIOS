@@ -23,15 +23,46 @@
  */
 
 #import "RecordViewController.h"
-#import "DbgMsg.h"
 
 #import "BatteryService.h"
 
 
+/*
+ ******************************************************************************
+ *
+ * for debug
+ *
+ ******************************************************************************
+ */
+#define LOGGING_LEVEL_RECORDVIEW    1
+#include "DbgMsg.h"
+
+#if defined(LOGGING_LEVEL_RECORDVIEW) && LOGGING_LEVEL_RECORDVIEW
+    #define LogRV(fmt, ...)     LOG_FORMAT(fmt, @"RV", ##__VA_ARGS__)
+#else
+    #define LogRV(...)
+#endif
+
+
+/*
+ ******************************************************************************
+ *
+ * @interface
+ *
+ ******************************************************************************
+ */
 @interface RecordViewController ()
 
 @end
 
+
+/*
+ ******************************************************************************
+ *
+ * @implementation
+ *
+ ******************************************************************************
+ */
 @implementation RecordViewController
 
 - (void)viewDidLoad
@@ -130,9 +161,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// BLEServer Callbacks
+// BLEServer Delegate
 //
-#pragma mark - BLEServer Callbacks
+#pragma mark - BLEServer Delegate
 - (void)didDisconnect
 {
     LogRV(@"did disconnect");

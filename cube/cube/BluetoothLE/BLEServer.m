@@ -233,7 +233,11 @@ typedef void(^peripheralConnectionCallback)(NSError *error);
     if ([connectList count]) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self connectPeripheral:nil];
+//                [self connectPeripheral:nil];
+                [self connectWithCompletion:^(NSError *error) {
+                    // discover service
+                    [connectDevice discoverServices:nil];
+                }];
             });
         });
 
@@ -253,9 +257,9 @@ typedef void(^peripheralConnectionCallback)(NSError *error);
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// CBCentralManager Callbacks
+// CBCentralManager Delegate
 //
-#pragma mark - CBCentralManager Callbacks
+#pragma mark - CBCentralManager Delegate
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
@@ -303,16 +307,19 @@ typedef void(^peripheralConnectionCallback)(NSError *error);
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
+    dispatch_async(dispatch_get_main_queue(), ^{
     msg(@"connected %@ - start", (peripheral.name == nil) ? @"Unnamed" : peripheral.name);
 
     // 這邊要設定Delegate才能對後續的操作有所反應
     connectDevice          = peripheral;
     connectDevice.delegate = self;
 
-    // discover service
-    [connectDevice discoverServices:nil];
+//    // discover service
+//    [connectDevice discoverServices:nil];
 
     msg(@"connected %@ - end", (peripheral.name == nil) ? @"Unnamed" : peripheral.name);
+
+    });
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
@@ -380,9 +387,9 @@ typedef void(^peripheralConnectionCallback)(NSError *error);
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// CBPeripheral Callbacks
+// CBPeripheral Delegate
 //
-#pragma mark - CBPeripheral Callbacks
+#pragma mark - CBPeripheral Delegate
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
