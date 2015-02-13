@@ -23,14 +23,12 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "BluetoothLE/BLEServer.h"
 
-#import "ZTCentralManager.h"
+#import "ZTProfile/ZTCentralManager.h"
 
-@interface ScanViewController : UITableViewController <CBCentralManagerDelegate, BLEServerDelegate>
+@interface ScanViewController : UITableViewController <CBCentralManagerDelegate, CBPeripheralDelegate>
 {
-    BLEServer           *BLEServ;
-    NSMutableArray      *scanList, *connectList;
+
 }
 
 

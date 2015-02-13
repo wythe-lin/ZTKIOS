@@ -23,23 +23,16 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "BluetoothLE/BLEServer.h"
 
-#import "ZTCentralManager.h"
+#import "ZTProfile/ZTCentralManager.h"
 
-@interface RecordViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, BLEServerDelegate>
+
+@interface RecordViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate>
 {
     NSMutableArray      *lstResolution, *lstSpeed, *lstPower;
     UIButton            *record;
 
-    BLEServer           *BLEServ;
-    NSMutableArray      *connectList;
-
-
 }
-
-@property (atomic, strong) ZTCentralManager *manager;
-
 
 @end
 

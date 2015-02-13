@@ -27,6 +27,8 @@
 #import "BatteryService.h"
 
 
+extern NSMutableArray   *connectList;
+
 /*
  ******************************************************************************
  *
@@ -65,6 +67,9 @@
  */
 @implementation RecordViewController
 
+/*---------------------------------------------------------------------------*/
+#pragma mark - PickerView Lifecycle
+/*---------------------------------------------------------------------------*/
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -94,13 +99,6 @@
     [record setBackgroundColor:[UIColor lightGrayColor]];
     [record setTitle:@"Record" forState:UIControlStateNormal];
 
-
-    // init BLEServer
-    BLEServ          = [BLEServer initBLEServer];
-    BLEServ.delegate = self;
-//    BLEServ          = [BLEServer initWithDelegate:self];
-
-    connectList      = [BLEServ getConnectList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -145,30 +143,196 @@
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// TableView Data Source
-//
+/*---------------------------------------------------------------------------*/
+#pragma mark -  Button Action
+/*---------------------------------------------------------------------------*/
 - (IBAction)recordButtonPress:(UIButton *)sender
 {
     LogRV(@"recordButtonPress: - begin (isMainThread=%@)", [[NSThread currentThread] isMainThread] ? @"YES" : @"NO");
 
-    [BLEServ sendCommand:0];
+    if (![connectList count]) {
+        return;
+    }
+
+    YMSCBPeripheral *yp = [connectList objectAtIndex:0];
+
+    if (yp.isConnected) {
+
+        [yp disconnect];
+    } else {
+
+        [yp connect];
+    }
+
+
+
+
 
     LogRV(@"recordButtonPress: - end (isMainThread=%@)", [[NSThread currentThread] isMainThread] ? @"YES" : @"NO");
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// BLEServer Delegate
-//
-#pragma mark - BLEServer Delegate
-- (void)didDisconnect
+
+/*---------------------------------------------------------------------------*/
+#pragma mark - CBCentralManagerDelegate Methods
+/*---------------------------------------------------------------------------*/
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
-    LogRV(@"did disconnect");
-    
+    LogRV(@"centralManagerDidUpdateState:");
+
+    switch (central.state) {
+        case CBCentralManagerStateUnknown: {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:@"The current state of the central manager is unknown."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            break;
+        }
+
+        case CBCentralManagerStateResetting:
+
+            break;
+
+        case CBCentralManagerStateUnsupported: {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:@"The platform does not support Bluetooth low energy."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            break;
+        }
+
+        case CBCentralManagerStateUnauthorized: {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning"
+                                                            message:@"The app is not authorized to use Bluetooth low energy."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            break;
+        }
+
+        case CBCentralManagerStatePoweredOff: {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning"
+                                                            message:@"Bluetooth is currently powered off."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            break;
+        }
+
+        case CBCentralManagerStatePoweredOn: {
+            // start scan
+            ZTCentralManager *centralManager = [ZTCentralManager sharedService];
+            if (centralManager.isScanning == NO) {
+                [centralManager startScan];
+            }
+            break;
+        }
+
+        default:
+            break;
+    }
 }
+
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
+{
+    LogRV(@"centralManager:didDiscoverPeripheral:advertisementData:RSSI:");
+
+
+}
+
+- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
+{
+    LogRV(@"centralManager:didConnectPeripheral:");
+
+    ZTCentralManager    *centralManager = [ZTCentralManager sharedService];
+    YMSCBPeripheral     *yp             = [centralManager findPeripheral:peripheral];
+
+    yp.delegate = self;
+    [yp readRSSI];
+
+}
+
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
+{
+    LogRV(@"centralManager:didDisconnectPeripheral:error:");
+
+
+
+}
+
+- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals
+{
+    LogRV(@"centralManager:didRetrievePeripherals:");
+
+    ZTCentralManager *centralManager = [ZTCentralManager sharedService];
+
+    for (CBPeripheral *peripheral in peripherals) {
+        YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+        if (yp) {
+            //            yp.delegate = self;
+        }
+    }
+
+}
+
+
+- (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals
+{
+    LogRV(@"centralManager:didRetrieveConnectedPeripherals:");
+
+    ZTCentralManager *centralManager = [ZTCentralManager sharedService];
+
+    for (CBPeripheral *peripheral in peripherals) {
+        YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+        if (yp) {
+            //            yp.delegate = self;
+        }
+    }
+
+}
+
+
+/*---------------------------------------------------------------------------*/
+#pragma mark - CBPeripheralDelegate Methods
+/*---------------------------------------------------------------------------*/
+- (void)performUpdateRSSI:(NSArray *)args
+{
+    LogRV(@"performUpdateRSSI:");
+
+    CBPeripheral *peripheral = args[0];
+
+    [peripheral readRSSI];
+}
+
+
+- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error
+{
+    LogRV(@"peripheralDidUpdateRSSI:error:");
+
+    if (error) {
+        NSLog(@"ERROR: readRSSI failed, retrying. %@", error.description);
+
+        if (peripheral.state == CBPeripheralStateConnected) {
+            NSArray *args = @[peripheral];
+            [self performSelector:@selector(performUpdateRSSI:) withObject:args afterDelay:2.0];
+        }
+
+        return;
+    }
+
+    ZTCentralManager *centralManager = [ZTCentralManager sharedService];
+    YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+    
+    NSArray *args = @[peripheral];
+    [self performSelector:@selector(performUpdateRSSI:) withObject:args afterDelay:yp.rssiPingPeriod];
+}
+
 
 
 @end

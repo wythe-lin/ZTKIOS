@@ -1,21 +1,26 @@
-// 
-// Copyright 2013-2014 Yummy Melon Software LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-//  Author: Charles Y. Choi <charles.choi@yummymelon.com>
-//
-
+/*
+ ******************************************************************************
+ * ZTCentralManager.h -
+ *
+ * Copyright (c) 2015-2016 by ZealTek Electronic Co., Ltd.
+ *
+ * This software is copyrighted by and is the property of ZealTek
+ * Electronic Co., Ltd. All rights are reserved by ZealTek Electronic
+ * Co., Ltd. This software may only be used in accordance with the
+ * corresponding license agreement. Any unauthorized use, duplication,
+ * distribution, or disclosure of this software is expressly forbidden.
+ *
+ * This Copyright notice MUST not be removed or modified without prior
+ * written consent of ZealTek Electronic Co., Ltd.
+ *
+ * ZealTek Electronic Co., Ltd. reserves the right to modify this
+ * software without notice.
+ *
+ * History:
+ *	2015.01.16	T.C. Chiu	frist edition
+ *
+ ******************************************************************************
+ */
 
 #import "YmsCoreBluetooth.h"
 

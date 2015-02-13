@@ -25,6 +25,8 @@
 #import "ScanViewController.h"
 
 
+NSMutableArray  *connectList;
+
 
 /*
  ******************************************************************************
@@ -90,12 +92,11 @@
     ZTCentralManager *centralManager = [ZTCentralManager initSharedServiceWithDelegate:self];
     [centralManager addObserver:self forKeyPath:@"isScanning" options:NSKeyValueObservingOptionNew context:NULL];
 
-    // init BLEServer
-    BLEServ          = [BLEServer initBLEServer];
-    BLEServ.delegate = self;
 
-    scanList         = [BLEServ getDiscoverList];
-    connectList      = [BLEServ getConnectList];
+    // connect list
+    if (connectList == nil) {
+        connectList = [[NSMutableArray alloc] init];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -124,7 +125,7 @@
     LogSV(@"viewDidDisappear");
 
     // stop scan
-    ZTCentralManager *centralManager = [ZTCentralManager sharedService];
+    ZTCentralManager    *centralManager = [ZTCentralManager sharedService];
     if (centralManager.isScanning == YES) {
         [centralManager stopScan];
     }
@@ -143,7 +144,10 @@
 {
     LogSV(@"handleRefresh");
 
-    [scanList removeAllObjects];
+    ZTCentralManager    *centralManager = [ZTCentralManager sharedService];
+    if (centralManager.count) {
+        [centralManager removeAllPeripherals];
+    }
 
     // 進行資料更新程序 開始
     [NSThread sleepForTimeInterval:1.0];    // 模擬資料更新要1秒鐘
@@ -168,18 +172,17 @@
 {
     // Return the number of rows in the section.
     // 告訴tableView一個section裡要顯示多少行
-    NSMutableArray  *lst;
     NSInteger       n = 0;
 
     switch (section) {
-        case 0:
-            lst = [BLEServ getDiscoverList];
-            n   = [lst count] ? [lst count] : 1;
+        case 0: {
+            ZTCentralManager    *centralManager = [ZTCentralManager sharedService];
+            n  = centralManager.count ? centralManager.count : 1;
             break;
+        }
 
         case 1:
-            lst = [BLEServ getConnectList];
-            n   = [lst count];
+            n   = [connectList count];
             break;
     }
     return n;
@@ -227,13 +230,26 @@
 {
     LogSV(@"tableView:commitEditingStyle:forRowAtIndexPath:");
 
-//    [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
+    switch (editingStyle) {
+        case UITableViewCellEditingStyleDelete: {
+            // 將對應的陣列資料刪除
+            //    [list removeObjectAtIndex:indexPath.row];
 
-    // 將對應的陣列資料刪除
-//    [list removeObjectAtIndex:indexPath.row];
+            // 實際刪除表格檢視中的一列，並選擇一個喜歡的刪除動畫
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
+            break;
+        }
 
-    // 實際刪除表格檢視中的一列，並選擇一個喜歡的刪除動畫
-    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
+        case UITableViewCellEditingStyleInsert:
+//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
+            break;
+
+        case UITableViewCellEditingStyleNone:
+            break;
+
+        default:
+            break;
+    }
 }
 
 // 選中cell的反應事件
@@ -245,16 +261,21 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     switch (indexPath.section) {
-        case 0:
+        case 0: {
             LogSV(@"section(0): row=%@", [NSString stringWithFormat:@"%0ld", (long) indexPath.row, nil]);
-            if ([scanList count]) {
-                BLEDevInfo  *devInfo = [scanList objectAtIndex:indexPath.row];
-                if (![connectList containsObject:devInfo]) {
-                    [connectList addObject:devInfo];
+            ZTCentralManager    *centralManager = [ZTCentralManager sharedService];
+
+            if (centralManager.count) {
+                YMSCBPeripheral *yp  = [centralManager peripheralAtIndex:indexPath.row];
+
+                if (![connectList containsObject:yp]) {
+                    [connectList addObject:yp];
                     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[connectList count]-1 inSection:1]] withRowAnimation:UITableViewRowAnimationRight];
                 }
             }
             break;
+        }
+
         case 1:
             LogSV(@"section(1): row=%@", [NSString stringWithFormat:@"%0ld", (long) indexPath.row, nil]);
             if ([connectList count]) {
@@ -282,8 +303,10 @@
 
     // 區分顯示區段
     switch (indexPath.section) {
-        case 0:
-            if (![scanList count]) {
+        case 0: {
+            ZTCentralManager    *centralManager = [ZTCentralManager sharedService];
+
+            if (!centralManager.count) {
                 cell.textLabel.font       = [UIFont fontWithName:@"HelveticaNeue-Thin" size:16.0];
                 cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:10.0];
 
@@ -295,8 +318,8 @@
                 cell.textLabel.font       = [UIFont fontWithName:@"HelveticaNeue-Thin" size:26.0];
                 cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:12.0];
 
-                BLEDevInfo      *devInfo  = [scanList objectAtIndex:indexPath.row];
-                CBPeripheral    *dev      = devInfo.cbp;
+                YMSCBPeripheral     *yp   = [centralManager peripheralAtIndex:indexPath.row];
+                CBPeripheral        *dev  = yp.cbPeripheral;
                 if (dev.name == nil) {
                     cell.textLabel.text   = @"Unnamed";
                 } else {
@@ -305,6 +328,7 @@
                 cell.detailTextLabel.text = [dev.identifier UUIDString];
             }
             break;
+        }
 
         case 1:
             if ([connectList count]) {
@@ -313,8 +337,8 @@
                 cell.textLabel.font       = [UIFont fontWithName:@"HelveticaNeue-Thin" size:26.0];
                 cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:12.0];
 
-                BLEDevInfo      *devInfo  = [connectList objectAtIndex:indexPath.row];
-                CBPeripheral    *dev      = devInfo.cbp;
+                YMSCBPeripheral     *yp   = [connectList objectAtIndex:indexPath.row];
+                CBPeripheral        *dev  = yp.cbPeripheral;
                 if (dev.name == nil) {
                     cell.textLabel.text   = @"Unnamed";
                 } else {
