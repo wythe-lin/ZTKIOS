@@ -24,7 +24,7 @@
 
 #import "RecordViewController.h"
 
-#import "BatteryService.h"
+#import "ZTBatteryService.h"
 
 
 extern NSMutableArray   *connectList;
@@ -36,7 +36,8 @@ extern NSMutableArray   *connectList;
  *
  ******************************************************************************
  */
-#define LOGGING_LEVEL_RECORDVIEW    1
+#define LOGGING_LEVEL_RECORDVIEW        1
+#define LOGGING_INCLUDE_MULTITHREAD     0
 #include "DbgMsg.h"
 
 #if defined(LOGGING_LEVEL_RECORDVIEW) && LOGGING_LEVEL_RECORDVIEW
@@ -76,6 +77,8 @@ extern NSMutableArray   *connectList;
     LogRV(@"viewDidLoad");
 
     // Do any additional setup after loading the view, typically from a nib.
+
+    // picker view
     lstResolution = [[NSMutableArray alloc] init];
     [lstResolution addObject:@"full HD"];
     [lstResolution addObject:@"HD"];
@@ -94,10 +97,53 @@ extern NSMutableArray   *connectList;
     [lstPower addObject:@"50Hz"];
     [lstPower addObject:@"60Hz"];
 
-
-    record = (UIButton *)[self.view viewWithTag:100];
-    [record setBackgroundColor:[UIColor lightGrayColor]];
+    // record button
+    record  = (UIButton *)[self.view viewWithTag:100];
+    [record setBackgroundColor:[UIColor greenColor]];
+    [record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [record setTitle:@"Record" forState:UIControlStateNormal];
+
+    // battery value label
+    battery                 = (UILabel *)[self.view viewWithTag:200];
+    battery.textColor       = [UIColor blackColor];
+    battery.backgroundColor = [UIColor clearColor];
+    battery.font            = [UIFont fontWithName:@"HelveticaNeue-Thin" size:12.0];
+    battery.text            = [NSString stringWithFormat:@"0%%"];
+    [battery addObserver:self forKeyPath:@"battery_level" options:NSKeyValueObservingOptionNew context:NULL];
+
+    // core bluetooth
+    [ZTCentralManager initSharedServiceWithDelegate:self];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    LogRV(@"viewWillAppear:");
+
+    ZTCentralManager *centralManager = [ZTCentralManager sharedService];
+    centralManager.delegate = self;
+
+    self.ztCube.delegate = self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    LogRV(@"viewDidAppear:");
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    LogRV(@"viewWillDisappear");
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    LogRV(@"viewDidDisappear");
 
 }
 
@@ -107,6 +153,10 @@ extern NSMutableArray   *connectList;
     // Dispose of any resources that can be recreated.
 }
 
+
+/*---------------------------------------------------------------------------*/
+#pragma mark -  PickerView Delegate
+/*---------------------------------------------------------------------------*/
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 3;
@@ -155,13 +205,19 @@ extern NSMutableArray   *connectList;
     }
 
     YMSCBPeripheral *yp = [connectList objectAtIndex:0];
-
     if (yp.isConnected) {
-
         [yp disconnect];
-    } else {
 
+        [record setBackgroundColor:[UIColor greenColor]];
+        [record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [record setTitle:@"Record" forState:UIControlStateNormal];
+
+    } else {
         [yp connect];
+
+        [record setBackgroundColor:[UIColor redColor]];
+        [record setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [record setTitle:@"Stop" forState:UIControlStateNormal];
     }
 
 
@@ -171,6 +227,21 @@ extern NSMutableArray   *connectList;
     LogRV(@"recordButtonPress: - end (isMainThread=%@)", [[NSThread currentThread] isMainThread] ? @"YES" : @"NO");
 }
 
+
+/*---------------------------------------------------------------------------*/
+#pragma mark - KVO
+/*---------------------------------------------------------------------------*/
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+
+    if ([keyPath isEqualToString:@"battery_level"]) {
+        LogRV(@"battery value!!!!!");
+
+    } else {
+        LogRV(@"who am I?");
+
+    }
+}
 
 
 /*---------------------------------------------------------------------------*/
@@ -226,11 +297,6 @@ extern NSMutableArray   *connectList;
         }
 
         case CBCentralManagerStatePoweredOn: {
-            // start scan
-            ZTCentralManager *centralManager = [ZTCentralManager sharedService];
-            if (centralManager.isScanning == NO) {
-                [centralManager startScan];
-            }
             break;
         }
 
@@ -243,7 +309,6 @@ extern NSMutableArray   *connectList;
 {
     LogRV(@"centralManager:didDiscoverPeripheral:advertisementData:RSSI:");
 
-
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
@@ -254,7 +319,7 @@ extern NSMutableArray   *connectList;
     YMSCBPeripheral     *yp             = [centralManager findPeripheral:peripheral];
 
     yp.delegate = self;
-    [yp readRSSI];
+//    [yp readRSSI];
 
 }
 
@@ -275,7 +340,7 @@ extern NSMutableArray   *connectList;
     for (CBPeripheral *peripheral in peripherals) {
         YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
         if (yp) {
-            //            yp.delegate = self;
+            yp.delegate = self;
         }
     }
 
@@ -291,7 +356,7 @@ extern NSMutableArray   *connectList;
     for (CBPeripheral *peripheral in peripherals) {
         YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
         if (yp) {
-            //            yp.delegate = self;
+            yp.delegate = self;
         }
     }
 
@@ -301,15 +366,170 @@ extern NSMutableArray   *connectList;
 /*---------------------------------------------------------------------------*/
 #pragma mark - CBPeripheralDelegate Methods
 /*---------------------------------------------------------------------------*/
-- (void)performUpdateRSSI:(NSArray *)args
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
-    LogRV(@"performUpdateRSSI:");
+    if (error) {
+        LogRV(@"ERROR: discovering services: %@", [error localizedDescription]);
+        return;
+    }
 
-    CBPeripheral *peripheral = args[0];
+    LogRV(@"discover (%0d) of services for %@", [peripheral.services count], (peripheral.name == nil) ? @"Unnamed" : peripheral.name);
+    if ([peripheral.services count] == 0) {
+        return;
+    }
 
-    [peripheral readRSSI];
+    for (CBService *service in peripheral.services) {
+        LogRV(@" <s> %@ (%@)", [service.UUID UUIDString], service.UUID);
+    }
+
 }
 
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
+{
+    if (error) {
+        LogRV(@"ERROR: discovering characteristics: %@", [error localizedDescription]);
+        return;
+    }
+
+    LogRV(@"discover (%0d) characteristics for [%@] service", [service.characteristics count], service.UUID);
+    if ([service.characteristics count] == 0) {
+        return;
+    }
+
+    // 列出所有的 characteristic
+    NSString *string;
+    for (CBCharacteristic *characteristic in service.characteristics) {
+/*
+         if ((characteristic.properties & CBCharacteristicPropertyBroadcast) == CBCharacteristicPropertyBroadcast) {
+         [string appendString:@", Broadcast"];
+
+         }
+*/
+
+        if ((characteristic.properties & CBCharacteristicPropertyRead) == CBCharacteristicPropertyRead) {
+            string = @"Read";
+
+        }
+
+/*
+         if ((characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse) == CBCharacteristicPropertyWriteWithoutResponse) {
+            string = @"Write Without Response";
+
+         }
+*/
+
+        if ((characteristic.properties & CBCharacteristicPropertyWrite) == CBCharacteristicPropertyWrite) {
+            string = @"Write";
+
+        }
+
+        if ((characteristic.properties & CBCharacteristicPropertyNotify) == CBCharacteristicPropertyNotify) {
+            string = @"Notify";
+
+        }
+
+/*
+         if ((characteristic.properties & CBCharacteristicPropertyIndicate) == CBCharacteristicPropertyIndicate) {
+            string = @"Indicate";
+
+         }
+
+         if ((characteristic.properties & CBCharacteristicPropertyAuthenticatedSignedWrites) == CBCharacteristicPropertyAuthenticatedSignedWrites) {
+            string = @"Authenticated Signed Writes";
+
+         }
+
+         if ((characteristic.properties & CBCharacteristicPropertyExtendedProperties) == CBCharacteristicPropertyExtendedProperties) {
+            string = @"Extended Properties";
+
+         }
+
+         if ((characteristic.properties & CBCharacteristicPropertyNotifyEncryptionRequired) == CBCharacteristicPropertyNotifyEncryptionRequired) {
+            string = @"Notify Encryption Required";
+
+         }
+
+         if ((characteristic.properties & CBCharacteristicPropertyIndicateEncryptionRequired) == CBCharacteristicPropertyIndicateEncryptionRequired) {
+            string = @"Indicate Encryption Required";
+
+         }
+         */
+        LogRV(@" <c> %@ (%@) (%@)", [characteristic.UUID UUIDString], characteristic.UUID, string);
+    }
+
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(CBService *)service error:(NSError *)error
+{
+    LogRV(@"peripheral:didDiscoverIncludedServicesForService:error:");
+
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    LogRV(@"peripheral:didDiscoverCharacteristicsForService:error:");
+
+
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    if (error) {
+        LogRV(@"ERROR: read characteristics - %@", [error localizedDescription]);
+        return;
+    }
+
+    LogRV(@"read characteristic: %@", characteristic.value);
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    if (error) {
+        LogRV(@"ERROR: write characteristics - %@", [error localizedDescription]);
+        return;
+    }
+
+    LogRV(@"write characteristic(1): %@", characteristic);
+    LogRV(@"write characteristic(2): %@", characteristic.value);
+
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
+{
+    LogRV(@"peripheral:didConnectPeripheral:");
+
+
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
+{
+    LogRV(@"peripheral:didWriteValueForDescriptor:error:");
+
+
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    if (error) {
+        LogRV(@"ERROR: changing notification state: %@", [error localizedDescription]);
+    }
+
+    LogRV(@"Update notification state");
+    
+    
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices
+{
+    LogRV(@"peripheral:didModifyServices:");
+    
+}
+
+- (void)peripheralDidUpdateName:(CBPeripheral *)peripheral
+{
+    LogRV(@"peripheralDidUpdateName:");
+    
+}
 
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error
 {
@@ -333,6 +553,14 @@ extern NSMutableArray   *connectList;
     [self performSelector:@selector(performUpdateRSSI:) withObject:args afterDelay:yp.rssiPingPeriod];
 }
 
+- (void)performUpdateRSSI:(NSArray *)args
+{
+    LogRV(@"performUpdateRSSI:");
+
+    CBPeripheral *peripheral = args[0];
+
+    [peripheral readRSSI];
+}
 
 
 @end

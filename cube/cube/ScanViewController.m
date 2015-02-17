@@ -104,6 +104,13 @@ NSMutableArray  *connectList;
     [super viewWillAppear:animated];
     LogSV(@"viewWillAppear:");
 
+    // start scan
+    ZTCentralManager *centralManager = [ZTCentralManager sharedService];
+
+    centralManager.delegate = self;
+    if (centralManager.isScanning == NO) {
+        [centralManager startScan];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -117,19 +124,19 @@ NSMutableArray  *connectList;
 {
     [super viewWillDisappear:animated];
     LogSV(@"viewWillDisappear");
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    LogSV(@"viewDidDisappear");
 
     // stop scan
     ZTCentralManager    *centralManager = [ZTCentralManager sharedService];
     if (centralManager.isScanning == YES) {
         [centralManager stopScan];
     }
-//    [BLEServ stopScan];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    LogSV(@"viewDidDisappear:");
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -432,11 +439,6 @@ NSMutableArray  *connectList;
         }
 
         case CBCentralManagerStatePoweredOn: {
-            // start scan
-            ZTCentralManager *centralManager = [ZTCentralManager sharedService];
-            if (centralManager.isScanning == NO) {
-                [centralManager startScan];
-            }
             break;
         }
 
@@ -465,9 +467,8 @@ NSMutableArray  *connectList;
     ZTCentralManager    *centralManager = [ZTCentralManager sharedService];
     YMSCBPeripheral     *yp             = [centralManager findPeripheral:peripheral];
 
-//    yp.delegate = self;
+    yp.delegate = self;
 //    [yp readRSSI];
-
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
@@ -487,7 +488,7 @@ NSMutableArray  *connectList;
     for (CBPeripheral *peripheral in peripherals) {
         YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
         if (yp) {
-//            yp.delegate = self;
+            yp.delegate = self;
         }
     }
 
@@ -503,7 +504,7 @@ NSMutableArray  *connectList;
     for (CBPeripheral *peripheral in peripherals) {
         YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
         if (yp) {
-//            yp.delegate = self;
+            yp.delegate = self;
         }
     }
 

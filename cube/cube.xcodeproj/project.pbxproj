@@ -18,16 +18,7 @@
 		9A379EF01A8B54540002FB5C /* YMSCBStoredPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EE61A8B54540002FB5C /* YMSCBStoredPeripherals.m */; };
 		9A379EF11A8B54540002FB5C /* YMSCBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EE81A8B54540002FB5C /* YMSCBUtils.m */; };
 		9A379EF51A8B55000002FB5C /* ZTCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EF41A8B55000002FB5C /* ZTCentralManager.m */; };
-		9A379EF91A8B56530002FB5C /* DEASensorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EF71A8B56530002FB5C /* DEASensorTag.m */; };
 		9A379F291A8B61130002FB5C /* DEAAccelerometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F181A8B61130002FB5C /* DEAAccelerometerService.m */; };
-		9A379F2A1A8B61130002FB5C /* DEABarometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F1A1A8B61130002FB5C /* DEABarometerService.m */; };
-		9A379F2B1A8B61130002FB5C /* DEABaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F1C1A8B61130002FB5C /* DEABaseService.m */; };
-		9A379F2C1A8B61130002FB5C /* DEADeviceInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F1E1A8B61130002FB5C /* DEADeviceInfoService.m */; };
-		9A379F2D1A8B61130002FB5C /* DEAGyroscopeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F201A8B61130002FB5C /* DEAGyroscopeService.m */; };
-		9A379F2E1A8B61130002FB5C /* DEAHumidityService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F221A8B61130002FB5C /* DEAHumidityService.m */; };
-		9A379F2F1A8B61130002FB5C /* DEAMagnetometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F241A8B61130002FB5C /* DEAMagnetometerService.m */; };
-		9A379F301A8B61130002FB5C /* DEASimpleKeysService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F261A8B61130002FB5C /* DEASimpleKeysService.m */; };
-		9A379F311A8B61130002FB5C /* DEATemperatureService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F281A8B61130002FB5C /* DEATemperatureService.m */; };
 		9A3D3FAC1A6E549900852006 /* BLEDevInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FAB1A6E549900852006 /* BLEDevInfo.m */; };
 		9A3D3FAF1A6E750D00852006 /* BLEUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FAE1A6E750D00852006 /* BLEUtility.m */; };
 		9A3D3FB21A6E79C600852006 /* PeriperalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FB11A6E79C600852006 /* PeriperalInfo.m */; };
@@ -44,6 +35,11 @@
 		9AAA320E1A67EDFC001D5B52 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAA320D1A67EDFC001D5B52 /* UIKit.framework */; };
 		9AAA32101A67EE11001D5B52 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAA320F1A67EE11001D5B52 /* CoreGraphics.framework */; };
 		9AAA32121A67EE37001D5B52 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAA32111A67EE37001D5B52 /* Foundation.framework */; };
+		9AC0E7201A8DE967002D24DD /* ZTCube.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0E71F1A8DE967002D24DD /* ZTCube.m */; };
+		9AC0E7251A8DE97D002D24DD /* ZTBaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0E7221A8DE97D002D24DD /* ZTBaseService.m */; };
+		9AC0E7261A8DE97D002D24DD /* ZTDeviceInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0E7241A8DE97D002D24DD /* ZTDeviceInfoService.m */; };
+		9AC0E7281A8E145D002D24DD /* ZTBatteryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0E7271A8E145D002D24DD /* ZTBatteryService.m */; };
+		9AC343F31A92035A00CBE7AF /* ZTProtrackService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */; };
 		9AC4C08D1A7A0959008E72BE /* BLEServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4C08C1A7A0959008E72BE /* BLEServer.m */; };
 		9AC7C6C51A821D1700EFAE59 /* BatteryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC7C6C41A821D1700EFAE59 /* BatteryService.m */; };
 /* End PBXBuildFile section */
@@ -81,27 +77,9 @@
 		9A379EE81A8B54540002FB5C /* YMSCBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBUtils.m; path = YmsCoreBluetooth/YMSCBUtils.m; sourceTree = "<group>"; };
 		9A379EF31A8B55000002FB5C /* ZTCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTCentralManager.h; path = ZTProfile/ZTCentralManager.h; sourceTree = "<group>"; };
 		9A379EF41A8B55000002FB5C /* ZTCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTCentralManager.m; path = ZTProfile/ZTCentralManager.m; sourceTree = "<group>"; };
-		9A379EF61A8B56530002FB5C /* DEASensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEASensorTag.h; path = ZTProfile/DEASensorTag.h; sourceTree = "<group>"; };
-		9A379EF71A8B56530002FB5C /* DEASensorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEASensorTag.m; path = ZTProfile/DEASensorTag.m; sourceTree = "<group>"; };
 		9A379EF81A8B56530002FB5C /* TISensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TISensorTag.h; path = ZTProfile/TISensorTag.h; sourceTree = "<group>"; };
 		9A379F171A8B61130002FB5C /* DEAAccelerometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEAAccelerometerService.h; path = ZTProfile/Services/DEAAccelerometerService.h; sourceTree = "<group>"; };
 		9A379F181A8B61130002FB5C /* DEAAccelerometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEAAccelerometerService.m; path = ZTProfile/Services/DEAAccelerometerService.m; sourceTree = "<group>"; };
-		9A379F191A8B61130002FB5C /* DEABarometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEABarometerService.h; path = ZTProfile/Services/DEABarometerService.h; sourceTree = "<group>"; };
-		9A379F1A1A8B61130002FB5C /* DEABarometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEABarometerService.m; path = ZTProfile/Services/DEABarometerService.m; sourceTree = "<group>"; };
-		9A379F1B1A8B61130002FB5C /* DEABaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEABaseService.h; path = ZTProfile/Services/DEABaseService.h; sourceTree = "<group>"; };
-		9A379F1C1A8B61130002FB5C /* DEABaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEABaseService.m; path = ZTProfile/Services/DEABaseService.m; sourceTree = "<group>"; };
-		9A379F1D1A8B61130002FB5C /* DEADeviceInfoService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEADeviceInfoService.h; path = ZTProfile/Services/DEADeviceInfoService.h; sourceTree = "<group>"; };
-		9A379F1E1A8B61130002FB5C /* DEADeviceInfoService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEADeviceInfoService.m; path = ZTProfile/Services/DEADeviceInfoService.m; sourceTree = "<group>"; };
-		9A379F1F1A8B61130002FB5C /* DEAGyroscopeService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEAGyroscopeService.h; path = ZTProfile/Services/DEAGyroscopeService.h; sourceTree = "<group>"; };
-		9A379F201A8B61130002FB5C /* DEAGyroscopeService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEAGyroscopeService.m; path = ZTProfile/Services/DEAGyroscopeService.m; sourceTree = "<group>"; };
-		9A379F211A8B61130002FB5C /* DEAHumidityService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEAHumidityService.h; path = ZTProfile/Services/DEAHumidityService.h; sourceTree = "<group>"; };
-		9A379F221A8B61130002FB5C /* DEAHumidityService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEAHumidityService.m; path = ZTProfile/Services/DEAHumidityService.m; sourceTree = "<group>"; };
-		9A379F231A8B61130002FB5C /* DEAMagnetometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEAMagnetometerService.h; path = ZTProfile/Services/DEAMagnetometerService.h; sourceTree = "<group>"; };
-		9A379F241A8B61130002FB5C /* DEAMagnetometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEAMagnetometerService.m; path = ZTProfile/Services/DEAMagnetometerService.m; sourceTree = "<group>"; };
-		9A379F251A8B61130002FB5C /* DEASimpleKeysService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEASimpleKeysService.h; path = ZTProfile/Services/DEASimpleKeysService.h; sourceTree = "<group>"; };
-		9A379F261A8B61130002FB5C /* DEASimpleKeysService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEASimpleKeysService.m; path = ZTProfile/Services/DEASimpleKeysService.m; sourceTree = "<group>"; };
-		9A379F271A8B61130002FB5C /* DEATemperatureService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEATemperatureService.h; path = ZTProfile/Services/DEATemperatureService.h; sourceTree = "<group>"; };
-		9A379F281A8B61130002FB5C /* DEATemperatureService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEATemperatureService.m; path = ZTProfile/Services/DEATemperatureService.m; sourceTree = "<group>"; };
 		9A379F321A8B61250002FB5C /* YmsCoreBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YmsCoreBluetooth.h; path = ZTProfile/YmsCoreBluetooth.h; sourceTree = "<group>"; };
 		9A3808D91A710810009F3B10 /* DbgMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbgMsg.h; sourceTree = "<group>"; };
 		9A3D3FAB1A6E549900852006 /* BLEDevInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEDevInfo.m; sourceTree = "<group>"; };
@@ -131,6 +109,16 @@
 		9AAA320D1A67EDFC001D5B52 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9AAA320F1A67EE11001D5B52 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		9AAA32111A67EE37001D5B52 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9AC0E71E1A8DE967002D24DD /* ZTCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTCube.h; path = ZTProfile/ZTCube.h; sourceTree = "<group>"; };
+		9AC0E71F1A8DE967002D24DD /* ZTCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTCube.m; path = ZTProfile/ZTCube.m; sourceTree = "<group>"; };
+		9AC0E7211A8DE97D002D24DD /* ZTBaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTBaseService.h; path = ZTProfile/Services/ZTBaseService.h; sourceTree = "<group>"; };
+		9AC0E7221A8DE97D002D24DD /* ZTBaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTBaseService.m; path = ZTProfile/Services/ZTBaseService.m; sourceTree = "<group>"; };
+		9AC0E7231A8DE97D002D24DD /* ZTDeviceInfoService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTDeviceInfoService.h; path = ZTProfile/Services/ZTDeviceInfoService.h; sourceTree = "<group>"; };
+		9AC0E7241A8DE97D002D24DD /* ZTDeviceInfoService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTDeviceInfoService.m; path = ZTProfile/Services/ZTDeviceInfoService.m; sourceTree = "<group>"; };
+		9AC0E7271A8E145D002D24DD /* ZTBatteryService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTBatteryService.m; path = ZTProfile/Services/ZTBatteryService.m; sourceTree = "<group>"; };
+		9AC0E7291A8E1489002D24DD /* ZTBatteryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZTBatteryService.h; path = ZTProfile/Services/ZTBatteryService.h; sourceTree = "<group>"; };
+		9AC343F11A92035A00CBE7AF /* ZTProtrackService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTProtrackService.h; path = ZTProfile/Services/ZTProtrackService.h; sourceTree = "<group>"; };
+		9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTProtrackService.m; path = ZTProfile/Services/ZTProtrackService.m; sourceTree = "<group>"; };
 		9AC4C08C1A7A0959008E72BE /* BLEServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEServer.m; sourceTree = "<group>"; };
 		9AC4C08E1A7A097D008E72BE /* BLEServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLEServer.h; sourceTree = "<group>"; };
 		9AC7C6C41A821D1700EFAE59 /* BatteryService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatteryService.m; sourceTree = "<group>"; };
@@ -210,8 +198,8 @@
 				9A379F321A8B61250002FB5C /* YmsCoreBluetooth.h */,
 				9A379EF31A8B55000002FB5C /* ZTCentralManager.h */,
 				9A379EF41A8B55000002FB5C /* ZTCentralManager.m */,
-				9A379EF61A8B56530002FB5C /* DEASensorTag.h */,
-				9A379EF71A8B56530002FB5C /* DEASensorTag.m */,
+				9AC0E71E1A8DE967002D24DD /* ZTCube.h */,
+				9AC0E71F1A8DE967002D24DD /* ZTCube.m */,
 				9A379EF81A8B56530002FB5C /* TISensorTag.h */,
 			);
 			name = ZTProfile;
@@ -220,24 +208,16 @@
 		9A379F151A8B59920002FB5C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9AC0E7211A8DE97D002D24DD /* ZTBaseService.h */,
+				9AC0E7221A8DE97D002D24DD /* ZTBaseService.m */,
+				9AC0E7231A8DE97D002D24DD /* ZTDeviceInfoService.h */,
+				9AC0E7241A8DE97D002D24DD /* ZTDeviceInfoService.m */,
+				9AC0E7291A8E1489002D24DD /* ZTBatteryService.h */,
+				9AC0E7271A8E145D002D24DD /* ZTBatteryService.m */,
+				9AC343F11A92035A00CBE7AF /* ZTProtrackService.h */,
+				9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */,
 				9A379F171A8B61130002FB5C /* DEAAccelerometerService.h */,
 				9A379F181A8B61130002FB5C /* DEAAccelerometerService.m */,
-				9A379F191A8B61130002FB5C /* DEABarometerService.h */,
-				9A379F1A1A8B61130002FB5C /* DEABarometerService.m */,
-				9A379F1B1A8B61130002FB5C /* DEABaseService.h */,
-				9A379F1C1A8B61130002FB5C /* DEABaseService.m */,
-				9A379F1D1A8B61130002FB5C /* DEADeviceInfoService.h */,
-				9A379F1E1A8B61130002FB5C /* DEADeviceInfoService.m */,
-				9A379F1F1A8B61130002FB5C /* DEAGyroscopeService.h */,
-				9A379F201A8B61130002FB5C /* DEAGyroscopeService.m */,
-				9A379F211A8B61130002FB5C /* DEAHumidityService.h */,
-				9A379F221A8B61130002FB5C /* DEAHumidityService.m */,
-				9A379F231A8B61130002FB5C /* DEAMagnetometerService.h */,
-				9A379F241A8B61130002FB5C /* DEAMagnetometerService.m */,
-				9A379F251A8B61130002FB5C /* DEASimpleKeysService.h */,
-				9A379F261A8B61130002FB5C /* DEASimpleKeysService.m */,
-				9A379F271A8B61130002FB5C /* DEATemperatureService.h */,
-				9A379F281A8B61130002FB5C /* DEATemperatureService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -436,33 +416,29 @@
 				9A379EEB1A8B54540002FB5C /* YMSCBCentralManager.m in Sources */,
 				9A379EF51A8B55000002FB5C /* ZTCentralManager.m in Sources */,
 				9A3D3FAC1A6E549900852006 /* BLEDevInfo.m in Sources */,
-				9A379F301A8B61130002FB5C /* DEASimpleKeysService.m in Sources */,
-				9A379F2D1A8B61130002FB5C /* DEAGyroscopeService.m in Sources */,
+				9AC0E7251A8DE97D002D24DD /* ZTBaseService.m in Sources */,
+				9AC0E7281A8E145D002D24DD /* ZTBatteryService.m in Sources */,
 				9A379EEE1A8B54540002FB5C /* YMSCBPeripheral.m in Sources */,
 				9A2FE8E51A690F980008C4D6 /* BTServer.m in Sources */,
 				9AAA31571A67E845001D5B52 /* ScanViewController.m in Sources */,
-				9A379EF91A8B56530002FB5C /* DEASensorTag.m in Sources */,
-				9A379F2C1A8B61130002FB5C /* DEADeviceInfoService.m in Sources */,
 				9AAA31511A67E845001D5B52 /* AppDelegate.m in Sources */,
 				9AAA320C1A67EDA0001D5B52 /* MBProgressHUD.m in Sources */,
 				9AC4C08D1A7A0959008E72BE /* BLEServer.m in Sources */,
-				9A379F311A8B61130002FB5C /* DEATemperatureService.m in Sources */,
 				9A3D3FB21A6E79C600852006 /* PeriperalInfo.m in Sources */,
 				9A379EF01A8B54540002FB5C /* YMSCBStoredPeripherals.m in Sources */,
 				9A379F291A8B61130002FB5C /* DEAAccelerometerService.m in Sources */,
+				9AC0E7201A8DE967002D24DD /* ZTCube.m in Sources */,
 				9A3D3FAF1A6E750D00852006 /* BLEUtility.m in Sources */,
-				9A379F2B1A8B61130002FB5C /* DEABaseService.m in Sources */,
+				9AC0E7261A8DE97D002D24DD /* ZTDeviceInfoService.m in Sources */,
 				9A379EED1A8B54540002FB5C /* YMSCBDescriptor.m in Sources */,
-				9A379F2E1A8B61130002FB5C /* DEAHumidityService.m in Sources */,
 				9AAA31541A67E845001D5B52 /* RecordViewController.m in Sources */,
 				9A379EEC1A8B54540002FB5C /* YMSCBCharacteristic.m in Sources */,
+				9AC343F31A92035A00CBE7AF /* ZTProtrackService.m in Sources */,
 				9AAA314E1A67E845001D5B52 /* main.m in Sources */,
 				9AC7C6C51A821D1700EFAE59 /* BatteryService.m in Sources */,
-				9A379F2A1A8B61130002FB5C /* DEABarometerService.m in Sources */,
 				9A379EE91A8B54540002FB5C /* NSMutableArray+fifoQueue.m in Sources */,
 				9A379EF11A8B54540002FB5C /* YMSCBUtils.m in Sources */,
 				9A379EEA1A8B54540002FB5C /* YMS128.c in Sources */,
-				9A379F2F1A8B61130002FB5C /* DEAMagnetometerService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

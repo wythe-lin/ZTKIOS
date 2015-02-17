@@ -1,6 +1,6 @@
 /*
  ******************************************************************************
- * RecordViewController.h -
+ * ZTBaseService.h -
  *
  * Copyright (c) 2015-2016 by ZealTek Electronic Co., Ltd.
  *
@@ -22,24 +22,46 @@
  ******************************************************************************
  */
 
-#import <UIKit/UIKit.h>
-
-#import "ZTCentralManager.h"
-#import "ZTCube.h"
+#import "YMSCBService.h"
+#include "TISensorTag.h"
 
 
-@interface RecordViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate>
-{
-    NSMutableArray      *lstResolution, *lstSpeed, *lstPower;
-    UIButton            *record;
-    UILabel             *battery;
+
+/**
+ Base class for defining a CoreBluetooth service for a TI SensorTag. 
+ */
+@interface ZTBaseService : YMSCBService
 
 
-}
+/**
+ Dictionary containing the values measured by the sensor.
+ 
+ This is an abstract propery.
+ */
+@property (nonatomic, readonly) NSDictionary *sensorValues;
 
-/// Instance of ZTCube.
-@property (strong, nonatomic) ZTCube    *ztCube;
+/**
+ Turn on CoreBluetooth peripheral service.
+ 
+ This method turns on the service by:
+ 
+ *  writing to *config* characteristic to enable service.
+ *  writing to *data* characteristic to enable notification.
+ 
+ */
+- (void)turnOn;
+
+
+/**
+ Turn off CoreBluetooth peripheral service.
+ 
+ This method turns off the service by:
+ 
+ *  writing to *config* characteristic to disable service.
+ *  writing to *data* characteristic to disable notification.
+ 
+ */
+- (void)turnOff;
 
 
 @end
-

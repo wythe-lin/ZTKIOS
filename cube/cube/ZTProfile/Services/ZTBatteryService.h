@@ -1,6 +1,6 @@
 /*
  ******************************************************************************
- * RecordViewController.h -
+ * ZTBatteryService.h -
  *
  * Copyright (c) 2015-2016 by ZealTek Electronic Co., Ltd.
  *
@@ -22,24 +22,17 @@
  ******************************************************************************
  */
 
-#import <UIKit/UIKit.h>
-
-#import "ZTCentralManager.h"
-#import "ZTCube.h"
+#import "YMSCoreBluetooth.h"
 
 
-@interface RecordViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate>
-{
-    NSMutableArray      *lstResolution, *lstSpeed, *lstPower;
-    UIButton            *record;
-    UILabel             *battery;
+#define kCUUID_BATTERY_LEVEL            0x2A19
 
 
-}
+@interface ZTBatteryService : YMSCBService
 
-/// Instance of ZTCube.
-@property (strong, nonatomic) ZTCube    *ztCube;
+@property (nonatomic, strong, readonly) NSNumber *battery_level;
 
+
+- (void)readBatteryLevel;
 
 @end
-

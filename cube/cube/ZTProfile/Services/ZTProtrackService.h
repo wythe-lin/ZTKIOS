@@ -1,6 +1,6 @@
 /*
  ******************************************************************************
- * RecordViewController.h -
+ * ZTProtrack.h -
  *
  * Copyright (c) 2015-2016 by ZealTek Electronic Co., Ltd.
  *
@@ -22,24 +22,17 @@
  ******************************************************************************
  */
 
-#import <UIKit/UIKit.h>
-
-#import "ZTCentralManager.h"
-#import "ZTCube.h"
+#import "YMSCoreBluetooth.h"
 
 
-@interface RecordViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate>
-{
-    NSMutableArray      *lstResolution, *lstSpeed, *lstPower;
-    UIButton            *record;
-    UILabel             *battery;
+#define kCUUID_PROTRACK_WRITE       0xFFE9
 
 
-}
+@interface ZTProtrackService : YMSCBService
 
-/// Instance of ZTCube.
-@property (strong, nonatomic) ZTCube    *ztCube;
 
+
+- (void)write;
+- (void)readDeviceTime;
 
 @end
-

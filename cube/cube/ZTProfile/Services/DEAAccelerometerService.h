@@ -17,12 +17,12 @@
 //
 
 
-#import "DEABaseService.h"
+#import "ZTBaseService.h"
 
 /**
  TI SensorTag CoreBluetooth service definition for accelerometer.
  */
-@interface DEAAccelerometerService : DEABaseService
+@interface DEAAccelerometerService : ZTBaseService
 
 /**
  Inherited property of DEABaseService.

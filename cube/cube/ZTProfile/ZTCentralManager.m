@@ -24,7 +24,7 @@
 
 #import "ZTCentralManager.h"
 
-#import "DEASensorTag.h"
+#import "ZTCube.h"
 #import "TISensorTag.h"
 
 
@@ -35,11 +35,17 @@
  *
  ******************************************************************************
  */
+#define DEBUG_MESSAGE                   1
 #define LOGGING_INCLUDE_MULTITHREAD     1
 #include "DbgMsg.h"
 
-#define dmsg(fmt, ...)          LOG_FORMAT(fmt, @"CEN", ##__VA_ARGS__)
-#define msg(fmt, ...)           LOG_FORMAT(fmt, @"MSG", ##__VA_ARGS__)
+#if defined(DEBUG_MESSAGE) && DEBUG_MESSAGE
+    #define dmsg(fmt, ...)      LOG_FORMAT(fmt, @"ZTCentralManager", ##__VA_ARGS__)
+#else
+    #define dmsg(...)
+#endif
+
+#define msg(fmt, ...)           LOG_FORMAT(fmt, @"ZTCentralManager", ##__VA_ARGS__)
 
 
 /*
@@ -130,12 +136,12 @@ static ZTCentralManager     *sharedCentralManager;
         BOOL isUnknownPeripheral = YES;
         for (NSString *pname in self.knownPeripheralNames) {
             if ([pname isEqualToString:peripheral.name]) {
-                DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
-                                                                           central:self
-                                                                            baseHi:kSensorTag_BASE_ADDRESS_HI
-                                                                            baseLo:kSensorTag_BASE_ADDRESS_LO];
+                ZTCube *ztCube = [[ZTCube alloc] initWithPeripheral:peripheral
+                                                            central:self
+                                                             baseHi:kSensorTag_BASE_ADDRESS_HI
+                                                             baseLo:kSensorTag_BASE_ADDRESS_LO];
 
-                [self addPeripheral:sensorTag];
+                [self addPeripheral:ztCube];
                 isUnknownPeripheral = NO;
                 break;
                 
@@ -144,7 +150,7 @@ static ZTCentralManager     *sharedCentralManager;
         }
         
         if (isUnknownPeripheral) {
-            //TODO: Handle unknown peripheral
+            // TODO: Handle unknown peripheral
             yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral central:self baseHi:0 baseLo:0];
             [self addPeripheral:yp];
         }
