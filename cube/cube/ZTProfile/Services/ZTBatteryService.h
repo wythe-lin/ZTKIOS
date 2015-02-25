@@ -30,9 +30,12 @@
 
 @interface ZTBatteryService : YMSCBService
 
-@property (nonatomic, strong, readonly) NSNumber *battery_level;
+@property (nonatomic, readonly) NSDictionary *sensorValues;
+
+@property (nonatomic, strong, readonly) NSNumber *batteryLevel;
 
 
-- (void)readBatteryLevel;
+- (void)turnOff;
+- (void)turnOn;
 
 @end

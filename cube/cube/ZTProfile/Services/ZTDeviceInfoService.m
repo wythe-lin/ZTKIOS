@@ -68,7 +68,7 @@
 
 - (instancetype)initWithName:(NSString *)oName parent:(YMSCBPeripheral *)pObj baseHi:(int64_t)hi baseLo:(int64_t)lo serviceOffset:(int)serviceOffset
 {
-    dmsg(@"initWithName:parent:baseHi:baseLo:serviceOffset:");
+    dmsg(@"init");
 
     self = [super initWithName:oName parent:pObj baseHi:hi baseLo:lo serviceOffset:serviceOffset];
     if (self) {

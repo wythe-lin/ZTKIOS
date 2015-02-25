@@ -369,7 +369,7 @@ extern NSMutableArray   *connectList;
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: didDiscoverServices - %@", [error localizedDescription]);
+        LogRV(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
         return;
     }
 
@@ -387,7 +387,7 @@ extern NSMutableArray   *connectList;
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: didDiscoverCharacteristicsForService - %@", [error localizedDescription]);
+        LogRV(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
         return;
     }
 
@@ -397,60 +397,61 @@ extern NSMutableArray   *connectList;
     }
 
     // 列出所有的 characteristic
-    NSString *string;
+    NSMutableString *string;
     for (CBCharacteristic *characteristic in service.characteristics) {
-/*
-         if ((characteristic.properties & CBCharacteristicPropertyBroadcast) == CBCharacteristicPropertyBroadcast) {
-         [string appendString:@", Broadcast"];
-
-         }
-*/
-
-        if ((characteristic.properties & CBCharacteristicPropertyRead) == CBCharacteristicPropertyRead) {
-            string = @"Read";
+        string = nil;
+        if ((characteristic.properties & CBCharacteristicPropertyBroadcast) == CBCharacteristicPropertyBroadcast) {
+            [string appendString:@"Broadcast"];
 
         }
 
-/*
-         if ((characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse) == CBCharacteristicPropertyWriteWithoutResponse) {
-            string = @"Write Without Response";
 
-         }
-*/
+        if ((characteristic.properties & CBCharacteristicPropertyRead) == CBCharacteristicPropertyRead) {
+            [string appendString:(string == nil) ? @"Read" : @" | Read"];
+
+        }
+
+
+        if ((characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse) == CBCharacteristicPropertyWriteWithoutResponse) {
+            [string appendString:(string == nil) ? @"Write Without Response" : @"|Write Without Response"];
+
+        }
+
 
         if ((characteristic.properties & CBCharacteristicPropertyWrite) == CBCharacteristicPropertyWrite) {
-            string = @"Write";
+            [string appendString:(string == nil) ? @"Write" : @"|Write"];
 
         }
 
         if ((characteristic.properties & CBCharacteristicPropertyNotify) == CBCharacteristicPropertyNotify) {
-            string = @"Notify";
+            [string appendString:(string == nil) ? @"Notify" : @"|Notify"];
+
+        }
+
+
+        if ((characteristic.properties & CBCharacteristicPropertyIndicate) == CBCharacteristicPropertyIndicate) {
+            [string appendString:(string == nil) ? @"Indicate" : @"|Indicate"];
 
         }
 
 /*
-         if ((characteristic.properties & CBCharacteristicPropertyIndicate) == CBCharacteristicPropertyIndicate) {
-            string = @"Indicate";
-
-         }
-
          if ((characteristic.properties & CBCharacteristicPropertyAuthenticatedSignedWrites) == CBCharacteristicPropertyAuthenticatedSignedWrites) {
-            string = @"Authenticated Signed Writes";
+             [string appendString:@"Authenticated Signed Writes"];
 
          }
 
          if ((characteristic.properties & CBCharacteristicPropertyExtendedProperties) == CBCharacteristicPropertyExtendedProperties) {
-            string = @"Extended Properties";
+             [string appendString:@"Extended Properties"];
 
          }
 
          if ((characteristic.properties & CBCharacteristicPropertyNotifyEncryptionRequired) == CBCharacteristicPropertyNotifyEncryptionRequired) {
-            string = @"Notify Encryption Required";
+             [string appendString:@"Notify Encryption Required"];
 
          }
 
          if ((characteristic.properties & CBCharacteristicPropertyIndicateEncryptionRequired) == CBCharacteristicPropertyIndicateEncryptionRequired) {
-            string = @"Indicate Encryption Required";
+             [string appendString:@"Indicate Encryption Required"];
 
          }
          */
@@ -475,7 +476,7 @@ extern NSMutableArray   *connectList;
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: didUpdateValueForCharacteristic - %@", [error localizedDescription]);
+        LogRV(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
         return;
     }
     LogRV(@"read characteristic: %@", characteristic.value);
@@ -486,7 +487,7 @@ extern NSMutableArray   *connectList;
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: didWriteValueForCharacteristic - %@", [error localizedDescription]);
+        LogRV(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
         return;
     }
     LogRV(@"write characteristic: %@", characteristic);
@@ -510,12 +511,17 @@ extern NSMutableArray   *connectList;
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: didUpdateNotificationStateForCharacteristic - %@", [error localizedDescription]);
+        LogRV(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
         return;
     }
-    LogRV(@"Update notification state - %@", characteristic.UUID);
-    
-    
+    LogRV(@"<%@> update notification state", characteristic.UUID);
+
+    // 已经發送通知
+    if (characteristic.isNotifying) {
+        LogRV(@"Notification began on %@", characteristic);
+        [peripheral readValueForCharacteristic:characteristic];
+    }
+
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices

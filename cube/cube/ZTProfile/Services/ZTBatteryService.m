@@ -55,9 +55,7 @@
  */
 @interface ZTBatteryService ()
 
-@property (nonatomic, strong) NSNumber *battery_level;
-
-@property (nonatomic, assign) int battLevel;
+@property (nonatomic, strong) NSNumber *batteryLevel;
 
 @end
 
@@ -73,50 +71,48 @@
 
 - (instancetype)initWithName:(NSString *)oName parent:(YMSCBPeripheral *)pObj baseHi:(int64_t)hi baseLo:(int64_t)lo serviceOffset:(int)serviceOffset
 {
-    dmsg(@"initWithName:parent:baseHi:baseLo:serviceOffset:");
+    dmsg(@"init");
 
     self = [super initWithName:oName parent:pObj baseHi:hi baseLo:lo serviceOffset:serviceOffset];
     if (self) {
         [self addCharacteristic:@"battery_level" withAddress:kCUUID_BATTERY_LEVEL];
-
-        _battLevel = 0;
     }
     return self;
 }
 
 
-// KVC
-- (void)readBatteryLevel
+- (void)turnOff
 {
-    dmsg(@"readBatteryLevel");
+    __weak ZTBatteryService *this = self;
 
-    __weak ZTBatteryService *this      = self;
-
-    // read battery level
-    YMSCBCharacteristic     *batt_lvCt = self.characteristicDict[@"battery_level"];
-    [batt_lvCt readValueWithBlock:^(NSData *data, NSError *error) {
+    YMSCBCharacteristic *ct = self.characteristicDict[@"battery_level"];
+    [ct setNotifyValue:NO withBlock:^(NSError *error) {
         if (error) {
-            msg(@"ERROR: <%@> %@", this.name, [error localizedDescription]);
+            msg(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
             return;
         }
 
-        NSData  *payload = [[NSData alloc] initWithData:data];
-        [payload getBytes:&_battLevel length:sizeof(_battLevel)];
-        dmsg(@"battery level: %d%%", _battLevel);
-        _YMS_PERFORM_ON_MAIN_THREAD(^{
-            [self willChangeValueForKey:@"batteryValue"];
-            this.battery_level = @(self.battLevel);
-            [self didChangeValueForKey:@"batteryValue"];
-        });
+        msg(@"TURNED OFF: %@", this.name);
     }];
 
-    // set notify value
-    dmsg(@"set notify value");
-    [batt_lvCt setNotifyValue:YES withBlock:^(NSError *error) {
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        this.isOn = NO;
+    });
+}
+
+
+- (void)turnOn
+{
+    __weak ZTBatteryService *this = self;
+
+    YMSCBCharacteristic *ct = self.characteristicDict[@"battery_level"];
+    [ct setNotifyValue:YES withBlock:^(NSError *error) {
         if (error) {
-            msg(@"ERROR: <%@> - setNotifyValue, %@", this.name, [error localizedDescription]);
+            msg(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
             return;
         }
+
+        msg(@"TURNED ON: %@", this.name);
     }];
 
     _YMS_PERFORM_ON_MAIN_THREAD(^{
@@ -128,15 +124,33 @@
 - (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error
 {
     if (error) {
-        msg(@"ERROR: %s - %@",__func__ ,[error localizedDescription]);
+        msg(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
         return;
     }
 
     msg(@"notifyCharacteristicHandler:error:");
-    if ([yc.name isEqualToString:@"battery_level"]) {
-        NSData *data = yc.cbCharacteristic.value;
 
+    if ([yc.name isEqualToString:@"battery_level"]) {
+        int     value    = 0;
+        NSData  *payload = [[NSData alloc] initWithData:yc.cbCharacteristic.value];
+        [payload getBytes:&value length:sizeof(value)];
+
+        dmsg(@"battery level: %d%%", value);
+
+        __weak ZTBatteryService *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [self willChangeValueForKey:@"sensorValues"];
+            this.batteryLevel = @(value);
+            [self didChangeValueForKey:@"sensorValues"];
+        });
     }
 }
+
+
+- (NSDictionary *)sensorValues
+{
+    return @{ @"batteryLevel": self.batteryLevel };
+}
+
 
 @end

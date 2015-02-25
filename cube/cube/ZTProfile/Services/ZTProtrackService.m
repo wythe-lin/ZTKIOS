@@ -69,7 +69,7 @@
 
 - (instancetype)initWithName:(NSString *)oName parent:(YMSCBPeripheral *)pObj baseHi:(int64_t)hi baseLo:(int64_t)lo serviceOffset:(int)serviceOffset
 {
-    dmsg(@"initWithName:parent:baseHi:baseLo:serviceOffset:");
+    dmsg(@"init");
 
     self = [super initWithName:oName parent:pObj baseHi:hi baseLo:lo serviceOffset:serviceOffset];
     if (self) {
@@ -83,11 +83,11 @@
 - (void)write
 {
     dmsg(@"write");
-
+/*
     YMSCBCharacteristic         *batt_lvCt = self.characteristicDict[@"FFE9"];
     __weak ZTProtrackService    *this      = self;
 
-/*
+
     // write
     [batt_lvCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
