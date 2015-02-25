@@ -369,7 +369,7 @@ extern NSMutableArray   *connectList;
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: discovering services: %@", [error localizedDescription]);
+        LogRV(@"ERROR: didDiscoverServices - %@", [error localizedDescription]);
         return;
     }
 
@@ -387,7 +387,7 @@ extern NSMutableArray   *connectList;
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: discovering characteristics: %@", [error localizedDescription]);
+        LogRV(@"ERROR: didDiscoverCharacteristicsForService - %@", [error localizedDescription]);
         return;
     }
 
@@ -475,28 +475,27 @@ extern NSMutableArray   *connectList;
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: read characteristics - %@", [error localizedDescription]);
+        LogRV(@"ERROR: didUpdateValueForCharacteristic - %@", [error localizedDescription]);
         return;
     }
-
     LogRV(@"read characteristic: %@", characteristic.value);
+
+
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: write characteristics - %@", [error localizedDescription]);
+        LogRV(@"ERROR: didWriteValueForCharacteristic - %@", [error localizedDescription]);
         return;
     }
-
-    LogRV(@"write characteristic(1): %@", characteristic);
-    LogRV(@"write characteristic(2): %@", characteristic.value);
+    LogRV(@"write characteristic: %@", characteristic);
 
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
 {
-    LogRV(@"peripheral:didConnectPeripheral:");
+    LogRV(@"peripheral:didUpdateValueForDescriptor:error:");
 
 
 }
@@ -511,10 +510,10 @@ extern NSMutableArray   *connectList;
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: changing notification state: %@", [error localizedDescription]);
+        LogRV(@"ERROR: didUpdateNotificationStateForCharacteristic - %@", [error localizedDescription]);
+        return;
     }
-
-    LogRV(@"Update notification state");
+    LogRV(@"Update notification state - %@", characteristic.UUID);
     
     
 }

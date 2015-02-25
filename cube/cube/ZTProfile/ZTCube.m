@@ -100,12 +100,12 @@
 
 - (void)connect
 {
-    dmsg(@"connects");
+    dmsg(@"connect");
 
     // Watchdog aware method
     [self resetWatchdog];
 
-    dmsg(@"connectWithOption:withBlock:");
+    dmsg(@"connectWithOption:withBlock: - begin");
     [self connectWithOptions:nil withBlock:^(YMSCBPeripheral *yp, NSError *error) {
         if (error) {
             msg(@"Error: connectWithOption:withBlock: - %@", [error localizedDescription]);
@@ -115,41 +115,47 @@
         // Example where only a subset of services is to be discovered.
 //        [yp discoverServices:[yp servicesSubset:@[@"temperature", @"simplekeys", @"devinfo"]] withBlock:^(NSArray *yservices, NSError *error) {
 
-        dmsg(@"discoverServices:withBlock:");
+        dmsg(@"discoverServices:withBlock: - begin");
         [yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
             if (error) {
                 msg(@"Error: discoverServices:withBlock: - %@", [error localizedDescription]);
                 return;
             }
             
-            dmsg(@"discoverCharacteristics:withBlock:");
+            dmsg(@"discover characteristics - begin");
             for (YMSCBService *service in yservices) {
                 if ([service.name isEqualToString:@"battery"]) {
-                    dmsg(@"battery service");
+                    dmsg(@"battery service - begin");
 
                     __weak ZTBatteryService *thisService = (ZTBatteryService *) service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
                         [thisService readBatteryLevel];
                     }];
-                    
+
+                    dmsg(@"battery service - end");
+
                 } else if ([service.name isEqualToString:@"devinfo"]) {
-                    dmsg(@"devinfo service");
+                    dmsg(@"devinfo service - begin");
 
                     __weak ZTDeviceInfoService *thisService = (ZTDeviceInfoService *) service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
                         [thisService readDeviceInfo];
                     }];
 
+                    dmsg(@"devinfo service - end");
+
                 } else if ([service.name isEqualToString:@"protrack_write"]) {
-                    dmsg(@"protrack write service");
+                    dmsg(@"protrack write service - begin");
 
                     __weak ZTProtrackService *thisService = (ZTProtrackService *) service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
                         [thisService readDeviceTime];
                     }];
 
+                    dmsg(@"protrack write service - end");
+
                 } else {
-                    dmsg(@"base service");
+                    dmsg(@"base service - begin");
 
                     __weak ZTBaseService *thisService = (ZTBaseService *)service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
@@ -169,10 +175,17 @@
                             }];
                         }
                     }];
+
+                    dmsg(@"base service - end");
+
                 }
             }
+            dmsg(@"discover characteristics - end");
         }];
+        dmsg(@"discoverServices:withBlock: - end");
     }];
+
+    dmsg(@"connectWithOption:withBlock: - end");
 }
 
 

@@ -92,18 +92,23 @@
 - (void)readDeviceInfo
 {
     dmsg(@"readDeviceInfo");
-    
-    YMSCBCharacteristic *system_idCt = self.characteristicDict[@"system_id"];
+
     __weak ZTDeviceInfoService *this = self;
 
     // read system_id
+    YMSCBCharacteristic *system_idCt = self.characteristicDict[@"system_id"];
     [system_idCt readValueWithBlock:^(NSData *data, NSError *error) {
+        if (error) {
+            msg(@"ERROR: <%@> %@", this.name, [error localizedDescription]);
+            return;
+        }
+
         NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
         unsigned char bytes[data.length];
 
         [data getBytes:bytes];
-        for (int ii = (int)data.length; ii >= 0;ii--) {
-            [tmpString appendFormat:@"%02hhx",bytes[ii]];
+        for (int ii = (int)data.length - 1; ii >= 0;ii--) {
+            [tmpString appendFormat:@"%02hhx", bytes[ii]];
             if (ii) {
                 [tmpString appendFormat:@":"];
             }
@@ -120,7 +125,7 @@
     YMSCBCharacteristic *model_numberCt = self.characteristicDict[@"model_number"];
     [model_numberCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
-            msg(@"ERROR: %@", [error localizedDescription]);
+            msg(@"ERROR: <%@> %@", this.name, [error localizedDescription]);
             return;
         }
         
@@ -135,7 +140,7 @@
     YMSCBCharacteristic *serial_numberCt = self.characteristicDict[@"serial_number"];
     [serial_numberCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
-            msg(@"ERROR: %@", [error localizedDescription]);
+            msg(@"ERROR: <%@> %@", this.name, [error localizedDescription]);
             return;
         }
 
@@ -150,7 +155,7 @@
     YMSCBCharacteristic *firmware_revCt = self.characteristicDict[@"firmware_rev"];
     [firmware_revCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
-            msg(@"ERROR: %@", [error localizedDescription]);
+            msg(@"ERROR: <%@> %@", this.name, [error localizedDescription]);
             return;
         }
 
@@ -166,7 +171,7 @@
     YMSCBCharacteristic *hardware_revCt = self.characteristicDict[@"hardware_rev"];
     [hardware_revCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
-            msg(@"ERROR: %@", [error localizedDescription]);
+            msg(@"ERROR: <%@> %@", this.name, [error localizedDescription]);
             return;
         }
 
@@ -182,7 +187,7 @@
     YMSCBCharacteristic *software_revCt = self.characteristicDict[@"software_rev"];
     [software_revCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
-            msg(@"ERROR: %@", [error localizedDescription]);
+            msg(@"ERROR: <%@> %@", this.name, [error localizedDescription]);
             return;
         }
 
@@ -198,7 +203,7 @@
     YMSCBCharacteristic *manufacturer_nameCt = self.characteristicDict[@"manufacturer_name"];
     [manufacturer_nameCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
-            msg(@"ERROR: %@", [error localizedDescription]);
+            msg(@"ERROR: <%@> %@", this.name, [error localizedDescription]);
             return;
         }
 
@@ -214,7 +219,7 @@
     YMSCBCharacteristic *ieeeCt = self.characteristicDict[@"ieee11073_cert_data"];
     [ieeeCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
-            msg(@"ERROR: %@", [error localizedDescription]);
+            msg(@"ERROR: <%@> %@", this.name, [error localizedDescription]);
             return;
         }
 

@@ -33,19 +33,10 @@
 @implementation ZTBaseService
 
 
-- (instancetype)initWithName:(NSString *)oName
-                      parent:(YMSCBPeripheral *)pObj
-                      baseHi:(int64_t)hi
-                      baseLo:(int64_t)lo
-               serviceOffset:(int)serviceOffset {
-    
-    self = [super initWithName:oName
-                        parent:pObj
-                        baseHi:hi
-                        baseLo:lo
-                 serviceOffset:serviceOffset];
-    
-    
+- (instancetype)initWithName:(NSString *)oName parent:(YMSCBPeripheral *)pObj baseHi:(int64_t)hi baseLo:(int64_t)lo serviceOffset:(int)serviceOffset
+{
+
+    self = [super initWithName:oName parent:pObj baseHi:hi baseLo:lo serviceOffset:serviceOffset];
     if (self) {
         yms_u128_t pbase = self.base;
         
@@ -57,7 +48,8 @@
 }
 
 
-- (void)addCharacteristic:(NSString *)cname withOffset:(int)addrOffset {
+- (void)addCharacteristic:(NSString *)cname withOffset:(int)addrOffset
+{
     YMSCBCharacteristic *yc;
     
     yms_u128_t pbase = self.base;
@@ -73,7 +65,8 @@
 }
 
 
-- (void)turnOff {
+- (void)turnOff
+{
     __weak ZTBaseService *this = self;
 
     YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
@@ -98,7 +91,8 @@
     });
 }
 
-- (void)turnOn {
+- (void)turnOn
+{
     __weak ZTBaseService *this = self;
     
     YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];

@@ -90,13 +90,13 @@
 {
     dmsg(@"readBatteryLevel");
 
-    YMSCBCharacteristic     *batt_lvCt = self.characteristicDict[@"battery_level"];
     __weak ZTBatteryService *this      = self;
 
     // read battery level
+    YMSCBCharacteristic     *batt_lvCt = self.characteristicDict[@"battery_level"];
     [batt_lvCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
-            msg(@"ERROR: %@", [error localizedDescription]);
+            msg(@"ERROR: <%@> %@", this.name, [error localizedDescription]);
             return;
         }
 
@@ -108,9 +108,35 @@
             this.battery_level = @(self.battLevel);
             [self didChangeValueForKey:@"batteryValue"];
         });
-
     }];
 
+    // set notify value
+    dmsg(@"set notify value");
+    [batt_lvCt setNotifyValue:YES withBlock:^(NSError *error) {
+        if (error) {
+            msg(@"ERROR: <%@> - setNotifyValue, %@", this.name, [error localizedDescription]);
+            return;
+        }
+    }];
+
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        this.isOn = YES;
+    });
+}
+
+
+- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error
+{
+    if (error) {
+        msg(@"ERROR: %s - %@",__func__ ,[error localizedDescription]);
+        return;
+    }
+
+    msg(@"notifyCharacteristicHandler:error:");
+    if ([yc.name isEqualToString:@"battery_level"]) {
+        NSData *data = yc.cbCharacteristic.value;
+
+    }
 }
 
 @end

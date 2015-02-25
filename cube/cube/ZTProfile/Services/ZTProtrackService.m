@@ -24,8 +24,6 @@
 
 #import "ZTProtrackService.h"
 
-
-
 /*
  ******************************************************************************
  *
@@ -115,25 +113,40 @@
 {
     dmsg(@"readDeviceTime");
 
-    YMSCBCharacteristic         *ptwCt = self.characteristicDict[@"FFE9"];
     __weak ZTProtrackService    *this  = self;
+    YMSCBCharacteristic         *ptwCt = self.characteristicDict[@"FFE9"];
 
-    // write
-    char    payload[3] = { 0x89, 0x00, 0x00 };
-    NSData  *command   = [NSData dataWithBytes:payload length:sizeof(payload)];
+
+    // set notify value
+    dmsg(@"set notify value");
+    [ptwCt setNotifyValue:YES withBlock:^(NSError *error) {
+        if (error) {
+            msg(@"ERROR: <%@> - setNotifyValue, %@", this.name, [error localizedDescription]);
+            return;
+        }
+    }];
+
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        this.isOn = YES;
+    });
+
 
     // send command
+    unsigned char           payload[3] = { 0x89, 0x00, 0x00 };
+    NSData                  *command   = [NSData dataWithBytes:payload length:3];
+
     dmsg(@"send command: %@", command);
     [ptwCt writeValue:command withBlock:^(NSError *error) {
         if (error) {
-            msg(@"ERROR: %@", [error localizedDescription]);
+            msg(@"ERROR: <%@> %@", this.name, [error localizedDescription]);
             return;
         }
 
+/*
         // read response
         [ptwCt readValueWithBlock:^(NSData *data, NSError *error) {
             if (error) {
-                msg(@"ERROR: %@", [error localizedDescription]);
+                msg(@"ERROR: <%@> - readValueWithBlock, %@", this.name, [error localizedDescription]);
                 return;
             }
 
@@ -145,7 +158,24 @@
             dmsg(@"rsp: %@", [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding]);
 
         }];
+*/
+
     }];
+}
+
+
+- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error
+{
+    if (error) {
+        msg(@"ERROR: %s - %@", __func__, [error localizedDescription]);
+        return;
+    }
+
+    msg(@"notifyCharacteristicHandler:error:");
+    if ([yc.name isEqualToString:@"FFE9"]) {
+        NSData *data = yc.cbCharacteristic.value;
+
+    }
 }
 
 @end
