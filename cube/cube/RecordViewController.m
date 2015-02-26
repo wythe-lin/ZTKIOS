@@ -103,13 +103,12 @@ extern NSMutableArray   *connectList;
     [record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [record setTitle:@"Record" forState:UIControlStateNormal];
 
-    // battery value label
+    // battery level
     battery                 = (UILabel *)[self.view viewWithTag:200];
     battery.textColor       = [UIColor blackColor];
     battery.backgroundColor = [UIColor clearColor];
     battery.font            = [UIFont fontWithName:@"HelveticaNeue-Thin" size:12.0];
     battery.text            = [NSString stringWithFormat:@"0%%"];
-    [battery addObserver:self forKeyPath:@"battery_level" options:NSKeyValueObservingOptionNew context:NULL];
 
     // core bluetooth
     [ZTCentralManager initSharedServiceWithDelegate:self];
@@ -124,7 +123,11 @@ extern NSMutableArray   *connectList;
     ZTCentralManager *centralManager = [ZTCentralManager sharedService];
     centralManager.delegate = self;
 
-    self.ztCube.delegate = self;
+    self.ztCube.delegate    = self;
+
+//    self.battServ = self.ztCube.serviceDict[@"battery"];
+//    [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -206,6 +209,9 @@ extern NSMutableArray   *connectList;
 
     YMSCBPeripheral *yp = [connectList objectAtIndex:0];
     if (yp.isConnected) {
+        self.battServ = yp.serviceDict[@"battery"];
+        [self.battServ removeObserver:self forKeyPath:@"batteryLevel"];
+
         [yp disconnect];
 
         [record setBackgroundColor:[UIColor greenColor]];
@@ -213,6 +219,9 @@ extern NSMutableArray   *connectList;
         [record setTitle:@"Record" forState:UIControlStateNormal];
 
     } else {
+        self.battServ = yp.serviceDict[@"battery"];
+        [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
+
         [yp connect];
 
         [record setBackgroundColor:[UIColor redColor]];
@@ -233,12 +242,12 @@ extern NSMutableArray   *connectList;
 /*---------------------------------------------------------------------------*/
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-
-    if ([keyPath isEqualToString:@"battery_level"]) {
-        LogRV(@"battery value!!!!!");
-
+    if ([keyPath isEqualToString:@"batteryLevel"]) {
+        LogRV(@"<KVO> batteryLevel");
+        int     value = [self.battServ.batteryLevel intValue];
+        battery.text  = [NSString stringWithFormat:@"%d%%", value];
     } else {
-        LogRV(@"who am I?");
+        LogRV(@"<KVO> who am I?");
 
     }
 }
@@ -397,9 +406,8 @@ extern NSMutableArray   *connectList;
     }
 
     // 列出所有的 characteristic
-    NSMutableString *string;
     for (CBCharacteristic *characteristic in service.characteristics) {
-        string = nil;
+        NSMutableString *string = [[NSMutableString alloc] init];
         if ((characteristic.properties & CBCharacteristicPropertyBroadcast) == CBCharacteristicPropertyBroadcast) {
             [string appendString:@"Broadcast"];
 
@@ -407,54 +415,55 @@ extern NSMutableArray   *connectList;
 
 
         if ((characteristic.properties & CBCharacteristicPropertyRead) == CBCharacteristicPropertyRead) {
-            [string appendString:(string == nil) ? @"Read" : @" | Read"];
+            ([string length] == 0) ? [string appendString:@"Read"] : [string appendString:@"|Read"];
 
         }
 
 
         if ((characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse) == CBCharacteristicPropertyWriteWithoutResponse) {
-            [string appendString:(string == nil) ? @"Write Without Response" : @"|Write Without Response"];
+            ([string length] == 0) ? [string appendString:@"Write Without Response"] : [string appendString:@"|Write Without Response"];
 
         }
 
 
         if ((characteristic.properties & CBCharacteristicPropertyWrite) == CBCharacteristicPropertyWrite) {
-            [string appendString:(string == nil) ? @"Write" : @"|Write"];
+            ([string length] == 0) ? [string appendString:@"Write"] : [string appendString:@"|Write"];
 
         }
 
         if ((characteristic.properties & CBCharacteristicPropertyNotify) == CBCharacteristicPropertyNotify) {
-            [string appendString:(string == nil) ? @"Notify" : @"|Notify"];
+            ([string length] == 0) ? [string appendString:@"Notify"] : [string appendString:@"|Notify"];
 
         }
 
 
         if ((characteristic.properties & CBCharacteristicPropertyIndicate) == CBCharacteristicPropertyIndicate) {
-            [string appendString:(string == nil) ? @"Indicate" : @"|Indicate"];
+            ([string length] == 0) ? [string appendString:@"Indicate"] : [string appendString:@"|Indicate"];
 
         }
 
 /*
-         if ((characteristic.properties & CBCharacteristicPropertyAuthenticatedSignedWrites) == CBCharacteristicPropertyAuthenticatedSignedWrites) {
-             [string appendString:@"Authenticated Signed Writes"];
+        if ((characteristic.properties & CBCharacteristicPropertyAuthenticatedSignedWrites) == CBCharacteristicPropertyAuthenticatedSignedWrites) {
+            ([string length] == 0) ? [string appendString:@"Authenticated Signed Writes"] : [string appendString:@"|Authenticated Signed Writes"];
 
-         }
+        }
 
-         if ((characteristic.properties & CBCharacteristicPropertyExtendedProperties) == CBCharacteristicPropertyExtendedProperties) {
-             [string appendString:@"Extended Properties"];
+        if ((characteristic.properties & CBCharacteristicPropertyExtendedProperties) == CBCharacteristicPropertyExtendedProperties) {
+            ([string length] == 0) ? [string appendString:@"Extended Properties"] : [string appendString:@"|Extended Properties"];
 
-         }
+        }
 
-         if ((characteristic.properties & CBCharacteristicPropertyNotifyEncryptionRequired) == CBCharacteristicPropertyNotifyEncryptionRequired) {
-             [string appendString:@"Notify Encryption Required"];
+        if ((characteristic.properties & CBCharacteristicPropertyNotifyEncryptionRequired) == CBCharacteristicPropertyNotifyEncryptionRequired) {
+            ([string length] == 0) ? [string appendString:@"Notify Encryption Required"] : [string appendString:@"|Notify Encryption Required"];
 
-         }
+        }
 
-         if ((characteristic.properties & CBCharacteristicPropertyIndicateEncryptionRequired) == CBCharacteristicPropertyIndicateEncryptionRequired) {
-             [string appendString:@"Indicate Encryption Required"];
+        if ((characteristic.properties & CBCharacteristicPropertyIndicateEncryptionRequired) == CBCharacteristicPropertyIndicateEncryptionRequired) {
+            ([string length] == 0) ? [string appendString:@"Indicate Encryption Required"] : [string appendString:@"|Indicate Encryption Required"];
 
-         }
-         */
+        }
+*/
+
         LogRV(@" <c> %@ (%@) (%@)", [characteristic.UUID UUIDString], characteristic.UUID, string);
     }
 

@@ -121,6 +121,7 @@
 }
 
 
+// KVC
 - (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error
 {
     if (error) {

@@ -51,7 +51,7 @@
 @property (nonatomic, readonly) ZTDeviceInfoService     *devinfo;
 
 // Convenience pointer to battery service.
-@property (nonatomic, readonly) ZTDeviceInfoService     *battery;
+@property (nonatomic, readonly) ZTBatteryService        *battery;
 
 @property (nonatomic, readonly) ZTProtrackService       *protrack;
 

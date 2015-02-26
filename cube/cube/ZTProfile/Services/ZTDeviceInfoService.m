@@ -87,8 +87,6 @@
 }
 
 
-
-
 - (void)readDeviceInfo
 {
     dmsg(@"readDeviceInfo");

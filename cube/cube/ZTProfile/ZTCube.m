@@ -78,7 +78,7 @@
 - (instancetype)initWithPeripheral:(CBPeripheral *)peripheral central:(YMSCBCentralManager *)owner baseHi:(int64_t)hi baseLo:(int64_t)lo
 {
 
-    dmsg(@"initWithPeripheral:central:baseHi:baseLo:");
+    dmsg(@"init");
 
     self = [super initWithPeripheral:peripheral central:owner baseHi:hi baseLo:lo];
     
@@ -139,7 +139,7 @@
                     }];
 
                 } else if ([service.name isEqualToString:@"protrack_write"]) {
-                    dmsg(@"protrack write service");
+                    dmsg(@"protrack (w) service");
                     __weak ZTProtrackService *thisService = (ZTProtrackService *) service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
 //                        [thisService readDeviceTime];
@@ -181,13 +181,13 @@
 
 - (ZTBatteryService *)battery
 {
-    dmsg(@"devinfo");
+    dmsg(@"battery");
     return self.serviceDict[@"battery"];
 }
 
 - (ZTProtrackService *)protrack
 {
-    dmsg(@"protrack write");
+    dmsg(@"protrack (w)");
     return self.serviceDict[@"protrack_write"];
 }
 

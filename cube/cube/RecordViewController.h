@@ -26,6 +26,7 @@
 
 #import "ZTCentralManager.h"
 #import "ZTCube.h"
+#import "ZTBatteryService.h"
 
 
 @interface RecordViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate>
@@ -38,7 +39,9 @@
 }
 
 /// Instance of ZTCube.
-@property (strong, nonatomic) ZTCube    *ztCube;
+@property (strong, nonatomic) ZTCube            *ztCube;
+
+@property (strong, nonatomic) ZTBatteryService  *battServ;
 
 
 @end
