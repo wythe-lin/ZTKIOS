@@ -28,14 +28,41 @@
 #define kCUUID_BATTERY_LEVEL            0x2A19
 
 
+/**
+ Battery Service
+ */
 @interface ZTBatteryService : YMSCBService
 
+/**
+ Dictionary containing the values measured by the sensor.
+
+ This is an abstract propery.
+ */
 @property (nonatomic, readonly) NSDictionary *sensorValues;
 
 @property (nonatomic, strong, readonly) NSNumber *batteryLevel;
 
 
-- (void)turnOff;
+/**
+ Turn on CoreBluetooth peripheral service.
+
+ This method turns on the service by:
+
+ *  writing to *config* characteristic to enable service.
+ *  writing to *data* characteristic to enable notification.
+
+ */
 - (void)turnOn;
+
+/**
+ Turn off CoreBluetooth peripheral service.
+
+ This method turns off the service by:
+
+ *  writing to *config* characteristic to disable service.
+ *  writing to *data* characteristic to disable notification.
+
+ */
+- (void)turnOff;
 
 @end

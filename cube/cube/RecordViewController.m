@@ -488,7 +488,7 @@ extern NSMutableArray   *connectList;
         LogRV(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
         return;
     }
-    LogRV(@"read characteristic: %@", characteristic.value);
+    LogRV(@"<%@> read characteristic: %@", [characteristic.UUID UUIDString], characteristic.value);
 
 
 }
@@ -499,7 +499,7 @@ extern NSMutableArray   *connectList;
         LogRV(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
         return;
     }
-    LogRV(@"write characteristic: %@", characteristic);
+    LogRV(@"<%@> write characteristic: %@", [characteristic.UUID UUIDString], characteristic.value);
 
 }
 
@@ -527,7 +527,7 @@ extern NSMutableArray   *connectList;
 
     // 已经發送通知
     if (characteristic.isNotifying) {
-        LogRV(@"Notification began on %@", characteristic);
+        LogRV(@"Notification began on %@", [characteristic.UUID UUIDString]);
         [peripheral readValueForCharacteristic:characteristic];
     }
 

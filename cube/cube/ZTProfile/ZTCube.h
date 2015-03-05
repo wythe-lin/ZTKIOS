@@ -24,6 +24,11 @@
 
 #import "YmsCoreBluetooth.h"
 
+#import "ZTDeviceInfoService.h"
+#import "ZTBatteryService.h"
+#import "ZTProtrackService.h"
+#import "ZTProtrackNotify.h"
+
 
 #define kSUUID_GAP_SERVICE_UUID             0x1800
 #define kSUUID_GATT_SERVICE                 0x1801
@@ -34,11 +39,6 @@
 #define kSUUID_PROTRACK_WRITE               0xFFE5
 
 
-@class ZTDeviceInfoService;
-@class ZTBatteryService;
-@class ZTProtrackService;
-
-@class DEAAccelerometerService;
 
 /**
  Peripheral Class.
@@ -55,8 +55,7 @@
 
 @property (nonatomic, readonly) ZTProtrackService       *protrack;
 
-/// Convenience pointer to accelerometer service.
-@property (nonatomic, readonly) DEAAccelerometerService *accelerometer;
+@property (nonatomic, readonly) ZTProtrackNotify        *protrackNotify;
 
 
 

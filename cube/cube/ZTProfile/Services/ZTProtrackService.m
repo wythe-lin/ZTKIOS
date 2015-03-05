@@ -111,71 +111,49 @@
 
 - (void)readDeviceTime
 {
-    dmsg(@"readDeviceTime");
+    dmsg(@"command: READ DEV TIME");
 
-    __weak ZTProtrackService    *this  = self;
     YMSCBCharacteristic         *ptwCt = self.characteristicDict[@"FFE9"];
-
-
-    // set notify value
-    dmsg(@"set notify value");
-    [ptwCt setNotifyValue:YES withBlock:^(NSError *error) {
-        if (error) {
-            msg(@"ERROR: <%@> - setNotifyValue, %@", this.name, [error localizedDescription]);
-            return;
-        }
-    }];
-
-    _YMS_PERFORM_ON_MAIN_THREAD(^{
-        this.isOn = YES;
-    });
-
 
     // send command
     unsigned char           payload[3] = { 0x89, 0x00, 0x00 };
     NSData                  *command   = [NSData dataWithBytes:payload length:3];
 
-    dmsg(@"send command: %@", command);
     [ptwCt writeValue:command withBlock:^(NSError *error) {
         if (error) {
-            msg(@"ERROR: <%@> %@", this.name, [error localizedDescription]);
+            msg(@"ERROR: %@ - [line %d]", [error localizedDescription], __LINE__);
             return;
         }
 
-/*
-        // read response
-        [ptwCt readValueWithBlock:^(NSData *data, NSError *error) {
-            if (error) {
-                msg(@"ERROR: <%@> - readValueWithBlock, %@", this.name, [error localizedDescription]);
-                return;
-            }
-
-            NSData  *response = [[NSData alloc] initWithData:data];
-
-            char    val[response.length];
-            [response getBytes:&val length:response.length];
-
-            dmsg(@"rsp: %@", [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding]);
-
-        }];
-*/
+        dmsg(@"send command: %@", command);
 
     }];
 }
 
-
-- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error
+- (void)clearData
 {
-    if (error) {
-        msg(@"ERROR: %s - %@", __func__, [error localizedDescription]);
-        return;
-    }
+    dmsg(@"command: CLEAR DATA");
 
-    msg(@"notifyCharacteristicHandler:error:");
-    if ([yc.name isEqualToString:@"FFE9"]) {
-        NSData *data = yc.cbCharacteristic.value;
+    YMSCBCharacteristic         *ptwCt = self.characteristicDict[@"FFE9"];
 
-    }
+    // send command
+    unsigned char           payload[3] = { 0x88, 0x00, 0x00 };
+    NSData                  *command   = [NSData dataWithBytes:payload length:3];
+
+    [ptwCt writeValue:command withBlock:^(NSError *error) {
+        if (error) {
+            msg(@"ERROR: %@ - [line %d]", [error localizedDescription], __LINE__);
+            return;
+        }
+
+        dmsg(@"send command: %@", command);
+        
+    }];
 }
+
+
+
+
+
 
 @end

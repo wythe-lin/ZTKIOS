@@ -25,9 +25,6 @@
 #import "ZTCube.h"
 #import "ZTBaseService.h"
 
-#import "ZTDeviceInfoService.h"
-#import "ZTBatteryService.h"
-#import "ZTProtrackService.h"
 
 #import "DEAAccelerometerService.h"
 
@@ -83,14 +80,13 @@
     self = [super initWithPeripheral:peripheral central:owner baseHi:hi baseLo:lo];
     
     if (self) {
-        DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" parent:self baseHi:hi baseLo:lo serviceOffset:kSensorTag_ACCELEROMETER_SERVICE];
-
         ZTDeviceInfoService     *devinfo = [[ZTDeviceInfoService alloc] initWithName:@"devinfo" parent:self baseHi:0 baseLo:0 serviceOffset:kSUUID_DEVINFO];
         ZTBatteryService        *batt    = [[ZTBatteryService alloc] initWithName:@"battery" parent:self baseHi:0 baseLo:0 serviceOffset:kSUUID_BATTERY];
         ZTProtrackService       *ptw     = [[ZTProtrackService alloc] initWithName:@"protrack_write" parent:self baseHi:0 baseLo:0 serviceOffset:kSUUID_PROTRACK_WRITE];
+        ZTProtrackNotify        *ptn     = [[ZTProtrackNotify alloc] initWithName:@"protrack_notify" parent:self baseHi:0 baseLo:0 serviceOffset:kSUUID_PROTRACK_NOTIFY];
 
-        self.serviceDict = @{@"accelerometer": as,
-                             @"protrack_write": ptw,
+        self.serviceDict = @{@"protrack_write": ptw,
+                             @"protrack_notify": ptn,
                              @"battery": batt,
                              @"devinfo": devinfo};
     }
@@ -142,29 +138,15 @@
                     dmsg(@"protrack (w) service");
                     __weak ZTProtrackService *thisService = (ZTProtrackService *) service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
-//                        [thisService readDeviceTime];
+                        [thisService readDeviceTime];
+                        [thisService clearData];
                     }];
 
-                } else {
-                    dmsg(@"base service");
-
-                    __weak ZTBaseService *thisService = (ZTBaseService *)service;
+                } else if ([service.name isEqualToString:@"protrack_notify"]) {
+                    dmsg(@"protrack (n) service");
+                    __weak ZTProtrackNotify *thisService = (ZTProtrackNotify *) service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
-                        for (NSString *key in chDict) {
-                            YMSCBCharacteristic *ct = chDict[key];
-//                            NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
-                            
-                            dmsg(@"discoverServices:withBlock:");
-                            [ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
-                                if (error) {
-                                    msg(@"Error: discoverDescriptorsWithBlock: - %@", [error localizedDescription]);
-                                    return;
-                                }
-                                for (YMSCBDescriptor *yd in ydescriptors) {
-                                    NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
-                                }
-                            }];
-                        }
+                        [thisService turnOn];
                     }];
                 }
             }
@@ -191,9 +173,11 @@
     return self.serviceDict[@"protrack_write"];
 }
 
-- (DEAAccelerometerService *)accelerometer
+- (ZTProtrackNotify *)protrackNotify
 {
-    return self.serviceDict[@"accelerometer"];
+    dmsg(@"protrack (n)");
+    return self.serviceDict[@"protrack_notify"];
 }
+
 
 @end

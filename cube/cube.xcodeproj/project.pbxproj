@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9A2FE8E51A690F980008C4D6 /* BTServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2FE8E41A690F980008C4D6 /* BTServer.m */; };
 		9A379EE91A8B54540002FB5C /* NSMutableArray+fifoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379ED81A8B54540002FB5C /* NSMutableArray+fifoQueue.m */; };
 		9A379EEA1A8B54540002FB5C /* YMS128.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A379ED91A8B54540002FB5C /* YMS128.c */; };
 		9A379EEB1A8B54540002FB5C /* YMSCBCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EDC1A8B54540002FB5C /* YMSCBCentralManager.m */; };
@@ -19,9 +18,6 @@
 		9A379EF11A8B54540002FB5C /* YMSCBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EE81A8B54540002FB5C /* YMSCBUtils.m */; };
 		9A379EF51A8B55000002FB5C /* ZTCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EF41A8B55000002FB5C /* ZTCentralManager.m */; };
 		9A379F291A8B61130002FB5C /* DEAAccelerometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F181A8B61130002FB5C /* DEAAccelerometerService.m */; };
-		9A3D3FAC1A6E549900852006 /* BLEDevInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FAB1A6E549900852006 /* BLEDevInfo.m */; };
-		9A3D3FAF1A6E750D00852006 /* BLEUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FAE1A6E750D00852006 /* BLEUtility.m */; };
-		9A3D3FB21A6E79C600852006 /* PeriperalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3D3FB11A6E79C600852006 /* PeriperalInfo.m */; };
 		9A40B1E01A6F71FD003C96D5 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A40B1DF1A6F71FD003C96D5 /* CoreBluetooth.framework */; };
 		9AAA314E1A67E845001D5B52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA314D1A67E845001D5B52 /* main.m */; };
 		9AAA31511A67E845001D5B52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA31501A67E845001D5B52 /* AppDelegate.m */; };
@@ -40,8 +36,7 @@
 		9AC0E7261A8DE97D002D24DD /* ZTDeviceInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0E7241A8DE97D002D24DD /* ZTDeviceInfoService.m */; };
 		9AC0E7281A8E145D002D24DD /* ZTBatteryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0E7271A8E145D002D24DD /* ZTBatteryService.m */; };
 		9AC343F31A92035A00CBE7AF /* ZTProtrackService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */; };
-		9AC4C08D1A7A0959008E72BE /* BLEServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4C08C1A7A0959008E72BE /* BLEServer.m */; };
-		9AC7C6C51A821D1700EFAE59 /* BatteryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC7C6C41A821D1700EFAE59 /* BatteryService.m */; };
+		9AD0C7531AA856C700E32C3D /* ZTProtrackNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD0C7521AA856C700E32C3D /* ZTProtrackNotify.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,8 +50,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9A2FE8E41A690F980008C4D6 /* BTServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTServer.m; sourceTree = "<group>"; };
-		9A2FE8E61A690FA30008C4D6 /* BTServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTServer.h; sourceTree = "<group>"; };
 		9A379ED71A8B54540002FB5C /* NSMutableArray+fifoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+fifoQueue.h"; path = "YmsCoreBluetooth/NSMutableArray+fifoQueue.h"; sourceTree = "<group>"; };
 		9A379ED81A8B54540002FB5C /* NSMutableArray+fifoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+fifoQueue.m"; path = "YmsCoreBluetooth/NSMutableArray+fifoQueue.m"; sourceTree = "<group>"; };
 		9A379ED91A8B54540002FB5C /* YMS128.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = YMS128.c; path = YmsCoreBluetooth/YMS128.c; sourceTree = "<group>"; };
@@ -82,12 +75,6 @@
 		9A379F181A8B61130002FB5C /* DEAAccelerometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEAAccelerometerService.m; path = ZTProfile/Services/DEAAccelerometerService.m; sourceTree = "<group>"; };
 		9A379F321A8B61250002FB5C /* YmsCoreBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YmsCoreBluetooth.h; path = ZTProfile/YmsCoreBluetooth.h; sourceTree = "<group>"; };
 		9A3808D91A710810009F3B10 /* DbgMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbgMsg.h; sourceTree = "<group>"; };
-		9A3D3FAB1A6E549900852006 /* BLEDevInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEDevInfo.m; sourceTree = "<group>"; };
-		9A3D3FAD1A6E54BD00852006 /* BLEDevInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLEDevInfo.h; sourceTree = "<group>"; };
-		9A3D3FAE1A6E750D00852006 /* BLEUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEUtility.m; sourceTree = "<group>"; };
-		9A3D3FB01A6E751700852006 /* BLEUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEUtility.h; sourceTree = "<group>"; };
-		9A3D3FB11A6E79C600852006 /* PeriperalInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeriperalInfo.m; sourceTree = "<group>"; };
-		9A3D3FB31A6E79CD00852006 /* PeriperalInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeriperalInfo.h; sourceTree = "<group>"; };
 		9A40B1DF1A6F71FD003C96D5 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		9AAA31481A67E845001D5B52 /* cube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AAA314C1A67E845001D5B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -119,10 +106,8 @@
 		9AC0E7291A8E1489002D24DD /* ZTBatteryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZTBatteryService.h; path = ZTProfile/Services/ZTBatteryService.h; sourceTree = "<group>"; };
 		9AC343F11A92035A00CBE7AF /* ZTProtrackService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTProtrackService.h; path = ZTProfile/Services/ZTProtrackService.h; sourceTree = "<group>"; };
 		9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTProtrackService.m; path = ZTProfile/Services/ZTProtrackService.m; sourceTree = "<group>"; };
-		9AC4C08C1A7A0959008E72BE /* BLEServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEServer.m; sourceTree = "<group>"; };
-		9AC4C08E1A7A097D008E72BE /* BLEServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLEServer.h; sourceTree = "<group>"; };
-		9AC7C6C41A821D1700EFAE59 /* BatteryService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatteryService.m; sourceTree = "<group>"; };
-		9AC7C6C61A821D3200EFAE59 /* BatteryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BatteryService.h; sourceTree = "<group>"; };
+		9AD0C7511AA856C700E32C3D /* ZTProtrackNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTProtrackNotify.h; path = ZTProfile/Services/ZTProtrackNotify.h; sourceTree = "<group>"; };
+		9AD0C7521AA856C700E32C3D /* ZTProtrackNotify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTProtrackNotify.m; path = ZTProfile/Services/ZTProtrackNotify.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,25 +132,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9A2FE8E01A6904E20008C4D6 /* BluetoothLE */ = {
-			isa = PBXGroup;
-			children = (
-				9A3D3FB31A6E79CD00852006 /* PeriperalInfo.h */,
-				9A3D3FB11A6E79C600852006 /* PeriperalInfo.m */,
-				9AC7C6C61A821D3200EFAE59 /* BatteryService.h */,
-				9AC7C6C41A821D1700EFAE59 /* BatteryService.m */,
-				9A2FE8E61A690FA30008C4D6 /* BTServer.h */,
-				9A2FE8E41A690F980008C4D6 /* BTServer.m */,
-				9A3D3FB01A6E751700852006 /* BLEUtility.h */,
-				9A3D3FAE1A6E750D00852006 /* BLEUtility.m */,
-				9A3D3FAD1A6E54BD00852006 /* BLEDevInfo.h */,
-				9A3D3FAB1A6E549900852006 /* BLEDevInfo.m */,
-				9AC4C08E1A7A097D008E72BE /* BLEServer.h */,
-				9AC4C08C1A7A0959008E72BE /* BLEServer.m */,
-			);
-			path = BluetoothLE;
-			sourceTree = "<group>";
-		};
 		9A379ED61A8B54130002FB5C /* YmsCoreBluetooth */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +182,8 @@
 				9AC0E7271A8E145D002D24DD /* ZTBatteryService.m */,
 				9AC343F11A92035A00CBE7AF /* ZTProtrackService.h */,
 				9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */,
+				9AD0C7511AA856C700E32C3D /* ZTProtrackNotify.h */,
+				9AD0C7521AA856C700E32C3D /* ZTProtrackNotify.m */,
 				9A379F171A8B61130002FB5C /* DEAAccelerometerService.h */,
 				9A379F181A8B61130002FB5C /* DEAAccelerometerService.m */,
 			);
@@ -246,7 +214,6 @@
 			children = (
 				9A379EF21A8B547B0002FB5C /* ZTProfile */,
 				9A379ED61A8B54130002FB5C /* YmsCoreBluetooth */,
-				9A2FE8E01A6904E20008C4D6 /* BluetoothLE */,
 				9AAA31C11A67EC4C001D5B52 /* MBProgressHUD */,
 				9AAA314F1A67E845001D5B52 /* AppDelegate.h */,
 				9AAA31501A67E845001D5B52 /* AppDelegate.m */,
@@ -415,27 +382,22 @@
 				9A379EEF1A8B54540002FB5C /* YMSCBService.m in Sources */,
 				9A379EEB1A8B54540002FB5C /* YMSCBCentralManager.m in Sources */,
 				9A379EF51A8B55000002FB5C /* ZTCentralManager.m in Sources */,
-				9A3D3FAC1A6E549900852006 /* BLEDevInfo.m in Sources */,
 				9AC0E7251A8DE97D002D24DD /* ZTBaseService.m in Sources */,
 				9AC0E7281A8E145D002D24DD /* ZTBatteryService.m in Sources */,
 				9A379EEE1A8B54540002FB5C /* YMSCBPeripheral.m in Sources */,
-				9A2FE8E51A690F980008C4D6 /* BTServer.m in Sources */,
 				9AAA31571A67E845001D5B52 /* ScanViewController.m in Sources */,
 				9AAA31511A67E845001D5B52 /* AppDelegate.m in Sources */,
 				9AAA320C1A67EDA0001D5B52 /* MBProgressHUD.m in Sources */,
-				9AC4C08D1A7A0959008E72BE /* BLEServer.m in Sources */,
-				9A3D3FB21A6E79C600852006 /* PeriperalInfo.m in Sources */,
 				9A379EF01A8B54540002FB5C /* YMSCBStoredPeripherals.m in Sources */,
 				9A379F291A8B61130002FB5C /* DEAAccelerometerService.m in Sources */,
 				9AC0E7201A8DE967002D24DD /* ZTCube.m in Sources */,
-				9A3D3FAF1A6E750D00852006 /* BLEUtility.m in Sources */,
+				9AD0C7531AA856C700E32C3D /* ZTProtrackNotify.m in Sources */,
 				9AC0E7261A8DE97D002D24DD /* ZTDeviceInfoService.m in Sources */,
 				9A379EED1A8B54540002FB5C /* YMSCBDescriptor.m in Sources */,
 				9AAA31541A67E845001D5B52 /* RecordViewController.m in Sources */,
 				9A379EEC1A8B54540002FB5C /* YMSCBCharacteristic.m in Sources */,
 				9AC343F31A92035A00CBE7AF /* ZTProtrackService.m in Sources */,
 				9AAA314E1A67E845001D5B52 /* main.m in Sources */,
-				9AC7C6C51A821D1700EFAE59 /* BatteryService.m in Sources */,
 				9A379EE91A8B54540002FB5C /* NSMutableArray+fifoQueue.m in Sources */,
 				9A379EF11A8B54540002FB5C /* YMSCBUtils.m in Sources */,
 				9A379EEA1A8B54540002FB5C /* YMS128.c in Sources */,

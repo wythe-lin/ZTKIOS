@@ -28,11 +28,21 @@
 #define kCUUID_PROTRACK_WRITE       0xFFE9
 
 
+/**
+ ProTrack Profile
+ */
 @interface ZTProtrackService : YMSCBService
 
 
 
 - (void)write;
+
+/**
+ Read Device Time
+ */
 - (void)readDeviceTime;
+
+- (void)clearData;
+
 
 @end

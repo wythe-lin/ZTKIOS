@@ -1,6 +1,6 @@
 /*
  ******************************************************************************
- * BatteryService.h -
+ * ZTProtrackNotify.h -
  *
  * Copyright (c) 2015-2016 by ZealTek Electronic Co., Ltd.
  *
@@ -17,20 +17,44 @@
  * software without notice.
  *
  * History:
- *	2015.02.04	T.C. Chiu	frist edition
+ *	2015.01.16	T.C. Chiu	frist edition
  *
  ******************************************************************************
  */
 
-#import "BLEServer.h"
-#import "BLEUtility.h"
+#import "YMSCoreBluetooth.h"
+
+#define kCUUID_PROTRACK_NOTIFY      0xFFE4
 
 
-@interface BattertService : NSObject
+/**
+ ProTrack Notify Service
+ */
+@interface ZTProtrackNotify : YMSCBService
 
-+ (void)readBatteryLevel:(CBPeripheral *)peripheral;
-+ (void)readBatteryLevel:(CBPeripheral *)peripheral sCBUUID:(CBUUID *)sCBUUID cCBUUID:(CBUUID *)cCBUUID;
+
+
+/**
+ Turn on CoreBluetooth peripheral service.
+
+ This method turns on the service by:
+
+ *  writing to *config* characteristic to enable service.
+ *  writing to *data* characteristic to enable notification.
+
+ */
+- (void)turnOn;
+
+/**
+ Turn off CoreBluetooth peripheral service.
+
+ This method turns off the service by:
+
+ *  writing to *config* characteristic to disable service.
+ *  writing to *data* characteristic to disable notification.
+
+ */
+- (void)turnOff;
+
 
 @end
-
-
