@@ -107,7 +107,7 @@
     YMSCBCharacteristic *ptnCt = self.characteristicDict[@"FFE4"];
     [ptnCt setNotifyValue:NO withBlock:^(NSError *error) {
         if (error) {
-            msg(@"ERROR: %@ [%d]", [error localizedDescription], __LINE__);
+            msg(@"ERROR: %@ [line %d]", [error localizedDescription], __LINE__);
             return;
         }
 
