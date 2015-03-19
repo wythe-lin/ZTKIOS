@@ -75,7 +75,7 @@ static ZTCentralManager     *sharedCentralManager;
 
         dispatch_queue_t queue = dispatch_queue_create("com.zealtek.centralQueue", 0);
 
-        NSArray *nameList = @[@"PT-5200"];
+        NSArray *nameList = @[@"ZT-3000"];
         sharedCentralManager = [[super allocWithZone:NULL] initWithKnownPeripheralNames:nameList
                                                                                   queue:queue
                                                                    useStoredPeripherals:NO

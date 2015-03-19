@@ -138,8 +138,8 @@
                     dmsg(@"protrack (w) service");
                     __weak ZTProtrackService *thisService = (ZTProtrackService *) service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
-                        [thisService readDeviceTime];
-                        [thisService clearData];
+                        [thisService setDate];
+//                        [thisService clearData];
                     }];
 
                 } else if ([service.name isEqualToString:@"protrack_notify"]) {

@@ -79,9 +79,9 @@
         [self addCharacteristic:@"hardware_rev" withAddress:kCUUID_DEVINFO_HARDWARE_REV];
         [self addCharacteristic:@"software_rev" withAddress:kCUUID_DEVINFO_SOFTWARE_REV];
         [self addCharacteristic:@"manufacturer_name" withAddress:kCUUID_DEVINFO_MANUFACTURER_NAME];
-//        [self addCharacteristic:@"ieee11073_cert_data" withAddress:kCUUID_DEVINFO_11073_CERT_DATA];
+        [self addCharacteristic:@"ieee11073_cert_data" withAddress:kCUUID_DEVINFO_11073_CERT_DATA];
         // TODO: Undocumented what PnP characteristic address is. Stubbing here for now.
-//        [self addCharacteristic:@"pnpid_data" withAddress:kCUUID_DEVINFO_PNPID_DATA];
+        [self addCharacteristic:@"pnpid_data" withAddress:kCUUID_DEVINFO_PNPID_DATA];
     }
     return self;
 }

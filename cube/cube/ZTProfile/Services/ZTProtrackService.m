@@ -109,16 +109,35 @@
 
 }
 
-- (void)readDeviceTime
+- (void)setDate
 {
-    dmsg(@"command: READ DEV TIME");
+    dmsg(@"command: set date");
 
     YMSCBCharacteristic         *ptwCt = self.characteristicDict[@"FFE9"];
 
     // send command
-    unsigned char           payload[3] = { 0x89, 0x00, 0x00 };
-    NSData                  *command   = [NSData dataWithBytes:payload length:3];
+    NSDate           *today     = [NSDate date];
+    NSCalendar       *calendar  = [NSCalendar currentCalendar];
+    NSDateComponents *component = [calendar components:(kCFCalendarUnitYear | kCFCalendarUnitMonth | kCFCalendarUnitDay | kCFCalendarUnitHour | kCFCalendarUnitMinute | kCFCalendarUnitSecond)
+                                              fromDate:today];
+    dmsg(@"current date: %04d/%02d/%02d time:%02d:%02d:%02d", [component year], [component month], [component day], [component hour], [component minute], [component second]);
 
+    unsigned char   payload[11] = { 0xFA, 0x0B, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE };
+    unsigned char   chksum      = payload[1] + payload[2];
+    payload[3] = [component year] % 2000;
+    chksum    += payload[3];
+    payload[4] = [component month];
+    chksum    += payload[4];
+    payload[5] = [component day];
+    chksum    += payload[5];
+    payload[6] = [component hour];
+    chksum    += payload[6];
+    payload[7] = [component minute];
+    chksum    += payload[7];
+    payload[8] = [component second];
+    payload[9] = payload[8] + chksum;
+
+    NSData  *command  = [NSData dataWithBytes:payload length:sizeof(payload)];
     [ptwCt writeValue:command withBlock:^(NSError *error) {
         if (error) {
             msg(@"ERROR: %@ - [line %d]", [error localizedDescription], __LINE__);

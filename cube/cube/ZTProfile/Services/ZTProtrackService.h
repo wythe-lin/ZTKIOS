@@ -40,7 +40,7 @@
 /**
  Read Device Time
  */
-- (void)readDeviceTime;
+- (void)setDate;
 
 - (void)clearData;
 

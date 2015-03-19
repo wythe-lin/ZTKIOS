@@ -229,10 +229,6 @@ extern NSMutableArray   *connectList;
         [record setTitle:@"Stop" forState:UIControlStateNormal];
     }
 
-
-
-
-
     LogRV(@"recordButtonPress: - end (isMainThread=%@)", [[NSThread currentThread] isMainThread] ? @"YES" : @"NO");
 }
 
