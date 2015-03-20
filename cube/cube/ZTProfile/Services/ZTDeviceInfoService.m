@@ -229,6 +229,21 @@
 
     }];
 
+    // read pnpid
+    YMSCBCharacteristic *pnpCt = self.characteristicDict[@"pnpid_data"];
+    [pnpCt readValueWithBlock:^(NSData *data, NSError *error) {
+        if (error) {
+            msg(@"ERROR: <%@> %@", this.name, [error localizedDescription]);
+            return;
+        }
+
+        NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
+        dmsg(@"PNP id: %@", payload);
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.pnpid_data = payload;
+        });
+
+    }];
 
 }
 

@@ -63,6 +63,8 @@
 /// IEEE 11073 Certification Data
 @property (nonatomic, strong) NSString *ieee11073_cert_data;
 
+@property (nonatomic, strong) NSString *pnpid_data;
+
 /** @name Read Device Information */
 /**
  Issue set of read requests to obtain device information which is store in the class properties.

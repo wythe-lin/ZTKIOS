@@ -139,7 +139,7 @@
                     __weak ZTProtrackService *thisService = (ZTProtrackService *) service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
                         [thisService setDate];
-//                        [thisService clearData];
+                        [thisService recordStart:0 power:0 speed:0];
                     }];
 
                 } else if ([service.name isEqualToString:@"protrack_notify"]) {
