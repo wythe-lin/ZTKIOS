@@ -37,6 +37,9 @@
 		9AC0E7281A8E145D002D24DD /* ZTBatteryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0E7271A8E145D002D24DD /* ZTBatteryService.m */; };
 		9AC343F31A92035A00CBE7AF /* ZTProtrackService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */; };
 		9AD0C7531AA856C700E32C3D /* ZTProtrackNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD0C7521AA856C700E32C3D /* ZTProtrackNotify.m */; };
+		9AD8A6951AC40A41009BE6A8 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8A6941AC40A41009BE6A8 /* ImageViewController.m */; };
+		9AD8A6981AC40E58009BE6A8 /* CollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8A6971AC40E58009BE6A8 /* CollectionCell.m */; };
+		9AD8A69A1AC4110F009BE6A8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD8A6991AC4110F009BE6A8 /* AssetsLibrary.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +111,11 @@
 		9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTProtrackService.m; path = ZTProfile/Services/ZTProtrackService.m; sourceTree = "<group>"; };
 		9AD0C7511AA856C700E32C3D /* ZTProtrackNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTProtrackNotify.h; path = ZTProfile/Services/ZTProtrackNotify.h; sourceTree = "<group>"; };
 		9AD0C7521AA856C700E32C3D /* ZTProtrackNotify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTProtrackNotify.m; path = ZTProfile/Services/ZTProtrackNotify.m; sourceTree = "<group>"; };
+		9AD8A6931AC40A41009BE6A8 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		9AD8A6941AC40A41009BE6A8 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		9AD8A6961AC40E58009BE6A8 /* CollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionCell.h; sourceTree = "<group>"; };
+		9AD8A6971AC40E58009BE6A8 /* CollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionCell.m; sourceTree = "<group>"; };
+		9AD8A6991AC4110F009BE6A8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AD8A69A1AC4110F009BE6A8 /* AssetsLibrary.framework in Frameworks */,
 				9A40B1E01A6F71FD003C96D5 /* CoreBluetooth.framework in Frameworks */,
 				9AAA32121A67EE37001D5B52 /* Foundation.framework in Frameworks */,
 				9AAA32101A67EE11001D5B52 /* CoreGraphics.framework in Frameworks */,
@@ -221,6 +230,10 @@
 				9AAA31531A67E845001D5B52 /* RecordViewController.m */,
 				9AAA31551A67E845001D5B52 /* ScanViewController.h */,
 				9AAA31561A67E845001D5B52 /* ScanViewController.m */,
+				9AD8A6931AC40A41009BE6A8 /* ImageViewController.h */,
+				9AD8A6941AC40A41009BE6A8 /* ImageViewController.m */,
+				9AD8A6961AC40E58009BE6A8 /* CollectionCell.h */,
+				9AD8A6971AC40E58009BE6A8 /* CollectionCell.m */,
 				9A3808D91A710810009F3B10 /* DbgMsg.h */,
 				9AAA31581A67E845001D5B52 /* Main.storyboard */,
 				9AAA315B1A67E845001D5B52 /* Images.xcassets */,
@@ -269,6 +282,7 @@
 		9AAA32131A67EE49001D5B52 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9AD8A6991AC4110F009BE6A8 /* AssetsLibrary.framework */,
 				9A40B1DF1A6F71FD003C96D5 /* CoreBluetooth.framework */,
 				9AAA320D1A67EDFC001D5B52 /* UIKit.framework */,
 				9AAA320F1A67EE11001D5B52 /* CoreGraphics.framework */,
@@ -384,6 +398,7 @@
 				9A379EF51A8B55000002FB5C /* ZTCentralManager.m in Sources */,
 				9AC0E7251A8DE97D002D24DD /* ZTBaseService.m in Sources */,
 				9AC0E7281A8E145D002D24DD /* ZTBatteryService.m in Sources */,
+				9AD8A6951AC40A41009BE6A8 /* ImageViewController.m in Sources */,
 				9A379EEE1A8B54540002FB5C /* YMSCBPeripheral.m in Sources */,
 				9AAA31571A67E845001D5B52 /* ScanViewController.m in Sources */,
 				9AAA31511A67E845001D5B52 /* AppDelegate.m in Sources */,
@@ -393,6 +408,7 @@
 				9AC0E7201A8DE967002D24DD /* ZTCube.m in Sources */,
 				9AD0C7531AA856C700E32C3D /* ZTProtrackNotify.m in Sources */,
 				9AC0E7261A8DE97D002D24DD /* ZTDeviceInfoService.m in Sources */,
+				9AD8A6981AC40E58009BE6A8 /* CollectionCell.m in Sources */,
 				9A379EED1A8B54540002FB5C /* YMSCBDescriptor.m in Sources */,
 				9AAA31541A67E845001D5B52 /* RecordViewController.m in Sources */,
 				9A379EEC1A8B54540002FB5C /* YMSCBCharacteristic.m in Sources */,

@@ -46,6 +46,9 @@
  This class maps to an instance of a CBPeripheral associated with a found ZTCube.
  */
 @interface ZTCube : YMSCBPeripheral
+{
+
+}
 
 // Convenience pointer to device information service.
 @property (nonatomic, readonly) ZTDeviceInfoService     *devinfo;
@@ -57,6 +60,9 @@
 
 @property (nonatomic, readonly) ZTProtrackNotify        *protrackNotify;
 
+
+- (void)recordStart:(NSInteger)resolution Speed:(NSInteger)speed Power:(NSInteger)power;
+- (void)recordStop;
 
 
 @end

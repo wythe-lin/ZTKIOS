@@ -90,8 +90,8 @@
                              @"battery": batt,
                              @"devinfo": devinfo};
     }
-    return self;
 
+    return self;
 }
 
 - (void)connect
@@ -139,7 +139,6 @@
                     __weak ZTProtrackService *thisService = (ZTProtrackService *) service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
                         [thisService setDate];
-                        [thisService recordStart:0 power:0 speed:0];
                     }];
 
                 } else if ([service.name isEqualToString:@"protrack_notify"]) {
@@ -151,10 +150,43 @@
                 }
             }
         }];
+
     }];
 }
 
 
+- (void)disconnect
+{
+    dmsg(@"disconnect");
+    [super disconnect];
+}
+
+
+/*
+ *
+ */
+- (void)recordStart:(NSInteger)resolution Speed:(NSInteger)speed Power:(NSInteger)power
+{
+    dmsg(@"recordStart:Power:Speed:");
+
+    ZTProtrackService *serv = self.serviceDict[@"protrack_write"];
+    [serv recordStart:resolution speed:speed power:power];
+}
+
+
+- (void)recordStop
+{
+    dmsg(@"recordStop");
+
+    ZTProtrackService *serv = self.serviceDict[@"protrack_write"];
+    [serv recordStop];
+}
+
+
+
+/*
+ *
+ */
 - (ZTDeviceInfoService *)devinfo
 {
     dmsg(@"devinfo");
@@ -178,6 +210,5 @@
     dmsg(@"protrack (n)");
     return self.serviceDict[@"protrack_notify"];
 }
-
 
 @end

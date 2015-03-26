@@ -83,20 +83,20 @@
 {
     __weak ZTProtrackNotify *this = self;
 
+    if (this.isOn == NO) {
+        YMSCBCharacteristic *ptnCt = self.characteristicDict[@"FFE4"];
+        [ptnCt setNotifyValue:YES withBlock:^(NSError *error) {
+            if (error) {
+                msg(@"ERROR: %@ [%d]", [error localizedDescription], __LINE__);
+                return;
+            }
+            msg(@"TURNED ON: %@", this.name);
+        }];
 
-    YMSCBCharacteristic *ptnCt = self.characteristicDict[@"FFE4"];
-    [ptnCt setNotifyValue:YES withBlock:^(NSError *error) {
-        if (error) {
-            msg(@"ERROR: %@ [%d]", [error localizedDescription], __LINE__);
-            return;
-        }
-
-        msg(@"TURNED ON: %@", this.name);
-    }];
-
-    _YMS_PERFORM_ON_MAIN_THREAD(^{
-        this.isOn = YES;
-    });
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.isOn = YES;
+        });
+    }
 }
 
 
@@ -104,19 +104,20 @@
 {
     __weak ZTProtrackNotify *this = self;
 
-    YMSCBCharacteristic *ptnCt = self.characteristicDict[@"FFE4"];
-    [ptnCt setNotifyValue:NO withBlock:^(NSError *error) {
-        if (error) {
-            msg(@"ERROR: %@ [line %d]", [error localizedDescription], __LINE__);
-            return;
-        }
+    if (this.isOn == YES) {
+        YMSCBCharacteristic *ptnCt = self.characteristicDict[@"FFE4"];
+        [ptnCt setNotifyValue:NO withBlock:^(NSError *error) {
+            if (error) {
+                msg(@"ERROR: %@ [line %d]", [error localizedDescription], __LINE__);
+                return;
+            }
+            msg(@"TURNED OFF: %@", this.name);
+        }];
 
-        msg(@"TURNED OFF: %@", this.name);
-    }];
-
-    _YMS_PERFORM_ON_MAIN_THREAD(^{
-        this.isOn = NO;
-    });
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.isOn = NO;
+        });
+    }
 }
 
 

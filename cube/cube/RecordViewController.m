@@ -103,6 +103,12 @@ extern NSMutableArray   *connectList;
     [record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [record setTitle:@"Record" forState:UIControlStateNormal];
 
+    // image button
+    image  = (UIButton *)[self.view viewWithTag:101];
+    [image setBackgroundColor:[UIColor greenColor]];
+    [image setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [image setTitle:@"Download" forState:UIControlStateNormal];
+
     // battery level
     battery                 = (UILabel *)[self.view viewWithTag:200];
     battery.textColor       = [UIColor blackColor];
@@ -113,6 +119,13 @@ extern NSMutableArray   *connectList;
     // core bluetooth
     [ZTCentralManager initSharedServiceWithDelegate:self];
 
+    //
+    rvResolution = 0;
+    rvPower      = 0;
+    rvSpeed      = 0;
+
+    //
+    isRecording  = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -188,9 +201,9 @@ extern NSMutableArray   *connectList;
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     switch (component) {
-        case 0:     LogRV(@"resolution -> %@", [lstResolution objectAtIndex:row]); break;
-        case 1:     LogRV(@"speed      -> %@", [lstSpeed objectAtIndex:row]);      break;
-        case 2:     LogRV(@"power      -> %@", [lstPower objectAtIndex:row]);      break;
+        case 0:     rvResolution = row; LogRV(@"resol -> %@", [lstResolution objectAtIndex:row]); break;
+        case 1:     rvSpeed      = row; LogRV(@"speed -> %@", [lstSpeed objectAtIndex:row]);      break;
+        case 2:     rvPower      = row; LogRV(@"power -> %@", [lstPower objectAtIndex:row]);      break;
         default:    break;
     }
 }
@@ -207,30 +220,68 @@ extern NSMutableArray   *connectList;
         return;
     }
 
-    YMSCBPeripheral *yp = [connectList objectAtIndex:0];
-    if (yp.isConnected) {
-        self.battServ = yp.serviceDict[@"battery"];
-        [self.battServ removeObserver:self forKeyPath:@"batteryLevel"];
+    self.ztCube   = (ZTCube *) [connectList objectAtIndex:0];
+    self.battServ = self.ztCube.serviceDict[@"battery"];
 
-        [yp disconnect];
+    MBProgressHUD   *HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
+    HUD.dimBackground = YES;
+    HUD.labelText = @"waiting...";
 
-        [record setBackgroundColor:[UIColor greenColor]];
-        [record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [record setTitle:@"Record" forState:UIControlStateNormal];
+    [HUD showAnimated:YES whileExecutingBlock:^{
+        LogRV(@"executing block...");
+        if (isRecording == NO) {
+            // record start
+            [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
+            [self.ztCube connect];
+            sleep(2);
+            [self.ztCube recordStart:rvResolution Speed:rvSpeed Power:rvPower];
 
-    } else {
-        self.battServ = yp.serviceDict[@"battery"];
-        [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
+        } else {
+            // record stop
+            [self.battServ removeObserver:self forKeyPath:@"batteryLevel"];
+            [self.ztCube connect];
+            sleep(2);
+            [self.ztCube recordStop];
+        }
+        sleep(2);
+        [self.ztCube disconnect];
+        sleep(6);
 
-        [yp connect];
+    } completionBlock:^{
+        LogRV(@"completion block...");
 
-        [record setBackgroundColor:[UIColor redColor]];
-        [record setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [record setTitle:@"Stop" forState:UIControlStateNormal];
-    }
+        [HUD removeFromSuperview];
+        if (isRecording == NO) {
+            // record start
+            isRecording = YES;
+            [record setBackgroundColor:[UIColor redColor]];
+            [record setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [record setTitle:@"Stop" forState:UIControlStateNormal];
+
+        } else {
+            // record stop
+            isRecording = NO;
+            [record setBackgroundColor:[UIColor greenColor]];
+            [record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [record setTitle:@"Record" forState:UIControlStateNormal];
+        }
+
+    }];
 
     LogRV(@"recordButtonPress: - end (isMainThread=%@)", [[NSThread currentThread] isMainThread] ? @"YES" : @"NO");
 }
+
+
+- (IBAction)imageButtonPress:(UIButton *)sender
+{
+
+
+
+}
+
+
+
 
 
 /*---------------------------------------------------------------------------*/
@@ -378,7 +429,7 @@ extern NSMutableArray   *connectList;
         return;
     }
 
-    LogRV(@"discover (%0d) of services for %@", [peripheral.services count], (peripheral.name == nil) ? @"Unnamed" : peripheral.name);
+    LogRV(@"discover (%0lu) of services for %@", (unsigned long) [peripheral.services count], (peripheral.name == nil) ? @"Unnamed" : peripheral.name);
     if ([peripheral.services count] == 0) {
         return;
     }
@@ -396,7 +447,7 @@ extern NSMutableArray   *connectList;
         return;
     }
 
-    LogRV(@"discover (%0d) characteristics for [%@] service", [service.characteristics count], service.UUID);
+    LogRV(@"discover (%0lu) characteristics for [%@] service", (unsigned long) [service.characteristics count], service.UUID);
     if ([service.characteristics count] == 0) {
         return;
     }

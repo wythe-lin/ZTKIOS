@@ -42,8 +42,9 @@
  */
 - (void)setDate;
 
-- (void)recordStart:(NSInteger)resolution power:(NSInteger)power speed:(NSInteger)speed;
+- (void)recordStart:(NSInteger)resolution speed:(NSInteger)speed power:(NSInteger)power;
 
+- (void)recordStop;
 
 
 @end

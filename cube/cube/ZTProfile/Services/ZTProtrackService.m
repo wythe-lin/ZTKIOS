@@ -150,7 +150,7 @@
     }];
 }
 
-- (void)recordStart:(NSInteger)resolution power:(NSInteger)power speed:(NSInteger)speed
+- (void)recordStart:(NSInteger)resolution speed:(NSInteger)speed power:(NSInteger)power
 {
     dmsg(@"command: record start");
 
@@ -161,9 +161,9 @@
     unsigned char   chksum    = payload[1] + payload[2];
     payload[3] = resolution;
     chksum    += payload[3];
-    payload[4] = power;
+    payload[4] = speed;
     chksum    += payload[4];
-    payload[5] = speed;
+    payload[5] = power;
     payload[6] = payload[5] + chksum;
 
     // send command
@@ -180,7 +180,28 @@
 }
 
 
+- (void)recordStop
+{
+    dmsg(@"command: record stop");
 
+    YMSCBCharacteristic         *ptwCt = self.characteristicDict[@"FFE9"];
+
+    // gen payload
+    unsigned char   payload[] = { 0xFA, 0x05, 0x11, 0x00, 0xFE };
+    payload[3] = payload[1] + payload[2];
+
+    // send command
+    NSData  *command  = [NSData dataWithBytes:payload length:sizeof(payload)];
+    [ptwCt writeValue:command withBlock:^(NSError *error) {
+        if (error) {
+            msg(@"ERROR: %@ - [line %d]", [error localizedDescription], __LINE__);
+            return;
+        }
+
+        dmsg(@"send command: %@", command);
+        
+    }];
+}
 
 
 

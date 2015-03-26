@@ -1,6 +1,6 @@
 /*
  ******************************************************************************
- * RecordViewController.h -
+ * CollectionCell.h -
  *
  * Copyright (c) 2015-2016 by ZealTek Electronic Co., Ltd.
  *
@@ -24,30 +24,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ZTCentralManager.h"
-#import "ZTCube.h"
-#import "ZTBatteryService.h"
-#import "MBProgressHUD.h"
+@interface CollectionCell : UICollectionViewCell
 
-@interface RecordViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate>
-{
-    NSMutableArray      *lstResolution, *lstSpeed, *lstPower;
-    UIButton            *record;
-    UIButton            *image;
-    UILabel             *battery;
 
-    NSInteger           rvResolution;
-    NSInteger           rvPower;
-    NSInteger           rvSpeed;
 
-    BOOL                isRecording;
-}
-
-/// Instance of ZTCube.
-@property (strong, nonatomic) ZTCube            *ztCube;
-
-@property (strong, nonatomic) ZTBatteryService  *battServ;
+@property (weak, nonatomic) IBOutlet UIImageView    *imageView;
 
 
 @end
-

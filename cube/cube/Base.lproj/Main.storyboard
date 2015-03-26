@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -38,6 +38,15 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" tag="101" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VO0-Te-vqP">
+                                <rect key="frame" x="220" y="349" width="160" height="50"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="imageButtonPress:" destination="9pv-A4-QxB" eventType="touchUpInside" id="xX3-JT-HCG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -45,6 +54,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="BKS-qu-vCi" secondAttribute="trailing" constant="-16" id="U0x-Md-Gsv"/>
                             <constraint firstItem="IUf-Tg-cfE" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="ZvZ-zr-3GB"/>
                             <constraint firstItem="BKS-qu-vCi" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="29" id="hbJ-Rl-UvK"/>
+                            <constraint firstItem="VO0-Te-vqP" firstAttribute="centerX" secondItem="eQk-5c-OkN" secondAttribute="centerX" id="jnu-Nw-fDw"/>
                             <constraint firstItem="BKS-qu-vCi" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="-16" id="r7W-78-y8V"/>
                             <constraint firstItem="BKS-qu-vCi" firstAttribute="centerX" secondItem="eQk-5c-OkN" secondAttribute="centerX" constant="-0.5" id="rX2-Ft-IaP"/>
                         </constraints>
@@ -113,6 +123,62 @@
             </objects>
             <point key="canvasLocation" x="750" y="0.0"/>
         </scene>
+        <!--Image-->
+        <scene sceneID="oAX-YV-OGn">
+            <objects>
+                <viewController id="7eg-sP-1V5" customClass="ImageViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rX8-Fw-SiE"/>
+                        <viewControllerLayoutGuide type="bottom" id="OAI-eP-p4a"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zhy-89-T70">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0Sl-ZT-ga5">
+                                <rect key="frame" x="0.0" y="63" width="600" height="488"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uw9-Oz-cr2">
+                                    <size key="itemSize" width="160" height="160"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="8qu-7S-zTw" customClass="CollectionCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Fd-76-I2O">
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="imageView" destination="6Fd-76-I2O" id="nyF-Z1-Wzo"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="7eg-sP-1V5" id="k5p-EO-Pgs"/>
+                                    <outlet property="delegate" destination="7eg-sP-1V5" id="pbI-PD-sVg"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Image" id="QIN-pL-tHA"/>
+                    <connections>
+                        <outlet property="colView" destination="0Sl-ZT-ga5" id="rJl-qE-DnT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tv2-aN-Psz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="704"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -126,6 +192,7 @@
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="khB-5e-R7F" kind="relationship" relationship="viewControllers" id="yM0-6z-wLM"/>
+                        <segue destination="7eg-sP-1V5" kind="relationship" relationship="viewControllers" id="yFL-c5-0V9"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
