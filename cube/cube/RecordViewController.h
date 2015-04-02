@@ -33,7 +33,7 @@
 {
     NSMutableArray      *lstResolution, *lstSpeed, *lstPower;
     UIButton            *record;
-    UIButton            *image;
+    UIButton            *download;
     UILabel             *battery;
 
     NSInteger           rvResolution;
@@ -41,6 +41,7 @@
     NSInteger           rvSpeed;
 
     BOOL                isRecording;
+    BOOL                isDownloading;
 }
 
 /// Instance of ZTCube.

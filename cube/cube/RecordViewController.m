@@ -37,6 +37,7 @@ extern NSMutableArray   *connectList;
  ******************************************************************************
  */
 #define LOGGING_LEVEL_RECORDVIEW        1
+#define LOGGING_LEVEL_BTLE              0
 #define LOGGING_INCLUDE_MULTITHREAD     0
 #include "DbgMsg.h"
 
@@ -44,6 +45,12 @@ extern NSMutableArray   *connectList;
     #define LogRV(fmt, ...)     LOG_FORMAT(fmt, @"RV", ##__VA_ARGS__)
 #else
     #define LogRV(...)
+#endif
+
+#if defined(LOGGING_LEVEL_BTLE) && LOGGING_LEVEL_BTLE
+#define LogBLE(fmt, ...)        LOG_FORMAT(fmt, @"RVBLE", ##__VA_ARGS__)
+#else
+#define LogBLE(...)
 #endif
 
 
@@ -98,16 +105,12 @@ extern NSMutableArray   *connectList;
     [lstPower addObject:@"60Hz"];
 
     // record button
-    record  = (UIButton *)[self.view viewWithTag:100];
-    [record setBackgroundColor:[UIColor greenColor]];
-    [record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [record setTitle:@"Record" forState:UIControlStateNormal];
+    record   = (UIButton *)[self.view viewWithTag:100];
+    [self setButton:record   title:@"Record" titleColor:[UIColor blackColor] backgroundColor:[UIColor greenColor]];
 
-    // image button
-    image  = (UIButton *)[self.view viewWithTag:101];
-    [image setBackgroundColor:[UIColor greenColor]];
-    [image setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [image setTitle:@"Download" forState:UIControlStateNormal];
+    // download button
+    download = (UIButton *)[self.view viewWithTag:101];
+    [self setButton:download title:@"Download" titleColor:[UIColor blackColor] backgroundColor:[UIColor greenColor]];
 
     // battery level
     battery                 = (UILabel *)[self.view viewWithTag:200];
@@ -125,7 +128,8 @@ extern NSMutableArray   *connectList;
     rvSpeed      = 0;
 
     //
-    isRecording  = NO;
+    isRecording   = NO;
+    isDownloading = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -137,10 +141,6 @@ extern NSMutableArray   *connectList;
     centralManager.delegate = self;
 
     self.ztCube.delegate    = self;
-
-//    self.battServ = self.ztCube.serviceDict[@"battery"];
-//    [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
-
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -154,6 +154,7 @@ extern NSMutableArray   *connectList;
 {
     [super viewWillDisappear:animated];
     LogRV(@"viewWillDisappear");
+
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -214,10 +215,20 @@ extern NSMutableArray   *connectList;
 /*---------------------------------------------------------------------------*/
 - (IBAction)recordButtonPress:(UIButton *)sender
 {
-    LogRV(@"recordButtonPress: - begin (isMainThread=%@)", [[NSThread currentThread] isMainThread] ? @"YES" : @"NO");
+    LogRV(@"recordButtonPress: - begin");
 
-    if (![connectList count]) {
+    if ((![connectList count]) || (isDownloading == YES)) {
         return;
+    }
+
+    if (isRecording == NO) {
+        // start record
+        [self setButton:record   title:@"Stop" titleColor:[UIColor whiteColor] backgroundColor:[UIColor redColor]];
+        [self setButton:download title:@"Download" titleColor:[UIColor blackColor] backgroundColor:[UIColor lightGrayColor]];
+    } else {
+        // stop record
+        [self setButton:record   title:@"Record" titleColor:[UIColor blackColor] backgroundColor:[UIColor greenColor]];
+        [self setButton:download title:@"Download" titleColor:[UIColor blackColor] backgroundColor:[UIColor greenColor]];
     }
 
     self.ztCube   = (ZTCube *) [connectList objectAtIndex:0];
@@ -226,62 +237,108 @@ extern NSMutableArray   *connectList;
     MBProgressHUD   *HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:HUD];
     HUD.dimBackground = YES;
-    HUD.labelText = @"waiting...";
+    HUD.labelText = @"connecting...";
 
     [HUD showAnimated:YES whileExecutingBlock:^{
         LogRV(@"executing block...");
+        [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
+
         if (isRecording == NO) {
-            // record start
-            [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
+            // start record
             [self.ztCube connect];
-            sleep(2);
-            [self.ztCube recordStart:rvResolution Speed:rvSpeed Power:rvPower];
+
+            HUD.labelText = @"progress...";
+            [self.ztCube startRecord:rvResolution Speed:rvSpeed Power:rvPower];
 
         } else {
-            // record stop
-            [self.battServ removeObserver:self forKeyPath:@"batteryLevel"];
+            // stop record
             [self.ztCube connect];
-            sleep(2);
-            [self.ztCube recordStop];
+
+            HUD.labelText = @"progress...";
+            [self.ztCube stopRecord];
         }
-        sleep(2);
+
         [self.ztCube disconnect];
-        sleep(6);
+
+        HUD.labelText = @"completed!";
+        sleep(1);
 
     } completionBlock:^{
         LogRV(@"completion block...");
-
         [HUD removeFromSuperview];
+
+        [self.battServ removeObserver:self forKeyPath:@"batteryLevel"];
+
         if (isRecording == NO) {
-            // record start
             isRecording = YES;
-            [record setBackgroundColor:[UIColor redColor]];
-            [record setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [record setTitle:@"Stop" forState:UIControlStateNormal];
-
         } else {
-            // record stop
             isRecording = NO;
-            [record setBackgroundColor:[UIColor greenColor]];
-            [record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [record setTitle:@"Record" forState:UIControlStateNormal];
         }
-
     }];
 
-    LogRV(@"recordButtonPress: - end (isMainThread=%@)", [[NSThread currentThread] isMainThread] ? @"YES" : @"NO");
+    LogRV(@"recordButtonPress: - end");
 }
 
 
-- (IBAction)imageButtonPress:(UIButton *)sender
+- (IBAction)downloadButtonPress:(UIButton *)sender
 {
+    LogRV(@"downloadButtonPress: - begin");
 
+    if ((![connectList count]) || (isRecording == YES)) {
+        return;
+    }
 
+    //
+    isDownloading = YES;
+    [self setButton:record   title:@"Record" titleColor:[UIColor blackColor] backgroundColor:[UIColor lightGrayColor]];
+    [self setButton:download title:@"Download" titleColor:[UIColor whiteColor] backgroundColor:[UIColor redColor]];
 
+    self.ztCube   = (ZTCube *) [connectList objectAtIndex:0];
+    self.battServ = self.ztCube.serviceDict[@"battery"];
+
+    MBProgressHUD   *HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
+    HUD.dimBackground = YES;
+    HUD.labelText = @"connecting...";
+
+    [HUD showAnimated:YES whileExecutingBlock:^{
+        LogRV(@"executing block...");
+        [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
+
+        [self.ztCube connect];
+
+        HUD.labelText = @"downloading...";
+        [self.ztCube download];
+
+        [self.ztCube disconnect];
+
+        HUD.labelText = @"completed!";
+        sleep(1);
+
+    } completionBlock:^{
+        LogRV(@"completion block...");
+        [HUD removeFromSuperview];
+
+        [self.battServ removeObserver:self forKeyPath:@"batteryLevel"];
+
+        [self setButton:record   title:@"Record" titleColor:[UIColor blackColor] backgroundColor:[UIColor greenColor]];
+        [self setButton:download title:@"Download" titleColor:[UIColor blackColor] backgroundColor:[UIColor greenColor]];
+        isDownloading = NO;
+    }];
+
+    LogRV(@"downloadButtonPress: - end");
 }
 
 
-
+/*
+ *
+ */
+- (void)setButton:(UIButton *)name title:(NSString *)title titleColor:(UIColor *)color backgroundColor:(UIColor *)bgColor
+{
+    [name setBackgroundColor:bgColor];
+    [name setTitleColor:color forState:UIControlStateNormal];
+    [name setTitle:title forState:UIControlStateNormal];
+}
 
 
 /*---------------------------------------------------------------------------*/
@@ -305,7 +362,7 @@ extern NSMutableArray   *connectList;
 /*---------------------------------------------------------------------------*/
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
-    LogRV(@"centralManagerDidUpdateState:");
+    LogBLE(@"centralManagerDidUpdateState:");
 
     switch (central.state) {
         case CBCentralManagerStateUnknown: {
@@ -369,7 +426,7 @@ extern NSMutableArray   *connectList;
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-    LogRV(@"centralManager:didConnectPeripheral:");
+    LogBLE(@"centralManager:didConnectPeripheral:");
 
     ZTCentralManager    *centralManager = [ZTCentralManager sharedService];
     YMSCBPeripheral     *yp             = [centralManager findPeripheral:peripheral];
@@ -425,17 +482,17 @@ extern NSMutableArray   *connectList;
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
+        NSLog(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
         return;
     }
 
-    LogRV(@"discover (%0lu) of services for %@", (unsigned long) [peripheral.services count], (peripheral.name == nil) ? @"Unnamed" : peripheral.name);
+    LogBLE(@"discover (%0lu) of services for %@", (unsigned long) [peripheral.services count], (peripheral.name == nil) ? @"Unnamed" : peripheral.name);
     if ([peripheral.services count] == 0) {
         return;
     }
 
     for (CBService *service in peripheral.services) {
-        LogRV(@" <s> %@ (%@)", [service.UUID UUIDString], service.UUID);
+        LogBLE(@" <s> %@ (%@)", [service.UUID UUIDString], service.UUID);
     }
 
 }
@@ -443,11 +500,11 @@ extern NSMutableArray   *connectList;
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
+        NSLog(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
         return;
     }
 
-    LogRV(@"discover (%0lu) characteristics for [%@] service", (unsigned long) [service.characteristics count], service.UUID);
+    LogBLE(@"discover (%0lu) characteristics for [%@] service", (unsigned long) [service.characteristics count], service.UUID);
     if ([service.characteristics count] == 0) {
         return;
     }
@@ -511,7 +568,7 @@ extern NSMutableArray   *connectList;
         }
 */
 
-        LogRV(@" <c> %@ (%@) (%@)", [characteristic.UUID UUIDString], characteristic.UUID, string);
+        LogBLE(@" <c> %@ (%@) (%@)", [characteristic.UUID UUIDString], characteristic.UUID, string);
     }
 
 }
@@ -532,10 +589,10 @@ extern NSMutableArray   *connectList;
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
+        NSLog(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
         return;
     }
-    LogRV(@"<%@> read characteristic: %@", [characteristic.UUID UUIDString], characteristic.value);
+    LogBLE(@"<%@> read characteristic: %@", [characteristic.UUID UUIDString], characteristic.value);
 
 
 }
@@ -543,10 +600,10 @@ extern NSMutableArray   *connectList;
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
+        NSLog(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
         return;
     }
-    LogRV(@"<%@> write characteristic: %@", [characteristic.UUID UUIDString], characteristic.value);
+    LogBLE(@"<%@> write characteristic: %@", [characteristic.UUID UUIDString], characteristic.value);
 
 }
 
@@ -567,15 +624,18 @@ extern NSMutableArray   *connectList;
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
-        LogRV(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
+        NSLog(@"ERROR: %@ [%s]", [error localizedDescription], __func__);
         return;
     }
-    LogRV(@"<%@> update notification state", characteristic.UUID);
+    LogBLE(@"<%@> update notification state", characteristic.UUID);
 
     // 已经發送通知
     if (characteristic.isNotifying) {
-        LogRV(@"Notification began on %@", [characteristic.UUID UUIDString]);
-        [peripheral readValueForCharacteristic:characteristic];
+        LogBLE(@"Notification began on %@", [characteristic.UUID UUIDString]);
+
+        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A19"]]) {
+            [peripheral readValueForCharacteristic:characteristic];
+        }
     }
 
 }

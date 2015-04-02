@@ -36,6 +36,7 @@
 		9AC0E7261A8DE97D002D24DD /* ZTDeviceInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0E7241A8DE97D002D24DD /* ZTDeviceInfoService.m */; };
 		9AC0E7281A8E145D002D24DD /* ZTBatteryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0E7271A8E145D002D24DD /* ZTBatteryService.m */; };
 		9AC343F31A92035A00CBE7AF /* ZTProtrackService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */; };
+		9AC90AAA1ACBDFEE00CA072B /* kfifo.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC90AA91ACBDFEE00CA072B /* kfifo.c */; };
 		9AD0C7531AA856C700E32C3D /* ZTProtrackNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD0C7521AA856C700E32C3D /* ZTProtrackNotify.m */; };
 		9AD8A6951AC40A41009BE6A8 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8A6941AC40A41009BE6A8 /* ImageViewController.m */; };
 		9AD8A6981AC40E58009BE6A8 /* CollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8A6971AC40E58009BE6A8 /* CollectionCell.m */; };
@@ -109,6 +110,8 @@
 		9AC0E7291A8E1489002D24DD /* ZTBatteryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZTBatteryService.h; path = ZTProfile/Services/ZTBatteryService.h; sourceTree = "<group>"; };
 		9AC343F11A92035A00CBE7AF /* ZTProtrackService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTProtrackService.h; path = ZTProfile/Services/ZTProtrackService.h; sourceTree = "<group>"; };
 		9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTProtrackService.m; path = ZTProfile/Services/ZTProtrackService.m; sourceTree = "<group>"; };
+		9AC90AA81ACBDFD100CA072B /* kfifo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = kfifo.h; path = ZTProfile/Services/kfifo.h; sourceTree = "<group>"; };
+		9AC90AA91ACBDFEE00CA072B /* kfifo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kfifo.c; path = ZTProfile/Services/kfifo.c; sourceTree = "<group>"; };
 		9AD0C7511AA856C700E32C3D /* ZTProtrackNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTProtrackNotify.h; path = ZTProfile/Services/ZTProtrackNotify.h; sourceTree = "<group>"; };
 		9AD0C7521AA856C700E32C3D /* ZTProtrackNotify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTProtrackNotify.m; path = ZTProfile/Services/ZTProtrackNotify.m; sourceTree = "<group>"; };
 		9AD8A6931AC40A41009BE6A8 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 				9AD0C7521AA856C700E32C3D /* ZTProtrackNotify.m */,
 				9A379F171A8B61130002FB5C /* DEAAccelerometerService.h */,
 				9A379F181A8B61130002FB5C /* DEAAccelerometerService.m */,
+				9AC90AA81ACBDFD100CA072B /* kfifo.h */,
+				9AC90AA91ACBDFEE00CA072B /* kfifo.c */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -272,8 +277,8 @@
 		9AAA31C11A67EC4C001D5B52 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				9AAA320B1A67EDA0001D5B52 /* MBProgressHUD.m */,
 				9AAA320A1A67ED8D001D5B52 /* MBProgressHUD.h */,
+				9AAA320B1A67EDA0001D5B52 /* MBProgressHUD.m */,
 			);
 			name = MBProgressHUD;
 			path = ../MBProgressHUD;
@@ -395,6 +400,7 @@
 			files = (
 				9A379EEF1A8B54540002FB5C /* YMSCBService.m in Sources */,
 				9A379EEB1A8B54540002FB5C /* YMSCBCentralManager.m in Sources */,
+				9AC90AAA1ACBDFEE00CA072B /* kfifo.c in Sources */,
 				9A379EF51A8B55000002FB5C /* ZTCentralManager.m in Sources */,
 				9AC0E7251A8DE97D002D24DD /* ZTBaseService.m in Sources */,
 				9AC0E7281A8E145D002D24DD /* ZTBatteryService.m in Sources */,

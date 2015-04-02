@@ -61,8 +61,8 @@
 @property (nonatomic, readonly) ZTProtrackNotify        *protrackNotify;
 
 
-- (void)recordStart:(NSInteger)resolution Speed:(NSInteger)speed Power:(NSInteger)power;
-- (void)recordStop;
-
+- (void)startRecord:(NSInteger)resolution Speed:(NSInteger)speed Power:(NSInteger)power;
+- (void)stopRecord;
+- (void)download;
 
 @end

@@ -37,12 +37,12 @@
 #include "DbgMsg.h"
 
 #if defined(DEBUG_MESSAGE) && DEBUG_MESSAGE
-#define dmsg(fmt, ...)      LOG_FORMAT(fmt, @"ZTDeviceInfoService", ##__VA_ARGS__)
+#define dmsg(fmt, ...)      LOG_FORMAT(fmt, @"ZTDevInfo", ##__VA_ARGS__)
 #else
 #define dmsg(...)
 #endif
 
-#define msg(fmt, ...)       LOG_FORMAT(fmt, @"ZTDeviceInfoService", ##__VA_ARGS__)
+#define msg(fmt, ...)       LOG_FORMAT(fmt, @"ZTDevInfo", ##__VA_ARGS__)
 
 
 /*

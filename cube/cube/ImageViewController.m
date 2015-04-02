@@ -193,9 +193,24 @@
 
     // 取出每一張照片的資料並轉換成 UIImage 格式
     CGImageRef img = [[imageArray objectAtIndex:indexPath.row] thumbnail];
+
+//    cell.imageView.image = [self imageWithImage:[UIImage imageWithCGImage:img] scaledToSize:CGSizeMake(20, 20)];
     cell.imageView.image = [UIImage imageWithCGImage:img];
 
     return cell;
+}
+
+
+-(UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize
+{
+    //UIGraphicsBeginImageContext(newSize);
+    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
+    // Pass 1.0 to force exact pixel size.
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 
@@ -207,17 +222,7 @@
 {
     LogIV(@"collectionView:layout:sizeForItemAtIndexPath:");
 
-
-    CGRect  screenBound  = [[UIScreen mainScreen] bounds];
-    CGSize  screenSize   = screenBound.size;
-    CGFloat screenWidth  = screenSize.width;
-    CGFloat screenHeight = screenSize.height;
-
-    screenWidth = ceil((screenWidth - ((9) * 2.0)) / 4);
-
-    LogIV(@"SW = %0f, IW = %0f", screenSize.width, screenWidth);
-    return CGSizeMake(screenWidth, screenWidth);
-//    return CGSizeMake(160, 160);
+    return CGSizeMake(72, 72);
 }
 
 // section的邊距
@@ -243,7 +248,17 @@
 // cell左右的最小間距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 2.0;
+    CGRect  screenBound  = [[UIScreen mainScreen] bounds];
+    CGSize  screenSize   = screenBound.size;
+    CGFloat screenWidth  = screenSize.width;
+    CGFloat screenHeight = screenSize.height;
+
+    screenWidth = ceil((screenWidth - ((9) * 2.0)) / 4);
+
+    LogIV(@"SW = %0f, IW = %0f", screenSize.width, screenWidth);
+//    return CGSizeMake(screenWidth, screenWidth);
+
+    return 3.4;
 }
 
 

@@ -36,12 +36,12 @@
 #include "DbgMsg.h"
 
 #if defined(DEBUG_MESSAGE) && DEBUG_MESSAGE
-#define dmsg(fmt, ...)      LOG_FORMAT(fmt, @"ZTProtrackService", ##__VA_ARGS__)
+#define dmsg(fmt, ...)      LOG_FORMAT(fmt, @"ZTWrite", ##__VA_ARGS__)
 #else
 #define dmsg(...)
 #endif
 
-#define msg(fmt, ...)       LOG_FORMAT(fmt, @"ZTProtrackService", ##__VA_ARGS__)
+#define msg(fmt, ...)       LOG_FORMAT(fmt, @"ZTWrite", ##__VA_ARGS__)
 
 
 /*
@@ -109,11 +109,34 @@
 
 }
 
+
+/*---------------------------------------------------------------------------*/
+#pragma mark - Calculate Checksum
+/*---------------------------------------------------------------------------*/
+- (unsigned char)calcChksum:(unsigned char *)payload length:(int)length
+{
+    unsigned char chksum = 0;
+
+    if (length < 5) {
+        return chksum;
+    }
+
+    for (int i=0; i<length-3; i++) {
+        chksum += payload[i+1];
+    }
+    return chksum;
+}
+
+
+/*---------------------------------------------------------------------------*/
+#pragma mark - Command
+#pragma mark -- set date
+/*---------------------------------------------------------------------------*/
 - (void)setDate
 {
-    dmsg(@"command: set date");
-
-    YMSCBCharacteristic         *ptwCt = self.characteristicDict[@"FFE9"];
+    dmsg(@"request: set date");
+    dispatch_semaphore_t    semaphore = dispatch_semaphore_create(0);
+    YMSCBCharacteristic     *ptwCt    = self.characteristicDict[@"FFE9"];
 
     // gen payload
     NSDate           *today     = [NSDate date];
@@ -123,86 +146,239 @@
     dmsg(@"current date: %04d/%02d/%02d time:%02d:%02d:%02d", [component year], [component month], [component day], [component hour], [component minute], [component second]);
 
     unsigned char   payload[] = { 0xFA, 0x0B, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE };
-    unsigned char   chksum    = payload[1] + payload[2];
     payload[3] = [component year] % 2000;
-    chksum    += payload[3];
     payload[4] = [component month];
-    chksum    += payload[4];
     payload[5] = [component day];
-    chksum    += payload[5];
     payload[6] = [component hour];
-    chksum    += payload[6];
     payload[7] = [component minute];
-    chksum    += payload[7];
     payload[8] = [component second];
-    payload[9] = payload[8] + chksum;
+    payload[9] = [self calcChksum:payload length:sizeof(payload)];
 
     // send command
     NSData  *command  = [NSData dataWithBytes:payload length:sizeof(payload)];
+    dmsg(@"[app->ble]: %@", command);
+
     [ptwCt writeValue:command withBlock:^(NSError *error) {
         if (error) {
             msg(@"ERROR: %@ - [line %d]", [error localizedDescription], __LINE__);
             return;
         }
-
-        dmsg(@"send command: %@", command);
-
+        dispatch_semaphore_signal(semaphore);
     }];
+
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 }
 
+
+/*---------------------------------------------------------------------------*/
+#pragma mark -- record start
+/*---------------------------------------------------------------------------*/
 - (void)recordStart:(NSInteger)resolution speed:(NSInteger)speed power:(NSInteger)power
 {
-    dmsg(@"command: record start");
-
-    YMSCBCharacteristic         *ptwCt = self.characteristicDict[@"FFE9"];
+    dmsg(@"request: record start");
+    dispatch_semaphore_t    semaphore = dispatch_semaphore_create(0);
+    YMSCBCharacteristic     *ptwCt    = self.characteristicDict[@"FFE9"];
 
     // gen payload
     unsigned char   payload[] = { 0xFA, 0x08, 0x01, 0x00, 0x00, 0x00, 0x00, 0xFE };
-    unsigned char   chksum    = payload[1] + payload[2];
     payload[3] = resolution;
-    chksum    += payload[3];
     payload[4] = speed;
-    chksum    += payload[4];
     payload[5] = power;
-    payload[6] = payload[5] + chksum;
+    payload[6] = [self calcChksum:payload length:sizeof(payload)];
 
     // send command
     NSData  *command  = [NSData dataWithBytes:payload length:sizeof(payload)];
+    dmsg(@"[app->ble]: %@", command);
+
     [ptwCt writeValue:command withBlock:^(NSError *error) {
         if (error) {
             msg(@"ERROR: %@ - [line %d]", [error localizedDescription], __LINE__);
             return;
         }
-
-        dmsg(@"send command: %@", command);
-        
+        dispatch_semaphore_signal(semaphore);
     }];
+
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 }
 
 
+/*---------------------------------------------------------------------------*/
+#pragma mark -- record stop
+/*---------------------------------------------------------------------------*/
 - (void)recordStop
 {
-    dmsg(@"command: record stop");
-
-    YMSCBCharacteristic         *ptwCt = self.characteristicDict[@"FFE9"];
+    dmsg(@"request: record stop");
+    dispatch_semaphore_t    semaphore = dispatch_semaphore_create(0);
+    YMSCBCharacteristic     *ptwCt    = self.characteristicDict[@"FFE9"];
 
     // gen payload
     unsigned char   payload[] = { 0xFA, 0x05, 0x11, 0x00, 0xFE };
-    payload[3] = payload[1] + payload[2];
+    payload[3] = [self calcChksum:payload length:sizeof(payload)];
 
     // send command
     NSData  *command  = [NSData dataWithBytes:payload length:sizeof(payload)];
+    dmsg(@"[app->ble]: %@", command);
+
     [ptwCt writeValue:command withBlock:^(NSError *error) {
         if (error) {
             msg(@"ERROR: %@ - [line %d]", [error localizedDescription], __LINE__);
             return;
         }
-
-        dmsg(@"send command: %@", command);
-        
+        dispatch_semaphore_signal(semaphore);
     }];
+
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 }
 
+
+/*---------------------------------------------------------------------------*/
+#pragma mark -- snapshot
+/*---------------------------------------------------------------------------*/
+- (void)snapshot:(NSInteger)resolution power:(NSInteger)power
+{
+    dmsg(@"request: snapshot");
+    dispatch_semaphore_t    semaphore = dispatch_semaphore_create(0);
+    YMSCBCharacteristic     *ptwCt    = self.characteristicDict[@"FFE9"];
+
+    // gen payload
+    unsigned char   payload[] = { 0xFA, 0x07, 0x02, 0x00, 0x00, 0x00, 0xFE };
+    payload[3] = resolution;
+    payload[4] = power;
+    payload[5] = [self calcChksum:payload length:sizeof(payload)];
+
+    // send command
+    NSData  *command  = [NSData dataWithBytes:payload length:sizeof(payload)];
+    dmsg(@"[app->ble]: %@", command);
+
+    [ptwCt writeValue:command withBlock:^(NSError *error) {
+        if (error) {
+            msg(@"ERROR: %@ - [line %d]", [error localizedDescription], __LINE__);
+            return;
+        }
+        dispatch_semaphore_signal(semaphore);
+    }];
+
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+}
+
+
+/*---------------------------------------------------------------------------*/
+#pragma mark -- read status
+/*---------------------------------------------------------------------------*/
+- (void)readStatus
+{
+    dmsg(@"request: read status");
+    dispatch_semaphore_t    semaphore = dispatch_semaphore_create(0);
+    YMSCBCharacteristic     *ptwCt    = self.characteristicDict[@"FFE9"];
+
+    // gen payload
+    unsigned char   payload[] = { 0xFA, 0x05, 0x03, 0x00, 0xFE };
+    payload[3] = [self calcChksum:payload length:sizeof(payload)];
+
+    // send command
+    NSData  *command  = [NSData dataWithBytes:payload length:sizeof(payload)];
+    dmsg(@"[app->ble]: %@", command);
+
+    [ptwCt writeValue:command withBlock:^(NSError *error) {
+        if (error) {
+            msg(@"ERROR: %@ - [line %d]", [error localizedDescription], __LINE__);
+            return;
+        }
+        dispatch_semaphore_signal(semaphore);
+    }];
+
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+}
+
+
+/*---------------------------------------------------------------------------*/
+#pragma mark -- inquiry picture
+/*---------------------------------------------------------------------------*/
+- (void)inquiryPic
+{
+    dmsg(@"request: inquiry pic");
+    dispatch_semaphore_t    semaphore = dispatch_semaphore_create(0);
+    YMSCBCharacteristic     *ptwCt    = self.characteristicDict[@"FFE9"];
+
+    // gen payload
+    unsigned char   payload[] = { 0xFA, 0x05, 0x21, 0x00, 0xFE };
+    payload[3] = [self calcChksum:payload length:sizeof(payload)];
+
+    // send command
+    NSData  *command  = [NSData dataWithBytes:payload length:sizeof(payload)];
+    dmsg(@"[app->ble]: %@", command);
+
+    [ptwCt writeValue:command withBlock:^(NSError *error) {
+        if (error) {
+            msg(@"ERROR: %@ - [line %d]", [error localizedDescription], __LINE__);
+            return;
+        }
+        dispatch_semaphore_signal(semaphore);
+    }];
+
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+}
+
+
+/*---------------------------------------------------------------------------*/
+#pragma mark -- inquiry block
+/*---------------------------------------------------------------------------*/
+- (void)inquiryBlock:(NSInteger)pic
+{
+    dmsg(@"request: inquiry block");
+    dispatch_semaphore_t    semaphore = dispatch_semaphore_create(0);
+    YMSCBCharacteristic     *ptwCt    = self.characteristicDict[@"FFE9"];
+
+    // gen payload
+    unsigned char   payload[] = { 0xFA, 0x06, 0x22, 0x00, 0x00, 0xFE };
+    payload[3] = pic;
+    payload[4] = [self calcChksum:payload length:sizeof(payload)];
+
+    // send command
+    NSData  *command  = [NSData dataWithBytes:payload length:sizeof(payload)];
+    dmsg(@"[app->ble]: %@", command);
+
+    [ptwCt writeValue:command withBlock:^(NSError *error) {
+        if (error) {
+            msg(@"ERROR: %@ - [line %d]", [error localizedDescription], __LINE__);
+            return;
+        }
+        dispatch_semaphore_signal(semaphore);
+    }];
+
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+}
+
+
+/*---------------------------------------------------------------------------*/
+#pragma mark -- get picture
+/*---------------------------------------------------------------------------*/
+- (void)getPic:(NSInteger)pic block:(NSInteger)blk
+{
+    dmsg(@"request: get pic");
+    dispatch_semaphore_t    semaphore = dispatch_semaphore_create(0);
+    YMSCBCharacteristic     *ptwCt    = self.characteristicDict[@"FFE9"];
+
+    // gen payload
+    unsigned char   payload[] = { 0xFA, 0x07, 0x23, 0x00, 0x00, 0x00, 0xFE };
+    payload[3] = pic;
+    payload[4] = blk;
+    payload[5] = [self calcChksum:payload length:sizeof(payload)];
+
+    // send command
+    NSData  *command  = [NSData dataWithBytes:payload length:sizeof(payload)];
+    dmsg(@"[app->ble]: %@", command);
+
+    [ptwCt writeValue:command withBlock:^(NSError *error) {
+        if (error) {
+            msg(@"ERROR: %@ - [line %d]", [error localizedDescription], __LINE__);
+            return;
+        }
+        dispatch_semaphore_signal(semaphore);
+    }];
+
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+}
 
 
 @end

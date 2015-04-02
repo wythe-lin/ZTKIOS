@@ -81,6 +81,9 @@
 }
 
 
+/*---------------------------------------------------------------------------*/
+#pragma mark - Notify On/Off
+/*---------------------------------------------------------------------------*/
 - (void)turnOff
 {
     __weak ZTBatteryService *this = self;
@@ -129,7 +132,7 @@
         return;
     }
 
-    msg(@"notifyCharacteristicHandler:error:");
+    msg(@"Battery Notify Handler");
 
     if ([yc.name isEqualToString:@"battery_level"]) {
         int     value    = 0;

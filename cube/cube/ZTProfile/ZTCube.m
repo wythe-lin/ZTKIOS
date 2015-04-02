@@ -97,6 +97,7 @@
 - (void)connect
 {
     dmsg(@"connect");
+    dispatch_semaphore_t    semaphore = dispatch_semaphore_create(0);
 
     // Watchdog aware method
     [self resetWatchdog];
@@ -107,9 +108,6 @@
             msg(@"Error: connectWithOption:withBlock: - %@", [error localizedDescription]);
             return;
         }
-        
-        // Example where only a subset of services is to be discovered.
-//        [yp discoverServices:[yp servicesSubset:@[@"temperature", @"simplekeys", @"devinfo"]] withBlock:^(NSArray *yservices, NSError *error) {
 
         dmsg(@"discoverServices:withBlock:");
         [yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
@@ -125,6 +123,7 @@
                     __weak ZTBatteryService *thisService = (ZTBatteryService *) service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
                         [thisService turnOn];
+                        dispatch_semaphore_signal(semaphore);
                     }];
 
                 } else if ([service.name isEqualToString:@"devinfo"]) {
@@ -132,13 +131,15 @@
                     __weak ZTDeviceInfoService *thisService = (ZTDeviceInfoService *) service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
                         [thisService readDeviceInfo];
+                        dispatch_semaphore_signal(semaphore);
                     }];
 
                 } else if ([service.name isEqualToString:@"protrack_write"]) {
                     dmsg(@"protrack (w) service");
                     __weak ZTProtrackService *thisService = (ZTProtrackService *) service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
-                        [thisService setDate];
+//                        [thisService setDate];
+                        dispatch_semaphore_signal(semaphore);
                     }];
 
                 } else if ([service.name isEqualToString:@"protrack_notify"]) {
@@ -146,42 +147,88 @@
                     __weak ZTProtrackNotify *thisService = (ZTProtrackNotify *) service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
                         [thisService turnOn];
+                        dispatch_semaphore_signal(semaphore);
                     }];
                 }
             }
         }];
 
     }];
+
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+
+    //
+    sleep(1);
 }
 
 
 - (void)disconnect
 {
-    dmsg(@"disconnect");
+    dmsg(@"disconnect - begin");
+    sleep(2);
+
     [super disconnect];
+
+    sleep(3);
+    dmsg(@"disconnect - end");
+}
+
+
+- (void)defaultConnectionHandler
+{
+    dmsg(@"defaultConnectionHandler");
+
 }
 
 
 /*
  *
  */
-- (void)recordStart:(NSInteger)resolution Speed:(NSInteger)speed Power:(NSInteger)power
+- (void)startRecord:(NSInteger)resolution Speed:(NSInteger)speed Power:(NSInteger)power
 {
-    dmsg(@"recordStart:Power:Speed:");
+    dmsg(@"startRecord:Power:Speed:");
+    ZTProtrackService *request  = self.serviceDict[@"protrack_write"];
+    ZTProtrackNotify  *response = self.serviceDict[@"protrack_notify"];
 
-    ZTProtrackService *serv = self.serviceDict[@"protrack_write"];
-    [serv recordStart:resolution speed:speed power:power];
+    [request setDate];
+    [response getResponsePacket];
+
+    [request recordStart:resolution speed:speed power:power];
+    [response getResponsePacket];
 }
 
 
-- (void)recordStop
+- (void)stopRecord
 {
-    dmsg(@"recordStop");
+    dmsg(@"stopRecord");
+    ZTProtrackService *request  = self.serviceDict[@"protrack_write"];
+    ZTProtrackNotify  *response = self.serviceDict[@"protrack_notify"];
 
-    ZTProtrackService *serv = self.serviceDict[@"protrack_write"];
-    [serv recordStop];
+    [request recordStop];
+    [response getResponsePacket];
 }
 
+
+
+- (void)download
+{
+    dmsg(@"download");
+    ZTProtrackService *request  = self.serviceDict[@"protrack_write"];
+    ZTProtrackNotify  *response = self.serviceDict[@"protrack_notify"];
+
+//    [request inquiryPic];
+//    [response getResponsePacket];
+
+//    [request inquiryBlock:1];
+//    [response getResponsePacket];
+
+    [request getPic:1 block:0];
+    [response getResponsePacket];
+
+}
 
 
 /*

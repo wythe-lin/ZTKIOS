@@ -23,6 +23,8 @@
  */
 
 #import "YMSCoreBluetooth.h"
+#include "kfifo.h"
+
 
 #define kCUUID_PROTRACK_NOTIFY      0xFFE4
 
@@ -31,8 +33,15 @@
  ProTrack Notify Service
  */
 @interface ZTProtrackNotify : YMSCBService
+{
+    unsigned char           in;
+    unsigned char           out;
 
+    struct __kfifo          rxqueue;
+    unsigned char           rxbuf[128];
 
+    dispatch_semaphore_t    semaphore;
+}
 
 /**
  Turn on CoreBluetooth peripheral service.
@@ -55,6 +64,8 @@
 
  */
 - (void)turnOff;
+
+- (void)getResponsePacket;
 
 
 @end

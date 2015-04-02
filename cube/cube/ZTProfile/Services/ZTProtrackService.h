@@ -41,10 +41,14 @@
  Read Device Time
  */
 - (void)setDate;
-
 - (void)recordStart:(NSInteger)resolution speed:(NSInteger)speed power:(NSInteger)power;
-
 - (void)recordStop;
+- (void)snapshot:(NSInteger)resolution power:(NSInteger)power;
+- (void)readStatus;
+- (void)inquiryPic;
+- (void)inquiryBlock:(NSInteger)pic;
+- (void)getPic:(NSInteger)pic block:(NSInteger)blk;
+
 
 
 @end
