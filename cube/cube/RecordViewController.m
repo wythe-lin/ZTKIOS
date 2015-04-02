@@ -119,6 +119,16 @@ extern NSMutableArray   *connectList;
     battery.font            = [UIFont fontWithName:@"HelveticaNeue-Thin" size:12.0];
     battery.text            = [NSString stringWithFormat:@"0%%"];
 
+    // version information
+    NSString *ver   = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
+
+    version                 = (UILabel *)[self.view viewWithTag:201];
+    version.textColor       = [UIColor blackColor];
+    version.backgroundColor = [UIColor clearColor];
+    version.font            = [UIFont fontWithName:@"HelveticaNeue-Thin" size:12.0];
+    version.text            = [NSString stringWithFormat:@"%@ (%@)", ver, build];
+
     // core bluetooth
     [ZTCentralManager initSharedServiceWithDelegate:self];
 

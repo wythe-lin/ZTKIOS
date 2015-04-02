@@ -94,6 +94,10 @@
     return self;
 }
 
+
+/*---------------------------------------------------------------------------*/
+#pragma mark -
+/*---------------------------------------------------------------------------*/
 - (void)connect
 {
     dmsg(@"connect");
@@ -184,9 +188,9 @@
 }
 
 
-/*
- *
- */
+/*---------------------------------------------------------------------------*/
+#pragma mark -
+/*---------------------------------------------------------------------------*/
 - (void)startRecord:(NSInteger)resolution Speed:(NSInteger)speed Power:(NSInteger)power
 {
     dmsg(@"startRecord:Power:Speed:");
@@ -215,25 +219,39 @@
 
 - (void)download
 {
+    NSInteger       pic;
+    NSInteger       block;
+    NSMutableData   *data = [[NSMutableData alloc] init];
+
     dmsg(@"download");
     ZTProtrackService *request  = self.serviceDict[@"protrack_write"];
     ZTProtrackNotify  *response = self.serviceDict[@"protrack_notify"];
 
-//    [request inquiryPic];
-//    [response getResponsePacket];
-
-//    [request inquiryBlock:1];
-//    [response getResponsePacket];
-
-    [request getPic:1 block:0];
+    [request inquiryPic];
     [response getResponsePacket];
+    pic = [response getPicBlk];
+//    pic = 0;
+
+    [request inquiryBlock:pic];
+    [response getResponsePacket];
+    block = [response getPicBlk];
+//    block = 2;
+
+    for (int n=0; n<block; n++) {
+        [request getPic:pic block:n];
+        [response getResponsePacket];
+        NSData *p = [response getRxPkt];
+        [data appendData:p];
+    }
+
+    dmsg(@"download - %@", data);
 
 }
 
 
-/*
- *
- */
+/*---------------------------------------------------------------------------*/
+#pragma mark -
+/*---------------------------------------------------------------------------*/
 - (ZTDeviceInfoService *)devinfo
 {
     dmsg(@"devinfo");

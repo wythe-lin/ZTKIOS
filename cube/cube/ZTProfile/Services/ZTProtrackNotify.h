@@ -34,14 +34,19 @@
  */
 @interface ZTProtrackNotify : YMSCBService
 {
-    unsigned char           in;
-    unsigned char           out;
-
     struct __kfifo          rxqueue;
     unsigned char           rxbuf[128];
 
     dispatch_semaphore_t    semaphore;
+
+    NSData                  *rxpkt;
 }
+
+@property (nonatomic, assign, getter = getAck) NSInteger        ack;
+@property (nonatomic, assign, getter = getStorage) NSInteger    storage;
+@property (nonatomic, assign, getter = getStatus) NSInteger     status;
+@property (nonatomic, assign, getter = getPicBlk) NSInteger     picblk;
+
 
 /**
  Turn on CoreBluetooth peripheral service.
@@ -66,6 +71,7 @@
 - (void)turnOff;
 
 - (void)getResponsePacket;
+- (NSData *)getRxPkt;
 
 
 @end

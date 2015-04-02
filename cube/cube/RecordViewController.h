@@ -35,6 +35,7 @@
     UIButton            *record;
     UIButton            *download;
     UILabel             *battery;
+    UILabel             *version;
 
     NSInteger           rvResolution;
     NSInteger           rvPower;

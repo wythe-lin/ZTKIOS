@@ -47,10 +47,17 @@
                                     <action selector="downloadButtonPress:" destination="9pv-A4-QxB" eventType="touchUpInside" id="SXP-eg-Haq"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="201" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SpP-FX-knb">
+                                <rect key="frame" x="5" y="522" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="IUf-Tg-cfE" secondAttribute="bottom" constant="8" id="1ve-ug-bOA"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="SpP-FX-knb" secondAttribute="bottom" constant="8" id="Dpt-Gv-Fgr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BKS-qu-vCi" secondAttribute="trailing" constant="-16" id="U0x-Md-Gsv"/>
                             <constraint firstItem="IUf-Tg-cfE" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="ZvZ-zr-3GB"/>
                             <constraint firstItem="BKS-qu-vCi" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="29" id="hbJ-Rl-UvK"/>

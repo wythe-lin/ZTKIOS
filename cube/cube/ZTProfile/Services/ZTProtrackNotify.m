@@ -76,6 +76,7 @@
         [self addCharacteristic:@"FFE4" withAddress:kCUUID_PROTRACK_NOTIFY];
     }
 
+    rxpkt = [[NSData alloc] init];
     kfifo_init(&rxqueue, rxbuf, sizeof(rxbuf));
     semaphore = dispatch_semaphore_create(0);
     return self;
@@ -132,8 +133,6 @@
 /*---------------------------------------------------------------------------*/
 - (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error
 {
-    _YMS_PERFORM_ON_MAIN_THREAD(^{
-
     if (error) {
         msg(@"ERROR: %@ - [line %d]", [error localizedDescription], __LINE__);
         return;
@@ -141,15 +140,14 @@
 
     dmsg(@"FFE4 Notify Handler");
     if ([yc.name isEqualToString:@"FFE4"]) {
-            NSData  *data = yc.cbCharacteristic.value;
-            dmsg(@"[ble->app]: %@", data);
+        NSData  *data = yc.cbCharacteristic.value;
+        dmsg(@"[ble->app]: %@", data);
 
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
             kfifo_in(&rxqueue, [data bytes], [data length]);
             dispatch_semaphore_signal(semaphore);
-
-    }
         });
-
+    }
 }
 
 
@@ -162,7 +160,7 @@
     unsigned char   fsm = 0;
     unsigned char   pkt[128];
 
-//    dmsg(@"getResponsePacket - begin");
+    dmsg(@"getResponsePacket - begin");
 
     for (fsm=0; fsm<4; ) {
         switch (fsm) {
@@ -206,17 +204,21 @@
                 }
                 break;
         }
-        usleep(1000*5);
     }
 
     // cheak packet
     switch (pkt[2]) {
         case 0x80:  // status packet
-            dmsg(@"response: status packet - ack=%02x, storage=%02x, status=%02x, data=%02x", pkt[3], pkt[4], pkt[5], pkt[6]);
+            _ack     = pkt[3];
+            _storage = pkt[4];
+            _status  = pkt[5];
+            _picblk  = pkt[6];
+            dmsg(@"response: status packet - ack=%02x, storage=%02x, status=%02x, data=%02x", _ack, _storage, _status, _picblk);
             break;
 
         case 0x20:
-            dmsg(@"response: data block packet - ");
+            rxpkt = [NSData dataWithBytes:&pkt[3] length:pkt[1]-5];
+            dmsg(@"response: data block packet - %@", rxpkt);
             break;
 
         default:
@@ -228,7 +230,10 @@
 }
 
 
-
+- (NSData *)getRxPkt
+{
+    return rxpkt;
+}
 
 
 @end
