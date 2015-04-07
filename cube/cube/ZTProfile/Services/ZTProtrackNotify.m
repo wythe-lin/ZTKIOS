@@ -177,7 +177,7 @@
                 dmsg(@"1");
                 if (kfifo_len(&rxqueue)) {
                     kfifo_out(&rxqueue, &tmp, 1);
-                    if (tmp == 0x05) {
+                    if (tmp == 0xFA) {
                         pkt[0] = tmp;
                         fsm    = 2;
                     }
