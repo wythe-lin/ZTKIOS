@@ -24,18 +24,49 @@
 
 #import "CollectionCell.h"
 
-@implementation CollectionCell
 
+/*
+ ******************************************************************************
+ *
+ * @interface
+ *
+ ******************************************************************************
+ */
+@interface CollectionCell ()
+
+
+@end
+
+
+/*
+ ******************************************************************************
+ *
+ * @implementation
+ *
+ ******************************************************************************
+ */
+@implementation CollectionCell
 
 - (instancetype)initWithFrame:(CGRect)frameRect
 {
     self = [super initWithFrame:frameRect];
     if (self) {
-        // Initialization code
+        // Grey background
+        self.backgroundColor = [UIColor colorWithWhite:0.12 alpha:1];
+
+
+
+
     }
     return self;
 }
 
+
+- (void)setBounds:(CGRect)bounds
+{
+    [super setBounds:bounds];
+    self.contentView.frame = bounds;
+}
 
 
 @end

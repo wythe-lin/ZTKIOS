@@ -51,6 +51,10 @@
  ******************************************************************************
  */
 @interface ImageViewController ()
+{
+    // Store margins for current setup
+    CGFloat _margin, _gutter, _marginL, _gutterL, _columns, _columnsL;
+}
 
 @end
 
@@ -79,6 +83,33 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.title = @"Image";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+
+    // Defaults
+    _columns = 3, _columnsL = 4;
+    _margin  = 0, _marginL  = 0;
+    _gutter  = 1, _gutterL  = 1;
+
+    // for pixel perfection...
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        // iPad
+        _columns = 6, _columnsL = 8;
+        _margin  = 1, _marginL  = 1;
+        _gutter  = 2, _gutterL  = 2;
+
+    } else if ([UIScreen mainScreen].bounds.size.height == 480) {
+        // iPhone 3.5 inch
+        _columns = 3, _columnsL = 4;
+        _margin  = 0, _marginL  = 1;
+        _gutter  = 1, _gutterL  = 2;
+
+    } else {
+        // iPhone 4 inch
+        _columns = 3, _columnsL = 5;
+        _margin  = 0, _marginL  = 0;
+        _gutter  = 1, _gutterL  = 2;
+    }
+
 
     lib = [[ALAssetsLibrary alloc] init];
 
@@ -142,6 +173,36 @@
 }
 
 
+/*---------------------------------------------------------------------------*/
+#pragma mark - Layout
+/*---------------------------------------------------------------------------*/
+- (CGFloat)getColumns
+{
+    if ((UIInterfaceOrientationIsPortrait(self.interfaceOrientation))) {
+        return _columns;
+    } else {
+        return _columnsL;
+    }
+}
+
+- (CGFloat)getMargin
+{
+    if ((UIInterfaceOrientationIsPortrait(self.interfaceOrientation))) {
+        return _margin;
+    } else {
+        return _marginL;
+    }
+}
+
+- (CGFloat)getGutter
+{
+    if ((UIInterfaceOrientationIsPortrait(self.interfaceOrientation))) {
+        return _gutter;
+    } else {
+        return _gutterL;
+    }
+}
+
 
 /*---------------------------------------------------------------------------*/
 #pragma mark - UICollectionViewDelegate
@@ -193,24 +254,9 @@
 
     // 取出每一張照片的資料並轉換成 UIImage 格式
     CGImageRef img = [[imageArray objectAtIndex:indexPath.row] thumbnail];
-
-//    cell.imageView.image = [self imageWithImage:[UIImage imageWithCGImage:img] scaledToSize:CGSizeMake(20, 20)];
     cell.imageView.image = [UIImage imageWithCGImage:img];
 
     return cell;
-}
-
-
--(UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize
-{
-    //UIGraphicsBeginImageContext(newSize);
-    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
-    // Pass 1.0 to force exact pixel size.
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
 }
 
 
@@ -220,17 +266,18 @@
 // cell size
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    LogIV(@"collectionView:layout:sizeForItemAtIndexPath:");
-
-    return CGSizeMake(72, 72);
+    CGFloat margin  = [self getMargin];
+    CGFloat gutter  = [self getGutter];
+    CGFloat columns = [self getColumns];
+    CGFloat value   = floorf(((self.view.bounds.size.width - (columns - 1) * gutter - 2 * margin) / columns));
+    return CGSizeMake(value, value);
 }
 
 // section的邊距
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    LogIV(@"collectionView:layout:insetForSectionAtIndex:");
-
-    return UIEdgeInsetsMake(0, 0, 140, 0);
+    CGFloat margin = [self getMargin];
+    return UIEdgeInsetsMake(margin, margin, margin+140, margin);
 }
 
 // headview size
@@ -242,23 +289,13 @@
 // cell上下的最小間距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 4.0;
+    return [self getGutter];
 }
 
 // cell左右的最小間距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    CGRect  screenBound  = [[UIScreen mainScreen] bounds];
-    CGSize  screenSize   = screenBound.size;
-    CGFloat screenWidth  = screenSize.width;
-    CGFloat screenHeight = screenSize.height;
-
-    screenWidth = ceil((screenWidth - ((9) * 2.0)) / 4);
-
-    LogIV(@"SW = %0f, IW = %0f", screenSize.width, screenWidth);
-//    return CGSizeMake(screenWidth, screenWidth);
-
-    return 3.4;
+    return [self getGutter];
 }
 
 
