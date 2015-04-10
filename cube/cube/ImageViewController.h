@@ -28,8 +28,14 @@
 
 @interface ImageViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
-    ALAssetsLibrary     *lib;
-    NSMutableArray      *imageArray;
+    NSArray         *docDirectory;
+    NSString        *documentPath;
+
+    NSString        *foldername;
+    NSString        *folderPath;
+
+    NSFileManager   *fileManager;
+    NSArray         *fileLst;
 }
 
 

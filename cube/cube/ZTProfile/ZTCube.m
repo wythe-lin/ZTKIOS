@@ -257,10 +257,15 @@
     NSString *newFolderPath = [documentPath stringByAppendingPathComponent:foldername];
 
     //檢查資料夾是否存在
+    NSError *error;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager contentsOfDirectoryAtPath:newFolderPath error:nil]) {
-        if ([fileManager createDirectoryAtPath:newFolderPath withIntermediateDirectories:YES attributes:nil error:nil]) {
-            msg(@"%@ - 資料夾建立成功", foldername);
+    if (![fileManager contentsOfDirectoryAtPath:newFolderPath error:&error]) {
+        if (!error) {
+            msg(@"%@ - 資料夾已存在但是空的", foldername);
+        } else {
+            if ([fileManager createDirectoryAtPath:newFolderPath withIntermediateDirectories:YES attributes:nil error:nil]) {
+                msg(@"%@ - 資料夾建立成功", foldername);
+            }
         }
     } else {
         msg(@"%@ - 資料夾已存在", foldername);
