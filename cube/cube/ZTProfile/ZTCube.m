@@ -216,6 +216,19 @@
 }
 
 
+- (void)snapshot:(NSInteger)resolution Power:(NSInteger)power
+{
+    dmsg(@"snapshot");
+    ZTProtrackService *request  = self.serviceDict[@"protrack_write"];
+    ZTProtrackNotify  *response = self.serviceDict[@"protrack_notify"];
+
+    [request setDate];
+    [response getResponsePacket];
+
+    [request snapshot:resolution power:power];
+    [response getResponsePacket];
+}
+
 
 - (void)download
 {
@@ -234,71 +247,71 @@
         dmsg(@"download - no picture");
         return;
     }
+    dmsg(@"download - %0d picture", pic);
 
-    [request inquiryBlock:pic];
-    [response getResponsePacket];
-    block = [response getPicBlk];
-
-    for (int n=0; n<block; n++) {
-        [request getPic:pic block:n];
+    for (int j=1; j<pic+1; j++) {
+        [request inquiryBlock:j];
         [response getResponsePacket];
-        NSData *p = [response getRxPkt];
-        [FileContent appendData:p];
-    }
+        block = [response getPicBlk];
 
-    dmsg(@"download - %@", FileContent);
-
-    //取得Document Path
-    NSArray *docDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentPath = [docDirectory  objectAtIndex:0];
-
-    //製作資料夾的路徑
-    NSString *foldername = @"wcube";
-    NSString *newFolderPath = [documentPath stringByAppendingPathComponent:foldername];
-
-    //檢查資料夾是否存在
-    NSError *error;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager contentsOfDirectoryAtPath:newFolderPath error:&error]) {
-        if (!error) {
-            msg(@"%@ - 資料夾已存在但是空的", foldername);
-        } else {
-            if ([fileManager createDirectoryAtPath:newFolderPath withIntermediateDirectories:YES attributes:nil error:nil]) {
-                msg(@"%@ - 資料夾建立成功", foldername);
-            }
+        for (int n=0; n<block; n++) {
+            [request getPic:j block:n];
+            [response getResponsePacket];
+            NSData *p = [response getRxPkt];
+            [FileContent appendData:p];
         }
-    } else {
-        msg(@"%@ - 資料夾已存在", foldername);
-    }
 
-    //製作新檔案名稱
-    NSDate           *today     = [NSDate date];
-    NSCalendar       *calendar  = [NSCalendar currentCalendar];
-    NSDateComponents *component = [calendar components:(kCFCalendarUnitYear | kCFCalendarUnitMonth | kCFCalendarUnitDay | kCFCalendarUnitHour | kCFCalendarUnitMinute | kCFCalendarUnitSecond)
+        dmsg(@"download - %@", FileContent);
+
+        //取得Document Path
+        NSArray *docDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentPath = [docDirectory  objectAtIndex:0];
+
+        //製作資料夾的路徑
+        NSString *foldername = @"wcube";
+        NSString *newFolderPath = [documentPath stringByAppendingPathComponent:foldername];
+
+        //檢查資料夾是否存在
+        NSError *error;
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if (![fileManager contentsOfDirectoryAtPath:newFolderPath error:&error]) {
+            if (!error) {
+                msg(@"%@ - 資料夾已存在但是空的", foldername);
+            } else {
+                if ([fileManager createDirectoryAtPath:newFolderPath withIntermediateDirectories:YES attributes:nil error:nil]) {
+                    msg(@"%@ - 資料夾建立成功", foldername);
+                }
+            }
+        } else {
+            msg(@"%@ - 資料夾已存在", foldername);
+        }
+
+        //製作新檔案名稱
+        NSDate           *today     = [NSDate date];
+        NSCalendar       *calendar  = [NSCalendar currentCalendar];
+        NSDateComponents *component = [calendar components:(kCFCalendarUnitYear | kCFCalendarUnitMonth | kCFCalendarUnitDay | kCFCalendarUnitHour | kCFCalendarUnitMinute | kCFCalendarUnitSecond)
                                               fromDate:today];
-    NSString *year     = [NSString stringWithFormat:@"%02ld", (long)[component year] % 2000];
-    NSString *month    = [year stringByAppendingFormat:@"%02ld", (long)[component month]];
-    NSString *day      = [month stringByAppendingFormat:@"%02ld", (long)[component day]];
-    NSString *hour     = [day stringByAppendingFormat:@"%02ld", (long)[component hour]];
-    NSString *minute   = [hour stringByAppendingFormat:@"%02ld", (long)[component minute]];
-    NSString *second   = [minute stringByAppendingFormat:@"%02ld", (long)[component second]];
-    NSString *filename = [second stringByAppendingFormat:@".jpg"];
+        NSString *year     = [NSString stringWithFormat:@"%02ld", (long)[component year] % 2000];
+        NSString *month    = [year stringByAppendingFormat:@"%02ld", (long)[component month]];
+        NSString *day      = [month stringByAppendingFormat:@"%02ld", (long)[component day]];
+        NSString *hour     = [day stringByAppendingFormat:@"%02ld", (long)[component hour]];
+        NSString *minute   = [hour stringByAppendingFormat:@"%02ld", (long)[component minute]];
+        NSString *second   = [minute stringByAppendingFormat:@"%02ld", (long)[component second]];
+        NSString *filename = [second stringByAppendingFormat:@".jpg"];
 
-    //製作新檔案的路徑
-    NSString *newFilePath = [newFolderPath stringByAppendingPathComponent:filename];
+        //製作新檔案的路徑
+        NSString *newFilePath = [newFolderPath stringByAppendingPathComponent:filename];
 
-    //建立空白新檔案
-    if ([fileManager createFileAtPath:newFilePath contents:nil attributes:nil]) {
-        msg(@"%@ - 檔案建立成功", filename);
+        //建立空白新檔案
+        if ([fileManager createFileAtPath:newFilePath contents:nil attributes:nil]) {
+            msg(@"%@ - 檔案建立成功", filename);
+        }
+
+        //寫入內容
+        if ([FileContent writeToFile:newFilePath atomically:YES]) {
+            msg(@"%@ - 檔案寫入成功", filename);
+        }
     }
-
-    //寫入內容
-//    NSString *FileContent = @"Furnace Digital iOS 程式設計中文學習網站";
-//    if ([FileContent writeToFile:newFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil]) {
-    if ([FileContent writeToFile:newFilePath atomically:YES]) {
-        msg(@"%@ - 檔案寫入成功", filename);
-    }
-
 }
 
 

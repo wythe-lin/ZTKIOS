@@ -28,7 +28,7 @@
 
 
 
-@property (weak, nonatomic) IBOutlet UIImageView    *imageView;
+@property (nonatomic, strong) IBOutlet UIImageView  *imageView;
 
 
 @end

@@ -24,6 +24,24 @@
 
 #import "CollectionCell.h"
 
+/*
+ ******************************************************************************
+ *
+ * for debug
+ *
+ ******************************************************************************
+ */
+#define LOGGING_LEVEL_COLLECTIONCELL        1
+#include "DbgMsg.h"
+
+#if defined(LOGGING_LEVEL_COLLECTIONCELL) && LOGGING_LEVEL_COLLECTIONCELL
+#define dmsg(fmt, ...)      LOG_FORMAT(fmt, @"CCELL", ##__VA_ARGS__)
+#else
+#define dmsg(...)
+#endif
+
+#define msg(fmt, ...)       LOG_FORMAT(fmt, @"CCELL", ##__VA_ARGS__)
+
 
 /*
  ******************************************************************************
@@ -49,10 +67,12 @@
 
 - (instancetype)initWithFrame:(CGRect)frameRect
 {
+    dmsg(@"initWithFrame:");
+
     self = [super initWithFrame:frameRect];
     if (self) {
         // Grey background
-        self.backgroundColor = [UIColor colorWithWhite:0.12 alpha:1];
+        self.backgroundColor = [UIColor blueColor];
 
 
 
@@ -64,6 +84,8 @@
 
 - (void)setBounds:(CGRect)bounds
 {
+    dmsg(@"setBounds: x=%0d, y=%0d, w=%0d, h=%0d", (int)bounds.origin.x, (int)bounds.origin.y, (int)bounds.size.width, (int)bounds.size.height);
+
     [super setBounds:bounds];
     self.contentView.frame = bounds;
 }

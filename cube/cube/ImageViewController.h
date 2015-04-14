@@ -36,10 +36,12 @@
 
     NSFileManager   *fileManager;
     NSArray         *fileLst;
+
+    UIButton        *erase;
 }
 
 
-@property (weak, nonatomic) IBOutlet UICollectionView   *colView;
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
 
 @end

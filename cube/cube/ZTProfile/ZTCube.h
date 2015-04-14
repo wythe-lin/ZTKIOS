@@ -63,6 +63,7 @@
 
 - (void)startRecord:(NSInteger)resolution Speed:(NSInteger)speed Power:(NSInteger)power;
 - (void)stopRecord;
+- (void)snapshot:(NSInteger)resolution Power:(NSInteger)power;
 - (void)download;
 
 @end

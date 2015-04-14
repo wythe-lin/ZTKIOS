@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -25,8 +25,12 @@
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="jjM-Wq-N0Y"/>
                                 </connections>
                             </pickerView>
-                            <button opaque="NO" tag="100" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQk-5c-OkN">
-                                <rect key="frame" x="220" y="285" width="160" height="50"/>
+                            <button opaque="NO" tag="100" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQk-5c-OkN">
+                                <rect key="frame" x="170" y="284" width="120" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="R3f-aW-Yyx"/>
+                                    <constraint firstAttribute="height" constant="50" id="q84-XD-esw"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="recordButtonPress:" destination="9pv-A4-QxB" eventType="touchUpInside" id="fju-bi-3X4"/>
@@ -40,6 +44,10 @@
                             </label>
                             <button opaque="NO" tag="101" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VO0-Te-vqP">
                                 <rect key="frame" x="220" y="349" width="160" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="Bjt-Jf-uz9"/>
+                                    <constraint firstAttribute="height" constant="50" id="Zfe-qT-Jw9"/>
+                                </constraints>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -53,17 +61,31 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" tag="102" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayL-8n-p2e">
+                                <rect key="frame" x="312" y="284" width="120" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="CVU-o1-NOQ"/>
+                                    <constraint firstAttribute="width" constant="120" id="vXS-Za-NOE"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="snapshotButtonPress:" destination="9pv-A4-QxB" eventType="touchUpInside" id="j2r-a4-qae"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="IUf-Tg-cfE" secondAttribute="bottom" constant="8" id="1ve-ug-bOA"/>
+                            <constraint firstAttribute="centerX" secondItem="eQk-5c-OkN" secondAttribute="centerX" constant="70" id="8a4-eg-uJM"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="SpP-FX-knb" secondAttribute="bottom" constant="8" id="Dpt-Gv-Fgr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BKS-qu-vCi" secondAttribute="trailing" constant="-16" id="U0x-Md-Gsv"/>
+                            <constraint firstAttribute="centerX" secondItem="ayL-8n-p2e" secondAttribute="centerX" constant="-72" id="V12-TI-sQn"/>
                             <constraint firstItem="IUf-Tg-cfE" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="ZvZ-zr-3GB"/>
+                            <constraint firstAttribute="centerX" secondItem="VO0-Te-vqP" secondAttribute="centerX" id="dVy-ey-84i"/>
                             <constraint firstItem="BKS-qu-vCi" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="29" id="hbJ-Rl-UvK"/>
-                            <constraint firstItem="VO0-Te-vqP" firstAttribute="centerX" secondItem="eQk-5c-OkN" secondAttribute="centerX" id="jnu-Nw-fDw"/>
                             <constraint firstItem="BKS-qu-vCi" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="-16" id="r7W-78-y8V"/>
-                            <constraint firstItem="BKS-qu-vCi" firstAttribute="centerX" secondItem="eQk-5c-OkN" secondAttribute="centerX" constant="-0.5" id="rX2-Ft-IaP"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Record" id="acW-dT-cKf"/>
@@ -142,9 +164,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0Sl-ZT-ga5">
-                                <rect key="frame" x="0.0" y="63" width="600" height="488"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" tag="130" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gsl-zd-sr4">
+                                <rect key="frame" x="474" y="25" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="JGf-yO-oN1"/>
+                                    <constraint firstAttribute="height" constant="30" id="Rc9-3f-GyP"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="eraseButtonPress:" destination="7eg-sP-1V5" eventType="touchUpInside" id="hAB-fQ-Mld"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0Sl-ZT-ga5">
+                                <rect key="frame" x="0.0" y="64" width="600" height="488"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="uw9-Oz-cr2">
                                     <size key="itemSize" width="153" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -152,7 +184,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="8qu-7S-zTw" customClass="CollectionCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CCell" id="8qu-7S-zTw" customClass="CollectionCell">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -178,16 +210,21 @@
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="7eg-sP-1V5" id="k5p-EO-Pgs"/>
-                                    <outlet property="delegate" destination="7eg-sP-1V5" id="pbI-PD-sVg"/>
+                                    <outlet property="dataSource" destination="7eg-sP-1V5" id="P1f-0P-Aem"/>
+                                    <outlet property="delegate" destination="7eg-sP-1V5" id="ZXD-gK-hpv"/>
                                 </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gsl-zd-sr4" secondAttribute="trailing" constant="10" id="5WH-cE-Lbz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0Sl-ZT-ga5" secondAttribute="trailing" constant="-16" id="7wE-8Z-zhC"/>
+                            <constraint firstItem="0Sl-ZT-ga5" firstAttribute="leading" secondItem="Zhy-89-T70" secondAttribute="leadingMargin" constant="-16" id="vfb-K6-hj2"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Image" id="QIN-pL-tHA"/>
                     <connections>
-                        <outlet property="colView" destination="0Sl-ZT-ga5" id="rJl-qE-DnT"/>
+                        <outlet property="collectionView" destination="0Sl-ZT-ga5" id="Oy4-ZX-SV6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tv2-aN-Psz" userLabel="First Responder" sceneMemberID="firstResponder"/>

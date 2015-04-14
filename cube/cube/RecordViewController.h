@@ -32,8 +32,11 @@
 @interface RecordViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate>
 {
     NSMutableArray      *lstResolution, *lstSpeed, *lstPower;
+
     UIButton            *record;
+    UIButton            *snapshot;
     UIButton            *download;
+
     UILabel             *battery;
     UILabel             *version;
 

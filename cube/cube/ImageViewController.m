@@ -23,6 +23,7 @@
  */
 
 #import "ImageViewController.h"
+#import "MBProgressHUD.h"
 #import "CollectionCell.h"
 
 
@@ -55,7 +56,7 @@
 @interface ImageViewController ()
 {
     // Store margins for current setup
-    CGFloat _margin, _gutter, _marginL, _gutterL, _columns, _columnsL;
+    CGFloat _margin, _gutter, _columns;
 }
 
 @end
@@ -83,7 +84,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.title = @"Image";
+    self.title = @"Pictures";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
 
@@ -119,18 +120,20 @@
     foldername   = @"wcube";
     folderPath   = [documentPath stringByAppendingPathComponent:foldername];
 
-/*
-     if ([[NSFileManager defaultManager] removeItemAtPath:folderPath error:nil]) {
-        LogIV(@"%@ - 刪除", foldername);
-     }
-*/
+    //
+    self.collectionView.backgroundColor = [UIColor grayColor];
 
+    // erase button
+    erase = (UIButton *)[self.view viewWithTag:130];
+    [self setButton:erase title:@"Erase" titleColor:[UIColor blackColor] backgroundColor:[UIColor greenColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     LogIV(@"viewWillAppear:");
+
+    [self.collectionView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -138,7 +141,6 @@
     [super viewDidAppear:animated];
     LogIV(@"viewDidAppear:");
 
-    [self.colView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -163,6 +165,57 @@
 
 }
 
+
+/*---------------------------------------------------------------------------*/
+#pragma mark - Erase Button
+/*---------------------------------------------------------------------------*/
+- (IBAction)eraseButtonPress:(UIButton *)sender
+{
+    LogIV(@"eraseButtonPress: - begin");
+
+    MBProgressHUD   *HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
+    HUD.dimBackground = YES;
+    HUD.labelText = @"erasing...";
+
+    [HUD showAnimated:YES whileExecutingBlock:^{
+        LogIV(@"executing block...");
+
+        NSError *error;
+        if (![[NSFileManager defaultManager] contentsOfDirectoryAtPath:foldername error:&error]) {
+            if (!error) {
+                if ([[NSFileManager defaultManager] removeItemAtPath:folderPath error:nil]) {
+                    LogIV(@"%@ - 刪除", foldername);
+                }
+            }
+        } else {
+            if ([[NSFileManager defaultManager] removeItemAtPath:folderPath error:nil]) {
+                LogIV(@"%@ - 刪除", foldername);
+            }
+        }
+        sleep(2);
+
+    } completionBlock:^{
+        LogIV(@"completion block...");
+        [HUD removeFromSuperview];
+
+        [self.collectionView reloadData];
+    }];
+
+
+    LogIV(@"eraseButtonPress: - end");
+}
+
+
+/*
+ *
+ */
+- (void)setButton:(UIButton *)name title:(NSString *)title titleColor:(UIColor *)color backgroundColor:(UIColor *)bgColor
+{
+    [name setBackgroundColor:bgColor];
+    [name setTitleColor:color forState:UIControlStateNormal];
+    [name setTitle:title forState:UIControlStateNormal];
+}
 
 
 /*---------------------------------------------------------------------------*/
@@ -221,11 +274,13 @@
 {
     LogIV(@"collectionView:cellForItemAtIndexPath:");
 
-    static NSString *identifier = @"Cell";
-    CollectionCell  *cell = (CollectionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    CollectionCell  *cell = (CollectionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"CCell" forIndexPath:indexPath];
     if (cell == nil) {
+        LogIV(@"alloc new cell");
         cell = [[CollectionCell alloc] init];
     }
+
+    cell.backgroundColor = [UIColor yellowColor];
 
     // 取出每一張照片的資料並轉換成 UIImage 格式
     NSString *imageToLoad = [folderPath stringByAppendingPathComponent:[fileLst objectAtIndex:indexPath.row]];
@@ -242,7 +297,7 @@
 // cell size
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat value   = floorf(((self.view.bounds.size.width - (_columns - 1) * _gutter - 2 * _margin) / _columns));
+    CGFloat value = floorf(((self.view.bounds.size.width - (_columns - 1) * _gutter - 2 * _margin) / _columns));
     return CGSizeMake(value, value);
 }
 
