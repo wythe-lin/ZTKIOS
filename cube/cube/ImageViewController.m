@@ -114,7 +114,7 @@
     }
     LogIV(@"_columns=%0d, _margin=%0d, _gutter=%0d", (int)_columns, (int)_margin, (int)_gutter);
 
-    //
+    // folder path
     docDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     documentPath = [docDirectory  objectAtIndex:0];
     foldername   = @"wcube";
@@ -182,7 +182,7 @@
         LogIV(@"executing block...");
 
         NSError *error;
-        if (![[NSFileManager defaultManager] contentsOfDirectoryAtPath:foldername error:&error]) {
+        if (![[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:&error]) {
             if (!error) {
                 if ([[NSFileManager defaultManager] removeItemAtPath:folderPath error:nil]) {
                     LogIV(@"%@ - 刪除", foldername);
@@ -221,11 +221,34 @@
 /*---------------------------------------------------------------------------*/
 #pragma mark - UICollectionViewDelegate
 /*---------------------------------------------------------------------------*/
+/*
+ * Managing the Selected Cells
+ */
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     LogIV(@"collectionView:didSelectItemAtIndexPath:");
 
-    // TODO: Select Item
+    NSMutableArray *indexPaths = [NSMutableArray arrayWithObject:indexPath];
+    if (self.selectedItemIndexPath) {
+        // if we had a previously selected cell
+
+        if ([indexPath compare:self.selectedItemIndexPath] == NSOrderedSame) {
+            // if it's the same as the one we just tapped on, then we're unselecting it
+            self.selectedItemIndexPath = nil;
+
+        } else {
+            // if it's different, then add that old one to our list of cells to reload, and
+            // save the currently selected indexPath
+            [indexPaths addObject:self.selectedItemIndexPath];
+            self.selectedItemIndexPath = indexPath;
+        }
+    } else {
+        // else, we didn't have previously selected cell, so we only need to save this indexPath for future reference
+        self.selectedItemIndexPath = indexPath;
+    }
+
+    // and now only reload only the cells that need updating
+    [collectionView reloadItemsAtIndexPaths:indexPaths];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -235,6 +258,11 @@
     // TODO: Deselect item
 }
 
+/*
+FlickrPhoto *photo = self.searchResults[searchTerm][indexPath.row];
+[self performSegueWithIdentifier:@"ShowFlickrPhoto" sender:photo];
+[self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
+*/
 
 /*---------------------------------------------------------------------------*/
 #pragma mark - UICollectionViewDataSource
@@ -280,12 +308,20 @@
         cell = [[CollectionCell alloc] init];
     }
 
-    cell.backgroundColor = [UIColor yellowColor];
+//    cell.backgroundColor = [UIColor yellowColor];
 
     // 取出每一張照片的資料並轉換成 UIImage 格式
     NSString *imageToLoad = [folderPath stringByAppendingPathComponent:[fileLst objectAtIndex:indexPath.row]];
-    cell.imageView.image = [UIImage imageNamed:imageToLoad];
-//    cell.imageView.image = [UIImage imageWithContentsOfFile:imageToLoad];
+//    cell.imageView.image = [UIImage imageNamed:imageToLoad];
+    cell.imageView.image = [UIImage imageWithContentsOfFile:imageToLoad];
+
+    if (self.selectedItemIndexPath != nil && [indexPath compare:self.selectedItemIndexPath] == NSOrderedSame) {
+        cell.imageView.layer.borderColor = [[UIColor redColor] CGColor];
+        cell.imageView.layer.borderWidth = 4.0;
+    } else {
+        cell.imageView.layer.borderColor = nil;
+        cell.imageView.layer.borderWidth = 0.0;
+    }
 
     return cell;
 }

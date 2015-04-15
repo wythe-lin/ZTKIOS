@@ -1,6 +1,6 @@
 /*
  ******************************************************************************
- * ImageViewController.h -
+ * ShowViewController.h -
  *
  * Copyright (c) 2015-2016 by ZealTek Electronic Co., Ltd.
  *
@@ -17,32 +17,17 @@
  * software without notice.
  *
  * History:
- *	2015.01.16	T.C. Chiu	frist edition
+ *	2015.04.15	T.C. Chiu	frist edition
  *
  ******************************************************************************
  */
 
 #import <UIKit/UIKit.h>
-#import <AssetsLibrary/AssetsLibrary.h>
+
+@interface ShowViewController : UIViewController
 
 
-@interface ImageViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
-{
-    NSArray         *docDirectory;
-    NSString        *documentPath;
 
-    NSString        *foldername;
-    NSString        *folderPath;
 
-    NSFileManager   *fileManager;
-    NSArray         *fileLst;
-
-    UIButton        *erase;
-
-}
-
-@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (nonatomic, strong) NSIndexPath *selectedItemIndexPath;
 
 @end
-

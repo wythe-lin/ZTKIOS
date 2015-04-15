@@ -234,7 +234,6 @@
 {
     NSInteger       pic;
     NSInteger       block;
-    NSMutableData   *FileContent = [[NSMutableData alloc] init];
 
     dmsg(@"download");
     ZTProtrackService *request  = self.serviceDict[@"protrack_write"];
@@ -254,6 +253,7 @@
         [response getResponsePacket];
         block = [response getPicBlk];
 
+        NSMutableData *FileContent = [[NSMutableData alloc] init];
         for (int n=0; n<block; n++) {
             [request getPic:j block:n];
             [response getResponsePacket];

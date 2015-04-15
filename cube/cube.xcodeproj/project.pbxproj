@@ -36,6 +36,7 @@
 		9AC0E7261A8DE97D002D24DD /* ZTDeviceInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0E7241A8DE97D002D24DD /* ZTDeviceInfoService.m */; };
 		9AC0E7281A8E145D002D24DD /* ZTBatteryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0E7271A8E145D002D24DD /* ZTBatteryService.m */; };
 		9AC343F31A92035A00CBE7AF /* ZTProtrackService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */; };
+		9AC80A3D1ADE4149009F5BB1 /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC80A3C1ADE4149009F5BB1 /* ShowViewController.m */; };
 		9AC90AAA1ACBDFEE00CA072B /* kfifo.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC90AA91ACBDFEE00CA072B /* kfifo.c */; };
 		9ACFFE1B1AD7BD0C005497D6 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE001AD7BD0C005497D6 /* NSIndexPath+PSTCollectionViewAdditions.m */; };
 		9ACFFE1C1AD7BD0C005497D6 /* PSTCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE021AD7BD0C005497D6 /* PSTCollectionView.m */; };
@@ -123,6 +124,8 @@
 		9AC0E7291A8E1489002D24DD /* ZTBatteryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZTBatteryService.h; path = ZTProfile/Services/ZTBatteryService.h; sourceTree = "<group>"; };
 		9AC343F11A92035A00CBE7AF /* ZTProtrackService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTProtrackService.h; path = ZTProfile/Services/ZTProtrackService.h; sourceTree = "<group>"; };
 		9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTProtrackService.m; path = ZTProfile/Services/ZTProtrackService.m; sourceTree = "<group>"; };
+		9AC80A3B1ADE4149009F5BB1 /* ShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowViewController.h; sourceTree = "<group>"; };
+		9AC80A3C1ADE4149009F5BB1 /* ShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowViewController.m; sourceTree = "<group>"; };
 		9AC90AA81ACBDFD100CA072B /* kfifo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = kfifo.h; path = ZTProfile/Services/kfifo.h; sourceTree = "<group>"; };
 		9AC90AA91ACBDFEE00CA072B /* kfifo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kfifo.c; path = ZTProfile/Services/kfifo.c; sourceTree = "<group>"; };
 		9ACFFDFF1AD7BD0C005497D6 /* NSIndexPath+PSTCollectionViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSIndexPath+PSTCollectionViewAdditions.h"; path = "PSTCollectionView/NSIndexPath+PSTCollectionViewAdditions.h"; sourceTree = "<group>"; };
@@ -281,6 +284,8 @@
 				9AD8A6941AC40A41009BE6A8 /* ImageViewController.m */,
 				9AD8A6961AC40E58009BE6A8 /* CollectionCell.h */,
 				9AD8A6971AC40E58009BE6A8 /* CollectionCell.m */,
+				9AC80A3B1ADE4149009F5BB1 /* ShowViewController.h */,
+				9AC80A3C1ADE4149009F5BB1 /* ShowViewController.m */,
 				9A3808D91A710810009F3B10 /* DbgMsg.h */,
 				9AAA31581A67E845001D5B52 /* Main.storyboard */,
 				9AAA315B1A67E845001D5B52 /* Images.xcassets */,
@@ -486,6 +491,7 @@
 				9ACFFE1F1AD7BD0C005497D6 /* PSTCollectionViewData.m in Sources */,
 				9A379EEE1A8B54540002FB5C /* YMSCBPeripheral.m in Sources */,
 				9ACFFE1E1AD7BD0C005497D6 /* PSTCollectionViewController.m in Sources */,
+				9AC80A3D1ADE4149009F5BB1 /* ShowViewController.m in Sources */,
 				9ACFFE211AD7BD0C005497D6 /* PSTCollectionViewItemKey.m in Sources */,
 				9ACFFE231AD7BD0C005497D6 /* PSTCollectionViewUpdateItem.m in Sources */,
 				9AAA31571A67E845001D5B52 /* ScanViewController.m in Sources */,
