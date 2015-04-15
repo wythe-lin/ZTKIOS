@@ -91,8 +91,6 @@ extern NSMutableArray   *connectList;
     [lstResolution addObject:@"HD"];
     [lstResolution addObject:@"VGA"];
     [lstResolution addObject:@"QVGA"];
-    [lstResolution addObject:@"CIF"];
-    [lstResolution addObject:@"QCIF"];
 
     lstSpeed = [[NSMutableArray alloc] init];
     [lstSpeed addObject:@"1x"];
