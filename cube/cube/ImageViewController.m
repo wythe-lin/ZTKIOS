@@ -23,7 +23,6 @@
  */
 
 #import "ImageViewController.h"
-#import "ShowViewController.h"
 #import "CollectionCell.h"
 
 // open source
@@ -245,19 +244,19 @@ typedef NS_ENUM(NSInteger, CellType)
 
 
 /*---------------------------------------------------------------------------*/
-#pragma mark - Segue
+#pragma mark - Image Resize
 /*---------------------------------------------------------------------------*/
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize
 {
-    LogIV(@"prepareForSegue:sender:");
+//    UIGraphicsBeginImageContext(newSize);
+    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
+    // Pass 1.0 to force exact pixel size.
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
 
-    if ([segue.identifier isEqualToString:@"ShowPhoto"]) {
-        ShowViewController  *sv   = segue.destinationViewController;
-        CollectionCell      *cell = sender;
-
-        sv.ccell = cell;
-    }
-    
+    return newImage;
 }
 
 
@@ -297,50 +296,48 @@ typedef NS_ENUM(NSInteger, CellType)
 
     //
     if (self.selectedItemIndexPath) {
-//        FlickrPhoto *photo = self.searchResults[searchTerm][indexPath.row];
-        CollectionCell  *cell = (CollectionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"CCell" forIndexPath:indexPath];
-//        [self performSegueWithIdentifier:@"ShowPhoto" sender:cell];
-        [self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
+        // get image source & scale
+        NSString *imageToLoad = [folderPath stringByAppendingPathComponent:[fileLst objectAtIndex:indexPath.row]];
+        UIImage *orgImage = [UIImage imageNamed:imageToLoad];;
+        UIImage *scaleImage = [self imageWithImage:orgImage scaledToSize:CGSizeMake(orgImage.size.width*1.5, orgImage.size.height*1.5)];
 
-
-        // pop up view
+        // popup view
         // Generate content view to present
-        UIView *contentView = [[UIView alloc] init];
+        UIImageView *contentView = [[UIImageView alloc] init];
         contentView.translatesAutoresizingMaskIntoConstraints = NO;
         contentView.backgroundColor = [UIColor colorWithRed:(184.0/255.0) green:(233.0/255.0) blue:(122.0/255.0) alpha:1.0];
         contentView.layer.cornerRadius = 12.0;
+        contentView.image = scaleImage;
+        contentView.contentMode = UIViewContentModeScaleAspectFit;
+        contentView.frame = CGRectMake(0, 0, contentView.image.size.width, contentView.image.size.height);
+        contentView.center = contentView.superview.center;
 
-        UILabel *dismissLabel = [[UILabel alloc] init];
-        dismissLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        dismissLabel.backgroundColor = [UIColor clearColor];
-        dismissLabel.textColor = [UIColor whiteColor];
-        dismissLabel.font = [UIFont boldSystemFontOfSize:72.0];
-        dismissLabel.text = @"Hi.";
+        UILabel *popLabel = [[UILabel alloc] init];
+        popLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        popLabel.backgroundColor = [UIColor clearColor];
+        popLabel.textColor = [UIColor whiteColor];
+        popLabel.font = [UIFont boldSystemFontOfSize:12.0];
+        popLabel.text = @"ZealTek";
 
-        [contentView addSubview:dismissLabel];
+        [contentView addSubview:popLabel];
 
-        NSDictionary *views = NSDictionaryOfVariableBindings(contentView, dismissLabel);
+        NSDictionary *views = NSDictionaryOfVariableBindings(contentView, popLabel);
+        [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[popLabel]-(2)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
+        [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[popLabel]-(2)-|" options:0                             metrics:nil views:views]];
 
-        [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(16)-[dismissLabel]-(10)-|"
-                                                                            options:NSLayoutFormatAlignAllCenterX
-                                                                            metrics:nil
-                                                                              views:views]];
-
-        [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(36)-[dismissLabel]-(36)-|"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:views]];
-
-        // Show in popup
+        // show in popup
         KLCPopupLayout layout = KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter);
         KLCPopup *popup = [KLCPopup popupWithContentView:contentView
-                                                 showType:KLCPopupShowTypeShrinkIn
-                                              dismissType:KLCPopupDismissTypeShrinkOut
-                                                 maskType:KLCPopupMaskTypeDimmed
-                                 dismissOnBackgroundTouch:NO
-                                    dismissOnContentTouch:YES];
+                                                showType:KLCPopupShowTypeShrinkIn
+                                             dismissType:KLCPopupDismissTypeShrinkOut
+                                                maskType:KLCPopupMaskTypeDimmed
+                                dismissOnBackgroundTouch:NO
+                                   dismissOnContentTouch:YES];
         
         [popup showWithLayout:layout];
+
+        //
+        [self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
     }
 }
 

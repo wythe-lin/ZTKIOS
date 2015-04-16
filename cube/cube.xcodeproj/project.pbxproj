@@ -27,7 +27,6 @@
 		9AC0E7281A8E145D002D24DD /* ZTBatteryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0E7271A8E145D002D24DD /* ZTBatteryService.m */; };
 		9AC343F31A92035A00CBE7AF /* ZTProtrackService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */; };
 		9AC5E6F71ADF89F400F457DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC5E6F61ADF89F400F457DE /* QuartzCore.framework */; };
-		9AC80A3D1ADE4149009F5BB1 /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC80A3C1ADE4149009F5BB1 /* ShowViewController.m */; };
 		9AC90AAA1ACBDFEE00CA072B /* kfifo.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC90AA91ACBDFEE00CA072B /* kfifo.c */; };
 		9AD0C7531AA856C700E32C3D /* ZTProtrackNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD0C7521AA856C700E32C3D /* ZTProtrackNotify.m */; };
 		9AD3B0221ADF9D5A00963D89 /* KLCPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3AFC81ADF9D5A00963D89 /* KLCPopup.m */; };
@@ -106,8 +105,6 @@
 		9AC343F11A92035A00CBE7AF /* ZTProtrackService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTProtrackService.h; path = ZTProfile/Services/ZTProtrackService.h; sourceTree = "<group>"; };
 		9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTProtrackService.m; path = ZTProfile/Services/ZTProtrackService.m; sourceTree = "<group>"; };
 		9AC5E6F61ADF89F400F457DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		9AC80A3B1ADE4149009F5BB1 /* ShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowViewController.h; sourceTree = "<group>"; };
-		9AC80A3C1ADE4149009F5BB1 /* ShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowViewController.m; sourceTree = "<group>"; };
 		9AC90AA81ACBDFD100CA072B /* kfifo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = kfifo.h; path = ZTProfile/Services/kfifo.h; sourceTree = "<group>"; };
 		9AC90AA91ACBDFEE00CA072B /* kfifo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kfifo.c; path = ZTProfile/Services/kfifo.c; sourceTree = "<group>"; };
 		9AD0C7511AA856C700E32C3D /* ZTProtrackNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTProtrackNotify.h; path = ZTProfile/Services/ZTProtrackNotify.h; sourceTree = "<group>"; };
@@ -260,8 +257,6 @@
 				9AD8A6941AC40A41009BE6A8 /* ImageViewController.m */,
 				9AD8A6961AC40E58009BE6A8 /* CollectionCell.h */,
 				9AD8A6971AC40E58009BE6A8 /* CollectionCell.m */,
-				9AC80A3B1ADE4149009F5BB1 /* ShowViewController.h */,
-				9AC80A3C1ADE4149009F5BB1 /* ShowViewController.m */,
 				9A3808D91A710810009F3B10 /* DbgMsg.h */,
 				9AAA31581A67E845001D5B52 /* Main.storyboard */,
 				9AAA315B1A67E845001D5B52 /* Images.xcassets */,
@@ -515,7 +510,6 @@
 				9AD3B0491ADF9D5A00963D89 /* YMS128.c in Sources */,
 				9AD3B04E1ADF9D5A00963D89 /* YMSCBService.m in Sources */,
 				9AD3B0411ADF9D5A00963D89 /* PSTCollectionViewItemKey.m in Sources */,
-				9AC80A3D1ADE4149009F5BB1 /* ShowViewController.m in Sources */,
 				9AD3B0471ADF9D5A00963D89 /* PSTGridLayoutSection.m in Sources */,
 				9AAA31571A67E845001D5B52 /* ScanViewController.m in Sources */,
 				9AD3B04D1ADF9D5A00963D89 /* YMSCBPeripheral.m in Sources */,
