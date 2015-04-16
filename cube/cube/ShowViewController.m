@@ -56,6 +56,7 @@
 @end
 
 
+
 /*
  ******************************************************************************
  *
@@ -82,15 +83,23 @@
     
     //
 
+    // snapshot button
+    done = (UIButton *)[self.view viewWithTag:190];
+    [self setButton:done title:@"Done" titleColor:[UIColor blackColor] backgroundColor:[UIColor greenColor]];
 
 
+    // image view
+    photo = (UIImageView *)[self.view viewWithTag:400];
+    photo.backgroundColor = [UIColor blueColor];
+    photo = self.ccell.imageView;
+
+    [photo reloadInputViews];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     LogSV(@"viewWillAppear:");
-
 
 }
 
@@ -117,25 +126,25 @@
 
 
 /*---------------------------------------------------------------------------*/
-#pragma mark - Segue
+#pragma mark - button
 /*---------------------------------------------------------------------------*/
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (IBAction)done:(id)sender
 {
-    LogSV(@"prepareForSegue:sender:");
-
-    if ([segue.identifier isEqualToString:@"ShowView"]) {
-
-
-    }
+    // TODO
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{}];
 
 }
 
 
-
-
-
-
-
+/*
+ *
+ */
+- (void)setButton:(UIButton *)name title:(NSString *)title titleColor:(UIColor *)color backgroundColor:(UIColor *)bgColor
+{
+    [name setBackgroundColor:bgColor];
+    [name setTitleColor:color forState:UIControlStateNormal];
+    [name setTitle:title forState:UIControlStateNormal];
+}
 
 
 @end

@@ -23,11 +23,20 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "CollectionCell.h"
+
 
 @interface ShowViewController : UIViewController
+{
+    UIButton        *done;
+    UIImageView     *photo;
+}
+
+@property (weak) IBOutlet UIImageView       *imageView;
+@property (weak) IBOutlet CollectionCell    *ccell;
 
 
-
+-(IBAction)done:(id) sender;
 
 
 @end

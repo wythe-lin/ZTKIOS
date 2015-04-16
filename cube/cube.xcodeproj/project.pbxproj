@@ -7,15 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9A379EE91A8B54540002FB5C /* NSMutableArray+fifoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379ED81A8B54540002FB5C /* NSMutableArray+fifoQueue.m */; };
-		9A379EEA1A8B54540002FB5C /* YMS128.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A379ED91A8B54540002FB5C /* YMS128.c */; };
-		9A379EEB1A8B54540002FB5C /* YMSCBCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EDC1A8B54540002FB5C /* YMSCBCentralManager.m */; };
-		9A379EEC1A8B54540002FB5C /* YMSCBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EDE1A8B54540002FB5C /* YMSCBCharacteristic.m */; };
-		9A379EED1A8B54540002FB5C /* YMSCBDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EE01A8B54540002FB5C /* YMSCBDescriptor.m */; };
-		9A379EEE1A8B54540002FB5C /* YMSCBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EE21A8B54540002FB5C /* YMSCBPeripheral.m */; };
-		9A379EEF1A8B54540002FB5C /* YMSCBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EE41A8B54540002FB5C /* YMSCBService.m */; };
-		9A379EF01A8B54540002FB5C /* YMSCBStoredPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EE61A8B54540002FB5C /* YMSCBStoredPeripherals.m */; };
-		9A379EF11A8B54540002FB5C /* YMSCBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EE81A8B54540002FB5C /* YMSCBUtils.m */; };
 		9A379EF51A8B55000002FB5C /* ZTCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EF41A8B55000002FB5C /* ZTCentralManager.m */; };
 		9A379F291A8B61130002FB5C /* DEAAccelerometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F181A8B61130002FB5C /* DEAAccelerometerService.m */; };
 		9A40B1E01A6F71FD003C96D5 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A40B1DF1A6F71FD003C96D5 /* CoreBluetooth.framework */; };
@@ -27,7 +18,6 @@
 		9AAA315C1A67E845001D5B52 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AAA315B1A67E845001D5B52 /* Images.xcassets */; };
 		9AAA315F1A67E845001D5B52 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AAA315D1A67E845001D5B52 /* LaunchScreen.xib */; };
 		9AAA316B1A67E845001D5B52 /* cubeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA316A1A67E845001D5B52 /* cubeTests.m */; };
-		9AAA320C1A67EDA0001D5B52 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA320B1A67EDA0001D5B52 /* MBProgressHUD.m */; };
 		9AAA320E1A67EDFC001D5B52 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAA320D1A67EDFC001D5B52 /* UIKit.framework */; };
 		9AAA32101A67EE11001D5B52 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAA320F1A67EE11001D5B52 /* CoreGraphics.framework */; };
 		9AAA32121A67EE37001D5B52 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAA32111A67EE37001D5B52 /* Foundation.framework */; };
@@ -36,25 +26,36 @@
 		9AC0E7261A8DE97D002D24DD /* ZTDeviceInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0E7241A8DE97D002D24DD /* ZTDeviceInfoService.m */; };
 		9AC0E7281A8E145D002D24DD /* ZTBatteryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC0E7271A8E145D002D24DD /* ZTBatteryService.m */; };
 		9AC343F31A92035A00CBE7AF /* ZTProtrackService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */; };
+		9AC5E6F71ADF89F400F457DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC5E6F61ADF89F400F457DE /* QuartzCore.framework */; };
 		9AC80A3D1ADE4149009F5BB1 /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC80A3C1ADE4149009F5BB1 /* ShowViewController.m */; };
 		9AC90AAA1ACBDFEE00CA072B /* kfifo.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC90AA91ACBDFEE00CA072B /* kfifo.c */; };
-		9ACFFE1B1AD7BD0C005497D6 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE001AD7BD0C005497D6 /* NSIndexPath+PSTCollectionViewAdditions.m */; };
-		9ACFFE1C1AD7BD0C005497D6 /* PSTCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE021AD7BD0C005497D6 /* PSTCollectionView.m */; };
-		9ACFFE1D1AD7BD0C005497D6 /* PSTCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE041AD7BD0C005497D6 /* PSTCollectionViewCell.m */; };
-		9ACFFE1E1AD7BD0C005497D6 /* PSTCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE071AD7BD0C005497D6 /* PSTCollectionViewController.m */; };
-		9ACFFE1F1AD7BD0C005497D6 /* PSTCollectionViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE091AD7BD0C005497D6 /* PSTCollectionViewData.m */; };
-		9ACFFE201AD7BD0C005497D6 /* PSTCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE0B1AD7BD0C005497D6 /* PSTCollectionViewFlowLayout.m */; };
-		9ACFFE211AD7BD0C005497D6 /* PSTCollectionViewItemKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE0D1AD7BD0C005497D6 /* PSTCollectionViewItemKey.m */; };
-		9ACFFE221AD7BD0C005497D6 /* PSTCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE0F1AD7BD0C005497D6 /* PSTCollectionViewLayout.m */; };
-		9ACFFE231AD7BD0C005497D6 /* PSTCollectionViewUpdateItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE121AD7BD0C005497D6 /* PSTCollectionViewUpdateItem.m */; };
-		9ACFFE241AD7BD0C005497D6 /* PSTGridLayoutInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE141AD7BD0C005497D6 /* PSTGridLayoutInfo.m */; };
-		9ACFFE251AD7BD0C005497D6 /* PSTGridLayoutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE161AD7BD0C005497D6 /* PSTGridLayoutItem.m */; };
-		9ACFFE261AD7BD0C005497D6 /* PSTGridLayoutRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE181AD7BD0C005497D6 /* PSTGridLayoutRow.m */; };
-		9ACFFE271AD7BD0C005497D6 /* PSTGridLayoutSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACFFE1A1AD7BD0C005497D6 /* PSTGridLayoutSection.m */; };
 		9AD0C7531AA856C700E32C3D /* ZTProtrackNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD0C7521AA856C700E32C3D /* ZTProtrackNotify.m */; };
+		9AD3B0221ADF9D5A00963D89 /* KLCPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3AFC81ADF9D5A00963D89 /* KLCPopup.m */; };
+		9AD3B0371ADF9D5A00963D89 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3AFEB1ADF9D5A00963D89 /* MBProgressHUD.m */; };
+		9AD3B03B1ADF9D5A00963D89 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3AFF41ADF9D5A00963D89 /* NSIndexPath+PSTCollectionViewAdditions.m */; };
+		9AD3B03C1ADF9D5A00963D89 /* PSTCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3AFF61ADF9D5A00963D89 /* PSTCollectionView.m */; };
+		9AD3B03D1ADF9D5A00963D89 /* PSTCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3AFF81ADF9D5A00963D89 /* PSTCollectionViewCell.m */; };
+		9AD3B03E1ADF9D5A00963D89 /* PSTCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3AFFB1ADF9D5A00963D89 /* PSTCollectionViewController.m */; };
+		9AD3B03F1ADF9D5A00963D89 /* PSTCollectionViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3AFFD1ADF9D5A00963D89 /* PSTCollectionViewData.m */; };
+		9AD3B0401ADF9D5A00963D89 /* PSTCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3AFFF1ADF9D5A00963D89 /* PSTCollectionViewFlowLayout.m */; };
+		9AD3B0411ADF9D5A00963D89 /* PSTCollectionViewItemKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0011ADF9D5A00963D89 /* PSTCollectionViewItemKey.m */; };
+		9AD3B0421ADF9D5A00963D89 /* PSTCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0041ADF9D5A00963D89 /* PSTCollectionViewLayout.m */; };
+		9AD3B0431ADF9D5A00963D89 /* PSTCollectionViewUpdateItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0061ADF9D5A00963D89 /* PSTCollectionViewUpdateItem.m */; };
+		9AD3B0441ADF9D5A00963D89 /* PSTGridLayoutInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0081ADF9D5A00963D89 /* PSTGridLayoutInfo.m */; };
+		9AD3B0451ADF9D5A00963D89 /* PSTGridLayoutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B00A1ADF9D5A00963D89 /* PSTGridLayoutItem.m */; };
+		9AD3B0461ADF9D5A00963D89 /* PSTGridLayoutRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B00C1ADF9D5A00963D89 /* PSTGridLayoutRow.m */; };
+		9AD3B0471ADF9D5A00963D89 /* PSTGridLayoutSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B00E1ADF9D5A00963D89 /* PSTGridLayoutSection.m */; };
+		9AD3B0481ADF9D5A00963D89 /* NSMutableArray+fifoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0111ADF9D5A00963D89 /* NSMutableArray+fifoQueue.m */; };
+		9AD3B0491ADF9D5A00963D89 /* YMS128.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0121ADF9D5A00963D89 /* YMS128.c */; };
+		9AD3B04A1ADF9D5A00963D89 /* YMSCBCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0151ADF9D5A00963D89 /* YMSCBCentralManager.m */; };
+		9AD3B04B1ADF9D5A00963D89 /* YMSCBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0171ADF9D5A00963D89 /* YMSCBCharacteristic.m */; };
+		9AD3B04C1ADF9D5A00963D89 /* YMSCBDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0191ADF9D5A00963D89 /* YMSCBDescriptor.m */; };
+		9AD3B04D1ADF9D5A00963D89 /* YMSCBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B01B1ADF9D5A00963D89 /* YMSCBPeripheral.m */; };
+		9AD3B04E1ADF9D5A00963D89 /* YMSCBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B01D1ADF9D5A00963D89 /* YMSCBService.m */; };
+		9AD3B04F1ADF9D5A00963D89 /* YMSCBStoredPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B01F1ADF9D5A00963D89 /* YMSCBStoredPeripherals.m */; };
+		9AD3B0501ADF9D5A00963D89 /* YMSCBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0211ADF9D5A00963D89 /* YMSCBUtils.m */; };
 		9AD8A6951AC40A41009BE6A8 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8A6941AC40A41009BE6A8 /* ImageViewController.m */; };
 		9AD8A6981AC40E58009BE6A8 /* CollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8A6971AC40E58009BE6A8 /* CollectionCell.m */; };
-		9AD8A69A1AC4110F009BE6A8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD8A6991AC4110F009BE6A8 /* AssetsLibrary.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,24 +69,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9A379ED71A8B54540002FB5C /* NSMutableArray+fifoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+fifoQueue.h"; path = "YmsCoreBluetooth/NSMutableArray+fifoQueue.h"; sourceTree = "<group>"; };
-		9A379ED81A8B54540002FB5C /* NSMutableArray+fifoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+fifoQueue.m"; path = "YmsCoreBluetooth/NSMutableArray+fifoQueue.m"; sourceTree = "<group>"; };
-		9A379ED91A8B54540002FB5C /* YMS128.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = YMS128.c; path = YmsCoreBluetooth/YMS128.c; sourceTree = "<group>"; };
-		9A379EDA1A8B54540002FB5C /* YMS128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMS128.h; path = YmsCoreBluetooth/YMS128.h; sourceTree = "<group>"; };
-		9A379EDB1A8B54540002FB5C /* YMSCBCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMSCBCentralManager.h; path = YmsCoreBluetooth/YMSCBCentralManager.h; sourceTree = "<group>"; };
-		9A379EDC1A8B54540002FB5C /* YMSCBCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBCentralManager.m; path = YmsCoreBluetooth/YMSCBCentralManager.m; sourceTree = "<group>"; };
-		9A379EDD1A8B54540002FB5C /* YMSCBCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMSCBCharacteristic.h; path = YmsCoreBluetooth/YMSCBCharacteristic.h; sourceTree = "<group>"; };
-		9A379EDE1A8B54540002FB5C /* YMSCBCharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBCharacteristic.m; path = YmsCoreBluetooth/YMSCBCharacteristic.m; sourceTree = "<group>"; };
-		9A379EDF1A8B54540002FB5C /* YMSCBDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMSCBDescriptor.h; path = YmsCoreBluetooth/YMSCBDescriptor.h; sourceTree = "<group>"; };
-		9A379EE01A8B54540002FB5C /* YMSCBDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBDescriptor.m; path = YmsCoreBluetooth/YMSCBDescriptor.m; sourceTree = "<group>"; };
-		9A379EE11A8B54540002FB5C /* YMSCBPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMSCBPeripheral.h; path = YmsCoreBluetooth/YMSCBPeripheral.h; sourceTree = "<group>"; };
-		9A379EE21A8B54540002FB5C /* YMSCBPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBPeripheral.m; path = YmsCoreBluetooth/YMSCBPeripheral.m; sourceTree = "<group>"; };
-		9A379EE31A8B54540002FB5C /* YMSCBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMSCBService.h; path = YmsCoreBluetooth/YMSCBService.h; sourceTree = "<group>"; };
-		9A379EE41A8B54540002FB5C /* YMSCBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBService.m; path = YmsCoreBluetooth/YMSCBService.m; sourceTree = "<group>"; };
-		9A379EE51A8B54540002FB5C /* YMSCBStoredPeripherals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMSCBStoredPeripherals.h; path = YmsCoreBluetooth/YMSCBStoredPeripherals.h; sourceTree = "<group>"; };
-		9A379EE61A8B54540002FB5C /* YMSCBStoredPeripherals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBStoredPeripherals.m; path = YmsCoreBluetooth/YMSCBStoredPeripherals.m; sourceTree = "<group>"; };
-		9A379EE71A8B54540002FB5C /* YMSCBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMSCBUtils.h; path = YmsCoreBluetooth/YMSCBUtils.h; sourceTree = "<group>"; };
-		9A379EE81A8B54540002FB5C /* YMSCBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMSCBUtils.m; path = YmsCoreBluetooth/YMSCBUtils.m; sourceTree = "<group>"; };
 		9A379EF31A8B55000002FB5C /* ZTCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTCentralManager.h; path = ZTProfile/ZTCentralManager.h; sourceTree = "<group>"; };
 		9A379EF41A8B55000002FB5C /* ZTCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTCentralManager.m; path = ZTProfile/ZTCentralManager.m; sourceTree = "<group>"; };
 		9A379EF81A8B56530002FB5C /* TISensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TISensorTag.h; path = ZTProfile/TISensorTag.h; sourceTree = "<group>"; };
@@ -109,8 +92,6 @@
 		9AAA31641A67E845001D5B52 /* cubeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cubeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AAA31691A67E845001D5B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AAA316A1A67E845001D5B52 /* cubeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cubeTests.m; sourceTree = "<group>"; };
-		9AAA320A1A67ED8D001D5B52 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = cube/MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
-		9AAA320B1A67EDA0001D5B52 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = cube/MBProgressHUD/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
 		9AAA320D1A67EDFC001D5B52 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9AAA320F1A67EE11001D5B52 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		9AAA32111A67EE37001D5B52 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -124,45 +105,67 @@
 		9AC0E7291A8E1489002D24DD /* ZTBatteryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZTBatteryService.h; path = ZTProfile/Services/ZTBatteryService.h; sourceTree = "<group>"; };
 		9AC343F11A92035A00CBE7AF /* ZTProtrackService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTProtrackService.h; path = ZTProfile/Services/ZTProtrackService.h; sourceTree = "<group>"; };
 		9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTProtrackService.m; path = ZTProfile/Services/ZTProtrackService.m; sourceTree = "<group>"; };
+		9AC5E6F61ADF89F400F457DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9AC80A3B1ADE4149009F5BB1 /* ShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowViewController.h; sourceTree = "<group>"; };
 		9AC80A3C1ADE4149009F5BB1 /* ShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowViewController.m; sourceTree = "<group>"; };
 		9AC90AA81ACBDFD100CA072B /* kfifo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = kfifo.h; path = ZTProfile/Services/kfifo.h; sourceTree = "<group>"; };
 		9AC90AA91ACBDFEE00CA072B /* kfifo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kfifo.c; path = ZTProfile/Services/kfifo.c; sourceTree = "<group>"; };
-		9ACFFDFF1AD7BD0C005497D6 /* NSIndexPath+PSTCollectionViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSIndexPath+PSTCollectionViewAdditions.h"; path = "PSTCollectionView/NSIndexPath+PSTCollectionViewAdditions.h"; sourceTree = "<group>"; };
-		9ACFFE001AD7BD0C005497D6 /* NSIndexPath+PSTCollectionViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSIndexPath+PSTCollectionViewAdditions.m"; path = "PSTCollectionView/NSIndexPath+PSTCollectionViewAdditions.m"; sourceTree = "<group>"; };
-		9ACFFE011AD7BD0C005497D6 /* PSTCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTCollectionView.h; path = PSTCollectionView/PSTCollectionView.h; sourceTree = "<group>"; };
-		9ACFFE021AD7BD0C005497D6 /* PSTCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSTCollectionView.m; path = PSTCollectionView/PSTCollectionView.m; sourceTree = "<group>"; };
-		9ACFFE031AD7BD0C005497D6 /* PSTCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTCollectionViewCell.h; path = PSTCollectionView/PSTCollectionViewCell.h; sourceTree = "<group>"; };
-		9ACFFE041AD7BD0C005497D6 /* PSTCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSTCollectionViewCell.m; path = PSTCollectionView/PSTCollectionViewCell.m; sourceTree = "<group>"; };
-		9ACFFE051AD7BD0C005497D6 /* PSTCollectionViewCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTCollectionViewCommon.h; path = PSTCollectionView/PSTCollectionViewCommon.h; sourceTree = "<group>"; };
-		9ACFFE061AD7BD0C005497D6 /* PSTCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTCollectionViewController.h; path = PSTCollectionView/PSTCollectionViewController.h; sourceTree = "<group>"; };
-		9ACFFE071AD7BD0C005497D6 /* PSTCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSTCollectionViewController.m; path = PSTCollectionView/PSTCollectionViewController.m; sourceTree = "<group>"; };
-		9ACFFE081AD7BD0C005497D6 /* PSTCollectionViewData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTCollectionViewData.h; path = PSTCollectionView/PSTCollectionViewData.h; sourceTree = "<group>"; };
-		9ACFFE091AD7BD0C005497D6 /* PSTCollectionViewData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSTCollectionViewData.m; path = PSTCollectionView/PSTCollectionViewData.m; sourceTree = "<group>"; };
-		9ACFFE0A1AD7BD0C005497D6 /* PSTCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTCollectionViewFlowLayout.h; path = PSTCollectionView/PSTCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		9ACFFE0B1AD7BD0C005497D6 /* PSTCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSTCollectionViewFlowLayout.m; path = PSTCollectionView/PSTCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		9ACFFE0C1AD7BD0C005497D6 /* PSTCollectionViewItemKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTCollectionViewItemKey.h; path = PSTCollectionView/PSTCollectionViewItemKey.h; sourceTree = "<group>"; };
-		9ACFFE0D1AD7BD0C005497D6 /* PSTCollectionViewItemKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSTCollectionViewItemKey.m; path = PSTCollectionView/PSTCollectionViewItemKey.m; sourceTree = "<group>"; };
-		9ACFFE0E1AD7BD0C005497D6 /* PSTCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTCollectionViewLayout.h; path = PSTCollectionView/PSTCollectionViewLayout.h; sourceTree = "<group>"; };
-		9ACFFE0F1AD7BD0C005497D6 /* PSTCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSTCollectionViewLayout.m; path = PSTCollectionView/PSTCollectionViewLayout.m; sourceTree = "<group>"; };
-		9ACFFE101AD7BD0C005497D6 /* PSTCollectionViewLayout+Internals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PSTCollectionViewLayout+Internals.h"; path = "PSTCollectionView/PSTCollectionViewLayout+Internals.h"; sourceTree = "<group>"; };
-		9ACFFE111AD7BD0C005497D6 /* PSTCollectionViewUpdateItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTCollectionViewUpdateItem.h; path = PSTCollectionView/PSTCollectionViewUpdateItem.h; sourceTree = "<group>"; };
-		9ACFFE121AD7BD0C005497D6 /* PSTCollectionViewUpdateItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSTCollectionViewUpdateItem.m; path = PSTCollectionView/PSTCollectionViewUpdateItem.m; sourceTree = "<group>"; };
-		9ACFFE131AD7BD0C005497D6 /* PSTGridLayoutInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTGridLayoutInfo.h; path = PSTCollectionView/PSTGridLayoutInfo.h; sourceTree = "<group>"; };
-		9ACFFE141AD7BD0C005497D6 /* PSTGridLayoutInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSTGridLayoutInfo.m; path = PSTCollectionView/PSTGridLayoutInfo.m; sourceTree = "<group>"; };
-		9ACFFE151AD7BD0C005497D6 /* PSTGridLayoutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTGridLayoutItem.h; path = PSTCollectionView/PSTGridLayoutItem.h; sourceTree = "<group>"; };
-		9ACFFE161AD7BD0C005497D6 /* PSTGridLayoutItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSTGridLayoutItem.m; path = PSTCollectionView/PSTGridLayoutItem.m; sourceTree = "<group>"; };
-		9ACFFE171AD7BD0C005497D6 /* PSTGridLayoutRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTGridLayoutRow.h; path = PSTCollectionView/PSTGridLayoutRow.h; sourceTree = "<group>"; };
-		9ACFFE181AD7BD0C005497D6 /* PSTGridLayoutRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSTGridLayoutRow.m; path = PSTCollectionView/PSTGridLayoutRow.m; sourceTree = "<group>"; };
-		9ACFFE191AD7BD0C005497D6 /* PSTGridLayoutSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSTGridLayoutSection.h; path = PSTCollectionView/PSTGridLayoutSection.h; sourceTree = "<group>"; };
-		9ACFFE1A1AD7BD0C005497D6 /* PSTGridLayoutSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSTGridLayoutSection.m; path = PSTCollectionView/PSTGridLayoutSection.m; sourceTree = "<group>"; };
 		9AD0C7511AA856C700E32C3D /* ZTProtrackNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTProtrackNotify.h; path = ZTProfile/Services/ZTProtrackNotify.h; sourceTree = "<group>"; };
 		9AD0C7521AA856C700E32C3D /* ZTProtrackNotify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTProtrackNotify.m; path = ZTProfile/Services/ZTProtrackNotify.m; sourceTree = "<group>"; };
+		9AD3AFC71ADF9D5A00963D89 /* KLCPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLCPopup.h; sourceTree = "<group>"; };
+		9AD3AFC81ADF9D5A00963D89 /* KLCPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLCPopup.m; sourceTree = "<group>"; };
+		9AD3AFEA1ADF9D5A00963D89 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		9AD3AFEB1ADF9D5A00963D89 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		9AD3AFF31ADF9D5A00963D89 /* NSIndexPath+PSTCollectionViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+PSTCollectionViewAdditions.h"; sourceTree = "<group>"; };
+		9AD3AFF41ADF9D5A00963D89 /* NSIndexPath+PSTCollectionViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+PSTCollectionViewAdditions.m"; sourceTree = "<group>"; };
+		9AD3AFF51ADF9D5A00963D89 /* PSTCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTCollectionView.h; sourceTree = "<group>"; };
+		9AD3AFF61ADF9D5A00963D89 /* PSTCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTCollectionView.m; sourceTree = "<group>"; };
+		9AD3AFF71ADF9D5A00963D89 /* PSTCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTCollectionViewCell.h; sourceTree = "<group>"; };
+		9AD3AFF81ADF9D5A00963D89 /* PSTCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTCollectionViewCell.m; sourceTree = "<group>"; };
+		9AD3AFF91ADF9D5A00963D89 /* PSTCollectionViewCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTCollectionViewCommon.h; sourceTree = "<group>"; };
+		9AD3AFFA1ADF9D5A00963D89 /* PSTCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTCollectionViewController.h; sourceTree = "<group>"; };
+		9AD3AFFB1ADF9D5A00963D89 /* PSTCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTCollectionViewController.m; sourceTree = "<group>"; };
+		9AD3AFFC1ADF9D5A00963D89 /* PSTCollectionViewData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTCollectionViewData.h; sourceTree = "<group>"; };
+		9AD3AFFD1ADF9D5A00963D89 /* PSTCollectionViewData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTCollectionViewData.m; sourceTree = "<group>"; };
+		9AD3AFFE1ADF9D5A00963D89 /* PSTCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		9AD3AFFF1ADF9D5A00963D89 /* PSTCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		9AD3B0001ADF9D5A00963D89 /* PSTCollectionViewItemKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTCollectionViewItemKey.h; sourceTree = "<group>"; };
+		9AD3B0011ADF9D5A00963D89 /* PSTCollectionViewItemKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTCollectionViewItemKey.m; sourceTree = "<group>"; };
+		9AD3B0021ADF9D5A00963D89 /* PSTCollectionViewLayout+Internals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PSTCollectionViewLayout+Internals.h"; sourceTree = "<group>"; };
+		9AD3B0031ADF9D5A00963D89 /* PSTCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTCollectionViewLayout.h; sourceTree = "<group>"; };
+		9AD3B0041ADF9D5A00963D89 /* PSTCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTCollectionViewLayout.m; sourceTree = "<group>"; };
+		9AD3B0051ADF9D5A00963D89 /* PSTCollectionViewUpdateItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTCollectionViewUpdateItem.h; sourceTree = "<group>"; };
+		9AD3B0061ADF9D5A00963D89 /* PSTCollectionViewUpdateItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTCollectionViewUpdateItem.m; sourceTree = "<group>"; };
+		9AD3B0071ADF9D5A00963D89 /* PSTGridLayoutInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTGridLayoutInfo.h; sourceTree = "<group>"; };
+		9AD3B0081ADF9D5A00963D89 /* PSTGridLayoutInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTGridLayoutInfo.m; sourceTree = "<group>"; };
+		9AD3B0091ADF9D5A00963D89 /* PSTGridLayoutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTGridLayoutItem.h; sourceTree = "<group>"; };
+		9AD3B00A1ADF9D5A00963D89 /* PSTGridLayoutItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTGridLayoutItem.m; sourceTree = "<group>"; };
+		9AD3B00B1ADF9D5A00963D89 /* PSTGridLayoutRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTGridLayoutRow.h; sourceTree = "<group>"; };
+		9AD3B00C1ADF9D5A00963D89 /* PSTGridLayoutRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTGridLayoutRow.m; sourceTree = "<group>"; };
+		9AD3B00D1ADF9D5A00963D89 /* PSTGridLayoutSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTGridLayoutSection.h; sourceTree = "<group>"; };
+		9AD3B00E1ADF9D5A00963D89 /* PSTGridLayoutSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTGridLayoutSection.m; sourceTree = "<group>"; };
+		9AD3B0101ADF9D5A00963D89 /* NSMutableArray+fifoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+fifoQueue.h"; sourceTree = "<group>"; };
+		9AD3B0111ADF9D5A00963D89 /* NSMutableArray+fifoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+fifoQueue.m"; sourceTree = "<group>"; };
+		9AD3B0121ADF9D5A00963D89 /* YMS128.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = YMS128.c; sourceTree = "<group>"; };
+		9AD3B0131ADF9D5A00963D89 /* YMS128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMS128.h; sourceTree = "<group>"; };
+		9AD3B0141ADF9D5A00963D89 /* YMSCBCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBCentralManager.h; sourceTree = "<group>"; };
+		9AD3B0151ADF9D5A00963D89 /* YMSCBCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBCentralManager.m; sourceTree = "<group>"; };
+		9AD3B0161ADF9D5A00963D89 /* YMSCBCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBCharacteristic.h; sourceTree = "<group>"; };
+		9AD3B0171ADF9D5A00963D89 /* YMSCBCharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBCharacteristic.m; sourceTree = "<group>"; };
+		9AD3B0181ADF9D5A00963D89 /* YMSCBDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBDescriptor.h; sourceTree = "<group>"; };
+		9AD3B0191ADF9D5A00963D89 /* YMSCBDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBDescriptor.m; sourceTree = "<group>"; };
+		9AD3B01A1ADF9D5A00963D89 /* YMSCBPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBPeripheral.h; sourceTree = "<group>"; };
+		9AD3B01B1ADF9D5A00963D89 /* YMSCBPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBPeripheral.m; sourceTree = "<group>"; };
+		9AD3B01C1ADF9D5A00963D89 /* YMSCBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBService.h; sourceTree = "<group>"; };
+		9AD3B01D1ADF9D5A00963D89 /* YMSCBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBService.m; sourceTree = "<group>"; };
+		9AD3B01E1ADF9D5A00963D89 /* YMSCBStoredPeripherals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBStoredPeripherals.h; sourceTree = "<group>"; };
+		9AD3B01F1ADF9D5A00963D89 /* YMSCBStoredPeripherals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBStoredPeripherals.m; sourceTree = "<group>"; };
+		9AD3B0201ADF9D5A00963D89 /* YMSCBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBUtils.h; sourceTree = "<group>"; };
+		9AD3B0211ADF9D5A00963D89 /* YMSCBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBUtils.m; sourceTree = "<group>"; };
 		9AD8A6931AC40A41009BE6A8 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		9AD8A6941AC40A41009BE6A8 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		9AD8A6961AC40E58009BE6A8 /* CollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionCell.h; sourceTree = "<group>"; };
 		9AD8A6971AC40E58009BE6A8 /* CollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionCell.m; sourceTree = "<group>"; };
-		9AD8A6991AC4110F009BE6A8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AD8A69A1AC4110F009BE6A8 /* AssetsLibrary.framework in Frameworks */,
+				9AC5E6F71ADF89F400F457DE /* QuartzCore.framework in Frameworks */,
 				9A40B1E01A6F71FD003C96D5 /* CoreBluetooth.framework in Frameworks */,
 				9AAA32121A67EE37001D5B52 /* Foundation.framework in Frameworks */,
 				9AAA32101A67EE11001D5B52 /* CoreGraphics.framework in Frameworks */,
@@ -188,31 +191,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9A379ED61A8B54130002FB5C /* YmsCoreBluetooth */ = {
-			isa = PBXGroup;
-			children = (
-				9A379ED71A8B54540002FB5C /* NSMutableArray+fifoQueue.h */,
-				9A379ED81A8B54540002FB5C /* NSMutableArray+fifoQueue.m */,
-				9A379ED91A8B54540002FB5C /* YMS128.c */,
-				9A379EDA1A8B54540002FB5C /* YMS128.h */,
-				9A379EDB1A8B54540002FB5C /* YMSCBCentralManager.h */,
-				9A379EDC1A8B54540002FB5C /* YMSCBCentralManager.m */,
-				9A379EE11A8B54540002FB5C /* YMSCBPeripheral.h */,
-				9A379EE21A8B54540002FB5C /* YMSCBPeripheral.m */,
-				9A379EE51A8B54540002FB5C /* YMSCBStoredPeripherals.h */,
-				9A379EE61A8B54540002FB5C /* YMSCBStoredPeripherals.m */,
-				9A379EE31A8B54540002FB5C /* YMSCBService.h */,
-				9A379EE41A8B54540002FB5C /* YMSCBService.m */,
-				9A379EDD1A8B54540002FB5C /* YMSCBCharacteristic.h */,
-				9A379EDE1A8B54540002FB5C /* YMSCBCharacteristic.m */,
-				9A379EDF1A8B54540002FB5C /* YMSCBDescriptor.h */,
-				9A379EE01A8B54540002FB5C /* YMSCBDescriptor.m */,
-				9A379EE71A8B54540002FB5C /* YMSCBUtils.h */,
-				9A379EE81A8B54540002FB5C /* YMSCBUtils.m */,
-			);
-			name = YmsCoreBluetooth;
-			sourceTree = "<group>";
-		};
 		9A379EF21A8B547B0002FB5C /* ZTProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,9 +248,7 @@
 		9AAA314A1A67E845001D5B52 /* cube */ = {
 			isa = PBXGroup;
 			children = (
-				9AAA31C11A67EC4C001D5B52 /* MBProgressHUD */,
-				9ACFFDFE1AD7BCBD005497D6 /* PSTCollectionView */,
-				9A379ED61A8B54130002FB5C /* YmsCoreBluetooth */,
+				9AD3AFC51ADF9D5A00963D89 /* OpenSource */,
 				9A379EF21A8B547B0002FB5C /* ZTProfile */,
 				9AAA314F1A67E845001D5B52 /* AppDelegate.h */,
 				9AAA31501A67E845001D5B52 /* AppDelegate.m */,
@@ -321,20 +297,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		9AAA31C11A67EC4C001D5B52 /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				9AAA320A1A67ED8D001D5B52 /* MBProgressHUD.h */,
-				9AAA320B1A67EDA0001D5B52 /* MBProgressHUD.m */,
-			);
-			name = MBProgressHUD;
-			path = ../MBProgressHUD;
-			sourceTree = "<group>";
-		};
 		9AAA32131A67EE49001D5B52 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9AD8A6991AC4110F009BE6A8 /* AssetsLibrary.framework */,
+				9AC5E6F61ADF89F400F457DE /* QuartzCore.framework */,
 				9A40B1DF1A6F71FD003C96D5 /* CoreBluetooth.framework */,
 				9AAA320D1A67EDFC001D5B52 /* UIKit.framework */,
 				9AAA320F1A67EE11001D5B52 /* CoreGraphics.framework */,
@@ -344,39 +310,93 @@
 			path = cube;
 			sourceTree = "<group>";
 		};
-		9ACFFDFE1AD7BCBD005497D6 /* PSTCollectionView */ = {
+		9AD3AFC51ADF9D5A00963D89 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
-				9ACFFDFF1AD7BD0C005497D6 /* NSIndexPath+PSTCollectionViewAdditions.h */,
-				9ACFFE001AD7BD0C005497D6 /* NSIndexPath+PSTCollectionViewAdditions.m */,
-				9ACFFE011AD7BD0C005497D6 /* PSTCollectionView.h */,
-				9ACFFE021AD7BD0C005497D6 /* PSTCollectionView.m */,
-				9ACFFE031AD7BD0C005497D6 /* PSTCollectionViewCell.h */,
-				9ACFFE041AD7BD0C005497D6 /* PSTCollectionViewCell.m */,
-				9ACFFE051AD7BD0C005497D6 /* PSTCollectionViewCommon.h */,
-				9ACFFE061AD7BD0C005497D6 /* PSTCollectionViewController.h */,
-				9ACFFE071AD7BD0C005497D6 /* PSTCollectionViewController.m */,
-				9ACFFE081AD7BD0C005497D6 /* PSTCollectionViewData.h */,
-				9ACFFE091AD7BD0C005497D6 /* PSTCollectionViewData.m */,
-				9ACFFE0A1AD7BD0C005497D6 /* PSTCollectionViewFlowLayout.h */,
-				9ACFFE0B1AD7BD0C005497D6 /* PSTCollectionViewFlowLayout.m */,
-				9ACFFE0C1AD7BD0C005497D6 /* PSTCollectionViewItemKey.h */,
-				9ACFFE0D1AD7BD0C005497D6 /* PSTCollectionViewItemKey.m */,
-				9ACFFE0E1AD7BD0C005497D6 /* PSTCollectionViewLayout.h */,
-				9ACFFE0F1AD7BD0C005497D6 /* PSTCollectionViewLayout.m */,
-				9ACFFE101AD7BD0C005497D6 /* PSTCollectionViewLayout+Internals.h */,
-				9ACFFE111AD7BD0C005497D6 /* PSTCollectionViewUpdateItem.h */,
-				9ACFFE121AD7BD0C005497D6 /* PSTCollectionViewUpdateItem.m */,
-				9ACFFE131AD7BD0C005497D6 /* PSTGridLayoutInfo.h */,
-				9ACFFE141AD7BD0C005497D6 /* PSTGridLayoutInfo.m */,
-				9ACFFE151AD7BD0C005497D6 /* PSTGridLayoutItem.h */,
-				9ACFFE161AD7BD0C005497D6 /* PSTGridLayoutItem.m */,
-				9ACFFE171AD7BD0C005497D6 /* PSTGridLayoutRow.h */,
-				9ACFFE181AD7BD0C005497D6 /* PSTGridLayoutRow.m */,
-				9ACFFE191AD7BD0C005497D6 /* PSTGridLayoutSection.h */,
-				9ACFFE1A1AD7BD0C005497D6 /* PSTGridLayoutSection.m */,
+				9AD3AFC61ADF9D5A00963D89 /* KLCPopup */,
+				9AD3AFC91ADF9D5A00963D89 /* MBProgressHUD */,
+				9AD3AFF21ADF9D5A00963D89 /* PSTCollectionView */,
+				9AD3B00F1ADF9D5A00963D89 /* YmsCoreBluetooth */,
 			);
-			name = PSTCollectionView;
+			path = OpenSource;
+			sourceTree = "<group>";
+		};
+		9AD3AFC61ADF9D5A00963D89 /* KLCPopup */ = {
+			isa = PBXGroup;
+			children = (
+				9AD3AFC71ADF9D5A00963D89 /* KLCPopup.h */,
+				9AD3AFC81ADF9D5A00963D89 /* KLCPopup.m */,
+			);
+			path = KLCPopup;
+			sourceTree = "<group>";
+		};
+		9AD3AFC91ADF9D5A00963D89 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				9AD3AFEA1ADF9D5A00963D89 /* MBProgressHUD.h */,
+				9AD3AFEB1ADF9D5A00963D89 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		9AD3AFF21ADF9D5A00963D89 /* PSTCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				9AD3AFF31ADF9D5A00963D89 /* NSIndexPath+PSTCollectionViewAdditions.h */,
+				9AD3AFF41ADF9D5A00963D89 /* NSIndexPath+PSTCollectionViewAdditions.m */,
+				9AD3AFF51ADF9D5A00963D89 /* PSTCollectionView.h */,
+				9AD3AFF61ADF9D5A00963D89 /* PSTCollectionView.m */,
+				9AD3AFF71ADF9D5A00963D89 /* PSTCollectionViewCell.h */,
+				9AD3AFF81ADF9D5A00963D89 /* PSTCollectionViewCell.m */,
+				9AD3AFF91ADF9D5A00963D89 /* PSTCollectionViewCommon.h */,
+				9AD3AFFA1ADF9D5A00963D89 /* PSTCollectionViewController.h */,
+				9AD3AFFB1ADF9D5A00963D89 /* PSTCollectionViewController.m */,
+				9AD3AFFC1ADF9D5A00963D89 /* PSTCollectionViewData.h */,
+				9AD3AFFD1ADF9D5A00963D89 /* PSTCollectionViewData.m */,
+				9AD3AFFE1ADF9D5A00963D89 /* PSTCollectionViewFlowLayout.h */,
+				9AD3AFFF1ADF9D5A00963D89 /* PSTCollectionViewFlowLayout.m */,
+				9AD3B0001ADF9D5A00963D89 /* PSTCollectionViewItemKey.h */,
+				9AD3B0011ADF9D5A00963D89 /* PSTCollectionViewItemKey.m */,
+				9AD3B0021ADF9D5A00963D89 /* PSTCollectionViewLayout+Internals.h */,
+				9AD3B0031ADF9D5A00963D89 /* PSTCollectionViewLayout.h */,
+				9AD3B0041ADF9D5A00963D89 /* PSTCollectionViewLayout.m */,
+				9AD3B0051ADF9D5A00963D89 /* PSTCollectionViewUpdateItem.h */,
+				9AD3B0061ADF9D5A00963D89 /* PSTCollectionViewUpdateItem.m */,
+				9AD3B0071ADF9D5A00963D89 /* PSTGridLayoutInfo.h */,
+				9AD3B0081ADF9D5A00963D89 /* PSTGridLayoutInfo.m */,
+				9AD3B0091ADF9D5A00963D89 /* PSTGridLayoutItem.h */,
+				9AD3B00A1ADF9D5A00963D89 /* PSTGridLayoutItem.m */,
+				9AD3B00B1ADF9D5A00963D89 /* PSTGridLayoutRow.h */,
+				9AD3B00C1ADF9D5A00963D89 /* PSTGridLayoutRow.m */,
+				9AD3B00D1ADF9D5A00963D89 /* PSTGridLayoutSection.h */,
+				9AD3B00E1ADF9D5A00963D89 /* PSTGridLayoutSection.m */,
+			);
+			path = PSTCollectionView;
+			sourceTree = "<group>";
+		};
+		9AD3B00F1ADF9D5A00963D89 /* YmsCoreBluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				9AD3B0101ADF9D5A00963D89 /* NSMutableArray+fifoQueue.h */,
+				9AD3B0111ADF9D5A00963D89 /* NSMutableArray+fifoQueue.m */,
+				9AD3B0121ADF9D5A00963D89 /* YMS128.c */,
+				9AD3B0131ADF9D5A00963D89 /* YMS128.h */,
+				9AD3B0141ADF9D5A00963D89 /* YMSCBCentralManager.h */,
+				9AD3B0151ADF9D5A00963D89 /* YMSCBCentralManager.m */,
+				9AD3B0161ADF9D5A00963D89 /* YMSCBCharacteristic.h */,
+				9AD3B0171ADF9D5A00963D89 /* YMSCBCharacteristic.m */,
+				9AD3B0181ADF9D5A00963D89 /* YMSCBDescriptor.h */,
+				9AD3B0191ADF9D5A00963D89 /* YMSCBDescriptor.m */,
+				9AD3B01A1ADF9D5A00963D89 /* YMSCBPeripheral.h */,
+				9AD3B01B1ADF9D5A00963D89 /* YMSCBPeripheral.m */,
+				9AD3B01C1ADF9D5A00963D89 /* YMSCBService.h */,
+				9AD3B01D1ADF9D5A00963D89 /* YMSCBService.m */,
+				9AD3B01E1ADF9D5A00963D89 /* YMSCBStoredPeripherals.h */,
+				9AD3B01F1ADF9D5A00963D89 /* YMSCBStoredPeripherals.m */,
+				9AD3B0201ADF9D5A00963D89 /* YMSCBUtils.h */,
+				9AD3B0211ADF9D5A00963D89 /* YMSCBUtils.m */,
+			);
+			path = YmsCoreBluetooth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -480,45 +500,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A379EEF1A8B54540002FB5C /* YMSCBService.m in Sources */,
-				9ACFFE1C1AD7BD0C005497D6 /* PSTCollectionView.m in Sources */,
-				9A379EEB1A8B54540002FB5C /* YMSCBCentralManager.m in Sources */,
+				9AD3B03E1ADF9D5A00963D89 /* PSTCollectionViewController.m in Sources */,
+				9AD3B04C1ADF9D5A00963D89 /* YMSCBDescriptor.m in Sources */,
 				9AC90AAA1ACBDFEE00CA072B /* kfifo.c in Sources */,
 				9A379EF51A8B55000002FB5C /* ZTCentralManager.m in Sources */,
 				9AC0E7251A8DE97D002D24DD /* ZTBaseService.m in Sources */,
 				9AC0E7281A8E145D002D24DD /* ZTBatteryService.m in Sources */,
+				9AD3B03C1ADF9D5A00963D89 /* PSTCollectionView.m in Sources */,
+				9AD3B04A1ADF9D5A00963D89 /* YMSCBCentralManager.m in Sources */,
+				9AD3B0221ADF9D5A00963D89 /* KLCPopup.m in Sources */,
+				9AD3B03B1ADF9D5A00963D89 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
+				9AD3B0501ADF9D5A00963D89 /* YMSCBUtils.m in Sources */,
 				9AD8A6951AC40A41009BE6A8 /* ImageViewController.m in Sources */,
-				9ACFFE1F1AD7BD0C005497D6 /* PSTCollectionViewData.m in Sources */,
-				9A379EEE1A8B54540002FB5C /* YMSCBPeripheral.m in Sources */,
-				9ACFFE1E1AD7BD0C005497D6 /* PSTCollectionViewController.m in Sources */,
+				9AD3B0491ADF9D5A00963D89 /* YMS128.c in Sources */,
+				9AD3B04E1ADF9D5A00963D89 /* YMSCBService.m in Sources */,
+				9AD3B0411ADF9D5A00963D89 /* PSTCollectionViewItemKey.m in Sources */,
 				9AC80A3D1ADE4149009F5BB1 /* ShowViewController.m in Sources */,
-				9ACFFE211AD7BD0C005497D6 /* PSTCollectionViewItemKey.m in Sources */,
-				9ACFFE231AD7BD0C005497D6 /* PSTCollectionViewUpdateItem.m in Sources */,
+				9AD3B0471ADF9D5A00963D89 /* PSTGridLayoutSection.m in Sources */,
 				9AAA31571A67E845001D5B52 /* ScanViewController.m in Sources */,
-				9ACFFE201AD7BD0C005497D6 /* PSTCollectionViewFlowLayout.m in Sources */,
+				9AD3B04D1ADF9D5A00963D89 /* YMSCBPeripheral.m in Sources */,
 				9AAA31511A67E845001D5B52 /* AppDelegate.m in Sources */,
-				9AAA320C1A67EDA0001D5B52 /* MBProgressHUD.m in Sources */,
-				9A379EF01A8B54540002FB5C /* YMSCBStoredPeripherals.m in Sources */,
+				9AD3B04B1ADF9D5A00963D89 /* YMSCBCharacteristic.m in Sources */,
 				9A379F291A8B61130002FB5C /* DEAAccelerometerService.m in Sources */,
 				9AC0E7201A8DE967002D24DD /* ZTCube.m in Sources */,
+				9AD3B0451ADF9D5A00963D89 /* PSTGridLayoutItem.m in Sources */,
+				9AD3B0371ADF9D5A00963D89 /* MBProgressHUD.m in Sources */,
+				9AD3B0461ADF9D5A00963D89 /* PSTGridLayoutRow.m in Sources */,
 				9AD0C7531AA856C700E32C3D /* ZTProtrackNotify.m in Sources */,
-				9ACFFE1D1AD7BD0C005497D6 /* PSTCollectionViewCell.m in Sources */,
+				9AD3B0481ADF9D5A00963D89 /* NSMutableArray+fifoQueue.m in Sources */,
+				9AD3B0421ADF9D5A00963D89 /* PSTCollectionViewLayout.m in Sources */,
+				9AD3B0441ADF9D5A00963D89 /* PSTGridLayoutInfo.m in Sources */,
 				9AC0E7261A8DE97D002D24DD /* ZTDeviceInfoService.m in Sources */,
+				9AD3B03F1ADF9D5A00963D89 /* PSTCollectionViewData.m in Sources */,
+				9AD3B04F1ADF9D5A00963D89 /* YMSCBStoredPeripherals.m in Sources */,
+				9AD3B0431ADF9D5A00963D89 /* PSTCollectionViewUpdateItem.m in Sources */,
 				9AD8A6981AC40E58009BE6A8 /* CollectionCell.m in Sources */,
-				9ACFFE261AD7BD0C005497D6 /* PSTGridLayoutRow.m in Sources */,
-				9ACFFE251AD7BD0C005497D6 /* PSTGridLayoutItem.m in Sources */,
-				9ACFFE1B1AD7BD0C005497D6 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
-				9ACFFE271AD7BD0C005497D6 /* PSTGridLayoutSection.m in Sources */,
-				9A379EED1A8B54540002FB5C /* YMSCBDescriptor.m in Sources */,
 				9AAA31541A67E845001D5B52 /* RecordViewController.m in Sources */,
-				9A379EEC1A8B54540002FB5C /* YMSCBCharacteristic.m in Sources */,
+				9AD3B0401ADF9D5A00963D89 /* PSTCollectionViewFlowLayout.m in Sources */,
+				9AD3B03D1ADF9D5A00963D89 /* PSTCollectionViewCell.m in Sources */,
 				9AC343F31A92035A00CBE7AF /* ZTProtrackService.m in Sources */,
 				9AAA314E1A67E845001D5B52 /* main.m in Sources */,
-				9ACFFE221AD7BD0C005497D6 /* PSTCollectionViewLayout.m in Sources */,
-				9A379EE91A8B54540002FB5C /* NSMutableArray+fifoQueue.m in Sources */,
-				9A379EF11A8B54540002FB5C /* YMSCBUtils.m in Sources */,
-				9A379EEA1A8B54540002FB5C /* YMS128.c in Sources */,
-				9ACFFE241AD7BD0C005497D6 /* PSTGridLayoutInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

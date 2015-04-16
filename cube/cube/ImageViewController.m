@@ -23,8 +23,33 @@
  */
 
 #import "ImageViewController.h"
-#import "MBProgressHUD.h"
+#import "ShowViewController.h"
 #import "CollectionCell.h"
+
+// open source
+#import "MBProgressHUD.h"
+#import "KLCPopup.h"
+
+#import <QuartzCore/QuartzCore.h>
+
+
+typedef NS_ENUM(NSInteger, FieldTag)
+{
+    FieldTagHorizontalLayout = 1001,
+    FieldTagVerticalLayout,
+    FieldTagMaskType,
+    FieldTagShowType,
+    FieldTagDismissType,
+    FieldTagBackgroundDismiss,
+    FieldTagContentDismiss,
+    FieldTagTimedDismiss,
+};
+
+typedef NS_ENUM(NSInteger, CellType)
+{
+    CellTypeNormal = 0,
+    CellTypeSwitch,
+};
 
 
 /*
@@ -218,6 +243,24 @@
 }
 
 
+
+/*---------------------------------------------------------------------------*/
+#pragma mark - Segue
+/*---------------------------------------------------------------------------*/
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    LogIV(@"prepareForSegue:sender:");
+
+    if ([segue.identifier isEqualToString:@"ShowPhoto"]) {
+        ShowViewController  *sv   = segue.destinationViewController;
+        CollectionCell      *cell = sender;
+
+        sv.ccell = cell;
+    }
+    
+}
+
+
 /*---------------------------------------------------------------------------*/
 #pragma mark - UICollectionViewDelegate
 /*---------------------------------------------------------------------------*/
@@ -228,10 +271,10 @@
 {
     LogIV(@"collectionView:didSelectItemAtIndexPath:");
 
+    //
     NSMutableArray *indexPaths = [NSMutableArray arrayWithObject:indexPath];
     if (self.selectedItemIndexPath) {
         // if we had a previously selected cell
-
         if ([indexPath compare:self.selectedItemIndexPath] == NSOrderedSame) {
             // if it's the same as the one we just tapped on, then we're unselecting it
             self.selectedItemIndexPath = nil;
@@ -242,13 +285,63 @@
             [indexPaths addObject:self.selectedItemIndexPath];
             self.selectedItemIndexPath = indexPath;
         }
+
     } else {
         // else, we didn't have previously selected cell, so we only need to save this indexPath for future reference
         self.selectedItemIndexPath = indexPath;
+
     }
 
     // and now only reload only the cells that need updating
     [collectionView reloadItemsAtIndexPaths:indexPaths];
+
+    //
+    if (self.selectedItemIndexPath) {
+//        FlickrPhoto *photo = self.searchResults[searchTerm][indexPath.row];
+        CollectionCell  *cell = (CollectionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"CCell" forIndexPath:indexPath];
+//        [self performSegueWithIdentifier:@"ShowPhoto" sender:cell];
+        [self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
+
+
+        // pop up view
+        // Generate content view to present
+        UIView *contentView = [[UIView alloc] init];
+        contentView.translatesAutoresizingMaskIntoConstraints = NO;
+        contentView.backgroundColor = [UIColor colorWithRed:(184.0/255.0) green:(233.0/255.0) blue:(122.0/255.0) alpha:1.0];
+        contentView.layer.cornerRadius = 12.0;
+
+        UILabel *dismissLabel = [[UILabel alloc] init];
+        dismissLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        dismissLabel.backgroundColor = [UIColor clearColor];
+        dismissLabel.textColor = [UIColor whiteColor];
+        dismissLabel.font = [UIFont boldSystemFontOfSize:72.0];
+        dismissLabel.text = @"Hi.";
+
+        [contentView addSubview:dismissLabel];
+
+        NSDictionary *views = NSDictionaryOfVariableBindings(contentView, dismissLabel);
+
+        [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(16)-[dismissLabel]-(10)-|"
+                                                                            options:NSLayoutFormatAlignAllCenterX
+                                                                            metrics:nil
+                                                                              views:views]];
+
+        [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(36)-[dismissLabel]-(36)-|"
+                                                                            options:0
+                                                                            metrics:nil
+                                                                              views:views]];
+
+        // Show in popup
+        KLCPopupLayout layout = KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter);
+        KLCPopup *popup = [KLCPopup popupWithContentView:contentView
+                                                 showType:KLCPopupShowTypeShrinkIn
+                                              dismissType:KLCPopupDismissTypeShrinkOut
+                                                 maskType:KLCPopupMaskTypeDimmed
+                                 dismissOnBackgroundTouch:NO
+                                    dismissOnContentTouch:YES];
+        
+        [popup showWithLayout:layout];
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -258,11 +351,6 @@
     // TODO: Deselect item
 }
 
-/*
-FlickrPhoto *photo = self.searchResults[searchTerm][indexPath.row];
-[self performSegueWithIdentifier:@"ShowFlickrPhoto" sender:photo];
-[self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
-*/
 
 /*---------------------------------------------------------------------------*/
 #pragma mark - UICollectionViewDataSource
@@ -308,8 +396,6 @@ FlickrPhoto *photo = self.searchResults[searchTerm][indexPath.row];
         cell = [[CollectionCell alloc] init];
     }
 
-//    cell.backgroundColor = [UIColor yellowColor];
-
     // 取出每一張照片的資料並轉換成 UIImage 格式
     NSString *imageToLoad = [folderPath stringByAppendingPathComponent:[fileLst objectAtIndex:indexPath.row]];
 //    cell.imageView.image = [UIImage imageNamed:imageToLoad];
@@ -317,7 +403,7 @@ FlickrPhoto *photo = self.searchResults[searchTerm][indexPath.row];
 
     if (self.selectedItemIndexPath != nil && [indexPath compare:self.selectedItemIndexPath] == NSOrderedSame) {
         cell.imageView.layer.borderColor = [[UIColor redColor] CGColor];
-        cell.imageView.layer.borderWidth = 4.0;
+        cell.imageView.layer.borderWidth = 2.0;
     } else {
         cell.imageView.layer.borderColor = nil;
         cell.imageView.layer.borderWidth = 0.0;

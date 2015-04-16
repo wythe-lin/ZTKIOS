@@ -107,7 +107,7 @@ extern NSMutableArray   *connectList;
     [self setButton:record   title:@"Record" titleColor:[UIColor blackColor] backgroundColor:[UIColor greenColor]];
 
     // snapshot button
-    snapshot = (UIButton *)[self.view viewWithTag:102];;
+    snapshot = (UIButton *)[self.view viewWithTag:102];
     [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor blackColor] backgroundColor:[UIColor greenColor]];
 
     // download button
