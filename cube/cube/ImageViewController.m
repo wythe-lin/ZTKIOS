@@ -273,72 +273,65 @@ typedef NS_ENUM(NSInteger, CellType)
     //
     NSMutableArray *indexPaths = [NSMutableArray arrayWithObject:indexPath];
     if (self.selectedItemIndexPath) {
-        // if we had a previously selected cell
         if ([indexPath compare:self.selectedItemIndexPath] == NSOrderedSame) {
-            // if it's the same as the one we just tapped on, then we're unselecting it
-            self.selectedItemIndexPath = nil;
+            // nothing to do
 
         } else {
-            // if it's different, then add that old one to our list of cells to reload, and
-            // save the currently selected indexPath
             [indexPaths addObject:self.selectedItemIndexPath];
             self.selectedItemIndexPath = indexPath;
         }
 
     } else {
-        // else, we didn't have previously selected cell, so we only need to save this indexPath for future reference
         self.selectedItemIndexPath = indexPath;
-
     }
 
     // and now only reload only the cells that need updating
     [collectionView reloadItemsAtIndexPaths:indexPaths];
 
-    //
-    if (self.selectedItemIndexPath) {
-        // get image source & scale
-        NSString *imageToLoad = [folderPath stringByAppendingPathComponent:[fileLst objectAtIndex:indexPath.row]];
-        UIImage *orgImage = [UIImage imageNamed:imageToLoad];;
-        UIImage *scaleImage = [self imageWithImage:orgImage scaledToSize:CGSizeMake(orgImage.size.width*1.5, orgImage.size.height*1.5)];
 
-        // popup view
-        // Generate content view to present
-        UIImageView *contentView = [[UIImageView alloc] init];
-        contentView.translatesAutoresizingMaskIntoConstraints = NO;
-        contentView.backgroundColor = [UIColor colorWithRed:(184.0/255.0) green:(233.0/255.0) blue:(122.0/255.0) alpha:1.0];
-        contentView.layer.cornerRadius = 12.0;
-        contentView.image = scaleImage;
-        contentView.contentMode = UIViewContentModeScaleAspectFit;
-        contentView.frame = CGRectMake(0, 0, contentView.image.size.width, contentView.image.size.height);
-        contentView.center = contentView.superview.center;
+    // get image source & scale
+    NSString *imageToLoad = [folderPath stringByAppendingPathComponent:[fileLst objectAtIndex:indexPath.row]];
+    UIImage *orgImage = [UIImage imageNamed:imageToLoad];;
+    UIImage *scaleImage = [self imageWithImage:orgImage scaledToSize:CGSizeMake(orgImage.size.width*1.5, orgImage.size.height*1.5)];
 
-        UILabel *popLabel = [[UILabel alloc] init];
-        popLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        popLabel.backgroundColor = [UIColor clearColor];
-        popLabel.textColor = [UIColor whiteColor];
-        popLabel.font = [UIFont boldSystemFontOfSize:12.0];
-        popLabel.text = @"ZealTek";
+    // popup view
+    // Generate content view to present
+    UIImageView *contentView = [[UIImageView alloc] init];
+    contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    contentView.backgroundColor = [UIColor colorWithRed:(184.0/255.0) green:(233.0/255.0) blue:(122.0/255.0) alpha:1.0];
+    contentView.layer.cornerRadius = 12.0;
+    contentView.image = scaleImage;
+    contentView.contentMode = UIViewContentModeScaleAspectFit;
+    contentView.frame = CGRectMake(0, 0, contentView.image.size.width, contentView.image.size.height);
+    contentView.center = contentView.superview.center;
 
-        [contentView addSubview:popLabel];
+    UILabel *popLabel = [[UILabel alloc] init];
+    popLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    popLabel.backgroundColor = [UIColor clearColor];
+    popLabel.textColor = [UIColor whiteColor];
+    popLabel.font = [UIFont boldSystemFontOfSize:12.0];
+    popLabel.text = @"ZealTek";
 
-        NSDictionary *views = NSDictionaryOfVariableBindings(contentView, popLabel);
-        [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[popLabel]-(2)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
-        [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[popLabel]-(2)-|" options:0                             metrics:nil views:views]];
+    [contentView addSubview:popLabel];
 
-        // show in popup
-        KLCPopupLayout layout = KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter);
-        KLCPopup *popup = [KLCPopup popupWithContentView:contentView
-                                                showType:KLCPopupShowTypeShrinkIn
-                                             dismissType:KLCPopupDismissTypeShrinkOut
-                                                maskType:KLCPopupMaskTypeDimmed
-                                dismissOnBackgroundTouch:NO
-                                   dismissOnContentTouch:YES];
+    NSDictionary *views = NSDictionaryOfVariableBindings(contentView, popLabel);
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[popLabel]-(2)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[popLabel]-(2)-|" options:0 metrics:nil views:views]];
+
+    // show in popup
+    KLCPopupLayout layout = KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter);
+    KLCPopup *popup = [KLCPopup popupWithContentView:contentView
+                                            showType:KLCPopupShowTypeShrinkIn
+                                         dismissType:KLCPopupDismissTypeShrinkOut
+                                            maskType:KLCPopupMaskTypeDimmed
+                            dismissOnBackgroundTouch:NO
+                               dismissOnContentTouch:YES];
         
-        [popup showWithLayout:layout];
+    [popup showWithLayout:layout];
 
-        //
-        [self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    }
+    //
+    [self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
+
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -395,8 +388,7 @@ typedef NS_ENUM(NSInteger, CellType)
 
     // 取出每一張照片的資料並轉換成 UIImage 格式
     NSString *imageToLoad = [folderPath stringByAppendingPathComponent:[fileLst objectAtIndex:indexPath.row]];
-//    cell.imageView.image = [UIImage imageNamed:imageToLoad];
-    cell.imageView.image = [UIImage imageWithContentsOfFile:imageToLoad];
+    cell.imageView.image = [UIImage imageNamed:imageToLoad];
 
     if (self.selectedItemIndexPath != nil && [indexPath compare:self.selectedItemIndexPath] == NSOrderedSame) {
         cell.imageView.layer.borderColor = [[UIColor redColor] CGColor];
@@ -417,7 +409,7 @@ typedef NS_ENUM(NSInteger, CellType)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat value = floorf(((self.view.bounds.size.width - (_columns - 1) * _gutter - 2 * _margin) / _columns));
-    return CGSizeMake(value, value);
+    return CGSizeMake(value, value*3/4);
 }
 
 // section的邊距
