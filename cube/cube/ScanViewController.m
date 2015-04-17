@@ -79,13 +79,17 @@ NSMutableArray  *connectList;
     // self.clearsSelectionOnViewWillAppear = NO;
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    self.title = @"Device";
     self.navigationItem.title = @"Scan Device";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    self.view.backgroundColor = [UIColor colorWithRed:86.0/255.0 green:161.0/255.0 blue:217.0/255.0 alpha:1.0];
 
     // for refresh control
     UIRefreshControl    *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(handleRefresh) forControlEvents:UIControlEventValueChanged];
-    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    refreshControl.tintColor = [UIColor whiteColor];
     self.refreshControl = refreshControl;
 
     // KVO
@@ -212,6 +216,26 @@ NSMutableArray  *connectList;
     return str;
 }
 
+// Asks the delegate for a view object to display in the header of the specified section of the table view.
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 22)];
+    UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 320, 22)];
+
+    sectionLabel.font = [UIFont boldSystemFontOfSize:18.0];
+    sectionLabel.backgroundColor = [UIColor clearColor];
+    sectionLabel.textColor = [UIColor whiteColor];
+    sectionLabel.text = [self tableView:tableView titleForHeaderInSection:section];
+
+    [headerView setBackgroundColor:[UIColor colorWithRed:79.0/255.0 green:127.0/255.0 blue:179.0/255.0 alpha:1.0]];
+    [headerView addSubview:sectionLabel];
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 22;
+}
 
 
 /*---------------------------------------------------------------------------*/
@@ -257,6 +281,12 @@ NSMutableArray  *connectList;
         default:
             break;
     }
+}
+
+// Tells the delegate the table view is about to draw a cell for a particular row
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [cell setBackgroundColor:[UIColor clearColor]];
 }
 
 // 選中cell的反應事件
@@ -306,7 +336,10 @@ NSMutableArray  *connectList;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:indicator];
     }
 
-    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    cell.selectionStyle            = UITableViewCellSelectionStyleDefault;
+
+    cell.textLabel.textColor       = [UIColor whiteColor];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
 
     // 區分顯示區段
     switch (indexPath.section) {
@@ -314,8 +347,8 @@ NSMutableArray  *connectList;
             ZTCentralManager    *centralManager = [ZTCentralManager sharedService];
 
             if (!centralManager.count) {
-                cell.textLabel.font       = [UIFont fontWithName:@"HelveticaNeue-Thin" size:16.0];
-                cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:10.0];
+                cell.textLabel.font            = [UIFont fontWithName:@"HelveticaNeue-Thin" size:16.0];
+                cell.detailTextLabel.font      = [UIFont fontWithName:@"HelveticaNeue-Thin" size:10.0];
 
                 cell.textLabel.text       = @"Searching for peripherals...";
                 cell.detailTextLabel.text = @" ";

@@ -111,6 +111,10 @@ typedef NS_ENUM(NSInteger, CellType)
     self.title = @"Pictures";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
+    self.view.backgroundColor = [UIColor colorWithRed:86.0/255.0 green:161.0/255.0 blue:217.0/255.0 alpha:1.0];
+
+    self.collectionView.backgroundColor = [UIColor colorWithRed:59.0/255.0 green:107.0/255.0 blue:159.0/255.0 alpha:1.0];
+
 
     // Defaults
     _columns = (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) ? 3 : 4;
@@ -144,12 +148,9 @@ typedef NS_ENUM(NSInteger, CellType)
     foldername   = @"wcube";
     folderPath   = [documentPath stringByAppendingPathComponent:foldername];
 
-    //
-    self.collectionView.backgroundColor = [UIColor grayColor];
-
     // erase button
     erase = (UIButton *)[self.view viewWithTag:130];
-    [self setButton:erase title:@"Erase" titleColor:[UIColor blackColor] backgroundColor:[UIColor greenColor]];
+    [self setButton:erase title:@"Erase" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -232,15 +233,21 @@ typedef NS_ENUM(NSInteger, CellType)
 
 
 /*
- *
+ * button style
  */
-- (void)setButton:(UIButton *)name title:(NSString *)title titleColor:(UIColor *)color backgroundColor:(UIColor *)bgColor
+- (void)setButton:(UIButton *)btnName
+            title:(NSString *)title
+       titleColor:(UIColor *)tColor
+  backgroundColor:(UIColor *)bgColor
+      borderWidth:(CGFloat)bWidth
+      borderColor:(UIColor *)bColor
 {
-    [name setBackgroundColor:bgColor];
-    [name setTitleColor:color forState:UIControlStateNormal];
-    [name setTitle:title forState:UIControlStateNormal];
+    [btnName setBackgroundColor:bgColor];
+    [btnName setTitleColor:tColor forState:UIControlStateNormal];
+    [btnName setTitle:title forState:UIControlStateNormal];
+    [[btnName layer] setBorderWidth:bWidth];
+    [[btnName layer] setBorderColor:[bColor CGColor]];
 }
-
 
 
 /*---------------------------------------------------------------------------*/
@@ -391,7 +398,7 @@ typedef NS_ENUM(NSInteger, CellType)
     cell.imageView.image = [UIImage imageNamed:imageToLoad];
 
     if (self.selectedItemIndexPath != nil && [indexPath compare:self.selectedItemIndexPath] == NSOrderedSame) {
-        cell.imageView.layer.borderColor = [[UIColor redColor] CGColor];
+        cell.imageView.layer.borderColor = [[UIColor whiteColor] CGColor];
         cell.imageView.layer.borderWidth = 2.0;
     } else {
         cell.imageView.layer.borderColor = nil;

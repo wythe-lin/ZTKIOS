@@ -23,6 +23,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 #import "ZTCentralManager.h"
 #import "ZTCube.h"
