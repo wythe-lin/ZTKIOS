@@ -113,7 +113,6 @@ extern NSMutableArray   *connectList;
     snapshot = (UIButton *)[self.view viewWithTag:102];
     [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
 
-
     // battery level
     battery                 = (UILabel *)[self.view viewWithTag:200];
     battery.textColor       = [UIColor whiteColor];
@@ -388,6 +387,9 @@ extern NSMutableArray   *connectList;
     [btnName setTitle:title forState:UIControlStateNormal];
     [[btnName layer] setBorderWidth:bWidth];
     [[btnName layer] setBorderColor:[bColor CGColor]];
+
+    [btnName layer].masksToBounds = YES;
+    [btnName layer].cornerRadius = 15.0f;
 }
 
 

@@ -28,11 +28,8 @@
 #include <stddef.h>
 #include <string.h>
 
-#define MIN(a, b)   ((a) < (b) ? (a) : (b))
-#define MAX(a, b)   ((a) > (b) ? (a) : (b))
-
-#define min         MIN
-
+#define min(a, b)   ((a) < (b) ? (a) : (b))
+#define max(a, b)   ((a) > (b) ? (a) : (b))
 
 /*
  ******************************************************************************
