@@ -74,7 +74,7 @@
                             <constraint firstItem="BKS-qu-vCi" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="-16" id="r7W-78-y8V"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Record" image="Pic" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Record" image="Rec" id="acW-dT-cKf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
@@ -253,5 +253,6 @@
     <resources>
         <image name="Dev" width="30" height="30"/>
         <image name="Pic" width="30" height="30"/>
+        <image name="Rec" width="30" height="30"/>
     </resources>
 </document>
