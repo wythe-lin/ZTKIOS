@@ -32,25 +32,6 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-typedef NS_ENUM(NSInteger, FieldTag)
-{
-    FieldTagHorizontalLayout = 1001,
-    FieldTagVerticalLayout,
-    FieldTagMaskType,
-    FieldTagShowType,
-    FieldTagDismissType,
-    FieldTagBackgroundDismiss,
-    FieldTagContentDismiss,
-    FieldTagTimedDismiss,
-};
-
-typedef NS_ENUM(NSInteger, CellType)
-{
-    CellTypeNormal = 0,
-    CellTypeSwitch,
-};
-
-
 /*
  ******************************************************************************
  *
@@ -68,6 +49,34 @@ typedef NS_ENUM(NSInteger, CellType)
 #endif
 
 #define msg(fmt, ...)       LOG_FORMAT(fmt, @"IV", ##__VA_ARGS__)
+
+
+/*
+ ******************************************************************************
+ *
+ * local variable
+ *
+ ******************************************************************************
+ */
+extern NSMutableArray   *connectList;
+
+typedef NS_ENUM(NSInteger, FieldTag)
+{
+    FieldTagHorizontalLayout = 1001,
+    FieldTagVerticalLayout,
+    FieldTagMaskType,
+    FieldTagShowType,
+    FieldTagDismissType,
+    FieldTagBackgroundDismiss,
+    FieldTagContentDismiss,
+    FieldTagTimedDismiss,
+};
+
+typedef NS_ENUM(NSInteger, CellType)
+{
+    CellTypeNormal = 0,
+    CellTypeSwitch,
+};
 
 
 /*
@@ -151,6 +160,11 @@ typedef NS_ENUM(NSInteger, CellType)
     // erase button
     erase = (UIButton *)[self.view viewWithTag:130];
     [self setButton:erase title:@"Erase" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
+
+    // download button
+    download = (UIButton *)[self.view viewWithTag:131];
+    [self setButton:download title:@"Download" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -192,7 +206,7 @@ typedef NS_ENUM(NSInteger, CellType)
 
 
 /*---------------------------------------------------------------------------*/
-#pragma mark - Erase Button
+#pragma mark - Erase Button Action
 /*---------------------------------------------------------------------------*/
 - (IBAction)eraseButtonPress:(UIButton *)sender
 {
@@ -229,6 +243,58 @@ typedef NS_ENUM(NSInteger, CellType)
 
 
     LogIV(@"eraseButtonPress: - end");
+}
+
+
+/*---------------------------------------------------------------------------*/
+#pragma mark - Download Button Action
+/*---------------------------------------------------------------------------*/
+- (IBAction)downloadButtonPress:(UIButton *)sender
+{
+    LogIV(@"downloadButtonPress: - begin");
+
+    if (![connectList count]) {
+        return;
+    }
+
+    //
+    [self setButton:download title:@"Download" titleColor:[UIColor redColor]       backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor redColor]];
+
+    self.ztCube   = (ZTCube *) [connectList objectAtIndex:0];
+
+    MBProgressHUD   *HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
+    HUD.dimBackground = YES;
+    HUD.labelText = @"connecting...";
+
+    [HUD showAnimated:YES whileExecutingBlock:^{
+        LogIV(@"executing block...");
+        [[[[self.tabBarController tabBar]items]objectAtIndex:0]setEnabled:FALSE];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:FALSE];
+
+        [self.ztCube connect];
+
+        HUD.labelText = @"downloading...";
+        [self.ztCube download];
+
+        [self.ztCube disconnect];
+
+        HUD.labelText = @"completed!";
+        sleep(1);
+
+    } completionBlock:^{
+        LogIV(@"completion block...");
+        [HUD removeFromSuperview];
+
+        [self setButton:download title:@"Download" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
+
+        [self.collectionView reloadData];
+
+        [[[[self.tabBarController tabBar]items]objectAtIndex:0]setEnabled:TRUE];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:TRUE];
+    }];
+    
+    LogIV(@"downloadButtonPress: - end");
 }
 
 

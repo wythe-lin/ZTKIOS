@@ -25,36 +25,12 @@
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="jjM-Wq-N0Y"/>
                                 </connections>
                             </pickerView>
-                            <button opaque="NO" tag="100" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQk-5c-OkN">
-                                <rect key="frame" x="170" y="284" width="120" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="R3f-aW-Yyx"/>
-                                    <constraint firstAttribute="height" constant="50" id="q84-XD-esw"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="recordButtonPress:" destination="9pv-A4-QxB" eventType="touchUpInside" id="fju-bi-3X4"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" tag="200" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUf-Tg-cfE">
                                 <rect key="frame" x="542" y="522" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" tag="101" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VO0-Te-vqP">
-                                <rect key="frame" x="220" y="349" width="160" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="Bjt-Jf-uz9"/>
-                                    <constraint firstAttribute="height" constant="50" id="Zfe-qT-Jw9"/>
-                                </constraints>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="downloadButtonPress:" destination="9pv-A4-QxB" eventType="touchUpInside" id="SXP-eg-Haq"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" tag="201" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SpP-FX-knb">
                                 <rect key="frame" x="5" y="522" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -62,10 +38,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" tag="102" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayL-8n-p2e">
-                                <rect key="frame" x="312" y="284" width="120" height="50"/>
+                                <rect key="frame" x="220" y="278" width="160" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="CVU-o1-NOQ"/>
-                                    <constraint firstAttribute="width" constant="120" id="vXS-Za-NOE"/>
+                                    <constraint firstAttribute="width" constant="160" id="7MX-bO-AfR"/>
+                                    <constraint firstAttribute="height" constant="44" id="DkB-SJ-ndM"/>
                                 </constraints>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -74,21 +50,31 @@
                                     <action selector="snapshotButtonPress:" destination="9pv-A4-QxB" eventType="touchUpInside" id="j2r-a4-qae"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" tag="100" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQk-5c-OkN">
+                                <rect key="frame" x="220" y="338" width="160" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="6om-Ha-R0I"/>
+                                    <constraint firstAttribute="height" constant="44" id="eKH-az-S4G"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="recordButtonPress:" destination="9pv-A4-QxB" eventType="touchUpInside" id="fju-bi-3X4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="IUf-Tg-cfE" secondAttribute="bottom" constant="8" id="1ve-ug-bOA"/>
-                            <constraint firstAttribute="centerX" secondItem="eQk-5c-OkN" secondAttribute="centerX" constant="70" id="8a4-eg-uJM"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="SpP-FX-knb" secondAttribute="bottom" constant="8" id="Dpt-Gv-Fgr"/>
+                            <constraint firstAttribute="centerX" secondItem="ayL-8n-p2e" secondAttribute="centerX" id="E84-4V-fme"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BKS-qu-vCi" secondAttribute="trailing" constant="-16" id="U0x-Md-Gsv"/>
-                            <constraint firstAttribute="centerX" secondItem="ayL-8n-p2e" secondAttribute="centerX" constant="-72" id="V12-TI-sQn"/>
                             <constraint firstItem="IUf-Tg-cfE" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="ZvZ-zr-3GB"/>
-                            <constraint firstAttribute="centerX" secondItem="VO0-Te-vqP" secondAttribute="centerX" id="dVy-ey-84i"/>
+                            <constraint firstAttribute="centerX" secondItem="eQk-5c-OkN" secondAttribute="centerX" id="eCR-yV-MLU"/>
                             <constraint firstItem="BKS-qu-vCi" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="29" id="hbJ-Rl-UvK"/>
                             <constraint firstItem="BKS-qu-vCi" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="-16" id="r7W-78-y8V"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Record" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Record" image="Rec" id="acW-dT-cKf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
@@ -139,7 +125,7 @@
         <scene sceneID="ssp-fn-G6V">
             <objects>
                 <navigationController id="khB-5e-R7F" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Device" id="CbN-cL-bxg"/>
+                    <tabBarItem key="tabBarItem" title="Device" image="Dev" id="CbN-cL-bxg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hVA-pv-Uml">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -164,19 +150,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" tag="130" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gsl-zd-sr4">
-                                <rect key="frame" x="474" y="25" width="100" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="JGf-yO-oN1"/>
-                                    <constraint firstAttribute="height" constant="30" id="Rc9-3f-GyP"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="eraseButtonPress:" destination="7eg-sP-1V5" eventType="touchUpInside" id="hAB-fQ-Mld"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0Sl-ZT-ga5">
-                                <rect key="frame" x="0.0" y="64" width="600" height="488"/>
+                                <rect key="frame" x="0.0" y="83" width="600" height="469"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="uw9-Oz-cr2">
                                     <size key="itemSize" width="153" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -214,15 +189,38 @@
                                     <outlet property="delegate" destination="7eg-sP-1V5" id="ZXD-gK-hpv"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" tag="131" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qMQ-HS-L5I">
+                                <rect key="frame" x="16" y="31" width="90" height="44"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="downloadButtonPress:" destination="7eg-sP-1V5" eventType="touchUpInside" id="Pom-QH-omZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="130" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gsl-zd-sr4">
+                                <rect key="frame" x="494" y="31" width="90" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="5sh-YE-ecQ"/>
+                                    <constraint firstAttribute="height" constant="44" id="oWq-Rf-WDj"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="eraseButtonPress:" destination="7eg-sP-1V5" eventType="touchUpInside" id="hAB-fQ-Mld"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Gsl-zd-sr4" secondAttribute="trailing" constant="10" id="5WH-cE-Lbz"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="0Sl-ZT-ga5" secondAttribute="trailing" constant="-16" id="7wE-8Z-zhC"/>
-                            <constraint firstItem="0Sl-ZT-ga5" firstAttribute="leading" secondItem="Zhy-89-T70" secondAttribute="leadingMargin" constant="-16" id="vfb-K6-hj2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0Sl-ZT-ga5" secondAttribute="trailing" constant="-16" id="2jc-qn-Ff1"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="0Sl-ZT-ga5" secondAttribute="bottom" constant="48" id="FDa-4E-Bxe"/>
+                            <constraint firstItem="Gsl-zd-sr4" firstAttribute="trailing" secondItem="Zhy-89-T70" secondAttribute="trailingMargin" id="GsZ-rU-d7w"/>
+                            <constraint firstItem="0Sl-ZT-ga5" firstAttribute="leading" secondItem="Zhy-89-T70" secondAttribute="leadingMargin" constant="-16" id="avv-hU-u06"/>
+                            <constraint firstItem="0Sl-ZT-ga5" firstAttribute="top" secondItem="qMQ-HS-L5I" secondAttribute="bottom" constant="8" id="dzq-jA-VAn"/>
+                            <constraint firstItem="qMQ-HS-L5I" firstAttribute="leading" secondItem="Zhy-89-T70" secondAttribute="leadingMargin" id="zAG-jE-fAI"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Pictures" id="QIN-pL-tHA"/>
+                    <tabBarItem key="tabBarItem" title="Pictures" image="Pic" id="QIN-pL-tHA"/>
                     <connections>
                         <outlet property="collectionView" destination="0Sl-ZT-ga5" id="Oy4-ZX-SV6"/>
                     </connections>
@@ -252,4 +250,9 @@
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Dev" width="30" height="30"/>
+        <image name="Pic" width="30" height="30"/>
+        <image name="Rec" width="30" height="30"/>
+    </resources>
 </document>

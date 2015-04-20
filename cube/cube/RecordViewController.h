@@ -36,7 +36,6 @@
 
     UIButton            *record;
     UIButton            *snapshot;
-    UIButton            *download;
 
     UILabel             *battery;
     UILabel             *version;
@@ -46,7 +45,6 @@
     NSInteger           rvSpeed;
 
     BOOL                isRecording;
-    BOOL                isDownloading;
 }
 
 /// Instance of ZTCube.

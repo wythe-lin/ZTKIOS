@@ -23,8 +23,10 @@
  */
 
 #import <UIKit/UIKit.h>
-#import <AssetsLibrary/AssetsLibrary.h>
 
+#import "ZTCube.h"
+#import "ZTBatteryService.h"
+#import "MBProgressHUD.h"
 
 @interface ImageViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
@@ -38,11 +40,16 @@
     NSArray         *fileLst;
 
     UIButton        *erase;
+    UIButton        *download;
 
 }
 
+/// Instance of ZTCube.
+@property (strong, nonatomic) ZTCube                    *ztCube;
+
+//
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (nonatomic, strong) NSIndexPath *selectedItemIndexPath;
+@property (nonatomic, strong) NSIndexPath               *selectedItemIndexPath;
 
 @end
 

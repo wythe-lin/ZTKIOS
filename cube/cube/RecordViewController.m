@@ -113,10 +113,6 @@ extern NSMutableArray   *connectList;
     snapshot = (UIButton *)[self.view viewWithTag:102];
     [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
 
-    // download button
-    download = (UIButton *)[self.view viewWithTag:101];
-    [self setButton:download title:@"Download" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
-
 
     // battery level
     battery                 = (UILabel *)[self.view viewWithTag:200];
@@ -145,7 +141,7 @@ extern NSMutableArray   *connectList;
 
     //
     isRecording   = NO;
-    isDownloading = NO;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -244,16 +240,13 @@ extern NSMutableArray   *connectList;
 
 
 /*---------------------------------------------------------------------------*/
-#pragma mark -  Button Action
+#pragma mark -  Record Button Action
 /*---------------------------------------------------------------------------*/
-/*
- * record button
- */
 - (IBAction)recordButtonPress:(UIButton *)sender
 {
     LogRV(@"recordButtonPress: - begin");
 
-    if ((![connectList count]) || (isDownloading == YES)) {
+    if (![connectList count]) {
         return;
     }
 
@@ -261,12 +254,10 @@ extern NSMutableArray   *connectList;
         // start record
         [self setButton:record   title:@"Stop"     titleColor:[UIColor redColor]       backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor redColor]];
         [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor lightGrayColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor lightGrayColor]];
-        [self setButton:download title:@"Download" titleColor:[UIColor lightGrayColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor lightGrayColor]];
     } else {
         // stop record
         [self setButton:record   title:@"Record"   titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
         [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
-        [self setButton:download title:@"Download" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
     }
 
     self.ztCube   = (ZTCube *) [connectList objectAtIndex:0];
@@ -280,6 +271,9 @@ extern NSMutableArray   *connectList;
     [HUD showAnimated:YES whileExecutingBlock:^{
         LogRV(@"executing block...");
         [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
+
+        [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:FALSE];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:FALSE];
 
         if (isRecording == NO) {
             // start record
@@ -312,82 +306,29 @@ extern NSMutableArray   *connectList;
         } else {
             isRecording = NO;
         }
+
+        [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:TRUE];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:TRUE];
     }];
 
     LogRV(@"recordButtonPress: - end");
 }
 
 
-/*
- * download button
- */
-- (IBAction)downloadButtonPress:(UIButton *)sender
+/*---------------------------------------------------------------------------*/
+#pragma mark -  Snapshot Button Action
+/*---------------------------------------------------------------------------*/
+- (IBAction)snapshotButtonPress:(UIButton *)sender
 {
-    LogRV(@"downloadButtonPress: - begin");
+    LogRV(@"snapshotButtonPress: - begin");
 
     if ((![connectList count]) || (isRecording == YES)) {
         return;
     }
 
     //
-    isDownloading = YES;
-    [self setButton:record   title:@"Record"   titleColor:[UIColor lightGrayColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor lightGrayColor]];
-    [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor lightGrayColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor lightGrayColor]];
-    [self setButton:download title:@"Download" titleColor:[UIColor redColor]       backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor redColor]];
-
-    self.ztCube   = (ZTCube *) [connectList objectAtIndex:0];
-    self.battServ = self.ztCube.serviceDict[@"battery"];
-
-    MBProgressHUD   *HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:HUD];
-    HUD.dimBackground = YES;
-    HUD.labelText = @"connecting...";
-
-    [HUD showAnimated:YES whileExecutingBlock:^{
-        LogRV(@"executing block...");
-        [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
-
-        [self.ztCube connect];
-
-        HUD.labelText = @"downloading...";
-        [self.ztCube download];
-
-        [self.ztCube disconnect];
-
-        HUD.labelText = @"completed!";
-        sleep(1);
-
-    } completionBlock:^{
-        LogRV(@"completion block...");
-        [HUD removeFromSuperview];
-
-        [self.battServ removeObserver:self forKeyPath:@"batteryLevel"];
-
-        [self setButton:record   title:@"Record"   titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
-        [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
-        [self setButton:download title:@"Download" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
-        isDownloading = NO;
-    }];
-
-    LogRV(@"downloadButtonPress: - end");
-}
-
-
-/*
- * snapshot button
- */
-- (IBAction)snapshotButtonPress:(UIButton *)sender
-{
-    LogRV(@"snapshotButtonPress: - begin");
-
-    if ((![connectList count]) || (isDownloading == YES) || (isRecording == YES)) {
-        return;
-    }
-
-    //
     [self setButton:record   title:@"Record"   titleColor:[UIColor lightGrayColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor lightGrayColor]];
     [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor redColor]       backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor redColor]];
-    [self setButton:download title:@"Download" titleColor:[UIColor lightGrayColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor lightGrayColor]];
 
     //
     self.ztCube   = (ZTCube *) [connectList objectAtIndex:0];
@@ -401,6 +342,9 @@ extern NSMutableArray   *connectList;
     [HUD showAnimated:YES whileExecutingBlock:^{
         LogRV(@"executing block...");
         [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
+
+        [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:FALSE];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:FALSE];
 
         [self.ztCube connect];
 
@@ -420,24 +364,12 @@ extern NSMutableArray   *connectList;
 
         [self setButton:record   title:@"Record"   titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
         [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
-        [self setButton:download title:@"Download" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
 
+        [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:TRUE];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:TRUE];
     }];
 
-
     LogRV(@"snapshotButtonPress: - end");
-}
-
-
-
-/*
- *
- */
-- (void)setButton:(UIButton *)name title:(NSString *)title titleColor:(UIColor *)color backgroundColor:(UIColor *)bgColor
-{
-    [name setBackgroundColor:bgColor];
-    [name setTitleColor:color forState:UIControlStateNormal];
-    [name setTitle:title forState:UIControlStateNormal];
 }
 
 
@@ -457,8 +389,6 @@ extern NSMutableArray   *connectList;
     [[btnName layer] setBorderWidth:bWidth];
     [[btnName layer] setBorderColor:[bColor CGColor]];
 }
-
-
 
 
 /*---------------------------------------------------------------------------*/
