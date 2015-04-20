@@ -25,6 +25,17 @@
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="jjM-Wq-N0Y"/>
                                 </connections>
                             </pickerView>
+                            <button opaque="NO" tag="100" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQk-5c-OkN">
+                                <rect key="frame" x="316" y="286" width="90" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="4mD-VL-Oec"/>
+                                    <constraint firstAttribute="height" constant="90" id="clT-lw-oX8"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="recordButtonPress:" destination="9pv-A4-QxB" eventType="touchUpInside" id="fju-bi-3X4"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" tag="200" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUf-Tg-cfE">
                                 <rect key="frame" x="542" y="522" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -38,10 +49,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" tag="102" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayL-8n-p2e">
-                                <rect key="frame" x="220" y="278" width="160" height="44"/>
+                                <rect key="frame" x="193" y="286" width="90" height="90"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="7MX-bO-AfR"/>
-                                    <constraint firstAttribute="height" constant="44" id="DkB-SJ-ndM"/>
+                                    <constraint firstAttribute="width" constant="90" id="ZO1-wZ-9nA"/>
+                                    <constraint firstAttribute="height" constant="90" id="pVk-kT-FBe"/>
                                 </constraints>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -50,26 +61,15 @@
                                     <action selector="snapshotButtonPress:" destination="9pv-A4-QxB" eventType="touchUpInside" id="j2r-a4-qae"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="100" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQk-5c-OkN">
-                                <rect key="frame" x="220" y="338" width="160" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="6om-Ha-R0I"/>
-                                    <constraint firstAttribute="height" constant="44" id="eKH-az-S4G"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="recordButtonPress:" destination="9pv-A4-QxB" eventType="touchUpInside" id="fju-bi-3X4"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="IUf-Tg-cfE" secondAttribute="bottom" constant="8" id="1ve-ug-bOA"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="SpP-FX-knb" secondAttribute="bottom" constant="8" id="Dpt-Gv-Fgr"/>
-                            <constraint firstAttribute="centerX" secondItem="ayL-8n-p2e" secondAttribute="centerX" id="E84-4V-fme"/>
+                            <constraint firstAttribute="centerX" secondItem="eQk-5c-OkN" secondAttribute="centerX" constant="-61" id="OVa-pI-fps"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BKS-qu-vCi" secondAttribute="trailing" constant="-16" id="U0x-Md-Gsv"/>
                             <constraint firstItem="IUf-Tg-cfE" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="ZvZ-zr-3GB"/>
-                            <constraint firstAttribute="centerX" secondItem="eQk-5c-OkN" secondAttribute="centerX" id="eCR-yV-MLU"/>
+                            <constraint firstAttribute="centerX" secondItem="ayL-8n-p2e" secondAttribute="centerX" constant="62" id="ekQ-x9-3UU"/>
                             <constraint firstItem="BKS-qu-vCi" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="29" id="hbJ-Rl-UvK"/>
                             <constraint firstItem="BKS-qu-vCi" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="-16" id="r7W-78-y8V"/>
                         </constraints>

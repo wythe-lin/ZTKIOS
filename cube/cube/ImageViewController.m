@@ -313,9 +313,8 @@ typedef NS_ENUM(NSInteger, CellType)
     [btnName setTitle:title forState:UIControlStateNormal];
     [[btnName layer] setBorderWidth:bWidth];
     [[btnName layer] setBorderColor:[bColor CGColor]];
-
-    [btnName layer].masksToBounds = YES;
-    [btnName layer].cornerRadius = 15.0f;
+    [[btnName layer] setMasksToBounds:YES];
+    [[btnName layer] setCornerRadius:15.0f];
 }
 
 
