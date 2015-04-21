@@ -269,6 +269,8 @@ extern NSMutableArray   *connectList;
 
     [HUD showAnimated:YES whileExecutingBlock:^{
         LogRV(@"executing block...");
+        [UIApplication sharedApplication].idleTimerDisabled = YES;
+
         [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
 
         [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:FALSE];
@@ -308,6 +310,8 @@ extern NSMutableArray   *connectList;
 
         [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:TRUE];
         [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:TRUE];
+
+        [UIApplication sharedApplication].idleTimerDisabled = NO;
     }];
 
     LogRV(@"recordButtonPress: - end");
@@ -340,6 +344,7 @@ extern NSMutableArray   *connectList;
 
     [HUD showAnimated:YES whileExecutingBlock:^{
         LogRV(@"executing block...");
+        [UIApplication sharedApplication].idleTimerDisabled = YES;
         [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
 
         [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:FALSE];
@@ -366,6 +371,8 @@ extern NSMutableArray   *connectList;
 
         [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:TRUE];
         [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:TRUE];
+
+        [UIApplication sharedApplication].idleTimerDisabled = NO;
     }];
 
     LogRV(@"snapshotButtonPress: - end");

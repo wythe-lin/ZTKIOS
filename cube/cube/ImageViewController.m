@@ -269,6 +269,8 @@ typedef NS_ENUM(NSInteger, CellType)
 
     [HUD showAnimated:YES whileExecutingBlock:^{
         LogIV(@"executing block...");
+        [UIApplication sharedApplication].idleTimerDisabled = YES;
+
         [[[[self.tabBarController tabBar]items]objectAtIndex:0]setEnabled:FALSE];
         [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:FALSE];
 
@@ -292,6 +294,8 @@ typedef NS_ENUM(NSInteger, CellType)
 
         [[[[self.tabBarController tabBar]items]objectAtIndex:0]setEnabled:TRUE];
         [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:TRUE];
+
+        [UIApplication sharedApplication].idleTimerDisabled = NO;
     }];
     
     LogIV(@"downloadButtonPress: - end");
