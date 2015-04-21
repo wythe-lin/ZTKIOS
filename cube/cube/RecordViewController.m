@@ -121,8 +121,8 @@ extern NSMutableArray   *connectList;
     battery.text            = [NSString stringWithFormat:@"0%%"];
 
     // version information
-    NSString *ver   = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
-    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
+    NSString *ver   = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
 
     version                 = (UILabel *)[self.view viewWithTag:201];
     version.textColor       = [UIColor whiteColor];
@@ -139,7 +139,7 @@ extern NSMutableArray   *connectList;
     rvSpeed      = 0;
 
     //
-    isRecording   = NO;
+    isRecording  = NO;
 
 }
 
