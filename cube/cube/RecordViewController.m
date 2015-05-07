@@ -23,9 +23,8 @@
  */
 
 #import "RecordViewController.h"
-
 #import "ZTBatteryService.h"
-
+#import "ZTColor.h"
 
 extern NSMutableArray   *connectList;
 
@@ -85,7 +84,7 @@ extern NSMutableArray   *connectList;
 
     // Do any additional setup after loading the view, typically from a nib.
     self.title = @"Record";
-    self.view.backgroundColor = [UIColor colorWithRed:86.0/255.0 green:161.0/255.0 blue:217.0/255.0 alpha:1.0];
+    self.view.backgroundColor = [ZTColor lightBlueColor];
 
 
     // picker view

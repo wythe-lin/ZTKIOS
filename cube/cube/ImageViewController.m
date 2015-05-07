@@ -24,6 +24,7 @@
 
 #import "ImageViewController.h"
 #import "CollectionCell.h"
+#import "ZTColor.h"
 
 // open source
 #import "MBProgressHUD.h"
@@ -31,6 +32,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+BOOL isDownloading = NO;
 
 /*
  ******************************************************************************
@@ -120,9 +122,8 @@ typedef NS_ENUM(NSInteger, CellType)
     self.title = @"Pictures";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
-    self.view.backgroundColor = [UIColor colorWithRed:86.0/255.0 green:161.0/255.0 blue:217.0/255.0 alpha:1.0];
-
-    self.collectionView.backgroundColor = [UIColor colorWithRed:59.0/255.0 green:107.0/255.0 blue:159.0/255.0 alpha:1.0];
+    self.view.backgroundColor = [ZTColor lightBlueColor];
+    self.collectionView.backgroundColor = [ZTColor darkBlueColor];
 
 
     // Defaults

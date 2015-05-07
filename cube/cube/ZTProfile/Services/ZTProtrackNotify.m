@@ -32,6 +32,7 @@
  ******************************************************************************
  */
 #define DEBUG_MESSAGE                   1
+#define DEBUG_RESPONSE                  0
 #define LOGGING_INCLUDE_MULTITHREAD     1
 #include "DbgMsg.h"
 
@@ -39,6 +40,12 @@
 #define dmsg(fmt, ...)      LOG_FORMAT(fmt, @"ZTNotify", ##__VA_ARGS__)
 #else
 #define dmsg(...)
+#endif
+
+#if defined(DEBUG_RESPONSE) && DEBUG_RESPONSE
+#define rsp(fmt, ...)       LOG_FORMAT(fmt, @"ZTNotify", ##__VA_ARGS__)
+#else
+#define rsp(...)
 #endif
 
 #define msg(fmt, ...)       LOG_FORMAT(fmt, @"ZTNotify", ##__VA_ARGS__)
@@ -79,6 +86,7 @@
     rxpkt = [[NSData alloc] init];
     kfifo_init(&rxqueue, rxbuf, sizeof(rxbuf));
     semaphore = dispatch_semaphore_create(0);
+    toTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerHandle:) userInfo:nil repeats:YES];
     return self;
 }
 
@@ -154,27 +162,33 @@
 /*---------------------------------------------------------------------------*/
 #pragma mark -
 /*---------------------------------------------------------------------------*/
-- (void)getResponsePacket
+- (NSUInteger)getResponsePacket
 {
     unsigned char   tmp;
     unsigned char   fsm = 0;
     unsigned char   pkt[128];
 
-    dmsg(@"getResponsePacket - begin");
+    rsp(@"getResponsePacket - begin");
+
+    [self startTimeoutTimer];
 
     for (fsm=0; fsm<4; ) {
         switch (fsm) {
             case 0: // wait for response
-                dmsg(@"0");
+                rsp(@"0");
                 if (!kfifo_len(&rxqueue)) {
-                    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+                    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW/*DISPATCH_TIME_FOREVER*/);
+                    if ([self getTimeoutValue] >= 3) {
+                        msg(@"FSM1 - timeout");
+                        return 1;
+                    }
                 } else {
                     fsm = 1;
                 }
                 break;
 
             case 1: // find leading code
-                dmsg(@"1");
+                rsp(@"1");
                 if (kfifo_len(&rxqueue)) {
                     kfifo_out(&rxqueue, &tmp, 1);
                     if (tmp == 0xFA) {
@@ -188,23 +202,31 @@
                 break;
 
             case 2: // get length
-                dmsg(@"2");
+                rsp(@"2");
                 kfifo_out(&rxqueue, &tmp, 1);
                 pkt[1] = tmp;
                 fsm    = 3;
+
+                [self resetTimeoutTimer];
                 break;
 
             case 3: // get packet content
-                dmsg(@"3");
+                rsp(@"3");
                 if (kfifo_len(&rxqueue) >= (pkt[1]-2)) {
                     kfifo_out(&rxqueue, &pkt[2], pkt[1]-2);
                     fsm = 4;
                 } else {
-                    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+                    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW/*DISPATCH_TIME_FOREVER*/);
+                    if ([self getTimeoutValue] >= 3) {
+                        msg(@"FSM3 - timeout");
+                        return 3;
+                    }
                 }
                 break;
         }
     }
+
+    [self stopTimeoutTimer];
 
     // cheak packet
     switch (pkt[2]) {
@@ -226,13 +248,51 @@
             break;
     }
 
-    dmsg(@"getResponsePacket - end");
+    rsp(@"getResponsePacket - end");
+    return 0;
 }
 
 
 - (NSData *)getRxPkt
 {
     return rxpkt;
+}
+
+
+/*---------------------------------------------------------------------------*/
+#pragma mark -
+/*---------------------------------------------------------------------------*/
+- (void)startTimeoutTimer
+{
+    [self resetTimeoutTimer];
+
+//    toTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerHandle:) userInfo:nil repeats:YES];
+//    [toTimer fire];
+
+//    BOOL timerState = [toTimer isValid];
+//    NSLog(@"Timer Validity is: %@", timerState?@"YES":@"NO");
+}
+
+- (void)stopTimeoutTimer
+{
+//    [toTimer invalidate];
+
+}
+
+- (void)resetTimeoutTimer
+{
+    toCount = 0;
+}
+
+- (NSUInteger)getTimeoutValue
+{
+    return toCount;
+}
+
+- (void)timerHandle:(NSTimer *)timer
+{
+    toCount++;
+//    dmsg(@"toCount=%0d", toCount);
 }
 
 

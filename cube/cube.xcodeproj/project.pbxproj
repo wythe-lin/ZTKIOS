@@ -55,6 +55,10 @@
 		9AD3B0501ADF9D5A00963D89 /* YMSCBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0211ADF9D5A00963D89 /* YMSCBUtils.m */; };
 		9AD8A6951AC40A41009BE6A8 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8A6941AC40A41009BE6A8 /* ImageViewController.m */; };
 		9AD8A6981AC40E58009BE6A8 /* CollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8A6971AC40E58009BE6A8 /* CollectionCell.m */; };
+		9AE8AC2A1AFB48DB00B655A9 /* PlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE8AC291AFB48DB00B655A9 /* PlanViewController.m */; };
+		9AE8AC301AFB4A5200B655A9 /* RMSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE8AC2E1AFB4A5200B655A9 /* RMSwipeTableViewCell.m */; };
+		9AE8AC331AFB4B0900B655A9 /* PlanViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE8AC321AFB4B0900B655A9 /* PlanViewCell.m */; };
+		9AE8AC361AFB68EA00B655A9 /* ZTColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE8AC351AFB68EA00B655A9 /* ZTColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +167,14 @@
 		9AD8A6941AC40A41009BE6A8 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		9AD8A6961AC40E58009BE6A8 /* CollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionCell.h; sourceTree = "<group>"; };
 		9AD8A6971AC40E58009BE6A8 /* CollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionCell.m; sourceTree = "<group>"; };
+		9AE8AC281AFB48DB00B655A9 /* PlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanViewController.h; sourceTree = "<group>"; };
+		9AE8AC291AFB48DB00B655A9 /* PlanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanViewController.m; sourceTree = "<group>"; };
+		9AE8AC2D1AFB4A5200B655A9 /* RMSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSwipeTableViewCell.h; sourceTree = "<group>"; };
+		9AE8AC2E1AFB4A5200B655A9 /* RMSwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSwipeTableViewCell.m; sourceTree = "<group>"; };
+		9AE8AC311AFB4AFE00B655A9 /* PlanViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlanViewCell.h; sourceTree = "<group>"; };
+		9AE8AC321AFB4B0900B655A9 /* PlanViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanViewCell.m; sourceTree = "<group>"; };
+		9AE8AC341AFB685200B655A9 /* ZTColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTColor.h; sourceTree = "<group>"; };
+		9AE8AC351AFB68EA00B655A9 /* ZTColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTColor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +269,12 @@
 				9AD8A6941AC40A41009BE6A8 /* ImageViewController.m */,
 				9AD8A6961AC40E58009BE6A8 /* CollectionCell.h */,
 				9AD8A6971AC40E58009BE6A8 /* CollectionCell.m */,
+				9AE8AC281AFB48DB00B655A9 /* PlanViewController.h */,
+				9AE8AC291AFB48DB00B655A9 /* PlanViewController.m */,
+				9AE8AC311AFB4AFE00B655A9 /* PlanViewCell.h */,
+				9AE8AC321AFB4B0900B655A9 /* PlanViewCell.m */,
+				9AE8AC341AFB685200B655A9 /* ZTColor.h */,
+				9AE8AC351AFB68EA00B655A9 /* ZTColor.m */,
 				9A3808D91A710810009F3B10 /* DbgMsg.h */,
 				9AAA31581A67E845001D5B52 /* Main.storyboard */,
 				9AAA315B1A67E845001D5B52 /* Images.xcassets */,
@@ -311,6 +329,7 @@
 				9AD3AFC61ADF9D5A00963D89 /* KLCPopup */,
 				9AD3AFC91ADF9D5A00963D89 /* MBProgressHUD */,
 				9AD3AFF21ADF9D5A00963D89 /* PSTCollectionView */,
+				9AE8AC2B1AFB4A5200B655A9 /* RMSwipeTableViewCell */,
 				9AD3B00F1ADF9D5A00963D89 /* YmsCoreBluetooth */,
 			);
 			path = OpenSource;
@@ -394,6 +413,15 @@
 			path = YmsCoreBluetooth;
 			sourceTree = "<group>";
 		};
+		9AE8AC2B1AFB4A5200B655A9 /* RMSwipeTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				9AE8AC2D1AFB4A5200B655A9 /* RMSwipeTableViewCell.h */,
+				9AE8AC2E1AFB4A5200B655A9 /* RMSwipeTableViewCell.m */,
+			);
+			path = RMSwipeTableViewCell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -444,6 +472,11 @@
 					9AAA31471A67E845001D5B52 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = 4M8S7GUF3Y;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					9AAA31631A67E845001D5B52 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -496,6 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AD3B03E1ADF9D5A00963D89 /* PSTCollectionViewController.m in Sources */,
+				9AE8AC331AFB4B0900B655A9 /* PlanViewCell.m in Sources */,
 				9AD3B04C1ADF9D5A00963D89 /* YMSCBDescriptor.m in Sources */,
 				9AC90AAA1ACBDFEE00CA072B /* kfifo.c in Sources */,
 				9A379EF51A8B55000002FB5C /* ZTCentralManager.m in Sources */,
@@ -510,6 +544,7 @@
 				9AD3B0491ADF9D5A00963D89 /* YMS128.c in Sources */,
 				9AD3B04E1ADF9D5A00963D89 /* YMSCBService.m in Sources */,
 				9AD3B0411ADF9D5A00963D89 /* PSTCollectionViewItemKey.m in Sources */,
+				9AE8AC361AFB68EA00B655A9 /* ZTColor.m in Sources */,
 				9AD3B0471ADF9D5A00963D89 /* PSTGridLayoutSection.m in Sources */,
 				9AAA31571A67E845001D5B52 /* ScanViewController.m in Sources */,
 				9AD3B04D1ADF9D5A00963D89 /* YMSCBPeripheral.m in Sources */,
@@ -528,8 +563,10 @@
 				9AD3B03F1ADF9D5A00963D89 /* PSTCollectionViewData.m in Sources */,
 				9AD3B04F1ADF9D5A00963D89 /* YMSCBStoredPeripherals.m in Sources */,
 				9AD3B0431ADF9D5A00963D89 /* PSTCollectionViewUpdateItem.m in Sources */,
+				9AE8AC2A1AFB48DB00B655A9 /* PlanViewController.m in Sources */,
 				9AD8A6981AC40E58009BE6A8 /* CollectionCell.m in Sources */,
 				9AAA31541A67E845001D5B52 /* RecordViewController.m in Sources */,
+				9AE8AC301AFB4A5200B655A9 /* RMSwipeTableViewCell.m in Sources */,
 				9AD3B0401ADF9D5A00963D89 /* PSTCollectionViewFlowLayout.m in Sources */,
 				9AD3B03D1ADF9D5A00963D89 /* PSTCollectionViewCell.m in Sources */,
 				9AC343F31A92035A00CBE7AF /* ZTProtrackService.m in Sources */,

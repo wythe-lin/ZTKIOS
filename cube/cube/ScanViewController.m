@@ -23,7 +23,7 @@
  */
 
 #import "ScanViewController.h"
-
+#import "ZTColor.h"
 
 NSMutableArray  *connectList;
 
@@ -81,12 +81,15 @@ NSMutableArray  *connectList;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.title = @"Device";
     self.navigationItem.title = @"Scan Device";
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+//    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationController.navigationBar.barTintColor = [ZTColor lightBlueColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 
-    self.view.backgroundColor = [UIColor colorWithRed:86.0/255.0 green:161.0/255.0 blue:217.0/255.0 alpha:1.0];
+    [self.tableView setSeparatorColor:[UIColor whiteColor]];
+    self.view.backgroundColor = [ZTColor lightBlueColor];
 
     // for refresh control
-    UIRefreshControl    *refreshControl = [[UIRefreshControl alloc] init];
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(handleRefresh) forControlEvents:UIControlEventValueChanged];
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     refreshControl.tintColor = [UIColor whiteColor];
@@ -227,7 +230,7 @@ NSMutableArray  *connectList;
     sectionLabel.textColor = [UIColor whiteColor];
     sectionLabel.text = [self tableView:tableView titleForHeaderInSection:section];
 
-    [headerView setBackgroundColor:[UIColor colorWithRed:79.0/255.0 green:127.0/255.0 blue:179.0/255.0 alpha:1.0]];
+    [headerView setBackgroundColor:[ZTColor darkBlueColor]];
     [headerView addSubview:sectionLabel];
     return headerView;
 }

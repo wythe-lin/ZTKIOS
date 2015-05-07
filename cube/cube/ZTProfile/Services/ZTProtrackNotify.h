@@ -40,6 +40,9 @@
     dispatch_semaphore_t    semaphore;
 
     NSData                  *rxpkt;
+
+    NSUInteger              toCount;
+    NSTimer                 *toTimer;
 }
 
 @property (nonatomic, assign, getter = getAck) NSInteger        ack;
@@ -70,7 +73,7 @@
  */
 - (void)turnOff;
 
-- (void)getResponsePacket;
+- (NSUInteger)getResponsePacket;
 - (NSData *)getRxPkt;
 
 

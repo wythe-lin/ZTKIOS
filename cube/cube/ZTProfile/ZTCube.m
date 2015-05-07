@@ -240,27 +240,33 @@
     ZTProtrackNotify  *response = self.serviceDict[@"protrack_notify"];
 
     [request inquiryPic];
-    [response getResponsePacket];
-    pic = [response getPicBlk];
-    if (!pic) {
-        dmsg(@"download - no picture");
+    if ([response getResponsePacket]) {
         return;
     }
-    dmsg(@"download - %0d picture", pic);
+    pic = [response getPicBlk];
+    if (!pic) {
+        dmsg(@"no picture");
+        return;
+    }
+    dmsg(@"picture=%0d", pic);
 
     for (int j=1; j<pic+1; j++) {
         [request inquiryBlock:j];
-        [response getResponsePacket];
+        if ([response getResponsePacket]) {
+            return;
+        }
         block = [response getPicBlk];
+        dmsg(@"picture(%0d), block(%0d)", j, block);
 
         NSMutableData *FileContent = [[NSMutableData alloc] init];
         for (int n=0; n<block; n++) {
             [request getPic:j block:n];
-            [response getResponsePacket];
+            if ([response getResponsePacket]) {
+                return;
+            }
             NSData *p = [response getRxPkt];
             [FileContent appendData:p];
         }
-
         dmsg(@"download - %@", FileContent);
 
         //取得Document Path
