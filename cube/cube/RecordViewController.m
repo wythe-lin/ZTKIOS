@@ -140,6 +140,10 @@ extern NSMutableArray   *connectList;
     //
     isRecording  = NO;
 
+    //
+    UIPickerView *picker = (UIPickerView *)[self.view viewWithTag:10];
+    [picker selectRow:1 inComponent:2 animated:NO];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated

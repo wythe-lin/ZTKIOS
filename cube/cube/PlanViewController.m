@@ -113,14 +113,14 @@
 
     //
     _hourLst = [NSMutableArray arrayWithObjects:@"00", @"01", @"02", @"03", @"04", @"05", @"06", @"07", @"08", @"09", @"10", @"11",
-                @"12", @"13", @"14", @"15", @"16", @"17", @"18", @"19", @"20", @"21", @"22", @"23", nil];
+                                                @"12", @"13", @"14", @"15", @"16", @"17", @"18", @"19", @"20", @"21", @"22", @"23", nil];
 
     _minLst  = [NSMutableArray arrayWithObjects:@"00", @"01", @"02", @"03", @"04", @"05", @"06", @"07", @"08", @"09",
-                @"10", @"11", @"12", @"13", @"14", @"15", @"16", @"17", @"18", @"19",
-                @"20", @"21", @"22", @"23", @"24", @"25", @"26", @"27", @"28", @"29",
-                @"30", @"31", @"32", @"33", @"34", @"35", @"36", @"37", @"38", @"39",
-                @"40", @"41", @"42", @"43", @"44", @"45", @"46", @"47", @"48", @"49",
-                @"50", @"51", @"52", @"53", @"54", @"55", @"56", @"57", @"58", @"59", nil];
+                                                @"10", @"11", @"12", @"13", @"14", @"15", @"16", @"17", @"18", @"19",
+                                                @"20", @"21", @"22", @"23", @"24", @"25", @"26", @"27", @"28", @"29",
+                                                @"30", @"31", @"32", @"33", @"34", @"35", @"36", @"37", @"38", @"39",
+                                                @"40", @"41", @"42", @"43", @"44", @"45", @"46", @"47", @"48", @"49",
+                                                @"50", @"51", @"52", @"53", @"54", @"55", @"56", @"57", @"58", @"59", nil];
 
 }
 
@@ -405,15 +405,6 @@ NSSecondCalendarUnit \
     }
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    switch (component) {
-        case 0:     return [_hourLst objectAtIndex:row];
-        case 1:     return [_minLst objectAtIndex:row];
-        default:    return nil;
-    }
-}
-
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     switch (component) {
@@ -422,7 +413,6 @@ NSSecondCalendarUnit \
         default:    break;
     }
 }
-
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
