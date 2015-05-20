@@ -50,7 +50,7 @@ BOOL isDownloading = NO;
     #define LogIV(...)
 #endif
 
-#define msg(fmt, ...)       LOG_FORMAT(fmt, @"IV", ##__VA_ARGS__)
+#define msg(fmt, ...)           LOG_FORMAT(fmt, @"IV", ##__VA_ARGS__)
 
 
 /*
@@ -120,8 +120,8 @@ typedef NS_ENUM(NSInteger, CellType)
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.title = @"Pictures";
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
+//    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.view.backgroundColor = [ZTColor lightBlueColor];
     self.collectionView.backgroundColor = [ZTColor darkBlueColor];
 
@@ -161,6 +161,7 @@ typedef NS_ENUM(NSInteger, CellType)
     // erase button
     erase = (UIButton *)[self.view viewWithTag:130];
     [self setButton:erase title:@"Erase" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
+
 
     // download button
     download = (UIButton *)[self.view viewWithTag:131];
@@ -390,7 +391,7 @@ typedef NS_ENUM(NSInteger, CellType)
     popLabel.backgroundColor = [UIColor clearColor];
     popLabel.textColor = [UIColor whiteColor];
     popLabel.font = [UIFont boldSystemFontOfSize:12.0];
-    popLabel.text = @"ZealTek";
+    popLabel.text = @"WCube";
 
     [contentView addSubview:popLabel];
 

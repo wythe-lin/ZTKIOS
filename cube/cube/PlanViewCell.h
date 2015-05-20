@@ -33,7 +33,7 @@
 @property (nonatomic, strong) UIImageView *checkmarkProfileImageView;
 @property (nonatomic, strong) UIImageView *deleteGreyImageView;
 @property (nonatomic, strong) UIImageView *deleteRedImageView;
-@property (nonatomic, assign) BOOL isFavourite;
+@property (nonatomic, assign, getter=getIsFavourite) BOOL isFavourite;
 
 -(void)setThumbnail:(UIImage *)image;
 -(void)setFavourite:(BOOL)favourite animated:(BOOL)animated;
@@ -44,5 +44,6 @@
 @property (nonatomic, strong) UILabel *begin;
 @property (nonatomic, strong) UILabel *end;
 
+@property (nonatomic, assign, getter=getIsCamera,  setter=setIsCamera:) BOOL isCamera;
 
 @end

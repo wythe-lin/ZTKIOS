@@ -94,8 +94,7 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 
     // register tableview cell
-    static NSString *CellIdentifier = @"PlanCell";
-    [self.tableView registerClass:[PlanViewCell class] forCellReuseIdentifier:CellIdentifier];
+    [self.tableView registerClass:[PlanViewCell class] forCellReuseIdentifier:@"PlanCell"];
     [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     [self.tableView setRowHeight:64];
     [self.tableView setSeparatorColor:[UIColor whiteColor]];
@@ -108,8 +107,12 @@
     self.tableView.contentInset = self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, - CGRectGetHeight(view.frame), 0);
 
     //
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(resetPlanView)];
-    [self.navigationItem setRightBarButtonItem:barButtonItem];
+    UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(sendPlanView)];
+    [self.navigationItem setRightBarButtonItem:sendButton];
+
+    UIBarButtonItem *resetButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(resetPlanView)];
+    [self.navigationItem setLeftBarButtonItem:resetButton];
+
 
     //
     _hourLst = [NSMutableArray arrayWithObjects:@"00", @"01", @"02", @"03", @"04", @"05", @"06", @"07", @"08", @"09", @"10", @"11",
@@ -130,15 +133,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)resetPlanView
-{
-    dmsg(@"resetPlanView");
-
-    [_array removeAllObjects];
-    _array = nil;
-    [self.tableView reloadData];
-}
-
 - (NSMutableArray *)array
 {
     if (!_array) {
@@ -150,6 +144,50 @@
     }
     return _array;
 }
+
+
+/*---------------------------------------------------------------------------*/
+#pragma mark -
+/*---------------------------------------------------------------------------*/
+- (void)resetPlanView
+{
+    dmsg(@"resetPlanView");
+
+    [_array removeAllObjects];
+    _array = nil;
+    [self.tableView reloadData];
+}
+
+- (void)sendPlanView
+{
+    dmsg(@"sendPlanView");
+
+    NSIndexPath *indexPath;
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+
+    for (NSUInteger i=0; i<5; i++) {
+        indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        PlanViewCell *cell = (PlanViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+
+        dmsg(@"cell(%0lu) - isEnabled=%@, isCamera=%@, begin=%@, end=%@",
+             (unsigned long)i,
+             [cell getIsFavourite] ? @"YES" : @"NO ",
+             [cell getIsCamera] ? @"YES" : @"NO ",
+             [dateFormatter stringFromDate:[cell getBeginTime]],
+             [dateFormatter stringFromDate:[cell getEndTime]]);
+    }
+
+
+
+
+}
+
+
+
+
 
 
 
@@ -232,6 +270,7 @@
     }
 
     [cell setFavourite:[(self.array)[indexPath.row][@"isEnabled"] boolValue] animated:NO];
+    [cell setIsCamera:[(self.array)[indexPath.row][@"isCamera"] boolValue]];
     cell.delegate = self;
 
     return cell;
@@ -467,6 +506,7 @@ NSSecondCalendarUnit \
             } else {
                 (self.array)[indexPath.row][@"isCamera"] = @YES;
             }
+            [cell setIsCamera:[(self.array)[indexPath.row][@"isCamera"] boolValue]];
 
             NSDate *t = [cell getEndTime];
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
