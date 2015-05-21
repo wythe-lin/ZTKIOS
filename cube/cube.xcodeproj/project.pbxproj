@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9A379EF51A8B55000002FB5C /* ZTCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EF41A8B55000002FB5C /* ZTCentralManager.m */; };
-		9A379F291A8B61130002FB5C /* DEAAccelerometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379F181A8B61130002FB5C /* DEAAccelerometerService.m */; };
 		9A40B1E01A6F71FD003C96D5 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A40B1DF1A6F71FD003C96D5 /* CoreBluetooth.framework */; };
 		9AAA314E1A67E845001D5B52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA314D1A67E845001D5B52 /* main.m */; };
 		9AAA31511A67E845001D5B52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA31501A67E845001D5B52 /* AppDelegate.m */; };
@@ -74,9 +73,6 @@
 /* Begin PBXFileReference section */
 		9A379EF31A8B55000002FB5C /* ZTCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTCentralManager.h; path = ZTProfile/ZTCentralManager.h; sourceTree = "<group>"; };
 		9A379EF41A8B55000002FB5C /* ZTCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTCentralManager.m; path = ZTProfile/ZTCentralManager.m; sourceTree = "<group>"; };
-		9A379EF81A8B56530002FB5C /* TISensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TISensorTag.h; path = ZTProfile/TISensorTag.h; sourceTree = "<group>"; };
-		9A379F171A8B61130002FB5C /* DEAAccelerometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEAAccelerometerService.h; path = ZTProfile/Services/DEAAccelerometerService.h; sourceTree = "<group>"; };
-		9A379F181A8B61130002FB5C /* DEAAccelerometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEAAccelerometerService.m; path = ZTProfile/Services/DEAAccelerometerService.m; sourceTree = "<group>"; };
 		9A379F321A8B61250002FB5C /* YmsCoreBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YmsCoreBluetooth.h; path = ZTProfile/YmsCoreBluetooth.h; sourceTree = "<group>"; };
 		9A3808D91A710810009F3B10 /* DbgMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbgMsg.h; sourceTree = "<group>"; };
 		9A40B1DF1A6F71FD003C96D5 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -209,7 +205,6 @@
 				9A379EF41A8B55000002FB5C /* ZTCentralManager.m */,
 				9AC0E71E1A8DE967002D24DD /* ZTCube.h */,
 				9AC0E71F1A8DE967002D24DD /* ZTCube.m */,
-				9A379EF81A8B56530002FB5C /* TISensorTag.h */,
 			);
 			name = ZTProfile;
 			sourceTree = "<group>";
@@ -227,8 +222,6 @@
 				9AC343F21A92035A00CBE7AF /* ZTProtrackService.m */,
 				9AD0C7511AA856C700E32C3D /* ZTProtrackNotify.h */,
 				9AD0C7521AA856C700E32C3D /* ZTProtrackNotify.m */,
-				9A379F171A8B61130002FB5C /* DEAAccelerometerService.h */,
-				9A379F181A8B61130002FB5C /* DEAAccelerometerService.m */,
 				9AC90AA81ACBDFD100CA072B /* kfifo.h */,
 				9AC90AA91ACBDFEE00CA072B /* kfifo.c */,
 			);
@@ -550,7 +543,6 @@
 				9AD3B04D1ADF9D5A00963D89 /* YMSCBPeripheral.m in Sources */,
 				9AAA31511A67E845001D5B52 /* AppDelegate.m in Sources */,
 				9AD3B04B1ADF9D5A00963D89 /* YMSCBCharacteristic.m in Sources */,
-				9A379F291A8B61130002FB5C /* DEAAccelerometerService.m in Sources */,
 				9AC0E7201A8DE967002D24DD /* ZTCube.m in Sources */,
 				9AD3B0451ADF9D5A00963D89 /* PSTGridLayoutItem.m in Sources */,
 				9AD3B0371ADF9D5A00963D89 /* MBProgressHUD.m in Sources */,

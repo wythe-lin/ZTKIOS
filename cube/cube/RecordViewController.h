@@ -23,12 +23,11 @@
  */
 
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
 
 #import "ZTCentralManager.h"
 #import "ZTCube.h"
 #import "ZTBatteryService.h"
-#import "MBProgressHUD.h"
+
 
 @interface RecordViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate>
 {
@@ -39,13 +38,18 @@
 
     UILabel             *battery;
     UILabel             *version;
+    UILabel             *capacity;
 
     NSInteger           rvResolution;
     NSInteger           rvPower;
     NSInteger           rvSpeed;
 
+    NSUInteger          remainCapacity;
+
     BOOL                isRecording;
 }
+
+
 
 /// Instance of ZTCube.
 @property (strong, nonatomic) ZTCube            *ztCube;

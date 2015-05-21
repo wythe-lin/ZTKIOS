@@ -25,7 +25,6 @@
 #import "ZTCentralManager.h"
 
 #import "ZTCube.h"
-#import "TISensorTag.h"
 
 
 /*
@@ -138,8 +137,8 @@ static ZTCentralManager     *sharedCentralManager;
             if ([pname isEqualToString:peripheral.name]) {
                 ZTCube *ztCube = [[ZTCube alloc] initWithPeripheral:peripheral
                                                             central:self
-                                                             baseHi:kSensorTag_BASE_ADDRESS_HI
-                                                             baseLo:kSensorTag_BASE_ADDRESS_LO];
+                                                             baseHi:kZTCube_BASE_ADDRESS_HI
+                                                             baseLo:kZTCube_BASE_ADDRESS_LO];
 
                 [self addPeripheral:ztCube];
                 isUnknownPeripheral = NO;

@@ -50,6 +50,9 @@
 
 }
 
+// the remaining capacity
+@property (nonatomic, assign, getter=getRemCapacity, setter=setRemCapacity:) NSInteger remCapacity;
+
 // Convenience pointer to device information service.
 @property (nonatomic, readonly) ZTDeviceInfoService     *devinfo;
 
@@ -60,10 +63,14 @@
 
 @property (nonatomic, readonly) ZTProtrackNotify        *protrackNotify;
 
-
 - (void)startRecord:(NSInteger)resolution Speed:(NSInteger)speed Power:(NSInteger)power;
 - (void)stopRecord;
 - (void)snapshot:(NSInteger)resolution Power:(NSInteger)power;
 - (void)download;
+
+- (NSUInteger)inquiryPic;
+- (NSUInteger)inquiryBlock:(NSUInteger)pic;
+- (void)getPics:(NSUInteger)pic block:(NSUInteger)totalBlk;
+
 
 @end

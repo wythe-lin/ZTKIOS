@@ -26,8 +26,11 @@
 #import "ZTColor.h"
 #import "KLCPopup.h"
 
+#import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 
+
+extern NSMutableArray   *connectList;
 
 /*
  ******************************************************************************
@@ -151,38 +154,76 @@
 /*---------------------------------------------------------------------------*/
 - (void)resetPlanView
 {
-    dmsg(@"resetPlanView");
+    dmsg(@"resetPlanView - begin");
 
     [_array removeAllObjects];
     _array = nil;
     [self.tableView reloadData];
+
+    dmsg(@"resetPlanView - end");
 }
 
 - (void)sendPlanView
 {
-    dmsg(@"sendPlanView");
+    dmsg(@"sendPlanView - begin");
 
-    NSIndexPath *indexPath;
+    if (![connectList count]) {
+        return;
+    }
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 //    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     [dateFormatter setDateFormat:@"HH:mm:ss"];
 
-    for (NSUInteger i=0; i<5; i++) {
-        indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-        PlanViewCell *cell = (PlanViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    self.ztCube = (ZTCube *) [connectList objectAtIndex:0];
 
-        dmsg(@"cell(%0lu) - isEnabled=%@, isCamera=%@, begin=%@, end=%@",
-             (unsigned long)i,
-             [cell getIsFavourite] ? @"YES" : @"NO ",
-             [cell getIsCamera] ? @"YES" : @"NO ",
-             [dateFormatter stringFromDate:[cell getBeginTime]],
-             [dateFormatter stringFromDate:[cell getEndTime]]);
-    }
+    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
+    HUD.dimBackground = YES;
+    HUD.labelText = @"connecting...";
 
+    [HUD showAnimated:YES whileExecutingBlock:^{
+        dmsg(@"executing block...");
+        [UIApplication sharedApplication].idleTimerDisabled = YES;
 
+        [[[[self.tabBarController tabBar]items]objectAtIndex:0]setEnabled:FALSE];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:FALSE];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:3]setEnabled:FALSE];
 
+        [self.ztCube connect];
 
+        for (NSUInteger i=0; i<5; i++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            PlanViewCell *cell = (PlanViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+
+            dmsg(@"cell(%0lu) - isEnabled=%@, isCamera=%@, begin=%@, end=%@",
+                 (unsigned long)i,
+                 [cell getIsFavourite] ? @"YES" : @"NO ",
+                 [cell getIsCamera] ? @"YES" : @"NO ",
+                 [dateFormatter stringFromDate:[cell getBeginTime]],
+                 [dateFormatter stringFromDate:[cell getEndTime]]);
+
+            HUD.labelText = [NSString stringWithFormat:@"send %0d/5 plann...", i+1];
+            sleep(1);
+        }
+
+        [self.ztCube disconnect];
+
+        HUD.labelText = @"completed!";
+        sleep(1);
+
+    } completionBlock:^{
+        dmsg(@"completion block...");
+        [HUD removeFromSuperview];
+
+        [[[[self.tabBarController tabBar]items]objectAtIndex:0]setEnabled:TRUE];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:TRUE];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:3]setEnabled:TRUE];
+
+        [UIApplication sharedApplication].idleTimerDisabled = NO;
+    }];
+
+    dmsg(@"sendPlanView - end");
 }
 
 

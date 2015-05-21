@@ -25,6 +25,8 @@
 #import <UIKit/UIKit.h>
 #import "PlanViewCell.h"
 
+#import "ZTCube.h"
+
 @interface PlanViewController : UITableViewController <RMSwipeTableViewCellDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 {
     PlanViewCell   *select;
@@ -37,5 +39,8 @@
 @property (nonatomic, assign, getter=getHour, setter=setHour:) NSInteger hour;
 @property (nonatomic, assign, getter=getMin,  setter=setMin:)  NSInteger min;
 
+
+/// Instance of ZTCube.
+@property (strong, nonatomic) ZTCube            *ztCube;
 
 @end

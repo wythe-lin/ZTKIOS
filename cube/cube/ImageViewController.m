@@ -120,10 +120,19 @@ typedef NS_ENUM(NSInteger, CellType)
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.title = @"Pictures";
+    self.navigationItem.title = @"Planning";
 //    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [ZTColor lightBlueColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+
     self.view.backgroundColor = [ZTColor lightBlueColor];
     self.collectionView.backgroundColor = [ZTColor darkBlueColor];
+
+    //
+    UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(eraseButtonPress:)];
+    [self.navigationItem setRightBarButtonItem:sendButton];
 
 
     // Defaults
@@ -275,11 +284,22 @@ typedef NS_ENUM(NSInteger, CellType)
 
         [[[[self.tabBarController tabBar]items]objectAtIndex:0]setEnabled:FALSE];
         [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:FALSE];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:3]setEnabled:FALSE];
 
         [self.ztCube connect];
 
-        HUD.labelText = @"downloading...";
-        [self.ztCube download];
+//        HUD.labelText = @"downloading...";
+//        [self.ztCube download];
+
+        NSUInteger totalPics = [self.ztCube inquiryPic];
+        for (NSUInteger pic=1; pic<totalPics+1; pic++) {
+            HUD.labelText = [NSString stringWithFormat:@"downloading %0lu/%0lu...", (unsigned long)pic, (unsigned long)totalPics];
+
+            NSUInteger  totalBlks = [self.ztCube inquiryBlock:pic];
+            if (totalBlks) {
+                [self.ztCube getPics:pic block:totalBlks];
+            }
+        }
 
         [self.ztCube disconnect];
 
@@ -296,6 +316,7 @@ typedef NS_ENUM(NSInteger, CellType)
 
         [[[[self.tabBarController tabBar]items]objectAtIndex:0]setEnabled:TRUE];
         [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:TRUE];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:3]setEnabled:TRUE];
 
         [UIApplication sharedApplication].idleTimerDisabled = NO;
     }];

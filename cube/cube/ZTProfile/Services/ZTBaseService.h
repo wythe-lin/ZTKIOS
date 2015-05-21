@@ -23,8 +23,6 @@
  */
 
 #import "YMSCBService.h"
-#include "TISensorTag.h"
-
 
 
 /**

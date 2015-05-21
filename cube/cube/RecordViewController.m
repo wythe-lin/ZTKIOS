@@ -26,6 +26,9 @@
 #import "ZTBatteryService.h"
 #import "ZTColor.h"
 
+#import "MBProgressHUD.h"
+#import <QuartzCore/QuartzCore.h>
+
 extern NSMutableArray   *connectList;
 
 /*
@@ -112,6 +115,17 @@ extern NSMutableArray   *connectList;
     snapshot = (UIButton *)[self.view viewWithTag:102];
     [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
 
+    //
+    rvResolution   = 0;
+    rvPower        = 0;
+    rvSpeed        = 0;
+
+    remainCapacity = 0;
+
+    //
+    isRecording    = NO;
+
+
     // battery level
     battery                 = (UILabel *)[self.view viewWithTag:200];
     battery.textColor       = [UIColor whiteColor];
@@ -129,16 +143,15 @@ extern NSMutableArray   *connectList;
     version.font            = [UIFont fontWithName:@"HelveticaNeue" size:12.0];
     version.text            = [NSString stringWithFormat:@"%@ (%@)", ver, build];
 
+    // The remaining capacity
+    capacity                 = (UILabel *)[self.view viewWithTag:202];
+    capacity.textColor       = [UIColor whiteColor];
+    capacity.backgroundColor = [UIColor clearColor];
+    capacity.font            = [UIFont fontWithName:@"HelveticaNeue" size:12.0];
+    capacity.text            = [NSString stringWithFormat:@"%0luMB", (unsigned long)remainCapacity];
+
     // core bluetooth
     [ZTCentralManager initSharedServiceWithDelegate:self];
-
-    //
-    rvResolution = 0;
-    rvPower      = 0;
-    rvSpeed      = 0;
-
-    //
-    isRecording  = NO;
 
     //
     UIPickerView *picker = (UIPickerView *)[self.view viewWithTag:10];
@@ -305,6 +318,9 @@ extern NSMutableArray   *connectList;
 
         [self.battServ removeObserver:self forKeyPath:@"batteryLevel"];
 
+        remainCapacity = [self.ztCube getRemCapacity];
+        capacity.text  = [NSString stringWithFormat:@"%0luMB", (unsigned long)remainCapacity];
+
         if (isRecording == NO) {
             isRecording = YES;
         } else {
@@ -352,6 +368,7 @@ extern NSMutableArray   *connectList;
 
         [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:FALSE];
         [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:FALSE];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:3]setEnabled:FALSE];
 
         [self.ztCube connect];
 
@@ -369,11 +386,15 @@ extern NSMutableArray   *connectList;
 
         [self.battServ removeObserver:self forKeyPath:@"batteryLevel"];
 
+        remainCapacity = [self.ztCube getRemCapacity];
+        capacity.text  = [NSString stringWithFormat:@"%0luMB", (unsigned long)remainCapacity];
+
         [self setButton:record   title:@"Record"   titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
         [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
 
         [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:TRUE];
         [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:TRUE];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:3]setEnabled:TRUE];
 
         [UIApplication sharedApplication].idleTimerDisabled = NO;
     }];

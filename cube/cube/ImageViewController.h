@@ -26,7 +26,7 @@
 
 #import "ZTCube.h"
 #import "ZTBatteryService.h"
-#import "MBProgressHUD.h"
+
 
 @interface ImageViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {

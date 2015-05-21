@@ -24,6 +24,10 @@
 
 #import "YmsCoreBluetooth.h"
 
+#define kZTCube_BASE_ADDRESS_HI     0xF000000004514000
+#define kZTCube_BASE_ADDRESS_LO     0xB000000000000000
+
+
 /**
  Application CoreBluetooth central manager service for Deanna.
  
