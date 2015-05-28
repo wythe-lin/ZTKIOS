@@ -156,10 +156,10 @@
 
     }];
 
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC));
+    dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC));
+    dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC));
+    dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC));
 
     //
     sleep(1);
@@ -171,7 +171,9 @@
     dmsg(@"disconnect - begin");
     sleep(2);
 
-    [super disconnect];
+    if ([self isConnected] == YES) {
+        [super disconnect];
+    }
 
     sleep(3);
     dmsg(@"disconnect - end");
@@ -194,6 +196,10 @@
     ZTProtrackService *request  = self.serviceDict[@"protrack_write"];
     ZTProtrackNotify  *response = self.serviceDict[@"protrack_notify"];
 
+    if ([self isConnected] == NO) {
+        return;
+    }
+
     [request setDate];
     [response getResponsePacket];
 
@@ -210,6 +216,10 @@
     ZTProtrackService *request  = self.serviceDict[@"protrack_write"];
     ZTProtrackNotify  *response = self.serviceDict[@"protrack_notify"];
 
+    if ([self isConnected] == NO) {
+        return;
+    }
+
     [request recordStop];
     [response getResponsePacket];
 
@@ -223,10 +233,28 @@
     ZTProtrackService *request  = self.serviceDict[@"protrack_write"];
     ZTProtrackNotify  *response = self.serviceDict[@"protrack_notify"];
 
-    [request setDate];
-    [response getResponsePacket];
+    if ([self isConnected] == NO) {
+        return;
+    }
 
     [request snapshot:resolution power:power];
+    [response getResponsePacket];
+
+    [self setRemCapacity:[response getPicBlk]];
+}
+
+
+- (void)powerManager:(NSUInteger)option
+{
+    dmsg(@"powerManager:");
+    ZTProtrackService *request  = self.serviceDict[@"protrack_write"];
+    ZTProtrackNotify  *response = self.serviceDict[@"protrack_notify"];
+
+    if ([self isConnected] == NO) {
+        return;
+    }
+
+    [request powerManage:option];
     [response getResponsePacket];
 
     [self setRemCapacity:[response getPicBlk]];
@@ -239,6 +267,10 @@
     ZTProtrackService *request  = self.serviceDict[@"protrack_write"];
     ZTProtrackNotify  *response = self.serviceDict[@"protrack_notify"];
 
+    if ([self isConnected] == NO) {
+        return 0;
+    }
+
     [request inquiryPic];
     [response getResponsePacket];
     return [response getPicBlk];
@@ -250,6 +282,10 @@
     dmsg(@"inquiryBlock:");
     ZTProtrackService *request  = self.serviceDict[@"protrack_write"];
     ZTProtrackNotify  *response = self.serviceDict[@"protrack_notify"];
+
+    if ([self isConnected] == NO) {
+        return 0;
+    }
 
     [request inquiryBlock:pic];
     [response getResponsePacket];
@@ -332,96 +368,65 @@
 }
 
 
-
-- (void)download
+- (NSInteger)readGPIO:(NSInteger)num
 {
-    NSInteger       pic;
-    NSInteger       block;
+    dmsg(@"readGPIO:");
+    ZTProtrackService *req = self.serviceDict[@"protrack_write"];
+    ZTProtrackNotify  *rsp = self.serviceDict[@"protrack_notify"];
 
-    dmsg(@"download");
-    ZTProtrackService *request  = self.serviceDict[@"protrack_write"];
-    ZTProtrackNotify  *response = self.serviceDict[@"protrack_notify"];
-
-    [request inquiryPic];
-    if ([response getResponsePacket]) {
-        return;
+    if ([self isConnected] == NO) {
+        return 0;
     }
-    pic = [response getPicBlk];
-    if (!pic) {
-        dmsg(@"no picture");
-        return;
-    }
-    dmsg(@"picture=%0d", pic);
 
-    for (int j=1; j<pic+1; j++) {
-        [request inquiryBlock:j];
-        if ([response getResponsePacket]) {
-            return;
-        }
-        block = [response getPicBlk];
-        dmsg(@"picture(%0d), block(%0d)", j, block);
-
-        NSMutableData *FileContent = [[NSMutableData alloc] init];
-        for (int n=0; n<block; n++) {
-            [request getPic:j block:n];
-            if ([response getResponsePacket]) {
-                return;
-            }
-            NSData *p = [response getRxPkt];
-            [FileContent appendData:p];
-        }
-        dmsg(@"download - %@", FileContent);
-
-        //取得Document Path
-        NSArray *docDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentPath = [docDirectory  objectAtIndex:0];
-
-        //製作資料夾的路徑
-        NSString *foldername = @"wcube";
-        NSString *newFolderPath = [documentPath stringByAppendingPathComponent:foldername];
-
-        //檢查資料夾是否存在
-        NSError *error;
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        if (![fileManager contentsOfDirectoryAtPath:newFolderPath error:&error]) {
-            if (!error) {
-                msg(@"%@ - 資料夾已存在但是空的", foldername);
-            } else {
-                if ([fileManager createDirectoryAtPath:newFolderPath withIntermediateDirectories:YES attributes:nil error:nil]) {
-                    msg(@"%@ - 資料夾建立成功", foldername);
-                }
-            }
-        } else {
-            msg(@"%@ - 資料夾已存在", foldername);
-        }
-
-        //製作新檔案名稱
-        NSDate           *today     = [NSDate date];
-        NSCalendar       *calendar  = [NSCalendar currentCalendar];
-        NSDateComponents *component = [calendar components:(kCFCalendarUnitYear | kCFCalendarUnitMonth | kCFCalendarUnitDay | kCFCalendarUnitHour | kCFCalendarUnitMinute | kCFCalendarUnitSecond)
-                                              fromDate:today];
-        NSString *year     = [NSString stringWithFormat:@"%02ld", (long)[component year] % 2000];
-        NSString *month    = [year stringByAppendingFormat:@"%02ld", (long)[component month]];
-        NSString *day      = [month stringByAppendingFormat:@"%02ld", (long)[component day]];
-        NSString *hour     = [day stringByAppendingFormat:@"%02ld", (long)[component hour]];
-        NSString *minute   = [hour stringByAppendingFormat:@"%02ld", (long)[component minute]];
-        NSString *second   = [minute stringByAppendingFormat:@"%02ld", (long)[component second]];
-        NSString *filename = [second stringByAppendingFormat:@".jpg"];
-
-        //製作新檔案的路徑
-        NSString *newFilePath = [newFolderPath stringByAppendingPathComponent:filename];
-
-        //建立空白新檔案
-        if ([fileManager createFileAtPath:newFilePath contents:nil attributes:nil]) {
-            msg(@"%@ - 檔案建立成功", filename);
-        }
-
-        //寫入內容
-        if ([FileContent writeToFile:newFilePath atomically:YES]) {
-            msg(@"%@ - 檔案寫入成功", filename);
-        }
-    }
+    [req readGPIO:num];
+    [rsp getResponsePacket];
+    return [rsp getPicBlk];
 }
+
+- (void)writeGPIO:(NSInteger)num level:(NSInteger)lvl
+{
+    dmsg(@"writeGPIO:level:");
+    ZTProtrackService *req = self.serviceDict[@"protrack_write"];
+    ZTProtrackNotify  *rsp = self.serviceDict[@"protrack_notify"];
+
+    if ([self isConnected] == NO) {
+        return;
+    }
+
+    [req writeGPIO:num level:lvl];
+    [rsp getResponsePacket];
+}
+
+
+- (void)writePlan:(NSUInteger)planid enable:(BOOL)en type:(NSUInteger)mode beginTime:(NSDate *)begin endTime:(NSDate *)end repeat:(NSUInteger)cycle
+{
+    dmsg(@"writePlan:enable:type:beginTime:endTime:repeat:");
+    ZTProtrackService *req = self.serviceDict[@"protrack_write"];
+    ZTProtrackNotify  *rsp = self.serviceDict[@"protrack_notify"];
+
+    if ([self isConnected] == NO) {
+        return;
+    }
+
+    [req writePlan:planid enable:en type:mode beginTime:begin endTime:end repeat:cycle];
+    [rsp getResponsePacket];
+}
+
+
+- (void)setDate
+{
+    dmsg(@"setDate");
+    ZTProtrackService *req = self.serviceDict[@"protrack_write"];
+    ZTProtrackNotify  *rsp = self.serviceDict[@"protrack_notify"];
+
+    if ([self isConnected] == NO) {
+        return;
+    }
+
+    [req setDate];
+    [rsp getResponsePacket];
+}
+
 
 
 /*---------------------------------------------------------------------------*/

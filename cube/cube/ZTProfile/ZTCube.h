@@ -63,14 +63,20 @@
 
 @property (nonatomic, readonly) ZTProtrackNotify        *protrackNotify;
 
+
 - (void)startRecord:(NSInteger)resolution Speed:(NSInteger)speed Power:(NSInteger)power;
 - (void)stopRecord;
 - (void)snapshot:(NSInteger)resolution Power:(NSInteger)power;
-- (void)download;
 
+- (void)powerManager:(NSUInteger)option;
 - (NSUInteger)inquiryPic;
 - (NSUInteger)inquiryBlock:(NSUInteger)pic;
 - (void)getPics:(NSUInteger)pic block:(NSUInteger)totalBlk;
 
+- (NSInteger)readGPIO:(NSInteger)num;
+- (void)writeGPIO:(NSInteger)num level:(NSInteger)lvl;
+- (void)writePlan:(NSUInteger)planid enable:(BOOL)en type:(NSUInteger)mode beginTime:(NSDate *)begin endTime:(NSDate *)end repeat:(NSUInteger)cycle;
+
+- (void)setDate;
 
 @end

@@ -265,16 +265,6 @@ extern NSMutableArray   *connectList;
         return;
     }
 
-    if (isRecording == NO) {
-        // start record
-        [self setButton:record   title:@"Stop"     titleColor:[UIColor redColor]       backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor redColor]];
-        [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor lightGrayColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor lightGrayColor]];
-    } else {
-        // stop record
-        [self setButton:record   title:@"Record"   titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
-        [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
-    }
-
     self.ztCube   = (ZTCube *) [connectList objectAtIndex:0];
     self.battServ = self.ztCube.serviceDict[@"battery"];
 
@@ -283,54 +273,58 @@ extern NSMutableArray   *connectList;
     HUD.dimBackground = YES;
     HUD.labelText = @"connecting...";
 
+    __block BOOL    hasBLE;
     [HUD showAnimated:YES whileExecutingBlock:^{
         LogRV(@"executing block...");
         [UIApplication sharedApplication].idleTimerDisabled = YES;
+        [self maskTabBar:4 except:0];
 
         [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
 
-        [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:FALSE];
-        [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:FALSE];
+        [self.ztCube connect];
+
+        HUD.labelText = @"progress...";
+        [self.ztCube setDate];
 
         if (isRecording == NO) {
             // start record
-            [self.ztCube connect];
-
-            HUD.labelText = @"progress...";
             [self.ztCube startRecord:rvResolution Speed:rvSpeed Power:rvPower];
-
         } else {
             // stop record
-            [self.ztCube connect];
-
-            HUD.labelText = @"progress...";
             [self.ztCube stopRecord];
         }
 
+        if ([self.ztCube isConnected] == YES) {
+            HUD.labelText = @"completed!";
+            hasBLE = YES;
+        } else {
+            HUD.labelText = @"connect fail...";
+            hasBLE = NO;
+        }
         [self.ztCube disconnect];
-
-        HUD.labelText = @"completed!";
-        sleep(1);
 
     } completionBlock:^{
         LogRV(@"completion block...");
-        [HUD removeFromSuperview];
-
-        [self.battServ removeObserver:self forKeyPath:@"batteryLevel"];
-
         remainCapacity = [self.ztCube getRemCapacity];
         capacity.text  = [NSString stringWithFormat:@"%0luMB", (unsigned long)remainCapacity];
 
-        if (isRecording == NO) {
-            isRecording = YES;
-        } else {
-            isRecording = NO;
+        [self.battServ removeObserver:self forKeyPath:@"batteryLevel"];
+
+        if (hasBLE == YES) {
+            if (isRecording == NO) {
+                isRecording = YES;
+                [self setButton:record   title:@"Stop"     titleColor:[UIColor redColor]       backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor redColor]];
+                [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor lightGrayColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor lightGrayColor]];
+            } else {
+                isRecording = NO;
+                [self setButton:record   title:@"Record"   titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
+                [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
+            }
         }
 
-        [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:TRUE];
-        [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:TRUE];
-
+        [self unmaskTabBar:4 except:0];
         [UIApplication sharedApplication].idleTimerDisabled = NO;
+        [HUD removeFromSuperview];
     }];
 
     LogRV(@"recordButtonPress: - end");
@@ -364,39 +358,36 @@ extern NSMutableArray   *connectList;
     [HUD showAnimated:YES whileExecutingBlock:^{
         LogRV(@"executing block...");
         [UIApplication sharedApplication].idleTimerDisabled = YES;
-        [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
+        [self maskTabBar:4 except:0];
 
-        [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:FALSE];
-        [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:FALSE];
-        [[[[self.tabBarController tabBar]items]objectAtIndex:3]setEnabled:FALSE];
+        [self.battServ addObserver:self forKeyPath:@"batteryLevel" options:NSKeyValueObservingOptionNew context:NULL];
 
         [self.ztCube connect];
 
         HUD.labelText = @"capture...";
+        [self.ztCube setDate];
         [self.ztCube snapshot:rvResolution Power:rvPower];
 
+        if ([self.ztCube isConnected] == YES) {
+            HUD.labelText = @"completed!";
+        } else {
+            HUD.labelText = @"connect fail...";
+        }
         [self.ztCube disconnect];
-
-        HUD.labelText = @"completed!";
-        sleep(1);
 
     } completionBlock:^{
         LogRV(@"completion block...");
-        [HUD removeFromSuperview];
-
-        [self.battServ removeObserver:self forKeyPath:@"batteryLevel"];
-
         remainCapacity = [self.ztCube getRemCapacity];
         capacity.text  = [NSString stringWithFormat:@"%0luMB", (unsigned long)remainCapacity];
+
+        [self.battServ removeObserver:self forKeyPath:@"batteryLevel"];
 
         [self setButton:record   title:@"Record"   titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
         [self setButton:snapshot title:@"Snapshot" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
 
-        [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:TRUE];
-        [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:TRUE];
-        [[[[self.tabBarController tabBar]items]objectAtIndex:3]setEnabled:TRUE];
-
+        [self unmaskTabBar:4 except:0];
         [UIApplication sharedApplication].idleTimerDisabled = NO;
+        [HUD removeFromSuperview];
     }];
 
     LogRV(@"snapshotButtonPress: - end");
@@ -420,6 +411,25 @@ extern NSMutableArray   *connectList;
     [[btnName layer] setBorderColor:[bColor CGColor]];
     [[btnName layer] setMasksToBounds:YES];
     [[btnName layer] setCornerRadius:45.0f];
+}
+
+
+- (void)maskTabBar:(NSInteger)total except:(NSInteger)n
+{
+    for (NSInteger i=0; i<total; i++) {
+        if (i != n) {
+            [[[[self.tabBarController tabBar]items]objectAtIndex:i]setEnabled:NO];
+        }
+    }
+}
+
+- (void)unmaskTabBar:(NSInteger)total except:(NSInteger)n
+{
+    for (NSInteger i=0; i<total; i++) {
+        if (i != n) {
+            [[[[self.tabBarController tabBar]items]objectAtIndex:i]setEnabled:YES];
+        }
+    }
 }
 
 
@@ -520,7 +530,7 @@ extern NSMutableArray   *connectList;
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    LogRV(@"centralManager:didDisconnectPeripheral:error:");
+    LogBLE(@"centralManager:didDisconnectPeripheral:error:");
 
 
 
@@ -528,7 +538,7 @@ extern NSMutableArray   *connectList;
 
 - (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals
 {
-    LogRV(@"centralManager:didRetrievePeripherals:");
+    LogBLE(@"centralManager:didRetrievePeripherals:");
 
     ZTCentralManager *centralManager = [ZTCentralManager sharedService];
 
@@ -544,7 +554,7 @@ extern NSMutableArray   *connectList;
 
 - (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals
 {
-    LogRV(@"centralManager:didRetrieveConnectedPeripherals:");
+    LogBLE(@"centralManager:didRetrieveConnectedPeripherals:");
 
     ZTCentralManager *centralManager = [ZTCentralManager sharedService];
 
@@ -657,13 +667,13 @@ extern NSMutableArray   *connectList;
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(CBService *)service error:(NSError *)error
 {
-    LogRV(@"peripheral:didDiscoverIncludedServicesForService:error:");
+    LogBLE(@"peripheral:didDiscoverIncludedServicesForService:error:");
 
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    LogRV(@"peripheral:didDiscoverCharacteristicsForService:error:");
+    LogBLE(@"peripheral:didDiscoverCharacteristicsForService:error:");
 
 
 }
@@ -691,14 +701,14 @@ extern NSMutableArray   *connectList;
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
 {
-    LogRV(@"peripheral:didUpdateValueForDescriptor:error:");
+    LogBLE(@"peripheral:didUpdateValueForDescriptor:error:");
 
 
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
 {
-    LogRV(@"peripheral:didWriteValueForDescriptor:error:");
+    LogBLE(@"peripheral:didWriteValueForDescriptor:error:");
 
 
 }
@@ -724,19 +734,19 @@ extern NSMutableArray   *connectList;
 
 - (void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices
 {
-    LogRV(@"peripheral:didModifyServices:");
+    LogBLE(@"peripheral:didModifyServices:");
     
 }
 
 - (void)peripheralDidUpdateName:(CBPeripheral *)peripheral
 {
-    LogRV(@"peripheralDidUpdateName:");
+    LogBLE(@"peripheralDidUpdateName:");
     
 }
 
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    LogRV(@"peripheralDidUpdateRSSI:error:");
+    LogBLE(@"peripheralDidUpdateRSSI:error:");
 
     if (error) {
         NSLog(@"ERROR: readRSSI failed, retrying. %@", error.description);
@@ -758,7 +768,7 @@ extern NSMutableArray   *connectList;
 
 - (void)performUpdateRSSI:(NSArray *)args
 {
-    LogRV(@"performUpdateRSSI:");
+    LogBLE(@"performUpdateRSSI:");
 
     CBPeripheral *peripheral = args[0];
 

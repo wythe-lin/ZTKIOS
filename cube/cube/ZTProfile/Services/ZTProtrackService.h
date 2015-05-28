@@ -45,9 +45,13 @@
 - (void)recordStop;
 - (void)snapshot:(NSInteger)resolution power:(NSInteger)power;
 - (void)readStatus;
+- (void)powerManage:(NSUInteger)option;
 - (void)inquiryPic;
 - (void)inquiryBlock:(NSInteger)pic;
 - (void)getPic:(NSInteger)pic block:(NSInteger)blk;
+- (void)readGPIO:(NSInteger)num;
+- (void)writeGPIO:(NSInteger)num level:(NSInteger)lvl;
+- (void)writePlan:(NSUInteger)planid enable:(BOOL)en type:(NSUInteger)mode beginTime:(NSDate *)begin endTime:(NSDate *)end repeat:(NSUInteger)cycle;
 
 
 

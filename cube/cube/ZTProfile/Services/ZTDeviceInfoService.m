@@ -32,8 +32,8 @@
  *
  ******************************************************************************
  */
-#define DEBUG_MESSAGE                   1
-#define LOGGING_INCLUDE_MULTITHREAD     1
+#define DEBUG_MESSAGE                   0
+#define LOGGING_INCLUDE_MULTITHREAD     0
 #include "DbgMsg.h"
 
 #if defined(DEBUG_MESSAGE) && DEBUG_MESSAGE

@@ -282,43 +282,37 @@ typedef NS_ENUM(NSInteger, CellType)
         LogIV(@"executing block...");
         [UIApplication sharedApplication].idleTimerDisabled = YES;
 
-        [[[[self.tabBarController tabBar]items]objectAtIndex:0]setEnabled:FALSE];
-        [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:FALSE];
-        [[[[self.tabBarController tabBar]items]objectAtIndex:3]setEnabled:FALSE];
+        [self maskTabBar:4 except:1];
 
         [self.ztCube connect];
 
-//        HUD.labelText = @"downloading...";
-//        [self.ztCube download];
+        if ([self.ztCube isConnected] == YES) {
+            NSUInteger totalPics = [self.ztCube inquiryPic];
+            for (NSUInteger pic=1; pic<totalPics+1; pic++) {
+                HUD.labelText = [NSString stringWithFormat:@"downloading %0lu/%0lu...", (unsigned long)pic, (unsigned long)totalPics];
 
-        NSUInteger totalPics = [self.ztCube inquiryPic];
-        for (NSUInteger pic=1; pic<totalPics+1; pic++) {
-            HUD.labelText = [NSString stringWithFormat:@"downloading %0lu/%0lu...", (unsigned long)pic, (unsigned long)totalPics];
-
-            NSUInteger  totalBlks = [self.ztCube inquiryBlock:pic];
-            if (totalBlks) {
-                [self.ztCube getPics:pic block:totalBlks];
+                NSUInteger  totalBlks = [self.ztCube inquiryBlock:pic];
+                if (totalBlks) {
+                    [self.ztCube getPics:pic block:totalBlks];
+                }
             }
+            HUD.labelText = @"completed!";
+
+        } else {
+            HUD.labelText = @"connect fail...";
         }
-
         [self.ztCube disconnect];
-
-        HUD.labelText = @"completed!";
         sleep(1);
 
     } completionBlock:^{
         LogIV(@"completion block...");
-        [HUD removeFromSuperview];
-
         [self setButton:download title:@"Download" titleColor:[UIColor whiteColor] backgroundColor:[UIColor clearColor] borderWidth:2.0f borderColor:[UIColor whiteColor]];
 
         [self.collectionView reloadData];
 
-        [[[[self.tabBarController tabBar]items]objectAtIndex:0]setEnabled:TRUE];
-        [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:TRUE];
-        [[[[self.tabBarController tabBar]items]objectAtIndex:3]setEnabled:TRUE];
-
+        [self unmaskTabBar:4 except:1];
         [UIApplication sharedApplication].idleTimerDisabled = NO;
+        [HUD removeFromSuperview];
     }];
     
     LogIV(@"downloadButtonPress: - end");
@@ -342,6 +336,25 @@ typedef NS_ENUM(NSInteger, CellType)
     [[btnName layer] setBorderColor:[bColor CGColor]];
     [[btnName layer] setMasksToBounds:YES];
     [[btnName layer] setCornerRadius:15.0f];
+}
+
+
+- (void)maskTabBar:(NSInteger)total except:(NSInteger)n
+{
+    for (NSInteger i=0; i<total; i++) {
+        if (i != n) {
+            [[[[self.tabBarController tabBar]items]objectAtIndex:i]setEnabled:NO];
+        }
+    }
+}
+
+- (void)unmaskTabBar:(NSInteger)total except:(NSInteger)n
+{
+    for (NSInteger i=0; i<total; i++) {
+        if (i != n) {
+            [[[[self.tabBarController tabBar]items]objectAtIndex:i]setEnabled:YES];
+        }
+    }
 }
 
 

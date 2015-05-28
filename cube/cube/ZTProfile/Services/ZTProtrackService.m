@@ -288,6 +288,36 @@
 
 
 /*---------------------------------------------------------------------------*/
+#pragma mark -- power manager
+/*---------------------------------------------------------------------------*/
+- (void)powerManage:(NSUInteger)option
+{
+    dmsg(@"request: power manager");
+    dispatch_semaphore_t    semaphore = dispatch_semaphore_create(0);
+    YMSCBCharacteristic     *ptwCt    = self.characteristicDict[@"FFE9"];
+
+    // gen payload
+    unsigned char   payload[] = { 0xFA, 0x06, 0x00, 0x00, 0x00, 0xFE };
+    payload[3] = (unsigned char) option;
+    payload[4] = [self calcChksum:payload length:sizeof(payload)];
+
+    // send command
+    NSData  *command  = [NSData dataWithBytes:payload length:sizeof(payload)];
+    dmsg(@"[app->ble]: %@", command);
+
+    [ptwCt writeValue:command withBlock:^(NSError *error) {
+        if (error) {
+            msg(@"ERROR: %@ - [line %d]", [error localizedDescription], __LINE__);
+            return;
+        }
+        dispatch_semaphore_signal(semaphore);
+    }];
+
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+}
+
+
+/*---------------------------------------------------------------------------*/
 #pragma mark -- inquiry picture/block
 /*---------------------------------------------------------------------------*/
 - (void)inquiryPic
@@ -452,7 +482,7 @@ NSSecondCalendarUnit \
     NSCalendar              *calendar = [NSCalendar currentCalendar];
 
     // gen payload
-    unsigned char   payload[] = { 0xFA, 0x0d, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE };
+    unsigned char   payload[] = { 0xFA, 0x0d, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE };
     payload[ 3] = planid;
     payload[ 4] = en ? 0x01 : 0x00;
     payload[ 5] = mode;

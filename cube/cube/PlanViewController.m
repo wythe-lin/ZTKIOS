@@ -186,12 +186,12 @@ extern NSMutableArray   *connectList;
         dmsg(@"executing block...");
         [UIApplication sharedApplication].idleTimerDisabled = YES;
 
-        [[[[self.tabBarController tabBar]items]objectAtIndex:0]setEnabled:FALSE];
-        [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:FALSE];
-        [[[[self.tabBarController tabBar]items]objectAtIndex:3]setEnabled:FALSE];
+        [self maskTabBar:4 except:2];
 
         [self.ztCube connect];
+        [self.ztCube setDate];
 
+#if 0
         for (NSUInteger i=0; i<5; i++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
             PlanViewCell *cell = (PlanViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
@@ -203,9 +203,13 @@ extern NSMutableArray   *connectList;
                  [dateFormatter stringFromDate:[cell getBeginTime]],
                  [dateFormatter stringFromDate:[cell getEndTime]]);
 
-            HUD.labelText = [NSString stringWithFormat:@"send %0d/5 plann...", i+1];
+            HUD.labelText = [NSString stringWithFormat:@"send %0d/5 plan...", i+1];
+            [self.ztCube writePlan:i enable:[cell getIsFavourite] type:[cell getIsCamera] beginTime:[cell getBeginTime] endTime:[cell getEndTime] repeat:0x01];
             sleep(1);
         }
+#else
+        [self.ztCube powerManager:0];
+#endif
 
         [self.ztCube disconnect];
 
@@ -214,22 +218,33 @@ extern NSMutableArray   *connectList;
 
     } completionBlock:^{
         dmsg(@"completion block...");
-        [HUD removeFromSuperview];
 
-        [[[[self.tabBarController tabBar]items]objectAtIndex:0]setEnabled:TRUE];
-        [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:TRUE];
-        [[[[self.tabBarController tabBar]items]objectAtIndex:3]setEnabled:TRUE];
-
+        [self unmaskTabBar:4 except:2];
         [UIApplication sharedApplication].idleTimerDisabled = NO;
+        [HUD removeFromSuperview];
     }];
 
     dmsg(@"sendPlanView - end");
 }
 
 
+- (void)maskTabBar:(NSInteger)total except:(NSInteger)n
+{
+    for (NSInteger i=0; i<total; i++) {
+        if (i != n) {
+            [[[[self.tabBarController tabBar]items]objectAtIndex:i]setEnabled:NO];
+        }
+    }
+}
 
-
-
+- (void)unmaskTabBar:(NSInteger)total except:(NSInteger)n
+{
+    for (NSInteger i=0; i<total; i++) {
+        if (i != n) {
+            [[[[self.tabBarController tabBar]items]objectAtIndex:i]setEnabled:YES];
+        }
+    }
+}
 
 
 /*---------------------------------------------------------------------------*/
