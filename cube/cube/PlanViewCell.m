@@ -110,7 +110,11 @@
         [self.contentView addSubview:self.end];
 
         [self setBeginTime:[NSDate date]];
-        [self setEndTime:[NSDate date]];
+
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDate *end = [[self getBeginTime] dateByAddingTimeInterval:60*1];
+        NSDateComponents *component = [[NSCalendar currentCalendar] components:PLANCELL_UNIT_FLAGS fromDate:end];
+        [self setEndTime:[gregorian dateFromComponents:component]];
 
         self.revealDirection = RMSwipeTableViewCellRevealDirectionBoth;
     }

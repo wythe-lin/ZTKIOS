@@ -491,7 +491,7 @@ NSSecondCalendarUnit \
     payload[ 6] = (unsigned char) [bc hour];
     payload[ 7] = (unsigned char) [bc minute];
 
-    NSDateComponents *ec = [calendar components:UNIT_FLAGS fromDate:begin];
+    NSDateComponents *ec = [calendar components:UNIT_FLAGS fromDate:end];
     payload[ 8] = (unsigned char) [ec hour];
     payload[ 9] = (unsigned char) [ec minute];
 

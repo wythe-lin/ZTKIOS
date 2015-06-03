@@ -25,6 +25,18 @@
 #import <UIKit/UIKit.h>
 #import "RMSwipeTableViewCell.h"
 
+
+#define PLANCELL_UNIT_FLAGS \
+( \
+    NSYearCalendarUnit | \
+    NSMonthCalendarUnit | \
+    NSDayCalendarUnit | \
+    NSHourCalendarUnit | \
+    NSMinuteCalendarUnit | \
+    NSSecondCalendarUnit \
+)
+
+
 @interface PlanViewCell : RMSwipeTableViewCell
 
 @property (nonatomic, strong) UIImageView *profileImageView;

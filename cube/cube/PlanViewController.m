@@ -56,6 +56,7 @@ extern NSMutableArray   *connectList;
 #endif
 
 
+
 /*
  ******************************************************************************
  *
@@ -191,7 +192,7 @@ extern NSMutableArray   *connectList;
         [self.ztCube connect];
         [self.ztCube setDate];
 
-#if 0
+#if 1
         for (NSUInteger i=0; i<5; i++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
             PlanViewCell *cell = (PlanViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
@@ -335,7 +336,7 @@ extern NSMutableArray   *connectList;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    select = (PlanViewCell *)[tableView cellForRowAtIndexPath:indexPath];
 
     // Generate content view to present
     UIView *contentView = [[UIView alloc] init];
@@ -355,6 +356,14 @@ extern NSMutableArray   *connectList;
     datePicker.backgroundColor = [UIColor clearColor];
     datePicker.dataSource = self;
     datePicker.delegate = self;
+
+    NSDate  *begin = [select getBeginTime];
+    NSCalendar  *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *bc = [calendar components:PLANCELL_UNIT_FLAGS fromDate:begin];
+    [datePicker selectRow:[bc hour] inComponent:0  animated:NO];
+    [datePicker selectRow:[bc minute] inComponent:1 animated:NO];
+    [self setHour:[bc hour]];
+    [self setMin:[bc minute]];
 
     UIButton *beginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     beginButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -418,10 +427,6 @@ extern NSMutableArray   *connectList;
                             dismissOnBackgroundTouch:NO
                                dismissOnContentTouch:NO];
 
-    select = (PlanViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    [self setHour:0];
-    [self setMin:0];
-
     [popup showWithLayout:layout];
 }
 
@@ -430,44 +435,39 @@ extern NSMutableArray   *connectList;
 /*---------------------------------------------------------------------------*/
 #pragma mark -
 /*---------------------------------------------------------------------------*/
-#define UNIT_FLAGS \
-( \
-NSYearCalendarUnit | \
-NSMonthCalendarUnit | \
-NSDayCalendarUnit | \
-NSHourCalendarUnit | \
-NSMinuteCalendarUnit | \
-NSSecondCalendarUnit \
-)
-
-
 - (void)beginButtonPressed:(UIButton *)sender
 {
     if ([sender isKindOfClass:[UIView class]]) {
-        NSDate *beginTime = [select getBeginTime];
-        NSDateComponents *component = [[NSCalendar currentCalendar] components:UNIT_FLAGS fromDate:beginTime];
-        [component setHour:[self getHour]];
-        [component setMinute:[self getMin]];
-
         NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        [select setBeginTime:[gregorian dateFromComponents:component]];
 
-        dmsg(@"beginButtonPressed: - %@", beginTime);
+        NSDate *beginTime = [select getBeginTime];
+        NSDateComponents *bc = [[NSCalendar currentCalendar] components:PLANCELL_UNIT_FLAGS fromDate:beginTime];
+        [bc setHour:[self getHour]];
+        [bc setMinute:[self getMin]];
+        [select setBeginTime:[gregorian dateFromComponents:bc]];
+        dmsg(@"beginButtonPressed: - begin time:%@", [select getBeginTime]);
+
+        if ([select getIsCamera]) {
+            NSDate *endTime = [[select getBeginTime] dateByAddingTimeInterval:60*1];
+            NSDateComponents *ec = [[NSCalendar currentCalendar] components:PLANCELL_UNIT_FLAGS fromDate:endTime];
+            [select setEndTime:[gregorian dateFromComponents:ec]];
+            dmsg(@"beginButtonPressed: - end   time:%@", [select getEndTime]);
+        }
     }
 }
 
 - (void)endButtonPressed:(UIButton *)sender
 {
     if ([sender isKindOfClass:[UIView class]]) {
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+
         NSDate *endTime = [select getEndTime];
-        NSDateComponents *component = [[NSCalendar currentCalendar] components:UNIT_FLAGS fromDate:endTime];
+        NSDateComponents *component = [[NSCalendar currentCalendar] components:PLANCELL_UNIT_FLAGS fromDate:endTime];
         [component setHour:[self getHour]];
         [component setMinute:[self getMin]];
 
-        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         [select setEndTime:[gregorian dateFromComponents:component]];
-
-        dmsg(@"endButtonPressed: - %@", endTime);
+        dmsg(@"endButtonPressed: - end   time:%@", [select getEndTime]);
     }
 }
 
