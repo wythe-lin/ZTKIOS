@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70EBD02D1C63358900C505AB /* NSMutableArray+fifoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBD01C1C63358900C505AB /* NSMutableArray+fifoQueue.m */; };
+		70EBD02E1C63358900C505AB /* YMS128.c in Sources */ = {isa = PBXBuildFile; fileRef = 70EBD01D1C63358900C505AB /* YMS128.c */; };
+		70EBD02F1C63358900C505AB /* YMSCBCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBD0201C63358900C505AB /* YMSCBCentralManager.m */; };
+		70EBD0301C63358900C505AB /* YMSCBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBD0221C63358900C505AB /* YMSCBCharacteristic.m */; };
+		70EBD0311C63358900C505AB /* YMSCBDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBD0241C63358900C505AB /* YMSCBDescriptor.m */; };
+		70EBD0321C63358900C505AB /* YMSCBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBD0261C63358900C505AB /* YMSCBPeripheral.m */; };
+		70EBD0331C63358900C505AB /* YMSCBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBD0281C63358900C505AB /* YMSCBService.m */; };
+		70EBD0341C63358900C505AB /* YMSCBStoredPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBD02A1C63358900C505AB /* YMSCBStoredPeripherals.m */; };
+		70EBD0351C63358900C505AB /* YMSCBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBD02C1C63358900C505AB /* YMSCBUtils.m */; };
 		9A379EF51A8B55000002FB5C /* ZTCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A379EF41A8B55000002FB5C /* ZTCentralManager.m */; };
 		9A40B1E01A6F71FD003C96D5 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A40B1DF1A6F71FD003C96D5 /* CoreBluetooth.framework */; };
 		9AAA314E1A67E845001D5B52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA314D1A67E845001D5B52 /* main.m */; };
@@ -43,15 +52,6 @@
 		9AD3B0451ADF9D5A00963D89 /* PSTGridLayoutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B00A1ADF9D5A00963D89 /* PSTGridLayoutItem.m */; };
 		9AD3B0461ADF9D5A00963D89 /* PSTGridLayoutRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B00C1ADF9D5A00963D89 /* PSTGridLayoutRow.m */; };
 		9AD3B0471ADF9D5A00963D89 /* PSTGridLayoutSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B00E1ADF9D5A00963D89 /* PSTGridLayoutSection.m */; };
-		9AD3B0481ADF9D5A00963D89 /* NSMutableArray+fifoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0111ADF9D5A00963D89 /* NSMutableArray+fifoQueue.m */; };
-		9AD3B0491ADF9D5A00963D89 /* YMS128.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0121ADF9D5A00963D89 /* YMS128.c */; };
-		9AD3B04A1ADF9D5A00963D89 /* YMSCBCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0151ADF9D5A00963D89 /* YMSCBCentralManager.m */; };
-		9AD3B04B1ADF9D5A00963D89 /* YMSCBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0171ADF9D5A00963D89 /* YMSCBCharacteristic.m */; };
-		9AD3B04C1ADF9D5A00963D89 /* YMSCBDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0191ADF9D5A00963D89 /* YMSCBDescriptor.m */; };
-		9AD3B04D1ADF9D5A00963D89 /* YMSCBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B01B1ADF9D5A00963D89 /* YMSCBPeripheral.m */; };
-		9AD3B04E1ADF9D5A00963D89 /* YMSCBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B01D1ADF9D5A00963D89 /* YMSCBService.m */; };
-		9AD3B04F1ADF9D5A00963D89 /* YMSCBStoredPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B01F1ADF9D5A00963D89 /* YMSCBStoredPeripherals.m */; };
-		9AD3B0501ADF9D5A00963D89 /* YMSCBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3B0211ADF9D5A00963D89 /* YMSCBUtils.m */; };
 		9AD8A6951AC40A41009BE6A8 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8A6941AC40A41009BE6A8 /* ImageViewController.m */; };
 		9AD8A6981AC40E58009BE6A8 /* CollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8A6971AC40E58009BE6A8 /* CollectionCell.m */; };
 		9AE8AC2A1AFB48DB00B655A9 /* PlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE8AC291AFB48DB00B655A9 /* PlanViewController.m */; };
@@ -71,6 +71,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		70EBD01B1C63358900C505AB /* NSMutableArray+fifoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+fifoQueue.h"; sourceTree = "<group>"; };
+		70EBD01C1C63358900C505AB /* NSMutableArray+fifoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+fifoQueue.m"; sourceTree = "<group>"; };
+		70EBD01D1C63358900C505AB /* YMS128.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = YMS128.c; sourceTree = "<group>"; };
+		70EBD01E1C63358900C505AB /* YMS128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMS128.h; sourceTree = "<group>"; };
+		70EBD01F1C63358900C505AB /* YMSCBCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBCentralManager.h; sourceTree = "<group>"; };
+		70EBD0201C63358900C505AB /* YMSCBCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBCentralManager.m; sourceTree = "<group>"; };
+		70EBD0211C63358900C505AB /* YMSCBCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBCharacteristic.h; sourceTree = "<group>"; };
+		70EBD0221C63358900C505AB /* YMSCBCharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBCharacteristic.m; sourceTree = "<group>"; };
+		70EBD0231C63358900C505AB /* YMSCBDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBDescriptor.h; sourceTree = "<group>"; };
+		70EBD0241C63358900C505AB /* YMSCBDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBDescriptor.m; sourceTree = "<group>"; };
+		70EBD0251C63358900C505AB /* YMSCBPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBPeripheral.h; sourceTree = "<group>"; };
+		70EBD0261C63358900C505AB /* YMSCBPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBPeripheral.m; sourceTree = "<group>"; };
+		70EBD0271C63358900C505AB /* YMSCBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBService.h; sourceTree = "<group>"; };
+		70EBD0281C63358900C505AB /* YMSCBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBService.m; sourceTree = "<group>"; };
+		70EBD0291C63358900C505AB /* YMSCBStoredPeripherals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBStoredPeripherals.h; sourceTree = "<group>"; };
+		70EBD02A1C63358900C505AB /* YMSCBStoredPeripherals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBStoredPeripherals.m; sourceTree = "<group>"; };
+		70EBD02B1C63358900C505AB /* YMSCBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBUtils.h; sourceTree = "<group>"; };
+		70EBD02C1C63358900C505AB /* YMSCBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBUtils.m; sourceTree = "<group>"; };
 		9A379EF31A8B55000002FB5C /* ZTCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTCentralManager.h; path = ZTProfile/ZTCentralManager.h; sourceTree = "<group>"; };
 		9A379EF41A8B55000002FB5C /* ZTCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTCentralManager.m; path = ZTProfile/ZTCentralManager.m; sourceTree = "<group>"; };
 		9A379F321A8B61250002FB5C /* YmsCoreBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YmsCoreBluetooth.h; path = ZTProfile/YmsCoreBluetooth.h; sourceTree = "<group>"; };
@@ -141,24 +159,6 @@
 		9AD3B00C1ADF9D5A00963D89 /* PSTGridLayoutRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTGridLayoutRow.m; sourceTree = "<group>"; };
 		9AD3B00D1ADF9D5A00963D89 /* PSTGridLayoutSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTGridLayoutSection.h; sourceTree = "<group>"; };
 		9AD3B00E1ADF9D5A00963D89 /* PSTGridLayoutSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTGridLayoutSection.m; sourceTree = "<group>"; };
-		9AD3B0101ADF9D5A00963D89 /* NSMutableArray+fifoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+fifoQueue.h"; sourceTree = "<group>"; };
-		9AD3B0111ADF9D5A00963D89 /* NSMutableArray+fifoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+fifoQueue.m"; sourceTree = "<group>"; };
-		9AD3B0121ADF9D5A00963D89 /* YMS128.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = YMS128.c; sourceTree = "<group>"; };
-		9AD3B0131ADF9D5A00963D89 /* YMS128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMS128.h; sourceTree = "<group>"; };
-		9AD3B0141ADF9D5A00963D89 /* YMSCBCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBCentralManager.h; sourceTree = "<group>"; };
-		9AD3B0151ADF9D5A00963D89 /* YMSCBCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBCentralManager.m; sourceTree = "<group>"; };
-		9AD3B0161ADF9D5A00963D89 /* YMSCBCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBCharacteristic.h; sourceTree = "<group>"; };
-		9AD3B0171ADF9D5A00963D89 /* YMSCBCharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBCharacteristic.m; sourceTree = "<group>"; };
-		9AD3B0181ADF9D5A00963D89 /* YMSCBDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBDescriptor.h; sourceTree = "<group>"; };
-		9AD3B0191ADF9D5A00963D89 /* YMSCBDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBDescriptor.m; sourceTree = "<group>"; };
-		9AD3B01A1ADF9D5A00963D89 /* YMSCBPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBPeripheral.h; sourceTree = "<group>"; };
-		9AD3B01B1ADF9D5A00963D89 /* YMSCBPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBPeripheral.m; sourceTree = "<group>"; };
-		9AD3B01C1ADF9D5A00963D89 /* YMSCBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBService.h; sourceTree = "<group>"; };
-		9AD3B01D1ADF9D5A00963D89 /* YMSCBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBService.m; sourceTree = "<group>"; };
-		9AD3B01E1ADF9D5A00963D89 /* YMSCBStoredPeripherals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBStoredPeripherals.h; sourceTree = "<group>"; };
-		9AD3B01F1ADF9D5A00963D89 /* YMSCBStoredPeripherals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBStoredPeripherals.m; sourceTree = "<group>"; };
-		9AD3B0201ADF9D5A00963D89 /* YMSCBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBUtils.h; sourceTree = "<group>"; };
-		9AD3B0211ADF9D5A00963D89 /* YMSCBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBUtils.m; sourceTree = "<group>"; };
 		9AD8A6931AC40A41009BE6A8 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		9AD8A6941AC40A41009BE6A8 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		9AD8A6961AC40E58009BE6A8 /* CollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionCell.h; sourceTree = "<group>"; };
@@ -384,24 +384,24 @@
 		9AD3B00F1ADF9D5A00963D89 /* YmsCoreBluetooth */ = {
 			isa = PBXGroup;
 			children = (
-				9AD3B0101ADF9D5A00963D89 /* NSMutableArray+fifoQueue.h */,
-				9AD3B0111ADF9D5A00963D89 /* NSMutableArray+fifoQueue.m */,
-				9AD3B0121ADF9D5A00963D89 /* YMS128.c */,
-				9AD3B0131ADF9D5A00963D89 /* YMS128.h */,
-				9AD3B0141ADF9D5A00963D89 /* YMSCBCentralManager.h */,
-				9AD3B0151ADF9D5A00963D89 /* YMSCBCentralManager.m */,
-				9AD3B0161ADF9D5A00963D89 /* YMSCBCharacteristic.h */,
-				9AD3B0171ADF9D5A00963D89 /* YMSCBCharacteristic.m */,
-				9AD3B0181ADF9D5A00963D89 /* YMSCBDescriptor.h */,
-				9AD3B0191ADF9D5A00963D89 /* YMSCBDescriptor.m */,
-				9AD3B01A1ADF9D5A00963D89 /* YMSCBPeripheral.h */,
-				9AD3B01B1ADF9D5A00963D89 /* YMSCBPeripheral.m */,
-				9AD3B01C1ADF9D5A00963D89 /* YMSCBService.h */,
-				9AD3B01D1ADF9D5A00963D89 /* YMSCBService.m */,
-				9AD3B01E1ADF9D5A00963D89 /* YMSCBStoredPeripherals.h */,
-				9AD3B01F1ADF9D5A00963D89 /* YMSCBStoredPeripherals.m */,
-				9AD3B0201ADF9D5A00963D89 /* YMSCBUtils.h */,
-				9AD3B0211ADF9D5A00963D89 /* YMSCBUtils.m */,
+				70EBD01B1C63358900C505AB /* NSMutableArray+fifoQueue.h */,
+				70EBD01C1C63358900C505AB /* NSMutableArray+fifoQueue.m */,
+				70EBD01D1C63358900C505AB /* YMS128.c */,
+				70EBD01E1C63358900C505AB /* YMS128.h */,
+				70EBD01F1C63358900C505AB /* YMSCBCentralManager.h */,
+				70EBD0201C63358900C505AB /* YMSCBCentralManager.m */,
+				70EBD0211C63358900C505AB /* YMSCBCharacteristic.h */,
+				70EBD0221C63358900C505AB /* YMSCBCharacteristic.m */,
+				70EBD0231C63358900C505AB /* YMSCBDescriptor.h */,
+				70EBD0241C63358900C505AB /* YMSCBDescriptor.m */,
+				70EBD0251C63358900C505AB /* YMSCBPeripheral.h */,
+				70EBD0261C63358900C505AB /* YMSCBPeripheral.m */,
+				70EBD0271C63358900C505AB /* YMSCBService.h */,
+				70EBD0281C63358900C505AB /* YMSCBService.m */,
+				70EBD0291C63358900C505AB /* YMSCBStoredPeripherals.h */,
+				70EBD02A1C63358900C505AB /* YMSCBStoredPeripherals.m */,
+				70EBD02B1C63358900C505AB /* YMSCBUtils.h */,
+				70EBD02C1C63358900C505AB /* YMSCBUtils.m */,
 			);
 			path = YmsCoreBluetooth;
 			sourceTree = "<group>";
@@ -522,47 +522,47 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AD3B03E1ADF9D5A00963D89 /* PSTCollectionViewController.m in Sources */,
+				70EBD0301C63358900C505AB /* YMSCBCharacteristic.m in Sources */,
 				9AE8AC331AFB4B0900B655A9 /* PlanViewCell.m in Sources */,
-				9AD3B04C1ADF9D5A00963D89 /* YMSCBDescriptor.m in Sources */,
 				9AC90AAA1ACBDFEE00CA072B /* kfifo.c in Sources */,
 				9A379EF51A8B55000002FB5C /* ZTCentralManager.m in Sources */,
 				9AC0E7251A8DE97D002D24DD /* ZTBaseService.m in Sources */,
+				70EBD0351C63358900C505AB /* YMSCBUtils.m in Sources */,
 				9AC0E7281A8E145D002D24DD /* ZTBatteryService.m in Sources */,
+				70EBD0321C63358900C505AB /* YMSCBPeripheral.m in Sources */,
+				70EBD0331C63358900C505AB /* YMSCBService.m in Sources */,
 				9AD3B03C1ADF9D5A00963D89 /* PSTCollectionView.m in Sources */,
-				9AD3B04A1ADF9D5A00963D89 /* YMSCBCentralManager.m in Sources */,
+				70EBD02D1C63358900C505AB /* NSMutableArray+fifoQueue.m in Sources */,
 				9AD3B0221ADF9D5A00963D89 /* KLCPopup.m in Sources */,
 				9AD3B03B1ADF9D5A00963D89 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
-				9AD3B0501ADF9D5A00963D89 /* YMSCBUtils.m in Sources */,
+				70EBD02F1C63358900C505AB /* YMSCBCentralManager.m in Sources */,
 				9AD8A6951AC40A41009BE6A8 /* ImageViewController.m in Sources */,
-				9AD3B0491ADF9D5A00963D89 /* YMS128.c in Sources */,
-				9AD3B04E1ADF9D5A00963D89 /* YMSCBService.m in Sources */,
 				9AD3B0411ADF9D5A00963D89 /* PSTCollectionViewItemKey.m in Sources */,
 				9AE8AC361AFB68EA00B655A9 /* ZTColor.m in Sources */,
 				9AD3B0471ADF9D5A00963D89 /* PSTGridLayoutSection.m in Sources */,
 				9AAA31571A67E845001D5B52 /* ScanViewController.m in Sources */,
-				9AD3B04D1ADF9D5A00963D89 /* YMSCBPeripheral.m in Sources */,
 				9AAA31511A67E845001D5B52 /* AppDelegate.m in Sources */,
-				9AD3B04B1ADF9D5A00963D89 /* YMSCBCharacteristic.m in Sources */,
 				9AC0E7201A8DE967002D24DD /* ZTCube.m in Sources */,
 				9AD3B0451ADF9D5A00963D89 /* PSTGridLayoutItem.m in Sources */,
 				9AD3B0371ADF9D5A00963D89 /* MBProgressHUD.m in Sources */,
 				9AD3B0461ADF9D5A00963D89 /* PSTGridLayoutRow.m in Sources */,
 				9AD0C7531AA856C700E32C3D /* ZTProtrackNotify.m in Sources */,
-				9AD3B0481ADF9D5A00963D89 /* NSMutableArray+fifoQueue.m in Sources */,
 				9AD3B0421ADF9D5A00963D89 /* PSTCollectionViewLayout.m in Sources */,
 				9AD3B0441ADF9D5A00963D89 /* PSTGridLayoutInfo.m in Sources */,
 				9AC0E7261A8DE97D002D24DD /* ZTDeviceInfoService.m in Sources */,
 				9AD3B03F1ADF9D5A00963D89 /* PSTCollectionViewData.m in Sources */,
-				9AD3B04F1ADF9D5A00963D89 /* YMSCBStoredPeripherals.m in Sources */,
 				9AD3B0431ADF9D5A00963D89 /* PSTCollectionViewUpdateItem.m in Sources */,
 				9AE8AC2A1AFB48DB00B655A9 /* PlanViewController.m in Sources */,
 				9AD8A6981AC40E58009BE6A8 /* CollectionCell.m in Sources */,
 				9AAA31541A67E845001D5B52 /* RecordViewController.m in Sources */,
+				70EBD02E1C63358900C505AB /* YMS128.c in Sources */,
 				9AE8AC301AFB4A5200B655A9 /* RMSwipeTableViewCell.m in Sources */,
 				9AD3B0401ADF9D5A00963D89 /* PSTCollectionViewFlowLayout.m in Sources */,
 				9AD3B03D1ADF9D5A00963D89 /* PSTCollectionViewCell.m in Sources */,
 				9AC343F31A92035A00CBE7AF /* ZTProtrackService.m in Sources */,
 				9AAA314E1A67E845001D5B52 /* main.m in Sources */,
+				70EBD0341C63358900C505AB /* YMSCBStoredPeripherals.m in Sources */,
+				70EBD0311C63358900C505AB /* YMSCBDescriptor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,10 +688,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = cube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = cube;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -702,10 +704,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = cube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = cube;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

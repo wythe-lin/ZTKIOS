@@ -143,7 +143,8 @@
     NSCalendar       *calendar  = [NSCalendar currentCalendar];
     NSDateComponents *component = [calendar components:(kCFCalendarUnitYear | kCFCalendarUnitMonth | kCFCalendarUnitDay | kCFCalendarUnitHour | kCFCalendarUnitMinute | kCFCalendarUnitSecond)
                                               fromDate:today];
-    dmsg(@"current date: %04d/%02d/%02d time:%02d:%02d:%02d", [component year], [component month], [component day], [component hour], [component minute], [component second]);
+    dmsg(@"current date: %04ld/%02ld/%02ld time:%02ld:%02ld:%02ld",
+         [component year], [component month], [component day], [component hour], [component minute], [component second]);
 
     unsigned char   payload[] = { 0xFA, 0x0B, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE };
     payload[3] = [component year] % 2000;

@@ -236,7 +236,7 @@
             _status  = pkt[5];
             _picblk  = ((unsigned short) pkt[6]) << 8;
             _picblk |= pkt[7];
-            dmsg(@"response: status packet - ack=%02x, storage=%02x, status=%02x, data=%04x", _ack, _storage, _status, _picblk);
+            dmsg(@"response: status packet - ack=%02lx, storage=%02lx, status=%02lx, data=%04lx", _ack, _storage, _status, (long)_picblk);
             break;
 
         case 0x20:

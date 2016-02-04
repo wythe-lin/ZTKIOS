@@ -83,7 +83,7 @@
     if (self.panElasticity) {
         if (ABS(translation.x) > self.panElasticityStartingPoint) {
             CGFloat width = CGRectGetWidth(self.frame);
-            CGFloat offset = fabsf(translation.x);
+            CGFloat offset = fabs(translation.x);
             panOffset = (offset * self.panElasticityFactor * width) / (offset * self.panElasticityFactor + width);
             panOffset *= translation.x < 0 ? -1.0f : 1.0f;
             if (self.panElasticityStartingPoint > 0) {

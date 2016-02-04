@@ -204,7 +204,7 @@ extern NSMutableArray   *connectList;
                  [dateFormatter stringFromDate:[cell getBeginTime]],
                  [dateFormatter stringFromDate:[cell getEndTime]]);
 
-            HUD.labelText = [NSString stringWithFormat:@"send %0d/5 plan...", i+1];
+            HUD.labelText = [NSString stringWithFormat:@"send %0lu/5 plan...", i+1];
             [self.ztCube writePlan:i enable:[cell getIsFavourite] type:[cell getIsCamera] beginTime:[cell getBeginTime] endTime:[cell getEndTime] repeat:0x01];
             sleep(1);
         }
